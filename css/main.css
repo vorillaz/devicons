@@ -912,6 +912,12 @@ div.smallicon.devicons {
 
 .btns {
   text-align: center; }
+ol.task-list {
+  padding: 1em 2.5em;
+}
+ol.task-list li{
+  list-style-type: binary;
+}
 
 p {
   font-size: 1.1em; }

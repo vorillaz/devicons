@@ -104,7 +104,7 @@ myApp.controller("MainCtrl", ["$scope",
             key: "node",
             name: "Node.js & stuff"
         }, {
-            key: "Source control",
+            key: "source",
             name: "Source control"
         }, {
             key: "social",
