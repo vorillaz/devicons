@@ -18,6 +18,11 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
  4. Ensure the font urls within `devicons.css` properly reference the `fonts` path within your project.
  5. Include a reference to the `devicons.css` file from every webpage you need to use it.
 
+## Install using Bower
+
+`bower install devicons`
+
+
 You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)
 
 ##Changelog
