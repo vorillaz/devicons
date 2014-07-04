@@ -583,13 +583,7 @@ myApp.controller("MainCtrl", ["$scope",
 ]);
 jQuery(document).ready(function(e) {
     function o() {
-        var t = e(window).scrollTop();
-        var n = e("header");
-        n.css("position", "absolute");
-        n.css("top", t + "px");
-        var r = e("#nav");
-        r.css("position", "absolute");
-        r.css("top", t + "px")
+        
     }
 
     function u() {
@@ -623,7 +617,6 @@ jQuery(document).ready(function(e) {
     });
     o();
     e(window).on("scroll", function() {
-        o();
         u()
     })
 })
