@@ -115,7 +115,7 @@ $devicons:	(git "\e602"),
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);
 	  $iconClassBefore: nth($devicon, 2);
-	  .devicons.devicons-#{$iconClass}{
+	  .devicons-#{$iconClass}{
 	  	&:before{
 	  		content: "#{$iconClassBefore}";	
 	  	}
