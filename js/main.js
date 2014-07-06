@@ -74,6 +74,18 @@ function shuffleArray(e) {
 }(window, window.document);
 "use strict";
 var myApp = angular.module("myApp", []);
+myApp .directive('a', function() {
+    return {
+        restrict: 'E',
+        link: function(scope, elem, attrs) {
+            if(attrs.ngClick || attrs.href === '' || attrs.href === '#'){
+                elem.on('click', function(e){
+                    e.preventDefault();
+                });
+            }
+        }
+   };
+});
 myApp.controller("MainCtrl", ["$scope",
     function(e) {
         e.tags = [{
