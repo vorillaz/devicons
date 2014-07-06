@@ -68,7 +68,7 @@
 							<h2>The font</h2>
 							<div id="tags" class="clearfix">
 								<ul>
-									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active"><span>#</span>{{tag.name}}</a></li>
+									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
 								</ul>
 							
 							</div>
