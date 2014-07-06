@@ -25,6 +25,35 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
 
 You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)
 
+##Upcoming releases
+New icons to be added in v.1.1
+
+**Programming Languages:** Swift
+
+**Node.js & Stuff:**: Express, Sails
+
+**IDES:**Atom, Coda, Espresso Sublime text
+
+**CSS & Preprocessors:** Bourbon, Compass, Less, Stylus
+
+**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Raphaël, Require.js, Snap.svg, Underscore.js, YUI
+
+**PHP and Stuff:** Symfony, CakePHP
+
+**Mobile:** Sencha Touch
+
+**Ruby:** Celluloid
+
+**Recources & Useful:** Code Tuts & Envato
+
+**Companies & Tools**: Atlassian, Trello
+
+**Miscellaneous:** Google analytics, Quantacak, Piwik, Google Maps
+
+Do you have any additional request? Drop me a line or support an issue.
+
+
+
 ##Changelog
 - v1.0 Initial launch of Devicons iconic fonts - 85 glyphs 
 
