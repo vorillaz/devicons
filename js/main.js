@@ -363,7 +363,7 @@ myApp.controller("MainCtrl", ["$scope",
             "iconname": "ghost_small",
             "key": "\\e614",
             "desc": "",
-            "tags": ["html5"]
+            "tags": ["tools", "cms"]
         }, {
             "iconname": "ghost",
             "key": "\\e61f",
