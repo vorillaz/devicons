@@ -7,7 +7,7 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
 
 
 ###Devicons icon set
-![Devicons](http://i.imgur.com/bzzfsqW.png)
+![Devicons](http://i.imgur.com/3O7xgpt.png)
 
 
 ## Getting Started
@@ -28,34 +28,32 @@ You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devi
 ##Upcoming releases
 New icons to be added in v.1.1
 
-**Programming Languages:** Swift
+**Node.js & Stuff:** Express, Sails
 
-**Node.js & Stuff:**: Express, Sails
+**IDES:** Atom, Coda, Espresso, Sublime text
 
-**IDES:**Atom, Coda, Espresso Sublime text
+**CSS & Preprocessors:** Bourbon
 
-**CSS & Preprocessors:** Bourbon, Compass, Less, Stylus
+**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Require.js, YUI
 
-**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Raphaël, Require.js, Snap.svg, Underscore.js, YUI
-
-**PHP and Stuff:** Symfony, CakePHP
+**PHP and Stuff:** CakePHP
 
 **Mobile:** Sencha Touch
 
 **Ruby:** Celluloid
 
-**Recources & Useful:** Code Tuts & Envato
-
-**Companies & Tools**: Atlassian, Trello
-
-**Miscellaneous:** Google analytics, Quantacak, Piwik, Google Maps
+**Miscellaneous:** Piwik, Google Maps
 
 Do you have any additional request? Drop me a line or support an issue.
 
 
 
 ##Changelog
+- v1.1 Added 12 new icons - 97 glyphs 
 - v1.0 Initial launch of Devicons iconic fonts - 85 glyphs 
+
+
+[Detailed changelog & contributors](/vorillaz/devicons/blob/master/CHANGELOG.md)
 
 ##Author
 - Email: sayhi@vorillaz.com

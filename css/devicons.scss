@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.1 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -110,7 +110,21 @@ $devicons:	(git "\e602"),
 			(ie "\e644"),
 			(firefox "\e645"),
 			(opera "\e646"),
-			(safari "\e648");
+			(safari "\e648"),
+			(swift "\e655"),
+			(symfony "\e656"),
+			(symfony_badge "\e657"),
+			(less "\e658"),
+			(stylus "\e659"),
+			(trello "\e65a"),
+			(atlassian "\e65b"),
+			(jira "\e65c"),
+			(envato "\e65d"),
+			(snap_svg "\e65e"),
+			(raphael "\e65f"),
+			(google_analytics "\e660"),
+			(compass "\e661"),
+			(onedrive "\e662");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);

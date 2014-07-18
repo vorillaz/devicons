@@ -1,6 +1,3 @@
-/*!
- *  Devicons 1.0 made by Theodore Vorillas / http://vorillaz.com 
- */
 @font-face {
   font-family: 'devicons';
   src: url("../fonts/devicons.eot?xqxft6");
@@ -273,3 +270,45 @@
 
 .devicons-safari:before {
   content: "\e648"; }
+
+.devicons-swift:before {
+  content: "\e655"; }
+
+.devicons-symfony:before {
+  content: "\e656"; }
+
+.devicons-symfony_badge:before {
+  content: "\e657"; }
+
+.devicons-less:before {
+  content: "\e658"; }
+
+.devicons-stylus:before {
+  content: "\e659"; }
+
+.devicons-trello:before {
+  content: "\e65a"; }
+
+.devicons-atlassian:before {
+  content: "\e65b"; }
+
+.devicons-jira:before {
+  content: "\e65c"; }
+
+.devicons-envato:before {
+  content: "\e65d"; }
+
+.devicons-snap_svg:before {
+  content: "\e65e"; }
+
+.devicons-raphael:before {
+  content: "\e65f"; }
+
+.devicons-google_analytics:before {
+  content: "\e660"; }
+
+.devicons-compass:before {
+  content: "\e661"; }
+
+.devicons-onedrive:before {
+  content: "\e662"; }

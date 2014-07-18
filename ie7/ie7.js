@@ -1,8 +1,3 @@
-/*!
- *  Devicons 1.0 made by Theodore Vorillas / http://vorillaz.com 
- */
-
-
 /* To avoid CSS expressions while still supporting IE 7 and IE 6, use this script */
 /* The script tag referring to this file must be placed before the ending body tag. */
 
@@ -103,6 +98,20 @@
 		'devicons-firefox': '&#xe645;',
 		'devicons-opera': '&#xe646;',
 		'devicons-safari': '&#xe648;',
+		'devicons-swift': '&#xe655;',
+		'devicons-symfony': '&#xe656;',
+		'devicons-symfony_badge': '&#xe657;',
+		'devicons-less': '&#xe658;',
+		'devicons-stylus': '&#xe659;',
+		'devicons-trello': '&#xe65a;',
+		'devicons-atlassian': '&#xe65b;',
+		'devicons-jira': '&#xe65c;',
+		'devicons-envato': '&#xe65d;',
+		'devicons-snap_svg': '&#xe65e;',
+		'devicons-raphael': '&#xe65f;',
+		'devicons-google_analytics': '&#xe660;',
+		'devicons-compass': '&#xe661;',
+		'devicons-onedrive': '&#xe662;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

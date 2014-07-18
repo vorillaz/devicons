@@ -1,22 +1,11 @@
 /*!
- *  Devdeviconss 1.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devdeviconss 1.1 made by Theodore Vorillas / http://vorillaz.com 
  */
 .devicons {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
 	fill: currentColor;
-	/*
-		You may apply any changes to the original height and width and also change
-		backgroundprosition in order to scale up the icons
-		
-		e.g
-		width: 50px;
-		height: 50px;
-		background-size: 100px 100px;
-		
-		Also try to change fill ;]
-	*/
 }
 .devicons-git {
 	/*fill: #000000;*/
@@ -271,5 +260,47 @@
 	/*fill: #000000;*/
 }
 .devicons-safari {
+	/*fill: #000000;*/
+}
+.devicons-swift {
+	/*fill: #000000;*/
+}
+.devicons-symfony {
+	/*fill: #000000;*/
+}
+.devicons-symfony_badge {
+	/*fill: #000000;*/
+}
+.devicons-less {
+	/*fill: #000000;*/
+}
+.devicons-stylus {
+	/*fill: #000000;*/
+}
+.devicons-trello {
+	/*fill: #000000;*/
+}
+.devicons-atlassian {
+	/*fill: #000000;*/
+}
+.devicons-jira {
+	/*fill: #000000;*/
+}
+.devicons-envato {
+	/*fill: #000000;*/
+}
+.devicons-snap_svg {
+	/*fill: #000000;*/
+}
+.devicons-raphael {
+	/*fill: #000000;*/
+}
+.devicons-google_analytics {
+	/*fill: #000000;*/
+}
+.devicons-compass {
+	/*fill: #000000;*/
+}
+.devicons-onedrive {
 	/*fill: #000000;*/
 }
