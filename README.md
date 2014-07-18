@@ -53,7 +53,7 @@ Do you have any additional request? Drop me a line or support an issue.
 - v1.0 Initial launch of Devicons iconic fonts - 85 glyphs 
 
 
-[Detailed changelog & contributors](/vorillaz/devicons/blob/master/CHANGELOG.md)
+[Detailed changelog & contributors](/blob/master/CHANGELOG.md)
 
 ##Author
 - Email: sayhi@vorillaz.com
