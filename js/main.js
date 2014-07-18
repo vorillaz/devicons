@@ -1023,7 +1023,7 @@ myApp.controller("MainCtrl", ["$scope",
                    },
                    {
                       "iconname":"atom",
-                      "key":"\\e665",
+                      "key":"\\e664",
                       "desc":"",
                       "tags":[
                          "tools",
