@@ -1,0 +1,155 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/thodores/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+12 verbose folder .
+13 info prepublish devicons@1.3.0
+14 silly lockFile 1f1177db-tar tar://.
+15 verbose lock tar://. /Users/thodores/.npm/1f1177db-tar.lock
+16 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+17 verbose lock tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz /Users/thodores/.npm/b3db13e1-90606-0-5478982264176011-tmp-tgz.lock
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+21 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+22 verbose tar unpack /var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+23 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+24 verbose lock tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package /Users/thodores/.npm/3d1bf0e2-90606-0-5478982264176011-package.lock
+25 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+26 verbose lock tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz /Users/thodores/.npm/b3db13e1-90606-0-5478982264176011-tmp-tgz.lock
+27 silly gunzTarPerm modes [ '755', '644' ]
+28 silly gunzTarPerm extractEntry package.json
+29 silly gunzTarPerm extractEntry .npmignore
+30 silly gunzTarPerm extractEntry README.md
+31 silly gunzTarPerm extractEntry css/devicons.css
+32 silly gunzTarPerm extractEntry css/devicons.min.css
+33 silly gunzTarPerm extractEntry css/devicons.scss
+34 silly gunzTarPerm extractEntry fonts/devicons.eot
+35 silly gunzTarPerm extractEntry fonts/devicons.svg
+36 silly gunzTarPerm extractEntry fonts/devicons.ttf
+37 silly gunzTarPerm extractEntry fonts/devicons.woff
+38 silly gunzTarPerm extractEntry ie7/ie7.js
+39 silly gunzTarPerm extractEntry ie7/ie7.css
+40 silly gunzTarPerm extractEntry selection.json
+41 silly gunzTarPerm extractEntry sprites/PNG/devicons_sprites.png
+42 silly gunzTarPerm extractEntry sprites/SVG/devicons_sprites.svg
+43 silly gunzTarPerm extractEntry sprites/SVG/devicons_svg_sprites.css
+44 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+45 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+46 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+47 silly lockFile b3db13e1-90606-0-5478982264176011-tmp-tgz tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/tmp.tgz
+48 verbose tar pack [ '/Users/thodores/.npm/devicons/1.3.0/package.tgz',
+48 verbose tar pack   '/var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package' ]
+49 verbose tarball /Users/thodores/.npm/devicons/1.3.0/package.tgz
+50 verbose folder /var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+51 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+52 verbose lock tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package /Users/thodores/.npm/3d1bf0e2-90606-0-5478982264176011-package.lock
+53 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+54 verbose lock tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz /Users/thodores/.npm/27eeed2d-s-npm-devicons-1-3-0-package-tgz.lock
+55 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+56 silly lockFile 3d1bf0e2-90606-0-5478982264176011-package tar:///var/folders/_g/1h73bxt91yj78srcvvtsfqcc0000gn/T/npm-48079-42AW__7s/1405718290606-0.5478982264176011/package
+57 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+58 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+59 silly lockFile 3caf6fce-dores-npm-devicons-1-3-0-package /Users/thodores/.npm/devicons/1.3.0/package
+60 verbose lock /Users/thodores/.npm/devicons/1.3.0/package /Users/thodores/.npm/3caf6fce-dores-npm-devicons-1-3-0-package.lock
+61 silly lockFile 3caf6fce-dores-npm-devicons-1-3-0-package /Users/thodores/.npm/devicons/1.3.0/package
+62 silly lockFile 3caf6fce-dores-npm-devicons-1-3-0-package /Users/thodores/.npm/devicons/1.3.0/package
+63 verbose tar unpack /Users/thodores/.npm/devicons/1.3.0/package.tgz
+64 silly lockFile 3ef0c6dc-dores-npm-devicons-1-3-0-package tar:///Users/thodores/.npm/devicons/1.3.0/package
+65 verbose lock tar:///Users/thodores/.npm/devicons/1.3.0/package /Users/thodores/.npm/3ef0c6dc-dores-npm-devicons-1-3-0-package.lock
+66 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+67 verbose lock tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz /Users/thodores/.npm/27eeed2d-s-npm-devicons-1-3-0-package-tgz.lock
+68 silly gunzTarPerm modes [ '755', '644' ]
+69 silly gunzTarPerm extractEntry package.json
+70 silly gunzTarPerm extractEntry .npmignore
+71 silly gunzTarPerm extractEntry README.md
+72 silly gunzTarPerm extractEntry css/devicons.css
+73 silly gunzTarPerm extractEntry css/devicons.min.css
+74 silly gunzTarPerm extractEntry css/devicons.scss
+75 silly gunzTarPerm extractEntry fonts/devicons.eot
+76 silly gunzTarPerm extractEntry fonts/devicons.svg
+77 silly gunzTarPerm extractEntry fonts/devicons.ttf
+78 silly gunzTarPerm extractEntry fonts/devicons.woff
+79 silly gunzTarPerm extractEntry ie7/ie7.js
+80 silly gunzTarPerm extractEntry ie7/ie7.css
+81 silly gunzTarPerm extractEntry selection.json
+82 silly gunzTarPerm extractEntry sprites/PNG/devicons_sprites.png
+83 silly gunzTarPerm extractEntry sprites/SVG/devicons_sprites.svg
+84 silly gunzTarPerm extractEntry sprites/SVG/devicons_svg_sprites.css
+85 silly lockFile 3ef0c6dc-dores-npm-devicons-1-3-0-package tar:///Users/thodores/.npm/devicons/1.3.0/package
+86 silly lockFile 3ef0c6dc-dores-npm-devicons-1-3-0-package tar:///Users/thodores/.npm/devicons/1.3.0/package
+87 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+88 silly lockFile 27eeed2d-s-npm-devicons-1-3-0-package-tgz tar:///Users/thodores/.npm/devicons/1.3.0/package.tgz
+89 verbose chmod /Users/thodores/.npm/devicons/1.3.0/package.tgz 644
+90 verbose chown /Users/thodores/.npm/devicons/1.3.0/package.tgz [ 501, 20 ]
+91 silly lockFile 3a52ce78- .
+92 silly lockFile 3a52ce78- .
+93 silly publish { name: 'devicons',
+93 silly publish   description: 'An iconic font made for developers',
+93 silly publish   version: '1.3.0',
+93 silly publish   keywords: [ 'font', 'icons', 'devicons', 'glyphs' ],
+93 silly publish   homepage: 'http://fontawesome.io/',
+93 silly publish   bugs: { url: 'http://github.com/vorillaz/devicons/issues' },
+93 silly publish   author:
+93 silly publish    { name: 'Theodore Vorillas',
+93 silly publish      email: 'sayhi@vorillaz.com',
+93 silly publish      url: 'http://twitter.com/vorillas' },
+93 silly publish   repository: { type: 'git', url: 'https://github.com/vorillaz/devicons.git' },
+93 silly publish   licenses:
+93 silly publish    { type: 'MIT',
+93 silly publish      url: 'http://opensource.org/licenses/mit-license.html' },
+93 silly publish   dependencies: {},
+93 silly publish   engines: { node: '>=0.10.3' },
+93 silly publish   readme: '# Meet  [Devicons](http://vorillaz.github.io/devicons/)\n### an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.\n\n[![NPM version][npm-image]][npm-url] \n[![Downloads][downloads-image]][npm-url] \n[![Support me][gittip-image]][gittip-url] \n[![Issue tracking][issues-image]][issues-url]\n[![Tag release][tag-release]][tags-url]\n\nDevicons is a full stack iconic font ready to be shipped with your next project. Created, handcrafted and coded by [Theodore Vorillas](http://twitter.com/vorillas) Devicons contains 85 vectorized sharp glyphs .\nDevicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  \n\n\n###Devicons icon set v 1.3\n![Devicons](http://i.imgur.com/nTQC2my.png)\n\n\n## Getting Started\n\n 1. Download and extract the repository\n 2. Copy the `devicons.css` to your project\n 3. Copy the `fonts` folder to your project\n 4. Ensure the font urls within `devicons.css` properly reference the `fonts` path within your project.\n 5. Include a reference to the `devicons.css` file from every webpage you need to use it.\n\n## Install using Bower\n\n`bower install devicons`\n\n##Install using NPM\n`npm install devicons`\n\n##Create a custom set\nIn the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like.\n\n##Contribute to the project.\nIcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don\'t recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG)\n\n\nYou may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)\n\n##Upcoming releases\nNew icons to be added in v.1.3\n\n**Node.js & Stuff:** Express, Sails\n\n**IDES:** Coda, Espresso, Sublime text\n\n**CSS & Preprocessors:** Bourbon\n\n**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Require.js, YUI\n\n**PHP and Stuff:** CakePHP\n\n**Mobile:** Sencha Touch\n\n**Miscellaneous:** Piwik, Google Maps, Alfred app\n\n**Tools:** Yeoman\n\nDo you have any additional request? Drop me a line or support an issue.\n\n\n\n##Changelog\n- v1.3 Added 10 new icons - 111 glyphs \n- v1.2 Added 3 new icons - 101 glyphs \n- v1.1 Added 12 new icons - 97 glyphs \n- v1.0 Initial launch of Devicons iconic fonts - 85 glyphs \n[Detailed changelog & contributors](/CHANGELOG.md)\n\n\n##Do you like (♥) Devicons? \n\n[![Support me][gittip-image]][gittip-url] \n\n\n##Author\n- Email: sayhi@vorillaz.com\n- Twitter: http://twitter.com/vorillas\n- Website: http://vorillaz.com\n\nNote: All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by the author, nor vice versa.\n\n\n\n\n[gittip-url]: https://www.gittip.com/vorillaz/\n[gittip-image]: http://img.shields.io/gittip/vorillaz.svg\n\n[downloads-image]: http://img.shields.io/npm/dm/devicons.svg\n[npm-url]: https://npmjs.org/package/devicons\n[npm-image]: http://img.shields.io/npm/v/devicons.svg\n\n\n[issues-url]: https://github.com/vorillaz/devicons/issues\n[issues-image]: http://img.shields.io/github/issues/vorillaz/devicons.svg\n\n[tag-release]: http://img.shields.io/github/tag/vorillaz/devicons.svg\n[tags-url]: https://github.com/vorillaz/devicons/releases\n',
+93 silly publish   readmeFilename: 'README.md',
+93 silly publish   _id: 'devicons@1.3.0',
+93 silly publish   dist: { shasum: '0eb66a654d704f7b15374b73e4bd7c6d934f3c81' },
+93 silly publish   _from: '.' }
+94 verbose url raw devicons
+95 verbose url resolving [ 'https://registry.npmjs.org/', './devicons' ]
+96 verbose url resolved https://registry.npmjs.org/devicons
+97 info trying registry request attempt 1 at 00:18:11
+98 http PUT https://registry.npmjs.org/devicons
+99 http 403 https://registry.npmjs.org/devicons
+100 error publish Failed PUT 403
+101 error Error: forbidden cannot modify pre-existing version: 1.3.0
+101 error old={"name":"devicons","description":"An iconic font made for developers","version":"1.3.0","keywords":["font","icons","devicons","glyphs"],"homepage":"http://fontawesome.io/","bugs":{"url":"http://github.com/vorillaz/devicons/issues"},"author":{"name":"Theodore Vorillas","email":"sayhi@vorillaz.com","url":"http://twitter.com/vorillas"},"repository":{"type":"git","url":"https://github.com/vorillaz/devicons.git"},"licenses":{"type":"MIT","url":"http://opensource.org/licenses/mit-license.html"},"dependencies":{},"engines":{"node":">=0.10.3"},"_id":"devicons@1.3.0","dist":{"shasum":"d8e8682e3ff31dd9d2c106e78a236fd1ae56059d","tarball":"http://registry.npmjs.org/devicons/-/devicons-1.3.0.tgz"},"_from":".","_npmVersion":"1.4.3","_npmUser":{"name":"vorillaz","email":"theodorevorillas@yahoo.gr"},"maintainers":[{"name":"vorillaz","email":"theodorevorillas@yahoo.gr"}]}
+101 error new={"name":"devicons","description":"An iconic font made for developers","version":"1.3.0","keywords":["font","icons","devicons","glyphs"],"homepage":"http://fontawesome.io/","bugs":{"url":"http://github.com/vorillaz/devicons/issues"},"author":{"name":"Theodore Vorillas","email":"sayhi@vorillaz.com","url":"http://twitter.com/vorillas"},"repository":{"type":"git","url":"https://github.com/vorillaz/devicons.git"},"licenses":{"type":"MIT","url":"http://opensource.org/licenses/mit-license.html"},"dependencies":{},"engines":{"node":">=0.10.3"},"readme":"# Meet  [Devicons](http://vorillaz.github.io/devicons/)\u000a### an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.\u000a\u000a[![NPM version][npm-image]][npm-url] \u000a[![Downloads][downloads-image]][npm-url] \u000a[![Support me][gittip-image]][gittip-url] \u000a[![Issue tracking][issues-image]][issues-url]\u000a[![Tag release][tag-release]][tags-url]\u000a\u000aDevicons is a full stack iconic font ready to be shipped with your next project. Created, handcrafted and coded by [Theodore Vorillas](http://twitter.com/vorillas) Devicons contains 85 vectorized sharp glyphs .\u000aDevicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  \u000a\u000a\u000a###Devicons icon set v 1.3\u000a![Devicons](http://i.imgur.com/nTQC2my.png)\u000a\u000a\u000a## Getting Started\u000a\u000a 1. Download and extract the repository\u000a 2. Copy the `devicons.css` to your project\u000a 3. Copy the `fonts` folder to your project\u000a 4. Ensure the font urls within `devicons.css` properly reference the `fonts` path within your project.\u000a 5. Include a reference to the `devicons.css` file from every webpage you need to use it.\u000a\u000a## Install using Bower\u000a\u000a`bower install devicons`\u000a\u000a##Install using NPM\u000a`npm install devicons`\u000a\u000a##Create a custom set\u000aIn the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like.\u000a\u000a##Contribute to the project.\u000aIcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don't recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG)\u000a\u000a\u000aYou may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)\u000a\u000a##Upcoming releases\u000aNew icons to be added in v.1.3\u000a\u000a**Node.js & Stuff:** Express, Sails\u000a\u000a**IDES:** Coda, Espresso, Sublime text\u000a\u000a**CSS & Preprocessors:** Bourbon\u000a\u000a**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Require.js, YUI\u000a\u000a**PHP and Stuff:** CakePHP\u000a\u000a**Mobile:** Sencha Touch\u000a\u000a**Miscellaneous:** Piwik, Google Maps, Alfred app\u000a\u000a**Tools:** Yeoman\u000a\u000aDo you have any additional request? Drop me a line or support an issue.\u000a\u000a\u000a\u000a##Changelog\u000a- v1.3 Added 10 new icons - 111 glyphs \u000a- v1.2 Added 3 new icons - 101 glyphs \u000a- v1.1 Added 12 new icons - 97 glyphs \u000a- v1.0 Initial launch of Devicons iconic fonts - 85 glyphs \u000a[Detailed changelog & contributors](/CHANGELOG.md)\u000a\u000a\u000a##Do you like (♥) Devicons? \u000a\u000a[![Support me][gittip-image]][gittip-url] \u000a\u000a\u000a##Author\u000a- Email: sayhi@vorillaz.com\u000a- Twitter: http://twitter.com/vorillas\u000a- Website: http://vorillaz.com\u000a\u000aNote: All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by the author, nor vice versa.\u000a\u000a\u000a\u000a\u000a[gittip-url]: https://www.gittip.com/vorillaz/\u000a[gittip-image]: http://img.shields.io/gittip/vorillaz.svg\u000a\u000a[downloads-image]: http://img.shields.io/npm/dm/devicons.svg\u000a[npm-url]: https://npmjs.org/package/devicons\u000a[npm-image]: http://img.shields.io/npm/v/devicons.svg\u000a\u000a\u000a[issues-url]: https://github.com/vorillaz/devicons/issues\u000a[issues-image]: http://img.shields.io/github/issues/vorillaz/devicons.svg\u000a\u000a[tag-release]: http://img.shields.io/github/tag/vorillaz/devicons.svg\u000a[tags-url]: https://github.com/vorillaz/devicons/releases\u000a","readmeFilename":"README.md","_id":"devicons@1.3.0","dist":{"shasum":"0eb66a654d704f7b15374b73e4bd7c6d934f3c81","tarball":"http://registry.npmjs.org/devicons/-/devicons-1.3.0.tgz"},"_from":".","_npmVersion":"1.4.3","_npmUser":{"name":"vorillaz","email":"theodorevorillas@yahoo.gr"},"maintainers":[{"name":"vorillaz","email":"theodorevorillas@yahoo.gr"}]}: devicons
+101 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:237:14)
+101 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:123:22)
+101 error     at Request.EventEmitter.emit (events.js:98:17)
+101 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:893:14)
+101 error     at Request.EventEmitter.emit (events.js:117:20)
+101 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:844:12)
+101 error     at IncomingMessage.EventEmitter.emit (events.js:117:20)
+101 error     at _stream_readable.js:920:16
+101 error     at process._tickCallback (node.js:415:13)
+102 error If you need help, you may report this *entire* log,
+102 error including the npm and node versions, at:
+102 error     <http://github.com/npm/npm/issues>
+103 error System Darwin 13.2.0
+104 error command "node" "/usr/local/bin/npm" "publish"
+105 error cwd /Users/thodores/Desktop/Projects/open source projects/devicons/FINAL/master
+106 error node -v v0.10.26
+107 error npm -v 1.4.3
+108 verbose exit [ 1, true ]

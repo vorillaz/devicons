@@ -40,7 +40,7 @@ IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes a
 You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)
 
 ##Upcoming releases
-New icons to be added in v.1.3
+New icons to be added in v.1.4.0
 
 **Node.js & Stuff:** Express, Sails
 
@@ -63,10 +63,10 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 ##Changelog
-- v1.3 Added 10 new icons - 111 glyphs 
-- v1.2 Added 3 new icons - 101 glyphs 
-- v1.1 Added 12 new icons - 97 glyphs 
-- v1.0 Initial launch of Devicons iconic fonts - 85 glyphs 
+- v1.3.0 Added 10 new icons - 111 glyphs 
+- v1.2.0 Added 3 new icons - 101 glyphs 
+- v1.1.0 Added 12 new icons - 97 glyphs 
+- v1.0.0 Initial launch of Devicons iconic fonts - 85 glyphs 
 [Detailed changelog & contributors](/CHANGELOG.md)
 
 
