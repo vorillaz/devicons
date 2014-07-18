@@ -692,11 +692,11 @@ div.smallicon.devicons {
   position:relative;
 }
 div.smallicon.devicons span.new{
-  font-size: 10px;
+  font-size: 0.51rem;
   line-height: 1;
   position: absolute;
   top: 0;
-  right: -24px;
+  right: -0.5rem;
   color: #07A38F;
   font-weight: 700;
   text-transform: uppercase;

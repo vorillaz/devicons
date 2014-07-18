@@ -750,6 +750,15 @@ myApp.controller("MainCtrl", ["$scope",
                       ]
                    },
                    {
+                      "iconname":"gulp",
+                      "key":"\\e663",
+                      "desc":"new",
+                      "tags":[
+                         "tools",
+                         "js"
+                      ]
+                   },
+                   {
                       "iconname":"npm",
                       "key":"\\e61e",
                       "desc":"",
@@ -769,6 +778,7 @@ myApp.controller("MainCtrl", ["$scope",
                          "useful"
                       ]
                    },
+
                    {
                       "iconname":"yahoo",
                       "key":"\\e615",
@@ -791,7 +801,15 @@ myApp.controller("MainCtrl", ["$scope",
                          "useful"
                       ]
                    },
-
+                   {
+                      "iconname":"cisco",
+                      "key":"\\e665",
+                      "desc":"new",
+                      "tags":[
+                         "companies",
+                         "misc"
+                      ]
+                   },
                    {
                       "iconname":"windows",
                       "key":"\\e60f",
@@ -997,6 +1015,15 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"visualstudio",
                       "key":"\\e60c",
+                      "desc":"",
+                      "tags":[
+                         "tools",
+                         "ides"
+                      ]
+                   },
+                   {
+                      "iconname":"atom",
+                      "key":"\\e665",
                       "desc":"",
                       "tags":[
                          "tools",
