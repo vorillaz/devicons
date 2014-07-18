@@ -112,6 +112,9 @@
 		'devicons-google_analytics': '&#xe660;',
 		'devicons-compass': '&#xe661;',
 		'devicons-onedrive': '&#xe662;',
+		'devicons-gulp': '&#xe663;',
+		'devicons-atom': '&#xe664;',
+		'devicons-cisco': '&#xe665;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

@@ -1,0 +1,9 @@
+.DS_Store
+.svn/*
+*.zip
+bin
+tmp
+
+# remove from NPM package
+bower.json
+CHANGELOG.md

@@ -1,0 +1,30 @@
+{
+  "name": "devicons",
+  "description": "An iconic font made for developers",
+  "version": "1.2.0",
+  "keywords": ["font", "icons", "devicons", "glyphs" ],
+  "homepage": "http://fontawesome.io/",
+  "bugs": {
+    "url" : "http://github.com/vorillaz/devicons/issues"
+  },
+  "author": {
+    "name": "Theodore Vorillas",
+    "email": "sayhi@vorillaz.com",
+    "web": "http://twitter.com/vorillas"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vorillaz/devicons.git"
+  },
+  "licenses": 
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.html"
+    }
+  ,
+  "dependencies": {
+  },
+  "engines" : {
+    "node" : ">=0.10.3"
+  }
+}

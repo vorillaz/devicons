@@ -1,3 +1,6 @@
+/*!
+ *  Devicons 1.2 made by Theodore Vorillas / http://vorillaz.com 
+ */
 @font-face {
   font-family: 'devicons';
   src: url("../fonts/devicons.eot?xqxft6");
@@ -312,3 +315,12 @@
 
 .devicons-onedrive:before {
   content: "\e662"; }
+
+.devicons-gulp:before {
+  content: "\e663"; }
+
+.devicons-atom:before {
+  content: "\e664"; }
+
+.devicons-cisco:before {
+  content: "\e665"; }

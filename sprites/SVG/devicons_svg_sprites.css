@@ -1,6 +1,7 @@
 /*!
- *  Devdeviconss 1.1 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.2 made by Theodore Vorillas / http://vorillaz.com 
  */
+ 
 .devicons {
 	display: inline-block;
 	width: 32px;
@@ -302,5 +303,14 @@
 	/*fill: #000000;*/
 }
 .devicons-onedrive {
+	/*fill: #000000;*/
+}
+.devicons-gulp {
+	/*fill: #000000;*/
+}
+.devicons-atom {
+	/*fill: #000000;*/
+}
+.devicons-cisco {
 	/*fill: #000000;*/
 }

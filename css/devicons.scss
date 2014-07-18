@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.1 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.2 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -124,7 +124,10 @@ $devicons:	(git "\e602"),
 			(raphael "\e65f"),
 			(google_analytics "\e660"),
 			(compass "\e661"),
-			(onedrive "\e662");
+			(onedrive "\e662"),
+			(gulp "\e663"),
+			(atom  "\e664"),
+			(cisco "\e665");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);
