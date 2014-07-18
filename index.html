@@ -4,7 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Devicons | The developer's iconic font</title>
-	<link href='//fonts.googleapis.com/css?family=Lato:100,400,700|Oswald:400,300' rel='stylesheet' type='text/css'>
+	<meta property="og:title" content="Devicons | The developer's iconic font" />
+	<meta property="og:description" content=" Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds. " />
+	
+	<meta property="og:image" content="http://vorillaz.github.io/devicons/img/ogimage.png" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,400,700|Oswald:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="favicon.ico">
 	<link rel="stylesheet" href="css/main.css">
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
@@ -12,12 +16,14 @@
 	<script type="text/javascript" src="js/modernizr.js"></script>
 </head>
 <body>
+	<div class="overlay">
+		<a href="#" id="spawn">Devicons</a>
+	</div>
 	<div id="outer-wrap">
 		<div id="inner-wrap">
 			<header>
 				<div id="headerinner">
 					<a class="nav-btn" id="nav-open-btn" href="#nav">Open Menu</a>
-					
 				</div>
 			</header>
 			<!--nav-->
@@ -46,7 +52,7 @@
 			<div id="main">
 				<div id="maininner">
 					<div id="welcome">
-						<a href="#" id="logo">Dev font</a>
+						<a href="#" id="logo">Devicons</a>
 					</div>
 					<div id="txt">
 						Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.
@@ -65,7 +71,7 @@
 					</div>
 					<div data-ng-controller="MainCtrl" id="dafont">
 						<div class="firsttext" >
-							<h2>The font</h2>
+							<h2>The font <small>v1.1</small></h2>
 							<div id="tags" class="clearfix">
 								<ul>
 									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
@@ -74,9 +80,11 @@
 							</div>
 							<div class="iconwrapper">
 								<div class="iconwrapperinner">
-									<div ng-repeat="icon in icons | filter:filterTheIcons" class="grid gridicon" ng-animate="'animate'">
+									<div ng-repeat="icon in icons | filter:filterTheIcons" class="grid gridicon"  ng-animate="'animate'">
 										<div class="smallicon devicons devicons-{{icon.iconname}}">
+											<span ng-bind-html-unsafe="icon.desc" class="point {{icon.desc}}"></span>
 										</div>
+										
 									</div>
 								</div>
 							</div>
