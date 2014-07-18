@@ -1024,7 +1024,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"atom",
                       "key":"\\e664",
-                      "desc":"",
+                      "desc":"new",
                       "tags":[
                          "tools",
                          "ides"
@@ -1087,7 +1087,17 @@ myApp.controller("MainCtrl", ["$scope",
                       "tags":[
                          "browsers"
                       ]
-                   }
+                   },
+                    {"iconname":"nancy","key":"\\e666","desc":"new","tags":["tools","useful","frameworks"]},
+                    {"iconname":"clojure","key":"\\e668","desc":"new","tags":["frameworks"]},
+                    {"iconname":"clojure_alt","key":"\\e66a","desc":"new","tags":["frameworks"]},
+                    {"iconname":"perl","key":"\\e669","desc":"new","tags":["programming"]},
+                    {"iconname":"celluloid","key":"\\e66b","desc":"new","tags":["frameworks"]},
+                    {"iconname":"w3c","key":"\\e66c","desc":"new","tags":["useful","resources"]},
+                    {"iconname":"redis","key":"\\e66d","desc":"new","tags":["tools","programming"]},
+                    {"iconname":"postgresql","key":"\\e66e","desc":"new","tags":["tools","programming"]},
+                    {"iconname":"webplatform","key":"\\e66f","desc":"new","tags":["useful","resources"]},
+                    {"iconname":"jenkins","key":"\\e667","desc":"new","tags":["frameworks","tools","misc"]}
                 ];
         e.filteredIcons = [];
         e.active = false;
