@@ -33,7 +33,7 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
 ##Create a custom set
 In the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like.
 
-###Contribute to the project.
+##Contribute to the project.
 IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don't recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG)
 
 
