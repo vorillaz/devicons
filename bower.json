@@ -1,7 +1,11 @@
 {
   "name": "devicons",
   "description": "Devicons - An icon font made for developers",
+<<<<<<< HEAD
   "version": "1.3",
+=======
+  "version": "1.2",
+>>>>>>> 62b77bdd8cfc4106088d8d9e9006af8cb4883c11
   "keywords": [
     "icons",
     "devicons",
