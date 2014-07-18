@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.2 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.3 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -127,7 +127,17 @@ $devicons:	(git "\e602"),
 			(onedrive "\e662"),
 			(gulp "\e663"),
 			(atom  "\e664"),
-			(cisco "\e665");
+			(cisco "\e665"),
+			(nancy "\e666"),
+			(clojure "\e668"),
+			(clojure_alt "\e66a"),
+			(perl "\e669"),
+			(celluloid "\e66b"),
+			(w3c "\e66c"),
+			(redis "\e66d"),
+			(postgresql "\e66e"),
+			(webplatform "\e66f"),
+			(jenkins "\e667");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);

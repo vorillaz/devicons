@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.2 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.3 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
   font-family: 'devicons';
@@ -324,3 +324,33 @@
 
 .devicons-cisco:before {
   content: "\e665"; }
+
+.devicons-nancy:before {
+  content: "\e666"; }
+
+.devicons-clojure:before {
+  content: "\e668"; }
+
+.devicons-clojure_alt:before {
+  content: "\e66a"; }
+
+.devicons-perl:before {
+  content: "\e669"; }
+
+.devicons-celluloid:before {
+  content: "\e66b"; }
+
+.devicons-w3c:before {
+  content: "\e66c"; }
+
+.devicons-redis:before {
+  content: "\e66d"; }
+
+.devicons-postgresql:before {
+  content: "\e66e"; }
+
+.devicons-webplatform:before {
+  content: "\e66f"; }
+
+.devicons-jenkins:before {
+  content: "\e667"; }

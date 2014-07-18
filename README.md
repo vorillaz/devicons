@@ -11,8 +11,8 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set v 1.2
-![Devicons](http://i.imgur.com/vqz74sT.png)
+###Devicons icon set v 1.3
+![Devicons](http://i.imgur.com/nTQC2my.png)
 
 
 ## Getting Started
@@ -27,7 +27,7 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
 
 `bower install devicons`
 
-##Install using nmp
+##Install using NPM
 `npm install devicons`
 
 ##Create a custom set
@@ -54,15 +54,16 @@ New icons to be added in v.1.3
 
 **Mobile:** Sencha Touch
 
-**Ruby:** Celluloid
+**Miscellaneous:** Piwik, Google Maps, Alfred app
 
-**Miscellaneous:** Piwik, Google Maps
+**Tools:** Yeoman
 
 Do you have any additional request? Drop me a line or support an issue.
 
 
 
 ##Changelog
+- v1.3 Added 10 new icons - 111 glyphs 
 - v1.2 Added 3 new icons - 101 glyphs 
 - v1.1 Added 12 new icons - 97 glyphs 
 - v1.0 Initial launch of Devicons iconic fonts - 85 glyphs 

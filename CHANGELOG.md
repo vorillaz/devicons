@@ -4,8 +4,22 @@
 
 [v1.1](#v1.1)
 [v1.2](#v1.2)
+[v1.2](#v1.3)
+
+
+## v1.3
+
+Change log and fixes in version 1.3:
+1. Added Clojure and Clojure badge icons as suggested by [@arrdem](https://github.com/arrdem) , [@stevenfourie](https://github.com/stevenfourie) & [@TakaGoto](https://github.com/TakaGoto). 
+2. Added Nancy icon as suggested by [@khellang](https://github.com/khellang).
+3. Added Nancy icon as suggested by [@markwellis](https://github.com/markwellis).
+4. Added PostgreSQL icon as suggested by [@RoryDH](https://github.com/RoryDH).
+5. Added Jenkins icon as suggested by Daniel Serodio.
+
+6.Also added Celluloid, W3C, Redis and Web platform icons
 
 ## v1.2
+
 Change log and fixes in version 1.2:
 1. Added Gulp.js badge as suggested by [@pkozlowski-opensource](https://github.com/pkozlowski-opensource). 
 
