@@ -11,7 +11,7 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set v 1.3
+###Devicons icon set v 1.3.1
 ![Devicons](http://i.imgur.com/nTQC2my.png)
 
 
@@ -63,6 +63,7 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 ##Changelog
+- v1.3.1 Minor fixes for bower package manager
 - v1.3.0 Added 10 new icons - 111 glyphs 
 - v1.2.0 Added 3 new icons - 101 glyphs 
 - v1.1.0 Added 12 new icons - 97 glyphs 

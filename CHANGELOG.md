@@ -4,8 +4,13 @@
 
 [v1.1](#v1.1)
 [v1.2](#v1.2)
-[v1.2](#v1.3)
+[v1.3](#v1.3)
+[v1.3.1](#v1.3.1)
 
+## v1.3.1
+
+Change log and fixes in version 1.3.1:
+1. Minor fix to unbreak bower package manager by [@daveio](https://github.com/daveio)
 
 ## v1.3
 
@@ -15,14 +20,12 @@ Change log and fixes in version 1.3:
 3. Added Nancy icon as suggested by [@markwellis](https://github.com/markwellis).
 4. Added PostgreSQL icon as suggested by [@RoryDH](https://github.com/RoryDH).
 5. Added Jenkins icon as suggested by Daniel Serodio.
-
 6.Also added Celluloid, W3C, Redis and Web platform icons
 
 ## v1.2
 
 Change log and fixes in version 1.2:
 1. Added Gulp.js badge as suggested by [@pkozlowski-opensource](https://github.com/pkozlowski-opensource). 
-
 2. Added Cisco, and Atom IDE icons as well.
 3. Devicons is also available via NPM 
 4. Added status and issue badges in README.md
