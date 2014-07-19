@@ -1,4 +1,3 @@
-@import  url("devicons.css"); 
 @charset "UTF-8";
 /*  Syntax Quick Reference
   --------------------------
@@ -431,7 +430,15 @@ p a {
 code {
   display: inline;
   color: #07A38F; }
-
+.attention{
+  padding-bottom: 1rem;
+}
+.attention input.in {
+  width: 100%;
+  padding: 0.3rem;
+  border: 1px solid #07A38F;
+  border-radius: 4px;
+}
 i,
 h3 em {
   color: #07A38F; }

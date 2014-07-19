@@ -6,11 +6,14 @@
 	<title>Devicons | The developer's iconic font</title>
 	<meta property="og:title" content="Devicons | The developer's iconic font" />
 	<meta property="og:description" content=" Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds. " />
-	
 	<meta property="og:image" content="//vorillaz.github.io/devicons/img/ogimage.png" />
 	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700|Oswald:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="favicon.ico">
-	<link rel="stylesheet" href="css/main.css">
+	<!-- Stylesheets we would like cleaned -->
+	<!-- build:css css/tidy.css -->
+		<link rel="stylesheet" href="css/devicons.css">
+		<link rel="stylesheet" href="css/main.css">
+	<!-- /build -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/modernizr.js"></script>
@@ -71,7 +74,7 @@
 					</div>
 					<div data-ng-controller="MainCtrl" id="dafont">
 						<div class="firsttext" >
-							<h2>The font <small>v1.3</small></h2>
+							<h2>The font <small>v1.3.1</small></h2>
 							<div id="tags" class="clearfix">
 								<ul>
 									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
@@ -91,6 +94,13 @@
 						</div>
 						<div id="usage">
 							<h2>Usage & FAQs</h2>
+
+							<h3>Use Devicons with a single line of code.<em>*</em></h3>
+							<div class="attention">
+								<p><span>Hey, hey</span> thanks to the wonderful guys of : <a href="http://www.jsdelivr.com/">http://www.jsdelivr.com/</a> you can now add Devicons into your project by adding the following code into the <code><HEAD></code> section of your project's HTML: </p>
+								<p><input class="in" type="text" onclick="this.select();" value="<link href='//cdn.jsdelivr.net/devicons/1.3.1/css/devicons.min.css' rel='stylesheet'>"></p>
+							</div>
+							
 							<h3>Getting started <em>*</em></h3>
 							
 							<p>Setting up Devicons can be as <em>simple</em> as:</p>
