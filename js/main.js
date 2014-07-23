@@ -271,7 +271,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"trello",
                       "key":"\\e65a",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "tools",
                          "misc"
@@ -280,7 +280,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"atlassian",
                       "key":"\\e65b",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "companies",
                          "websites",
@@ -290,7 +290,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"jira",
                       "key":"\\e65c",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "source",
                          "tools",
@@ -375,7 +375,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"symfony",
                       "key":"\\e656",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "frameworks",
                          "tools"
@@ -384,7 +384,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"symfony_badge",
                       "key":"\\e657",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "frameworks",
                          "tools"
@@ -461,7 +461,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"snap_svg",
                       "key":"\\e65e",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "js",
                          "frameworks"
@@ -470,7 +470,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"raphael",
                       "key":"\\e65f",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "js",
                          "frameworks"
@@ -583,7 +583,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"compass",
                       "key":"\\e661",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "css",
                          "frameworks",
@@ -593,7 +593,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"less",
                       "key":"\\e658",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "css",
                          "frameworks",
@@ -603,7 +603,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"stylus",
                       "key":"\\e659",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "css",
                          "frameworks",
@@ -752,7 +752,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"gulp",
                       "key":"\\e663",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "tools",
                          "js"
@@ -804,7 +804,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"cisco",
                       "key":"\\e665",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "companies",
                          "misc"
@@ -875,7 +875,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"swift",
                       "key":"\\e655",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "programming","mob"
                       ]
@@ -929,7 +929,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"envato",
                       "key":"\\e65d",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "resources",
                          "tools",
@@ -978,7 +978,7 @@ myApp.controller("MainCtrl", ["$scope",
                       ]
                    },
                    {
-                      "iconname":"hackernews",
+                      "iconname":"hackers",
                       "key":"\\e61a",
                       "desc":"",
                       "tags":[
@@ -999,7 +999,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"onedrive",
                       "key":"\\e662",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "tools"
                       ]
@@ -1024,7 +1024,7 @@ myApp.controller("MainCtrl", ["$scope",
                    {
                       "iconname":"atom",
                       "key":"\\e664",
-                      "desc":"new",
+                      "desc":"",
                       "tags":[
                          "tools",
                          "ides"
@@ -1088,16 +1088,28 @@ myApp.controller("MainCtrl", ["$scope",
                          "browsers"
                       ]
                    },
-                    {"iconname":"nancy","key":"\\e666","desc":"new","tags":["tools","useful","frameworks"]},
-                    {"iconname":"clojure","key":"\\e668","desc":"new","tags":["frameworks"]},
-                    {"iconname":"clojure_alt","key":"\\e66a","desc":"new","tags":["frameworks"]},
-                    {"iconname":"perl","key":"\\e669","desc":"new","tags":["programming"]},
-                    {"iconname":"celluloid","key":"\\e66b","desc":"new","tags":["frameworks"]},
-                    {"iconname":"w3c","key":"\\e66c","desc":"new","tags":["useful","resources"]},
-                    {"iconname":"redis","key":"\\e66d","desc":"new","tags":["tools","programming"]},
-                    {"iconname":"postgresql","key":"\\e66e","desc":"new","tags":["tools","programming"]},
-                    {"iconname":"webplatform","key":"\\e66f","desc":"new","tags":["useful","resources"]},
-                    {"iconname":"jenkins","key":"\\e667","desc":"new","tags":["frameworks","tools","misc"]}
+                    {"iconname":"nancy","key":"\\e666","desc":"","tags":["tools","useful","frameworks"]},
+                    {"iconname":"clojure","key":"\\e668","desc":"","tags":["frameworks"]},
+                    {"iconname":"clojure_alt","key":"\\e66a","desc":"","tags":["frameworks"]},
+                    {"iconname":"perl","key":"\\e669","desc":"","tags":["programming"]},
+                    {"iconname":"celluloid","key":"\\e66b","desc":"","tags":["frameworks"]},
+                    {"iconname":"w3c","key":"\\e66c","desc":"","tags":["useful","resources"]},
+                    {"iconname":"redis","key":"\\e66d","desc":"","tags":["tools","programming"]},
+                    {"iconname":"postgresql","key":"\\e66e","desc":"","tags":["tools","programming"]},
+                    {"iconname":"webplatform","key":"\\e66f","desc":"","tags":["useful","resources"]},
+                    {"iconname":"jenkins","key":"\\e667","desc":"","tags":["frameworks","tools","misc"]}
+                    ,{"iconname":"requirejs","key":"\\e670","desc":"new","tags":["js","frameworks"]},
+                    {"iconname":"opensource","key":"\\e671","desc":"new","tags":["misc"]},
+                    {"iconname":"typo3","key":"\\e672","desc":"new","tags":["cms"]},
+                    {"iconname":"uikit","key":"\\e673","desc":"new","tags":["frameworks","tools","misc"]},
+                    {"iconname":"doctrine","key":"\\e674","desc":"new","tags":["frameworks","tools","misc"]},
+                    {"iconname":"groovy","key":"\\e675","desc":"new","tags":["tools","useful"] },
+                    {"iconname":"ngnix","key":"\\e676","desc":"new","tags":["tools","useful"] },
+                    {"iconname":"haskell","key":"\\e677","desc":"new","tags":["programming"]},
+                    {"iconname":"zend","key":"\\e678","desc":"new","tags":["frameworks"]},
+                    {"iconname":"gnu","key":"\\e679","desc":"new","tags":["misc"]},
+                    {"iconname":"yeoman","key":"\\e67a","desc":"new","tags":["tools","useful"]},
+                    {"iconname":"heroku","key":"\\e67b","desc":"new","tags":["tools","useful"] }
                 ];
         e.filteredIcons = [];
         e.active = false;
@@ -1118,6 +1130,7 @@ myApp.controller("MainCtrl", ["$scope",
             }
             return t
         }
+        $(".overlay").fadeOut('slow');
     }
 ]);
 jQuery(document).ready(function(e) {
@@ -1160,6 +1173,4 @@ jQuery(document).ready(function(e) {
         u()
     })
 });
-jQuery(window).load(function() {
-    $(".overlay").fadeOut('slow');
-});
+

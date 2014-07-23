@@ -1,4 +1,6 @@
-
+/*!
+ *  Devicons 1.4.0 made by Theodore Vorillas / http://vorillaz.com 
+ */
 @font-face {
   font-family: 'devicons';
   src: url("../fonts/devicons.eot?xqxft6");
@@ -352,3 +354,39 @@
 
 .devicons-jenkins:before {
   content: "\e667"; }
+
+.devicons-requirejs:before {
+  content: "\e670"; }
+
+.devicons-opensource:before {
+  content: "\e671"; }
+
+.devicons-typo3:before {
+  content: "\e672"; }
+
+.devicons-uikit:before {
+  content: "\e673"; }
+
+.devicons-doctrine:before {
+  content: "\e674"; }
+
+.devicons-groovy:before {
+  content: "\e675"; }
+
+.devicons-ngnix:before {
+  content: "\e676"; }
+
+.devicons-haskell:before {
+  content: "\e677"; }
+
+.devicons-zend:before {
+  content: "\e678"; }
+
+.devicons-gnu:before {
+  content: "\e679"; }
+
+.devicons-yeoman:before {
+  content: "\e67a"; }
+
+.devicons-heroku:before {
+  content: "\e67b"; }

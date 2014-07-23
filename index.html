@@ -74,7 +74,7 @@
 					</div>
 					<div data-ng-controller="MainCtrl" id="dafont">
 						<div class="firsttext" >
-							<h2>The font <small>v1.3.1</small></h2>
+							<h2>The font <small>v1.4.0</small></h2>
 							<div id="tags" class="clearfix">
 								<ul>
 									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
@@ -196,27 +196,29 @@
 						</div>
 						<div id="cheat">
 							<h2>Cheatsheet</h2>
+							
+
 							<div id="cheatinner">
-								<div ng-repeat="icon in icons" class="grid gridiconbig clearfix" ng-animate="'animate'">
+								
 									<div class="innericns">
 										<span class="cheatgrid cheatgrid_f">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
+											<span class="devicons devicons-git"></span>
 											
 										</span>
 										<span class="cheatgrid cheatgrid_s">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
+											<span class="devicons devicons-git"></span>
 											
 										</span>
 										<span class="cheatgrid cheatgrid_t">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
+											<span class="devicons devicons-git"></span>
 											
 										</span>
 										<span class="cheatgrid cheatgrid_fo">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
+											<span class="devicons devicons-git"></span>
 											
 										</span>
 										<span class="cheatgrid cheatgrid_fi">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
+											<span class="devicons devicons-git"></span>
 
 										</span>
 										
@@ -225,15 +227,4415 @@
 									<div class="innertxt clearfix">
 										<div class="innerblock"> 
 											<span>Class: </span>
-											<input class="in" type="text"  onclick="this.select();" value="devicons devicons-{{icon.iconname}}">
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git">
 										</div>
 										<div class="innerblock">
 											<span><em>before:</em> content</span>
-											<input class="in" type="text" onclick="this.select();" value="{{icon.key}}">
+											<input class="in" type="text" onclick="this.select();" value="\e602">
 										</div>
 										<div class="innerblock">
 											<span>HTML: </span>
-											<input class="in" type="text" onclick="this.select();" value="{{ icon.key.replace('\\','&#x') }}">
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe602">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-git_compare"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-git_compare"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-git_compare"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-git_compare"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-git_compare"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git_compare">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e628">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe628">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-git_branch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-git_branch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-git_branch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-git_branch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-git_branch"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git_branch">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e625">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe625">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-git_commit"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-git_commit"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-git_commit"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-git_commit"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-git_commit"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git_commit">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e629">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe629">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-git_pull_request"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-git_pull_request"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-git_pull_request"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-git_pull_request"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-git_pull_request"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git_pull_request">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e626">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe626">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-git_merge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-git_merge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-git_merge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-git_merge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-git_merge"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-git_merge">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e627">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe627">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-bitbucket"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-bitbucket"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-bitbucket"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-bitbucket"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-bitbucket"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-bitbucket">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e603">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe603">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-github_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-github_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-github_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-github_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-github_alt"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-github_alt">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e608">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe608">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-github_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-github_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-github_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-github_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-github_badge"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-github_badge">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e609">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe609">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-github"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-github"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-github"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-github"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-github"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-github">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-github_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-github_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-github_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-github_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-github_full"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-github_full">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e617">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe617">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-trello"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-trello"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-trello"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-trello"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-trello"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-trello">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-atlassian"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-atlassian"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-atlassian"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-atlassian"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-atlassian"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-atlassian">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-jira"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-jira"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-jira"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-jira"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-jira"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-jira">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-java"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-java"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-java"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-java"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-java"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-java">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e638">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe638">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ruby"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ruby"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ruby"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ruby"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ruby"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ruby">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e639">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe639">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-scala"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-scala"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-scala"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-scala"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-scala"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-scala">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e637">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe637">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-python"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-python"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-python"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-python"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-python"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-python">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-go"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-go"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-go"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-go"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-go"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-go">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e624">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe624">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ruby_on_rails"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ruby_on_rails"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ruby_on_rails"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ruby_on_rails"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ruby_on_rails"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ruby_on_rails">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-django"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-django"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-django"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-django"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-django"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-django">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-markdown"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-markdown"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-markdown"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-markdown"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-markdown"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-markdown">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-php"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-php"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-php"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-php"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-php"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-php">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-symfony"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-symfony"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-symfony"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-symfony"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-symfony"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-symfony">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e656">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe656">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-symfony_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-symfony_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-symfony_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-symfony_badge"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-symfony_badge"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-symfony_badge">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e657">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe657">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-mysql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-mysql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-mysql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-mysql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-mysql"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-mysql">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e604">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe604">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-streamline"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-streamline"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-streamline"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-streamline"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-streamline"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-streamline">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e605">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe605">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-database"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-database"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-database"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-database"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-database"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-database">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e606">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe606">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-laravel"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-laravel"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-laravel"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-laravel"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-laravel"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-laravel">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-javascript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-javascript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-javascript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-javascript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-javascript"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-javascript">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-angular"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-angular"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-angular"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-angular"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-angular"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-angular">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e653">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe653">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-backbone"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-backbone"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-backbone"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-backbone"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-backbone"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-backbone">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e652">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe652">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-snap_svg"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-snap_svg"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-snap_svg"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-snap_svg"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-snap_svg"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-snap_svg">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-raphael"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-raphael"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-raphael"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-raphael"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-raphael"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-raphael">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-coffeescript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-coffeescript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-coffeescript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-coffeescript"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-coffeescript"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-coffeescript">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e651">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe651">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-jquery"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-jquery"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-jquery"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-jquery"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-jquery"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-jquery">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e650">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe650">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-modernizr"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-modernizr"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-modernizr"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-modernizr"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-modernizr"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-modernizr">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e620">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe620">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-jquery_ui"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-jquery_ui"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-jquery_ui"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-jquery_ui"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-jquery_ui"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-jquery_ui">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e654">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe654">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ember"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ember"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ember"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ember"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ember"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ember">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-dojo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-dojo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-dojo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-dojo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-dojo"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-dojo">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-nodejs"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-nodejs"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-nodejs"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-nodejs"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-nodejs"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-nodejs">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e619">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe619">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-nodejs_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-nodejs_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-nodejs_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-nodejs_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-nodejs_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-nodejs_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e618">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe618">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-javascript_shield"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-javascript_shield"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-javascript_shield"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-javascript_shield"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-javascript_shield"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-javascript_shield">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-bootstrap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-bootstrap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-bootstrap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-bootstrap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-bootstrap"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-bootstrap">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e647">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe647">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-sass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-sass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-sass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-sass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-sass"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-sass">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-compass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-compass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-compass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-compass"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-compass"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-compass">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e661">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe661">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-less"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-less"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-less"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-less"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-less"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-less">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e658">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe658">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-stylus"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-stylus"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-stylus"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-stylus"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-stylus"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-stylus">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e659">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe659">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-css3_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-css3_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-css3_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-css3_full"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-css3_full"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-css3_full">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-css3"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-css3"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-css3"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-css3"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-css3"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-css3">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e649">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe649">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-html5"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-html5"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-html5"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-html5"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-html5"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-html5">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e636">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe636">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-html5_multimedia"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-html5_multimedia"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-html5_multimedia"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-html5_multimedia"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-html5_multimedia"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-html5_multimedia">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e632">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe632">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-html5_device_access"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-html5_device_access"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-html5_device_access"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-html5_device_access"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-html5_device_access"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-html5_device_access">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e633">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe633">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-html5_3d_effects"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-html5_3d_effects"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-html5_3d_effects"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-html5_3d_effects"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-html5_3d_effects"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-html5_3d_effects">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e635">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe635">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-html5_connectivity"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-html5_connectivity"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-html5_connectivity"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-html5_connectivity"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-html5_connectivity"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-html5_connectivity">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e634">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe634">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ghost_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ghost_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ghost_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ghost_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ghost_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ghost_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e614">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe614">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ghost"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ghost"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ghost"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ghost"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ghost"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ghost">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-magento"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-magento"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-magento"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-magento"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-magento"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-magento">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e640">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe640">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-joomla"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-joomla"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-joomla"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-joomla"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-joomla"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-joomla">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e641">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe641">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-jekyll_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-jekyll_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-jekyll_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-jekyll_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-jekyll_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-jekyll_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-drupal"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-drupal"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-drupal"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-drupal"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-drupal"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-drupal">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e642">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe642">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-wordpress"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-wordpress"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-wordpress"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-wordpress"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-wordpress"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-wordpress">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-grunt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-grunt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-grunt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-grunt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-grunt"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-grunt">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-bower"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-bower"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-bower"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-bower"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-bower"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-bower">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e64d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe64d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-gulp"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-gulp"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-gulp"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-gulp"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-gulp"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-gulp">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e663">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe663">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-npm"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-npm"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-npm"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-npm"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-npm"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-npm">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-yahoo_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-yahoo_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-yahoo_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-yahoo_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-yahoo_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-yahoo_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-yahoo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-yahoo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-yahoo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-yahoo"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-yahoo"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-yahoo">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e615">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe615">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-bing_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-bing_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-bing_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-bing_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-bing_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-bing_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e600">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe600">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-cisco"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-cisco"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-cisco"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-cisco"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-cisco"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-cisco">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e665">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe665">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-windows"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-windows"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-windows"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-windows"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-windows"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-windows">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-linux"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-linux"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-linux"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-linux"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-linux"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-linux">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e612">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe612">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ubuntu"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ubuntu"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ubuntu"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ubuntu"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ubuntu"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ubuntu">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e63a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe63a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-android"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-android"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-android"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-android"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-android"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-android">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-apple"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-apple"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-apple"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-apple"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-apple"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-apple">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e611">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe611">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-appstore"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-appstore"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-appstore"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-appstore"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-appstore"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-appstore">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e613">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe613">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-phonegap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-phonegap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-phonegap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-phonegap"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-phonegap"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-phonegap">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e630">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe630">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-swift"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-swift"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-swift"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-swift"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-swift"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-swift">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e655">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe655">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-blackberry"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-blackberry"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-blackberry"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-blackberry"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-blackberry"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-blackberry">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e623">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe623">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-stackoverflow"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-stackoverflow"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-stackoverflow"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-stackoverflow"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-stackoverflow"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-stackoverflow">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e610">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe610">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-techcrunch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-techcrunch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-techcrunch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-techcrunch"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-techcrunch"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-techcrunch">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-codrops"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-codrops"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-codrops"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-codrops"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-codrops"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-codrops">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-css_tricks"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-css_tricks"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-css_tricks"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-css_tricks"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-css_tricks"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-css_tricks">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e601">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe601">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-envato"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-envato"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-envato"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-envato"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-envato"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-envato">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e65d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe65d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-smashing_magazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-smashing_magazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-smashing_magazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-smashing_magazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-smashing_magazine"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-smashing_magazine">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-netmagazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-netmagazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-netmagazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-netmagazine"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-netmagazine"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-netmagazine">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-codepen"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-codepen"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-codepen"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-codepen"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-codepen"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-codepen">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e616">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe616">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-cssdeck"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-cssdeck"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-cssdeck"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-cssdeck"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-cssdeck"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-cssdeck">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e62a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe62a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-hackernews"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-hackernews"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-hackernews"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-hackernews"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-hackernews"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-hackernews">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e61a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe61a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-dropbox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-dropbox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-dropbox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-dropbox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-dropbox"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-dropbox">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e607">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe607">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-onedrive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-onedrive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-onedrive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-onedrive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-onedrive"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-onedrive">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e662">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe662">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-google_drive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-google_drive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-google_drive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-google_drive"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-google_drive"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-google_drive">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e631">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe631">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-visualstudio"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-visualstudio"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-visualstudio"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-visualstudio"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-visualstudio"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-visualstudio">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e60c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe60c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-atom"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-atom"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-atom"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-atom"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-atom"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-atom">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e664">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe664">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-unity_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-unity_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-unity_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-unity_small"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-unity_small"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-unity_small">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e621">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe621">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-rasberry_pi"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-rasberry_pi"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-rasberry_pi"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-rasberry_pi"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-rasberry_pi"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-rasberry_pi">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e622">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe622">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-chrome"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-chrome"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-chrome"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-chrome"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-chrome"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-chrome">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e643">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe643">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-ie"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-ie"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-ie"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-ie"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-ie"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-ie">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e644">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe644">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-firefox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-firefox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-firefox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-firefox"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-firefox"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-firefox">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e645">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe645">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-opera"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-opera"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-opera"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-opera"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-opera"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-opera">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e646">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe646">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-safari"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-safari"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-safari"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-safari"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-safari"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-safari">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e648">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe648">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-nancy"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-nancy"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-nancy"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-nancy"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-nancy"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-nancy">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e666">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe666">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-clojure"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-clojure"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-clojure"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-clojure"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-clojure"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-clojure">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e668">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe668">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-clojure_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-clojure_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-clojure_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-clojure_alt"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-clojure_alt"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-clojure_alt">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66a">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66a">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-perl"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-perl"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-perl"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-perl"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-perl"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-perl">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e669">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe669">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-celluloid"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-celluloid"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-celluloid"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-celluloid"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-celluloid"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-celluloid">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66b">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66b">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-w3c"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-w3c"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-w3c"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-w3c"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-w3c"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-w3c">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66c">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66c">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-redis"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-redis"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-redis"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-redis"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-redis"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-redis">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66d">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66d">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-postgresql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-postgresql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-postgresql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-postgresql"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-postgresql"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-postgresql">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66e">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66e">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-webplatform"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-webplatform"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-webplatform"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-webplatform"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-webplatform"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-webplatform">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e66f">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe66f">
+										</div>
+									</div>
+										
+								</div><div ng-repeat="icon in icons" class="grid gridiconbig clearfix ng-scope" ng-animate="'animate'">
+									<div class="innericns">
+										<span class="cheatgrid cheatgrid_f">
+											<span class="devicons devicons-jenkins"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_s">
+											<span class="devicons devicons-jenkins"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_t">
+											<span class="devicons devicons-jenkins"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fo">
+											<span class="devicons devicons-jenkins"></span>
+											
+										</span>
+										<span class="cheatgrid cheatgrid_fi">
+											<span class="devicons devicons-jenkins"></span>
+
+										</span>
+										
+
+									</div>
+									<div class="innertxt clearfix">
+										<div class="innerblock"> 
+											<span>Class: </span>
+											<input class="in" type="text" onclick="this.select();" value="devicons devicons-jenkins">
+										</div>
+										<div class="innerblock">
+											<span><em>before:</em> content</span>
+											<input class="in" type="text" onclick="this.select();" value="\e667">
+										</div>
+										<div class="innerblock">
+											<span>HTML: </span>
+											<input class="in" type="text" onclick="this.select();" value="&amp;#xe667">
 										</div>
 									</div>
 										
