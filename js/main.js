@@ -1,161 +1,55 @@
-function getMatch(e, t) {
-    var n = [];
-    for (var r = 0; r < e.length; r++) {
-        for (var i = 0; i < t.length; i++) {
-            if (e[r] === t[i]) n.push(e[r])
+//menu
+!function(a,b){var d=function(a){return a.trim?a.trim():a.replace(/^\s+|\s+$/g,"")},e=function(a,b){return-1!==(" "+a.className+" ").indexOf(" "+b+" ")},f=function(a,b){e(a,b)||(a.className=""===a.className?b:a.className+" "+b)},g=function(a,b){a.className=d((" "+a.className+" ").replace(" "+b+" "," "))},h=function(a,b){if(a)do{if(a.id===b)return!0;if(9===a.nodeType)break}while(a=a.parentNode);return!1},i=b.documentElement,k=(a.Modernizr.prefixed("transform"),a.Modernizr.prefixed("transition")),l=function(){var a={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",msTransition:"MSTransitionEnd",transition:"transitionend"};return a.hasOwnProperty(k)?a[k]:!1}();a.App=function(){var c=!1,d={},j=b.getElementById("inner-wrap"),m=!1,n="js-nav";return d.init=function(){if(!c){c=!0;var o=function(a){a&&a.target===j&&b.removeEventListener(l,o,!1),m=!1};d.closeNav=function(){if(m){var c=l&&k?parseFloat(a.getComputedStyle(j,"")[k+"Duration"]):0;c>0?b.addEventListener(l,o,!1):o(null)}g(i,n)},d.openNav=function(){m||(f(i,n),m=!0)},d.toggleNav=function(a){m&&e(i,n)?d.closeNav():d.openNav(),a&&a.preventDefault()},b.getElementById("nav-open-btn").addEventListener("click",d.toggleNav,!1),b.addEventListener("click",function(a){m&&!h(a.target,"nav")&&(a.preventDefault(),d.closeNav())},!0),f(i,"js-ready")}},d}(),a.addEventListener&&a.addEventListener("DOMContentLoaded",a.App.init,!1)}(window,window.document);
+//utilities
+function getMatch(a, b) {
+    var matches = [];
+
+    for ( var i = 0; i < a.length; i++ ) {
+        for ( var e = 0; e < b.length; e++ ) {
+            if ( a[i] === b[e] ) matches.push( a[i] );
         }
     }
-    return n
+    return matches;
 }
 
-function shuffleArray(e) {
-    for (var t = e.length - 1; t > 0; t--) {
-        var n = Math.floor(Math.random() * (t + 1));
-        var r = e[t];
-        e[t] = e[n];
-        e[n] = r
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
-    return e
-}! function(e, t) {
-    var isTouch=Modernizr.touch;
-    var n = function(e) {
-        return e.trim ? e.trim() : e.replace(/^\s+|\s+$/g, "")
-    }, r = function(e, t) {
-            return -1 !== (" " + e.className + " ").indexOf(" " + t + " ")
-        }, i = function(e, t) {
-            r(e, t) || (e.className = "" === e.className ? t : e.className + " " + t)
-        }, s = function(e, t) {
-            e.className = n((" " + e.className + " ").replace(" " + t + " ", " "))
-        }, o = function(e, t) {
-            if (e)
-                do {
-                    if (e.id === t) return !0;
-                    if (9 === e.nodeType) break
-                } while (e = e.parentNode);
-            return !1
-        }, u = t.documentElement,
-        a = (e.Modernizr.prefixed("transform"), e.Modernizr.prefixed("transition")),
-        f = function() {
-            var e = {
-                WebkitTransition: "webkitTransitionEnd",
-                MozTransition: "transitionend",
-                OTransition: "oTransitionEnd otransitionend",
-                msTransition: "MSTransitionEnd",
-                transition: "transitionend"
-            };
-            return e.hasOwnProperty(a) ? e[a] : !1
-        }();
-    e.App = function() {
-        var n = !1,
-            c = {}, p = t.getElementById("inner-wrap"),
-            d = !1,
-            v = "js-nav";
-        return c.init = function() {
-            if (!n) {
-                n = !0;
-                var y = function(e) {
-                    e && e.target === p && t.removeEventListener(f, y, !1), d = !1
-                };
-                c.closeNav = function() {
-                    if (d) {
-                        var n = f && a ? parseFloat(e.getComputedStyle(p, "")[a + "Duration"]) : 0;
-                        n > 0 ? t.addEventListener(f, y, !1) : y(null)
-                    }
-                    s(u, v)
-                }, c.openNav = function() {
-                    d || (i(u, v), d = !0)
-                }, c.toggleNav = function(e) {
-                    d && r(u, v) ? c.closeNav() : c.openNav(), e && e.preventDefault()
-                }, t.getElementById("nav-open-btn").addEventListener(isTouch ?"touchend" :"click", c.toggleNav, !1), t.addEventListener(isTouch ? "touchend" :"click", function(e) {
-                    d && !o(e.target, "nav") && (e.preventDefault(), c.closeNav())
-                }, !0), i(u, "js-ready")
-            }
-        }, c
-    }(), e.addEventListener && e.addEventListener("DOMContentLoaded", e.App.init, !1)
-}(window, window.document);
-"use strict";
-var myApp = angular.module("myApp", []);
-myApp.controller("MainCtrl", ["$scope",
-    function(e) {
-        e.tags = [
-                   {
-                      key:"programming",
-                      name:"Programming Languages"
-                   },
-                   {
-                      key:"js",
-                      name:"Javascript & stuff"
-                   },
-                   {
-                      key:"misc",
-                      name:"Misc."
-                   },
-                   {
-                      key:"browsers",
-                      name:"Browsers"
-                   },
-                   {
-                      key:"useful",
-                      name:"Useful"
-                   },
-                   {
-                      key:"tools",
-                      name:"Tools"
-                   },
-                   {
-                      key:"html5",
-                      name:"HTML5 & stuff"
-                   },
-                   {
-                      key:"css",
-                      name:"CSS & stuff"
-                   },
-                   {
-                      key:"node",
-                      name:"Node.js & stuff"
-                   },
-                   {
-                      key:"source",
-                      name:"Source control"
-                   },
-                   {
-                      key:"social",
-                      name:"Social"
-                   },
-                   {
-                      key:"os",
-                      name:"OS"
-                   },
-                   {
-                      key:"frameworks",
-                      name:"Frameworks"
-                   },
-                   {
-                      key:"resources",
-                      name:"Resources"
-                   },
-                   {
-                      key:"companies",
-                      name:"Companies"
-                   },
-                   {
-                      key:"ides",
-                      name:"IDEs"
-                   },
-                   {
-                      key:"mob",
-                      name:"Mobile"
-                   },
-                   {
-                      key:"websites",
-                      name:"Websites"
-                   },
-                   {
-                      key:"cms",
-                      name:"CMS"
-                   }
-                ];
-                        e.icons =[
+    return array;
+}
+
+'use strict';
+var myApp = angular.module('myApp',[]);
+myApp.controller('MainCtrl',['$scope',function ($scope) {
+    $scope.tags = [
+        {"key":"programming","name":"Programming Languages"},
+        {"key":"js","name":"Javascript & stuff"},
+        {"key":"misc","name":"Misc."},
+        {"key":"browsers","name":"Browsers"},
+        {"key":"useful","name":"Useful"},
+        {"key":"tools","name":"Tools"},
+        {"key":"html5","name":"HTML5 & stuff"},
+        {"key":"css","name":"CSS & stuff"},
+        {"key":"node","name":"Node.js & stuff"},
+        {"key":"Source control","name":"Source control"},
+        {"key":"social","name":"Social"},
+        {"key":"os","name":"OS"},
+        {"key":"frameworks","name":"Frameworks"},
+        {"key":"resources","name":"Resources"},
+        {"key":"companies","name":"Companies"},
+        {"key":"ides","name":"IDEs"},
+        {"key":"mob","name":"Mobile"},
+        {"key":"websites","name":"Websites"},
+        {"key":"cms","name":"CMS"},
+
+    ];
+
+    $scope.icons =[
                    {
                       "iconname":"git",
                       "key":"\\e602",
@@ -1111,66 +1005,90 @@ myApp.controller("MainCtrl", ["$scope",
                     {"iconname":"yeoman","key":"\\e67a","desc":"new","tags":["tools","useful"]},
                     {"iconname":"heroku","key":"\\e67b","desc":"new","tags":["tools","useful"] }
                 ];
-        e.filteredIcons = [];
-        e.active = false;
-        e.randomIcons = e.icons;
-        e.includeInFilter = function(t) {
-            var n = $.inArray(t, e.filteredIcons);
-            if (n > -1) {
-                e.filteredIcons.splice(n, 1)
-            } else {
-                e.filteredIcons.push(t)
-            }
-        };
-        e.filterTheIcons = function(t) {
-            var n;
-            if (e.filteredIcons.length > 0) {
-                n = getMatch(t.tags, e.filteredIcons);
-                if (!n.length > 0) return
-            }
-            return t
+    $scope.filteredIcons = [];
+    $scope.active = false;
+
+
+   $scope.randomIcons=$scope.icons;
+
+$scope.includeInFilter = function(tag) {
+        var i = $.inArray(tag, $scope.filteredIcons);
+        if (i > -1) {
+            $scope.filteredIcons.splice(i, 1);
+        } else {
+            $scope.filteredIcons.push(tag);
         }
-        $(".overlay").fadeOut('slow');
-    }
-]);
-jQuery(document).ready(function(e) {
-    var isTouch=Modernizr.touch;
-    function o() {
-        
     }
 
-    function u() {
-        var n = e(this).scrollTop() + r;
-        var o = s.map(function() {
-            if (e(this).offset().top < n) return this
-        });
-        o = o[o.length - 1];
-        var u = o && o.length ? o[0].id : "";
-        if (t !== u) {
-            t = u;
-            i.parent().removeClass("active").end().filter("[href=#" + u + "]").parent().addClass("active")
+$scope.filterTheIcons = function(icon) {
+        
+        var matched;
+        if ($scope.filteredIcons.length > 0) {
+            matched=getMatch(icon.tags,$scope.filteredIcons);
+            if ( !matched.length > 0)
+                return;
         }
+        
+        return icon;
     }
-    var t, n = e("nav"),
-        r = n.outerHeight() + 15,
-        i = n.find("a"),
-        s = i.map(function() {
-            var t = e(e(this).attr("href"));
-            if (t.length) {
-                return t
-            }
-        });
-    i.on(isTouch ?"touchend" :"click",function(t) {
-        var n = e(this).attr("href"),
-            i = n === "#" ? 0 : e(n).offset().top - r + 1;
-        e("html, body").stop().animate({
-            scrollTop: i
-        }, 300);
-        t.preventDefault()
+  $(".overlay").fadeOut('slow');
+}]);    
+
+
+jQuery(document).ready(function($) {
+   var lastId,
+    topMenu = $("nav"),
+    topMenuHeight = topMenu.outerHeight()+15,
+    // All list items
+    menuItems = topMenu.find("a"),
+    // Anchors corresponding to menu items
+    scrollItems = menuItems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
     });
-    o();
-    e(window).on("scroll", function() {
-        u()
-    })
+    menuItems.click(function(e){
+      var href = $(this).attr("href"),
+          offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+      $('html, body').stop().animate({ 
+          scrollTop: offsetTop
+      }, 300);
+      e.preventDefault();
+    });
+   function fix_scroll() {
+     var s = $(window).scrollTop();
+     var fixedHeader = $('header');
+     fixedHeader.css('position','absolute');
+     fixedHeader.css('top',s + 'px');
+
+     var fixedMenu = $('#nav');
+     fixedMenu.css('position','absolute');
+     fixedMenu.css('top',s + 'px');
+     
+   }fix_scroll();
+
+   function naved(){
+         // Get container scroll position
+       var fromTop = $(this).scrollTop()+topMenuHeight;
+       
+       // Get id of current scroll item
+       var cur = scrollItems.map(function(){
+         if ($(this).offset().top < fromTop)
+           return this;
+       });
+       // Get the id of the current element
+       cur = cur[cur.length-1];
+       var id = cur && cur.length ? cur[0].id : "";
+       
+       if (lastId !== id) {
+           lastId = id;
+           // Set/remove active class
+           menuItems
+             .parent().removeClass("active")
+             .end().filter("[href=#"+id+"]").parent().addClass("active");
+       }  
+   }
+   $(window).on('scroll',function(){ fix_scroll(); naved(); });
 });
+
+
 
