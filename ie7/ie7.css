@@ -334,3 +334,39 @@
 .devicons-jenkins {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe667;');
 }
+.devicons-requirejs {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe670;');
+}
+.devicons-opensource {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe671;');
+}
+.devicons-typo3 {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe672;');
+}
+.devicons-uikit {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe673;');
+}
+.devicons-doctrine {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe674;');
+}
+.devicons-groovy {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe675;');
+}
+.devicons-ngnix {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe676;');
+}
+.devicons-haskell {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe677;');
+}
+.devicons-zend {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe678;');
+}
+.devicons-gnu {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe679;');
+}
+.devicons-yeoman {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe67a;');
+}
+.devicons-heroku {
+	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe67b;');
+}

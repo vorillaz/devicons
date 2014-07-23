@@ -11,7 +11,7 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set v 1.3.1
+###Devicons icon set  1.4.0
 ![Devicons](http://i.imgur.com/nTQC2my.png)
 
 ## Use Devicons with a single line of code.
@@ -36,16 +36,16 @@ Thanks to the wonderful guys of  [jsdelivr](http://www.jsdelivr.com/) you can no
 `npm install devicons`
 
 ##Create a custom set
-In the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like.
+In the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like. IcoMoon also can load `devicons.svg` file.
 
 ##Contribute to the project.
-IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don't recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG)
+IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don't recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG).
 
 
 You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)
 
 ##Upcoming releases
-New icons to be added in v.1.4.0
+New icons to be added in v.1.5.0
 
 **Node.js & Stuff:** Express, Sails
 
@@ -53,7 +53,7 @@ New icons to be added in v.1.4.0
 
 **CSS & Preprocessors:** Bourbon
 
-**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js, Require.js, YUI
+**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js,  YUI
 
 **PHP and Stuff:** CakePHP
 
@@ -61,13 +61,13 @@ New icons to be added in v.1.4.0
 
 **Miscellaneous:** Piwik, Google Maps, Alfred app
 
-**Tools:** Yeoman
 
 Do you have any additional request? Drop me a line or support an issue.
 
 
 
 ##Changelog
+- v1.4.0 Added 12 new icons - 123 glyphs 
 - v1.3.1 Minor fixes for bower package manager
 - v1.3.0 Added 10 new icons - 111 glyphs 
 - v1.2.0 Added 3 new icons - 101 glyphs 

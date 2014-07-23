@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.3 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.4.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -137,7 +137,19 @@ $devicons:	(git "\e602"),
 			(redis "\e66d"),
 			(postgresql "\e66e"),
 			(webplatform "\e66f"),
-			(jenkins "\e667");
+			(jenkins "\e667"),
+			(requirejs "\e670"),
+			(opensource "\e671"),
+			(typo3 "\e672"),
+			(uikit "\e673"),
+			(doctrine "\e674"),
+			(groovy "\e675"),
+			(ngnix "\e676"),
+			(haskell "\e677"),
+			(zend "\e678"),
+			(gnu "\e679"),
+			(yeoman "\e67a"),
+			(heroku "\e67b");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);

@@ -6,6 +6,15 @@
 [v1.2](#v1.2)
 [v1.3](#v1.3)
 [v1.3.1](#v1.3.1)
+## 1.4.0
+Change log and fixes in version 1.4.0:
+1. Remove the "v" from versioning
+2. Polishing StackOverflow icon
+3. Added Zend icon as suggested by [@acelaya](https://github.com/acelaya).
+4. Added Heroku, NGINX icons as suggested by [@triplec1988](https://github.com/triplec1988). 
+5. Added Typo3 icon as suggested by Sebastian Schmal
+6. Added Groovy icon as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge). 
+7. Also added UiKit, Require.js, Haskell, Yeoman, Doctrine, Open Source,GNU icons as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge). 
 
 ## v1.3.1
 
@@ -20,7 +29,7 @@ Change log and fixes in version 1.3:
 3. Added Nancy icon as suggested by [@markwellis](https://github.com/markwellis).
 4. Added PostgreSQL icon as suggested by [@RoryDH](https://github.com/RoryDH).
 5. Added Jenkins icon as suggested by Daniel Serodio.
-6.Also added Celluloid, W3C, Redis and Web platform icons
+6. Also added Celluloid, W3C, Redis and Web platform icons
 
 ## v1.2
 
