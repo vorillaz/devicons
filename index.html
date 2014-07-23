@@ -76,7 +76,22 @@
 					<div data-ng-controller="MainCtrl" id="dafont">
 						<div class="firsttext" >
 							<h2>The font <small>v1.4.0</small></h2>
+							<div id="tags" class="clearfix">
+								<ul>
+									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
+								</ul>
 							
+							</div>
+							<div class="iconwrapper">
+								<div class="iconwrapperinner">
+									<div ng-repeat="icon in icons | filter:filterTheIcons" class="grid gridicon"  ng-animate="'animate'">
+										<div class="smallicon devicons devicons-{{icon.iconname}}">
+											<span ng-bind-html-unsafe="icon.desc" class="point {{icon.desc}}"></span>
+										</div>
+										
+									</div>
+								</div>
+							</div>
 						</div>
 						<div id="usage">
 							<h2>Usage & FAQs</h2>
@@ -4645,7 +4660,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script>
