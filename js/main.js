@@ -36,7 +36,7 @@ myApp.controller('MainCtrl',['$scope',function ($scope) {
         {"key":"html5","name":"HTML5 & stuff"},
         {"key":"css","name":"CSS & stuff"},
         {"key":"node","name":"Node.js & stuff"},
-        {"key":"Source control","name":"Source control"},
+        {"key":"source","name":"Source control"},
         {"key":"social","name":"Social"},
         {"key":"os","name":"OS"},
         {"key":"frameworks","name":"Frameworks"},
