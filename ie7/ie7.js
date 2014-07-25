@@ -131,7 +131,7 @@
 		'devicons-uikit': '&#xe673;',
 		'devicons-doctrine': '&#xe674;',
 		'devicons-groovy': '&#xe675;',
-		'devicons-ngnix': '&#xe676;',
+		'devicons-nginx': '&#xe676;',
 		'devicons-haskell': '&#xe677;',
 		'devicons-zend': '&#xe678;',
 		'devicons-gnu': '&#xe679;',
