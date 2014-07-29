@@ -8,7 +8,7 @@
   font-weight: normal;
   font-style: normal; }
 .devicons {
-  font-family: 'devicons';
+  font-family: inherit;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -18,6 +18,9 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+.devicons:before {
+    font-family: 'devicons'; }
 
 .devicons-git:before {
   content: "\e602"; }
