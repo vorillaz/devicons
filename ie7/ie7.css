@@ -352,7 +352,7 @@
 .devicons-groovy {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe675;');
 }
-.devicons-ngnix {
+.devicons-nginx {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe676;');
 }
 .devicons-haskell {
