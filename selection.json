@@ -2683,7 +2683,7 @@
 				],
 				"grid": 14,
 				"tags": [
-					"ngnix"
+					"nginx"
 				]
 			},
 			"properties": {
@@ -2691,7 +2691,7 @@
 				"id": 135,
 				"prevSize": 32,
 				"code": 58998,
-				"name": "ngnix",
+				"name": "nginx",
 				"ligatures": ""
 			},
 			"setIdx": 0,
