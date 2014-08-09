@@ -1,1094 +1,240 @@
-//menu
-!function(a,b){var d=function(a){return a.trim?a.trim():a.replace(/^\s+|\s+$/g,"")},e=function(a,b){return-1!==(" "+a.className+" ").indexOf(" "+b+" ")},f=function(a,b){e(a,b)||(a.className=""===a.className?b:a.className+" "+b)},g=function(a,b){a.className=d((" "+a.className+" ").replace(" "+b+" "," "))},h=function(a,b){if(a)do{if(a.id===b)return!0;if(9===a.nodeType)break}while(a=a.parentNode);return!1},i=b.documentElement,k=(a.Modernizr.prefixed("transform"),a.Modernizr.prefixed("transition")),l=function(){var a={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",msTransition:"MSTransitionEnd",transition:"transitionend"};return a.hasOwnProperty(k)?a[k]:!1}();a.App=function(){var c=!1,d={},j=b.getElementById("inner-wrap"),m=!1,n="js-nav";return d.init=function(){if(!c){c=!0;var o=function(a){a&&a.target===j&&b.removeEventListener(l,o,!1),m=!1};d.closeNav=function(){if(m){var c=l&&k?parseFloat(a.getComputedStyle(j,"")[k+"Duration"]):0;c>0?b.addEventListener(l,o,!1):o(null)}g(i,n)},d.openNav=function(){m||(f(i,n),m=!0)},d.toggleNav=function(a){m&&e(i,n)?d.closeNav():d.openNav(),a&&a.preventDefault()},b.getElementById("nav-open-btn").addEventListener("click",d.toggleNav,!1),b.addEventListener("click",function(a){m&&!h(a.target,"nav")&&(a.preventDefault(),d.closeNav())},!0),f(i,"js-ready")}},d}(),a.addEventListener&&a.addEventListener("DOMContentLoaded",a.App.init,!1)}(window,window.document);
-//utilities
-function getMatch(a, b) {
-    var matches = [];
+(function ($) {
+  var isTouch=Modernizr.touch;
+  
+  $(document).ready(function(){
+    $("#handler").on(isTouch ? 'touchend' : 'click',function(event){
+     $(".menu-icon").toggleClass('open');
+     $(".menu-wrap").toggle().delay(1500).toggleClass('open');
+    });
 
-    for ( var i = 0; i < a.length; i++ ) {
-        for ( var e = 0; e < b.length; e++ ) {
-            if ( a[i] === b[e] ) matches.push( a[i] );
-        }
-    }
-    return matches;
+    $(".menu-hider li a").on(isTouch ? 'touchend' : 'click',function(event){
+      closeNav(); 
+    });
+    $("#search").on('focus blur',function(event){
+      $(".iconwrapper").toggleClass('blurred');
+    });
+
+
+  });
+  
+  $(document).on("scroll",function(){
+     closeNav();
+  });
+
+}(jQuery))
+
+function closeNav(){
+   $(".menu-icon").removeClass("open");
+   $(".menu-wrap").hide().delay(1500).removeClass('open');
 }
 
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
+var app = angular.module( "myApp", ['ngRoute'] );
 
-'use strict';
-var myApp = angular.module('myApp',[]);
-myApp.controller('MainCtrl',['$scope',function ($scope) {
-    $scope.tags = [
-        {"key":"programming","name":"Programming Languages"},
-        {"key":"js","name":"Javascript & stuff"},
-        {"key":"misc","name":"Misc."},
-        {"key":"browsers","name":"Browsers"},
-        {"key":"useful","name":"Useful"},
-        {"key":"tools","name":"Tools"},
-        {"key":"html5","name":"HTML5 & stuff"},
-        {"key":"css","name":"CSS & stuff"},
-        {"key":"node","name":"Node.js & stuff"},
-        {"key":"source","name":"Source control"},
-        {"key":"social","name":"Social"},
-        {"key":"os","name":"OS"},
-        {"key":"frameworks","name":"Frameworks"},
-        {"key":"resources","name":"Resources"},
-        {"key":"companies","name":"Companies"},
-        {"key":"ides","name":"IDEs"},
-        {"key":"mob","name":"Mobile"},
-        {"key":"websites","name":"Websites"},
-        {"key":"cms","name":"CMS"},
+app.config( function ( $routeProvider ) {
+  $routeProvider
+    .when( '/dafont', { templateUrl: 'dafont' } )
+    .when( '/usage', { templateUrl: 'use' } )
+    .when( '/cheat', { templateUrl: 'cheat' } )
+    .when( '/about', { templateUrl: 'about' } )
+    .when( '/main', { templateUrl: 'main'  } )
+    .when('/singleicon/:iconame', {
+          templateUrl: 'single',
+          controller: "SingleCtrl",
+      })
+    .otherwise( { redirectTo: '/main',controller: StaticCtrl  } );
 
-    ];
+}).controller("SingleCtrl", function ($scope, $routeParams) {
+  var findTheIcon=getByIconname($routeParams.iconame,$scope.icons);
+  console.log(findTheIcon)
+  $scope.model = {
+    actualIcon: findTheIcon,
+  }
 
-    $scope.icons =[
-                   {
-                      "iconname":"git",
-                      "key":"\\e602",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"git_compare",
-                      "key":"\\e628",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"git_branch",
-                      "key":"\\e625",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"git_commit",
-                      "key":"\\e629",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"git_pull_request",
-                      "key":"\\e626",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"git_merge",
-                      "key":"\\e627",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"bitbucket",
-                      "key":"\\e603",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "websites",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"github_alt",
-                      "key":"\\e608",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "websites",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"github_badge",
-                      "key":"\\e609",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "websites",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"github",
-                      "key":"\\e60a",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "websites",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"github_full",
-                      "key":"\\e617",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "websites",
-                         "social"
-                      ]
-                   },
+  function getByIconname(iconname, myArray) {
+    return myArray.filter(function(obj) {
+      if(obj.iconname == iconname) {
+        return obj 
+      }
+    })[0];
+  };
 
-                   
-                   
-                   {
-                      "iconname":"trello",
-                      "key":"\\e65a",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"atlassian",
-                      "key":"\\e65b",
-                      "desc":"",
-                      "tags":[
-                         "companies",
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"jira",
-                      "key":"\\e65c",
-                      "desc":"",
-                      "tags":[
-                         "source",
-                         "tools",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"java",
-                      "key":"\\e638",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"ruby",
-                      "key":"\\e639",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"scala",
-                      "key":"\\e637",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"python",
-                      "key":"\\e63c",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"go",
-                      "key":"\\e624",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"ruby_on_rails",
-                      "key":"\\e63b",
-                      "desc":"",
-                      "tags":[
-                         "frameworks",
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"django",
-                      "key":"\\e61d",
-                      "desc":"",
-                      "tags":[
-                         "frameworks",
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"markdown",
-                      "key":"\\e63e",
-                      "desc":"",
-                      "tags":[
-                         "programming",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"php",
-                      "key":"\\e63d",
-                      "desc":"",
-                      "tags":[
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"symfony",
-                      "key":"\\e656",
-                      "desc":"",
-                      "tags":[
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"symfony_badge",
-                      "key":"\\e657",
-                      "desc":"",
-                      "tags":[
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"mysql",
-                      "key":"\\e604",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming"
-                      ]
-                   },
-                   {
-                      "iconname":"streamline",
-                      "key":"\\e605",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"database",
-                      "key":"\\e606",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"laravel",
-                      "key":"\\e63f",
-                      "desc":"",
-                      "tags":[
-                         "programming",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"javascript",
-                      "key":"\\e64e",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming",
-                         "node",
-                         "frameworks",
-                         "js"
-                      ]
-                   },
-                   {
-                      "iconname":"angular",
-                      "key":"\\e653",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"backbone",
-                      "key":"\\e652",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"snap_svg",
-                      "key":"\\e65e",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"raphael",
-                      "key":"\\e65f",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"coffeescript",
-                      "key":"\\e651",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"jquery",
-                      "key":"\\e650",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"modernizr",
-                      "key":"\\e620",
-                      "desc":"",
-                      "tags":{
-
-                      }
-                   },
-                   {
-                      "iconname":"jquery_ui",
-                      "key":"\\e654",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"ember",
-                      "key":"\\e61b",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"dojo",
-                      "key":"\\e61c",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"nodejs",
-                      "key":"\\e619",
-                      "desc":"",
-                      "tags":[
-                         "js",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"nodejs_small",
-                      "key":"\\e618",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming",
-                         "node",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"javascript_shield",
-                      "key":"\\e64f",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "programming",
-                         "node",
-                         "frameworks",
-                         "js"
-                      ]
-                   },
-                   {
-                      "iconname":"bootstrap",
-                      "key":"\\e647",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "frameworks"
-                      ]
-                   },
-                   {
-                      "iconname":"sass",
-                      "key":"\\e64b",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"compass",
-                      "key":"\\e661",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"less",
-                      "key":"\\e658",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"stylus",
-                      "key":"\\e659",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "frameworks",
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"css3_full",
-                      "key":"\\e64a",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"css3",
-                      "key":"\\e649",
-                      "desc":"",
-                      "tags":[
-                         "css",
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"html5",
-                      "key":"\\e636",
-                      "desc":"",
-                      "tags":[
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"html5_multimedia",
-                      "key":"\\e632",
-                      "desc":"",
-                      "tags":[
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"html5_device_access",
-                      "key":"\\e633",
-                      "desc":"",
-                      "tags":[
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"html5_3d_effects",
-                      "key":"\\e635",
-                      "desc":"",
-                      "tags":[
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"html5_connectivity",
-                      "key":"\\e634",
-                      "desc":"",
-                      "tags":[
-                         "html5"
-                      ]
-                   },
-                   {
-                      "iconname":"ghost_small",
-                      "key":"\\e614",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"ghost",
-                      "key":"\\e61f",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"magento",
-                      "key":"\\e640",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"joomla",
-                      "key":"\\e641",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"jekyll_small",
-                      "key":"\\e60d",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"drupal",
-                      "key":"\\e642",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"wordpress",
-                      "key":"\\e60b",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "cms"
-                      ]
-                   },
-                   {
-                      "iconname":"grunt",
-                      "key":"\\e64c",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "node"
-                      ]
-                   },
-                   {
-                      "iconname":"bower",
-                      "key":"\\e64d",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "node"
-                      ]
-                   },
-                   {
-                      "iconname":"gulp",
-                      "key":"\\e663",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "js"
-                      ]
-                   },
-                   {
-                      "iconname":"npm",
-                      "key":"\\e61e",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "node"
-                      ]
-                   },
-                   {
-                      "iconname":"yahoo_small",
-                      "key":"\\e62b",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "companies",
-                         "useful"
-                      ]
-                   },
-
-                   {
-                      "iconname":"yahoo",
-                      "key":"\\e615",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "companies",
-                         "useful"
-                      ]
-                   },
-                   {
-                      "iconname":"bing_small",
-                      "key":"\\e600",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "companies",
-                         "useful"
-                      ]
-                   },
-                   {
-                      "iconname":"cisco",
-                      "key":"\\e665",
-                      "desc":"",
-                      "tags":[
-                         "companies",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"windows",
-                      "key":"\\e60f",
-                      "desc":"",
-                      "tags":[
-                         "os",
-                         "companies"
-                      ]
-                   },
-                   {
-                      "iconname":"linux",
-                      "key":"\\e612",
-                      "desc":"",
-                      "tags":[
-                         "os",
-                         "companies"
-                      ]
-                   },
-                   {
-                      "iconname":"ubuntu",
-                      "key":"\\e63a",
-                      "desc":"",
-                      "tags":[
-                         "os",
-                         "companies"
-                      ]
-                   },
-                   {
-                      "iconname":"android",
-                      "key":"\\e60e",
-                      "desc":"",
-                      "tags":[
-                         "os",
-                         "companies"
-                      ]
-                   },
-                   {
-                      "iconname":"apple",
-                      "key":"\\e611",
-                      "desc":"",
-                      "tags":{
-
-                      }
-                   },
-                   {
-                      "iconname":"appstore",
-                      "key":"\\e613",
-                      "desc":"",
-                      "tags":[
-                         "os",
-                         "companies"
-                      ]
-                   },
-                   {
-                      "iconname":"phonegap",
-                      "key":"\\e630",
-                      "desc":"",
-                      "tags":[
-                         "mob",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"swift",
-                      "key":"\\e655",
-                      "desc":"",
-                      "tags":[
-                         "programming","mob"
-                      ]
-                   },
-                   {
-                      "iconname":"blackberry",
-                      "key":"\\e623",
-                      "desc":"",
-                      "tags":[
-                         "mob",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"stackoverflow",
-                      "key":"\\e610",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"techcrunch",
-                      "key":"\\e62c",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"codrops",
-                      "key":"\\e62f",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"css_tricks",
-                      "key":"\\e601",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-
-                   {
-                      "iconname":"envato",
-                      "key":"\\e65d",
-                      "desc":"",
-                      "tags":[
-                         "resources",
-                         "tools",
-                         "misc",
-                         "useful"
-                      ]
-                   },
-                   {
-                      "iconname":"smashing_magazine",
-                      "key":"\\e62d",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"netmagazine",
-                      "key":"\\e62e",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources"
-                      ]
-                   },
-                   {
-                      "iconname":"codepen",
-                      "key":"\\e616",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "useful",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"cssdeck",
-                      "key":"\\e62a",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "useful",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"hackers",
-                      "key":"\\e61a",
-                      "desc":"",
-                      "tags":[
-                         "websites",
-                         "resources",
-                         "useful",
-                         "social"
-                      ]
-                   },
-                   {
-                      "iconname":"dropbox",
-                      "key":"\\e607",
-                      "desc":"",
-                      "tags":[
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"onedrive",
-                      "key":"\\e662",
-                      "desc":"",
-                      "tags":[
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"google_drive",
-                      "key":"\\e631",
-                      "desc":"",
-                      "tags":[
-                         "tools"
-                      ]
-                   },
-                   {
-                      "iconname":"visualstudio",
-                      "key":"\\e60c",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "ides"
-                      ]
-                   },
-                   {
-                      "iconname":"atom",
-                      "key":"\\e664",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "ides"
-                      ]
-                   },
-                   {
-                      "iconname":"unity_small",
-                      "key":"\\e621",
-                      "desc":"",
-                      "tags":[
-                         "tools",
-                         "frameworks",
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"rasberry_pi",
-                      "key":"\\e622",
-                      "desc":"",
-                      "tags":[
-                         "misc"
-                      ]
-                   },
-                   {
-                      "iconname":"chrome",
-                      "key":"\\e643",
-                      "desc":"",
-                      "tags":[
-                         "browsers"
-                      ]
-                   },
-                   {
-                      "iconname":"ie",
-                      "key":"\\e644",
-                      "desc":"",
-                      "tags":[
-                         "browsers"
-                      ]
-                   },
-                   {
-                      "iconname":"firefox",
-                      "key":"\\e645",
-                      "desc":"",
-                      "tags":[
-                         "browsers"
-                      ]
-                   },
-                   {
-                      "iconname":"opera",
-                      "key":"\\e646",
-                      "desc":"",
-                      "tags":[
-                         "browsers"
-                      ]
-                   },
-                   {
-                      "iconname":"safari",
-                      "key":"\\e648",
-                      "desc":"",
-                      "tags":[
-                         "browsers"
-                      ]
-                   },
-                    {"iconname":"nancy","key":"\\e666","desc":"","tags":["tools","useful","frameworks"]},
-                    {"iconname":"clojure","key":"\\e668","desc":"","tags":["frameworks"]},
-                    {"iconname":"clojure_alt","key":"\\e66a","desc":"","tags":["frameworks"]},
-                    {"iconname":"perl","key":"\\e669","desc":"","tags":["programming"]},
-                    {"iconname":"celluloid","key":"\\e66b","desc":"","tags":["frameworks"]},
-                    {"iconname":"w3c","key":"\\e66c","desc":"","tags":["useful","resources"]},
-                    {"iconname":"redis","key":"\\e66d","desc":"","tags":["tools","programming"]},
-                    {"iconname":"postgresql","key":"\\e66e","desc":"","tags":["tools","programming"]},
-                    {"iconname":"webplatform","key":"\\e66f","desc":"","tags":["useful","resources"]},
-                    {"iconname":"jenkins","key":"\\e667","desc":"","tags":["frameworks","tools","misc"]}
-                    ,{"iconname":"requirejs","key":"\\e670","desc":"new","tags":["js","frameworks"]},
-                    {"iconname":"opensource","key":"\\e671","desc":"new","tags":["misc"]},
-                    {"iconname":"typo3","key":"\\e672","desc":"new","tags":["cms"]},
-                    {"iconname":"uikit","key":"\\e673","desc":"new","tags":["frameworks","tools","misc"]},
-                    {"iconname":"doctrine","key":"\\e674","desc":"new","tags":["frameworks","tools","misc"]},
-                    {"iconname":"groovy","key":"\\e675","desc":"new","tags":["tools","useful"] },
-                    {"iconname":"ngnix","key":"\\e676","desc":"new","tags":["tools","useful"] },
-                    {"iconname":"haskell","key":"\\e677","desc":"new","tags":["programming"]},
-                    {"iconname":"zend","key":"\\e678","desc":"new","tags":["frameworks"]},
-                    {"iconname":"gnu","key":"\\e679","desc":"new","tags":["misc"]},
-                    {"iconname":"yeoman","key":"\\e67a","desc":"new","tags":["tools","useful"]},
-                    {"iconname":"heroku","key":"\\e67b","desc":"new","tags":["tools","useful"] }
-                ];
-    $scope.filteredIcons = [];
-    $scope.active = false;
-
-
-   $scope.randomIcons=$scope.icons;
-
-$scope.includeInFilter = function(tag) {
-        var i = $.inArray(tag, $scope.filteredIcons);
-        if (i > -1) {
-            $scope.filteredIcons.splice(i, 1);
-        } else {
-            $scope.filteredIcons.push(tag);
-        }
-    }
-
-$scope.filterTheIcons = function(icon) {
-        
-        var matched;
-        if ($scope.filteredIcons.length > 0) {
-            matched=getMatch(icon.tags,$scope.filteredIcons);
-            if ( !matched.length > 0)
-                return;
-        }
-        
-        return icon;
-    }
-  $(".overlay").fadeOut('slow');
-}]);    
-
-
-jQuery(document).ready(function($) {
-   var lastId,
-    topMenu = $("nav"),
-    topMenuHeight = topMenu.outerHeight()+15,
-    // All list items
-    menuItems = topMenu.find("a"),
-    // Anchors corresponding to menu items
-    scrollItems = menuItems.map(function(){
-      var item = $($(this).attr("href"));
-      if (item.length) { return item; }
-    });
-    menuItems.click(function(e){
-      var href = $(this).attr("href"),
-          offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
-      $('html, body').stop().animate({ 
-          scrollTop: offsetTop
-      }, 300);
-      e.preventDefault();
-    });
-   function fix_scroll() {
-     var s = $(window).scrollTop();
-     var fixedHeader = $('header');
-     fixedHeader.css('position','absolute');
-     fixedHeader.css('top',s + 'px');
-
-     var fixedMenu = $('#nav');
-     fixedMenu.css('position','absolute');
-     fixedMenu.css('top',s + 'px');
-     
-   }fix_scroll();
-
-   function naved(){
-         // Get container scroll position
-       var fromTop = $(this).scrollTop()+topMenuHeight;
-       
-       // Get id of current scroll item
-       var cur = scrollItems.map(function(){
-         if ($(this).offset().top < fromTop)
-           return this;
-       });
-       // Get the id of the current element
-       cur = cur[cur.length-1];
-       var id = cur && cur.length ? cur[0].id : "";
-       
-       if (lastId !== id) {
-           lastId = id;
-           // Set/remove active class
-           menuItems
-             .parent().removeClass("active")
-             .end().filter("[href=#"+id+"]").parent().addClass("active");
-       }  
-   }
-   $(window).on('scroll',function(){ fix_scroll(); naved(); });
 });
+
+app.run(function($rootScope) {
+  $rootScope.icons=
+    [{iconname:"git",key:"\\e602",name:"Git", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"git_compare",key:"\\e628",name:"Git Compare", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"git_branch",key:"\\e625",name:"Git Branch", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"git_commit",key:"\\e629",name:"Git Commit", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"git_pull_request",key:"\\e626",name:"Git Pull Request", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"git_merge",key:"\\e627",name:"Git Merge", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
+    {iconname:"bitbucket",key:"\\e603",name:"Bitbucket", desc:"Bitbucket is a web-based hosting service for projects that use either the Mercurial (since the origin) or Git (since october, 2011) revision control systems",tags:["source","tools","websites","social"]},
+    {iconname:"github_alt",key:"\\e608",name:"Github", desc:"GitHub is a Git repository web-based hosting service which offers all of the functionality of Git as well as adding many of its own features. Unlike Git, which is strictly a command-line tool, Github provides a web-based graphical interface and desktop as well as mobile integration.",tags:["source","tools","websites","social"]},
+    {iconname:"github_badge",key:"\\e609",name:"Github", desc:"GitHub is a Git repository web-based hosting service which offers all of the functionality of Git as well as adding many of its own features. Unlike Git, which is strictly a command-line tool, Github provides a web-based graphical interface and desktop as well as mobile integration.",tags:["source","tools","websites","social"]},
+    {iconname:"github",key:"\\e60a",name:"Github", desc:"GitHub is a Git repository web-based hosting service which offers all of the functionality of Git as well as adding many of its own features. Unlike Git, which is strictly a command-line tool, Github provides a web-based graphical interface and desktop as well as mobile integration.",tags:["source","tools","websites","social"]},
+    {iconname:"github_full",key:"\\e617",name:"Github", desc:"GitHub is a Git repository web-based hosting service which offers all of the functionality of Git as well as adding many of its own features. Unlike Git, which is strictly a command-line tool, Github provides a web-based graphical interface and desktop as well as mobile integration.",tags:["source","tools","websites","social"]},
+    {iconname:"trello",key:"\\e65a",name:"Trello", desc:"Trello is a free web-based project management application originally made by Fog Creek Software in 2011, that spun out to be its own company in 2014.",tags:["tools","misc"]},
+    {iconname:"atlassian",key:"\\e65b",name:"Atlassian", desc:"Atlassian is an Australian enterprise software company that develops products geared towards software developers and project managers.",tags:["companies","websites","resources"]},
+    {iconname:"jira",key:"\\e65c",name:"Jira", desc:"Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions.",tags:["source","tools","misc"]},
+    {iconname:"java",key:"\\e638",name:"Java", desc:"Java is a computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.",tags:["programming"]},
+    {iconname:"ruby",key:"\\e639",name:"Ruby", desc:"Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro 'Matz' Matsumoto in Japan.",tags:["programming"]},
+    {iconname:"scala",key:"\\e637",name:"Scala", desc:"Scala  is an object-functional programming and scripting language for general software applications. Scala has full support for functional programming (including currying, pattern matching, algebraic data types, lazy evaluation, tail recursion, immutability, etc.) and a very strong static type system.",tags:["programming"]},
+    {iconname:"python",key:"\\e63c",name:"Python", desc:"Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C. The language provides constructs intended to enable clear programs on both a small and large scale.",tags:["programming"]},
+    {iconname:"go",key:"\\e624",name:"Go", desc:"Go, also called golang, is a programming language initially developed at Google in 2007 by Robert Griesemer, Rob Pike, and Ken Thompson. It is a statically-typed language with syntax loosely derived from that of C, adding garbage collection, type safety, some dynamic-typing capabilities, additional built-in types such as variable-length arrays and key-value maps, and a large standard library.",tags:["programming"]},
+    {iconname:"ruby_on_rails",key:"\\e63b",name:"Ruby on Rails", desc:"Ruby on Rails, often simply referred to as Rails, is an open source web application framework which runs via the Ruby programming language. It is a full-stack framework: it allows creating pages and applications that gather information from the web server, talk to or query the database, and render templates out of the box. As a result, Rails features a routing system that is independent of the web server.",tags:["frameworks","programming"]},
+    {iconname:"django",key:"\\e61d",name:"Django", desc:"Django is a free and open source web application framework, written in Python, which follows the model–view–controller architectural pattern. It is maintained by the Django Software Foundation (DSF), an independent organization established as a 501(c)(3) non-profit.",tags:["frameworks","programming"]},
+    {iconname:"markdown",key:"\\e63e",name:"Markdown", desc:"Markdown is a plain text formatting syntax designed so that it optionally can be converted to HTML using a tool by the same name. Markdown is popularly used to format readme files, for writing messages in online discussion forums or in text editors for the quick creation of rich text documents.",tags:["programming","frameworks"]},
+    {iconname:"php",key:"\\e63d",name:"PHP", desc:"PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language. As of January 2013, PHP was installed on more than 240 million websites (39% of those sampled) and 2.1 million web servers.",tags:["programming"]},
+    {iconname:"symfony",key:"\\e656",name:"Symfony", desc:"Symfony is a PHP web application framework for MVC applications. Symfony is free software and released under the MIT license. The symfony-project.com website launched on October 18, 2005.",tags:["frameworks","tools"]},
+    {iconname:"symfony_badge",key:"\\e657",name:"Symfony", desc:"Symfony is a PHP web application framework for MVC applications. Symfony is free software and released under the MIT license. The symfony-project.com website launched on October 18, 2005.",tags:["frameworks","tools"]},
+    {iconname:"mysql",key:"\\e604",name:"MySQL", desc:"MySQL is (as of March 2014) the world's second most widely used open-source relational database management system (RDBMS). It is named after co-founder Michael Widenius's daughter, My. The SQL phrase stands for Structured Query Language.",tags:["tools","programming"]},
+    {iconname:"streamline",key:"\\e605",name:"Streamline", desc:"",tags:["tools","programming","misc"]},
+    {iconname:"database",key:"\\e606",name:"Database", desc:"A database is an organized collection of data. The data are typically organized to model aspects of reality in a way that supports processes requiring this information. For example, modelling the availability of rooms in hotels in a way that supports finding a hotel with vacancies.",tags:["tools","programming","misc"]},
+    {iconname:"laravel",key:"\\e63f",name:"Laravel", desc:"Laravel is a free, open source PHP web application framework, designed for the development of model–view–controller (MVC) web applications. Laravel is released under the MIT license, with its source code hosted on GitHub.",tags:["programming","frameworks"]},
+    {iconname:"javascript",key:"\\e64e",name:"JavaScript", desc:"JavaScript (JS) is a dynamic computer programming language. It is most commonly used as part of web browsers, whose implementations allow client-side scripts to interact with the user, control the browser, communicate asynchronously, and alter the document content that is displayed. It is also being used in server-side network programming (with Node.js), game development and the creation of desktop and mobile applications.",tags:["tools","programming","node","frameworks","js"]},
+    {iconname:"angular",key:"\\e653",name:"AngularJS", desc:"AngularJS is an open-source web application framework, maintained by Google and community, that assists with creating single-page applications, one-page web applications that only require HTML, CSS, and JavaScript on the client side. Its goal is to augment web applications with model–view–controller (MVC) capability, in an effort to make both development and testing easier.",tags:["js","frameworks"]},
+    {iconname:"backbone",key:"\\e652",name:"Backbone.js", desc:"Backbone.js is a JavaScript library with a RESTful JSON interface and is based on the model–view–presenter (MVP) application design paradigm. Backbone is known for being lightweight, as its only dependency is on one JavaScript library, Underscore.js.",tags:["js","frameworks"]},
+    {iconname:"snap_svg",key:"\\e65e",name:"Snap.svg", desc:"SVG is an excellent way to create interactive, resolution-independent vector graphics that will look great on any size screen. And the Snap.svg JavaScript library makes working with your SVG assets as easy as jQuery makes working with the DOM.",tags:["js","frameworks"]},
+    {iconname:"raphael",key:"\\e65f",name:"Raphaël.js", desc:"Raphaël is a small JavaScript library that should simplify your work with vector graphics on the web. If you want to create your own specific chart or image crop and rotate widget, for example, you can achieve it simply and easily with this library.",tags:["js","frameworks"]},
+    {iconname:"coffeescript",key:"\\e651",name:"CoffeeScript", desc:"CoffeeScript is a programming language that transcompiles to JavaScript. It adds syntactic sugar inspired by Ruby, Python and Haskell to enhance JavaScript's brevity and readability.[citation needed] Specific additional features include list comprehension and pattern matching.",tags:["js","frameworks"]},
+    {iconname:"jquery",key:"\\e650",name:"jQuery", desc:"jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML. It was released in January 2006 at BarCamp NYC by John Resig. It is currently developed by a team of developers led by Dave Methvin. Used by over 60% of the 10,000 most visited websites, jQuery is the most popular JavaScript library in use today",tags:["js","frameworks"]},
+    {iconname:"modernizr",key:"\\e620",name:"Modernizr", desc:"Modernizr is a JavaScript library which is designed to detect HTML5 and CSS3 features in various browsers. Since the specifications for both HTML5 and CSS3 are only partially implemented or nonexistent in many browsers, it can be difficult to determine which techniques are available for use in rendering a page, and when it is necessary to avoid using a feature or to load a workaround such as a shim to emulate the feature. Modernizr aims to provide this feature detection in a complete and standardized manner.",tags:{}},
+    {iconname:"jquery_ui",key:"\\e654",name:"jQuery", desc:"jQuery UI is a collection of GUI widgets, animated visual effects, and themes implemented with jQuery (a JavaScript library), Cascading Style Sheets, and HTML.",tags:["js","frameworks"]},
+    {iconname:"ember",key:"\\e61b",name:"Ember.JS", desc:"Ember.js is an open-source client-side JavaScript web application framework based on the model-view-controller (MVC) software architectural pattern. It allows developers to create scalable single-page applications by incorporating common idioms and best practices into a framework that provides a rich object model, declarative two-way data binding, computed properties, automatically-updating templates powered by Handlebars.js, and a router for managing application state.",tags:["js","frameworks"]},
+    {iconname:"dojo",key:"\\e61c",name:"Dojo Toolkit", desc:"Dojo Toolkit (stylized as dōjō toolkit) is an open source modular JavaScript library (or more specifically JavaScript toolkit) designed to ease the rapid development of cross-platform, JavaScript/Ajax-based applications and web sites.",tags:["js","frameworks"]},
+    {iconname:"nodejs",key:"\\e619",name:"Node.js", desc:"Node.js is a cross-platform runtime environment and a library for running applications written in JavaScript outside the browser (for example, on the server).",tags:["js","frameworks"]},
+    {iconname:"nodejs_small",key:"\\e618",name:"Node.js", desc:"Node.js is a cross-platform runtime environment and a library for running applications written in JavaScript outside the browser (for example, on the server).",tags:["tools","programming","node","frameworks"]},
+    {iconname:"javascript_shield",key:"\\e64f",name:"JavaScript", desc:"JavaScript (JS) is a dynamic computer programming language. It is most commonly used as part of web browsers, whose implementations allow client-side scripts to interact with the user, control the browser, communicate asynchronously, and alter the document content that is displayed. It is also being used in server-side network programming (with Node.js), game development and the creation of desktop and mobile applications.",tags:["tools","programming","node","frameworks","js"]},
+    {iconname:"bootstrap",key:"\\e647",name:"Bootstrap", desc:"Bootstrap is a free collection of tools for creating websites and web applications. It contains HTML and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. In June 2014 it was the No.1 project on GitHub with 69,000+ stars and 25,000+ forks, with a user base including MSNBC and NASA.",tags:["css","frameworks"]},
+    {iconname:"sass",key:"\\e64b",name:"Sass", desc:"Sass (Syntactically Awesome Stylesheets) is a stylesheet language initially designed by Hampton Catlin and developed by Natalie Weizenbaum. After its initial versions, Weizenbaum and Chris Eppstein have continued to extend Sass with SassScript, a simple scripting language used in Sass files.",tags:["css","frameworks","tools"]},
+    {iconname:"compass",key:"\\e661",name:"Compass", desc:"Compass is an open-source CSS Authoring Framework.",tags:["css","frameworks","tools"]},
+    {iconname:"less",key:"\\e658",name:"Less", desc:"Less is a CSS pre-processor, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.",tags:["css","frameworks","tools"]},
+    {iconname:"stylus",key:"\\e659",name:"Stylus", desc:"Stylus is a dynamic stylesheet language designed influenced by Sass and LESS. It's regarded as the third most used CSS preprocessor syntax",tags:["css","frameworks","tools"]},
+    {iconname:"css3_full",key:"\\e64a",name:"CSS 3", desc:"CSS 3 is the modularization of Cascading Style Sheets to allow additions to the specification as well as limit the properties used in a given situation.",tags:["css","html5"]},
+    {iconname:"css3",key:"\\e649",name:"CSS 3", desc:"CSS 3 is the modularization of Cascading Style Sheets to allow additions to the specification as well as limit the properties used in a given situation.",tags:["css","html5"]},
+    {iconname:"html5",key:"\\e636",name:"HTML5", desc:"HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).",tags:["html5"]},
+    {iconname:"html5_multimedia",key:"\\e632",name:"HTML5 Multimedia", desc:"HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).",tags:["html5"]},
+    {iconname:"html5_device_access",key:"\\e633",name:"HTML5 Device Access", desc:"HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).",tags:["html5"]},
+    {iconname:"html5_3d_effects",key:"\\e635",name:"HTML5 3D Effects", desc:"HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).",tags:["html5"]},
+    {iconname:"html5_connectivity",key:"\\e634",name:"HTML5 Connectivity", desc:"HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML 4 as of 1997) and, as of December 2012, is a candidate recommendation of the World Wide Web Consortium (W3C).",tags:["html5"]},
+    {iconname:"ghost_small",key:"\\e614",name:"Ghost", desc:"Ghost is a simple, powerful publishing platform that allows you to share your story with the world.",tags:["tools","cms"]},
+    {iconname:"ghost",key:"\\e61f",name:"Ghost", desc:"Ghost is a simple, powerful publishing platform that allows you to share your story with the world.",tags:["tools","cms"]},
+    {iconname:"magento",key:"\\e640",name:"Magento", desc:"Magento is an open-source content management system for e-commerce web sites. The software was originally developed by Varien Inc., a US private company headquartered in Los Angeles, with assistance from volunteers.",tags:["tools","cms"]},
+    {iconname:"joomla",key:"\\e641",name:"Magento", desc:"Joomla is a free and open-source content management system (CMS) for publishing web content. It is built on a model–view–controller web application framework that can be used independently of the CMS.",tags:["tools","cms"]},
+    {iconname:"jekyll_small",key:"\\e60d",name:"Magento", desc:"Jekyll is a free-software, written in Ruby by Tom Preston-Werner, GitHub's co-founder. Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites. It is a file-based CMS; instead of using databases, Jekyll takes the content, renders Markdown or Textile and Liquid templates, and produces a complete, static website ready to be served by Apache, Nginx or another web server.",tags:["tools","cms"]},
+    {iconname:"drupal",key:"\\e642",name:"Magento", desc:"Drupal is a free and open-source content management framework written in PHP and distributed under the GNU General Public License. It is used as a back-end framework for at least 2.1% of all websites worldwide ranging from personal blogs to corporate, political, and government sites including whitehouse.gov and data.gov.uk.",tags:["tools","cms"]},
+    {iconname:"wordpress",key:"\\e60b",name:"Magento", desc:"WordPress is a free and open source blogging tool and a content management system (CMS) based on PHP and MySQL. Features include a plugin architecture and a template system. WordPress was used by more than 22.0% of the top 10 million websites as of August 2013. WordPress is the most popular blogging system in use on the Web, at more than 60 million websites.",tags:["tools","cms"]},
+    {iconname:"grunt",key:"\\e64c",name:"Grunt", desc:"Built on top of Node.js, Grunt is a task-based command-line tool that speeds up workflows by reducing the effort required to prepare assets for production. It does this by wrapping up jobs into tasks that are compiled automatically as you go along. Basically, you can use Grunt on most tasks that you consider to be grunt work and would normally have to manually configure and run yourself.",tags:["tools","node"]},
+    {iconname:"bower",key:"\\e64d",name:"Bower", desc:"Web sites are made of lots of things — frameworks, libraries, assets, utilities, and rainbows. Bower manages all these things for you. Bower works by fetching and installing packages from all over, taking care of hunting, finding, downloading, and saving the stuff you’re looking for.",tags:["tools","node"]},
+    {iconname:"gulp",key:"\\e663",name:"Gulp", desc:"Gulp is a task runner which uses Node.js.",tags:["tools","js"]},
+    {iconname:"npm",key:"\\e61e",name:"NPM", desc:"NPM is a NodeJS package manager. As its name would imply, you can use it to install node programs. Also, if you use it in development, it makes it easier to specify and link dependencies.",tags:["tools","node"]},
+    {iconname:"yahoo_small",key:"\\e62b",name:"Yahoo", desc:"Yahoo! Inc. is an American multinational Internet corporation headquartered in Sunnyvale, California. It is globally known for its Web portal, search engine Yahoo Search, and related services, including Yahoo Directory, Yahoo Mail, Yahoo News, Yahoo Finance, Yahoo Groups, Yahoo Answers, advertising, online mapping, video sharing, fantasy sports and its social media website. It is one of the most popular sites in the United States.",tags:["websites","resources","companies","useful"]},
+    {iconname:"yahoo",key:"\\e615",name:"Yahoo", desc:"Yahoo! Inc. is an American multinational Internet corporation headquartered in Sunnyvale, California. It is globally known for its Web portal, search engine Yahoo Search, and related services, including Yahoo Directory, Yahoo Mail, Yahoo News, Yahoo Finance, Yahoo Groups, Yahoo Answers, advertising, online mapping, video sharing, fantasy sports and its social media website. It is one of the most popular sites in the United States.",tags:["websites","resources","companies","useful"]},
+    {iconname:"bing_small",key:"\\e600",name:"Bing", desc:"Bing (known previously as Live Search, Windows Live Search, and MSN Search) is a web search engine (advertised as a 'decision engine') from Microsoft.",tags:["websites","resources","companies","useful"]},
+    {iconname:"cisco",key:"\\e665",name:"CiMicrosoft Windowssco", desc:"Cisco Systems, Inc. is an American multinational corporation headquartered in San Jose, California, that designs, manufactures, and sells networking equipment.",tags:["companies","misc"]},
+    {iconname:"windows",key:"\\e60f",name:"", desc:"Microsoft Windows is a series of graphical interface operating systems developed, marketed, and sold by Microsoft. Microsoft introduced an operating environment named Windows on November 20, 1985 as a graphical operating system shell for MS-DOS in response to the growing interest in graphical user interfaces (GUIs).",tags:["os","companies"]},
+    {iconname:"linux",key:"\\e612",name:"Linux", desc:"Linux is a Unix-like and mostly POSIX-compliant computer operating system assembled under the model of free and open source software development and distribution. The defining component of Linux is the Linux kernel, an operating system kernel first released on 5 October 1991 by Linus Torvalds. The Free Software Foundation uses the name GNU/Linux, which has led to some controversy.",tags:["os","companies"]},
+    {iconname:"ubuntu","key":"\\e63a", name:"Ubuntu", desc:"Ubuntu is a Debian-based Linux operating system, with Unity as its default desktop environment (GNOME was the previous desktop environment). It is based on free software and named after the Southern African philosophy of ubuntu (literally, 'human-ness'), which often is translated as 'humanity towards others' or 'the belief in a universal bond of sharing that connects all humanity'.",key:"\\e63a",name:"", desc:"Ubuntu  ] is a Debian-based Linux operating system, with Unity as its default desktop environment (GNOME was the previous desktop environment). It is based on free software and named after the Southern African philosophy of ubuntu (literally, 'human-ness'), which often is translated as 'humanity towards others' or 'the belief in a universal bond of sharing that connects all humanity'.",tags:["os","companies"]},
+    {iconname:"android",key:"\\e60e",name:"Android", desc:"Android is a mobile operating system (OS) based on the Linux kernel that is currently developed by Google. With a user interface based on direct manipulation, Android is designed primarily for touchscreen mobile devices such as smartphones and tablet computers, with specialized user interfaces for televisions (Android TV), cars (Android Auto), and wrist watches (Android Wear). ",tags:["os","companies"]},
+    {iconname:"apple",key:"\\e611",name:"Apple", desc:"Apple Inc. is an American multinational corporation headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, online services, and personal computers. Its best-known hardware products are the Mac line of computers, the iPod media player, the iPhone smartphone, and the iPad tablet computer. Its online services include iCloud, iTunes Store, and App Store. Its consumer software includes the OS X and iOS operating systems, the iTunes media browser, the Safari web browser, and the iLife and iWork creativity and productivity suites.",tags:{}},
+    {iconname:"appstore",key:"\\e613",name:"App Store", desc:"The App Store is a digital distribution platform for mobile apps on iOS, developed and maintained by Apple Inc. The service allows users to browse and download applications that were developed with Apple's iOS SDK. The apps can be downloaded directly to an iOS device, or onto a personal computer via iTunes (also developed and maintained by Apple Inc.). The 'App Store' is not the only app store available, with there being other well-known app stores for Android, Windows Phone, and BlackBerry 10.",tags:["os","companies"]},
+    {iconname:"phonegap",key:"\\e630",name:"PhoneGap", desc:"PhoneGap is a mobile development framework produced by Nitobi, purchased by Adobe Systems in 2011. It enables software programmers to build applications for mobile devices using JavaScript, HTML5, and CSS3, instead of device-specific languages such as Objective-C. It enables wrapping up of HTML, CSS and Javascript code depending upon the platform of the device. It extends the features of HTML and Javascript to work with the device. The resulting applications are hybrid, meaning that they are neither truly Mobile native application native (because all layout rendering is done via web views instead of the platform's native UI framework) nor purely web-based (because they are not just web apps, but are packaged as apps for distribution and have access to native device APIs). From version 1.9 onward it is even possible to freely mix native and hybrid code snippets.",tags:["mob","misc"]},
+    {iconname:"swift",key:"\\e655",name:"Swift", desc:"Swift is a multi-paradigm, compiled programming language developed by Apple for iOS and OS X development. Introduced at Apple's developer conference WWDC 2014, Swift is designed to replace Objective-C, Apple's object-oriented language, while working with Apple's Cocoa and Cocoa Touch frameworks and the large body of existing Objective-C code written for Apple products. Swift is intended to be more resilient against erroneous code. It is built with the LLVM compiler included in Xcode 6 beta, and uses the Objective-C runtime, allowing Objective-C, Objective-C++ and Swift code to run within a single program.",tags:["programming","mob"]},
+    {iconname:"blackberry",key:"\\e623",name:"BlackBerry", desc:"BlackBerry Limited, formerly known as Research In Motion Limited (RIM), is a Canadian telecommunication and wireless equipment company best known to the general public as the developer of the BlackBerry brand of smartphones and tablets, but also well known worldwide as a provider of secure & high reliability software for industrial applications and Mobile Device Management (MDM).",tags:["mob","misc","companies"]},
+    {iconname:"stackoverflow",key:"\\e610",name:"Stack Overflow", desc:"Stack Overflow is a privately held website, the flagship site of the Stack Exchange Network, created in 2008 by Jeff Atwood and Joel Spolsky, as a more open alternative to earlier Q&A sites such as Experts Exchange. The name for the website was chosen by voting in April 2008 by readers of Coding Horror, Atwood's popular programming blog.",tags:["websites","resources"]},
+    {iconname:"techcrunch",key:"\\e62c",name:"TechCrunch", desc:"TechCrunch is a news website focused on information technology companies, ranging in size from startups to established NASDAQ-100 firms. It was founded by Michael Arrington in 2005. On September 28, 2010, at its TechCrunch Disrupt conference in San Francisco, AOL announced that it would acquire TechCrunch.",tags:["websites","resources"]},
+    {iconname:"codrops",key:"\\e62f",name:"Codrops", desc:"Codrops is dedicated to provide useful tutorials, insightful articles, creative inspiration and free resources for web designers and developers.",tags:["websites","resources"]},
+    {iconname:"css_tricks",key:"\\e601",name:"Css Tricks", desc:"Dedicated to the world of CSS and related technologies. Snippets, videos, tricks and tutorials.",tags:["websites","resources"]},
+    {iconname:"envato",key:"\\e65d",name:"Envato", desc:"Envato is an Australia-based, privately held company that specializes in the start-up, promotion and operation of multiple online marketplaces which facilitate the exchange of digital goods from thousands of independent sellers and digital authors to both amateur and professional web-designers, creative agencies and operators of web properties. Envato was founded in 2006 by Collis Ta'eed, Cyan Ta'eed, and Jun Rung.",tags:["resources","tools","misc","useful"]},
+    {iconname:"smashing_magazine",key:"\\e62d",name:"Smashing Magazine" , desc:"Smashing Magazine is a website and blog that offers resources and advice to Web developers and Web designers. It was founded by Sven Lennartz and Vitaly Friedman in September 2006. Today Smashing Magazine is run by Smashing Magazine GmbH.",tags:["websites","resources"]},
+    {iconname:"netmagazine",key:"\\e62e",name:".net Magazine", desc:".net is a monthly Internet magazine and website published in the UK by Future plc. Founded in 1994, .net magazine is published every four weeks (13 issues per year). The magazine was initially aimed at the general Internet user, but has adapted into a title aimed at professional and amateur web designers; a significant proportion of its readers are full-time web developers. In 2011 it also launched as a digital edition for tablet computers.",tags:["websites","resources"]},
+    {iconname:"codepen",key:"\\e616",name:"Codepen", desc:"",tags:["websites","resources","useful","social"]},
+    {iconname:"cssdeck",key:"\\e62a",name:"CSSDeck", desc:"Collection of Awesome CSS and JS Creations to help out frontend developers and designers.",tags:["websites","resources","useful","social"]},
+    {iconname:"hackernews",key:"\\e61a",name:"Hacker News", desc:"Hacker News is a social news website that caters to programmers and entrepreneurs. Hacker News is run by Paul Graham's investment fund and startup incubator Y Combinator. Users can submit, vote and comment on content related to computer science and entrepreneurship. Hacker News differs from other social news websites because users cannot downvote unwanted submissions. In contrast, users with more than 500 'karma' points may vote down unhelpful comments.",tags:["websites","resources","useful","social"]},
+    {iconname:"dropbox",key:"\\e607",name:"Dropbox", desc:"Dropbox is a file hosting service operated by Dropbox, Inc., headquartered in San Francisco, California, that offers cloud storage, file synchronization, personal cloud, and client software. Dropbox allows users to create a special folder on each of their computers, which Dropbox then synchronizes so that it appears to be the same folder (with the same contents) regardless of which computer is used to view it. Files placed in this folder also are accessible through a website and mobile phone applications.",tags:["tools"]},
+    {iconname:"onedrive",key:"\\e662",name:"OneDrive", desc:"OneDrive (previously SkyDrive, Windows Live SkyDrive and Windows Live Folders) is a file hosting service that allows users to upload and sync files to a cloud storage and then access them from a Web browser or their local device. It is part of the suite of online services formerly known as Windows Live and allows users to keep the files private, share them with contacts, or make the files public. Publicly shared files do not require a Microsoft account to access.",tags:["tools"]},
+    {iconname:"google_drive",key:"\\e631",name:"Google Drive", desc:"Google Drive is a file storage and synchronization service provided by Google, released on April 24, 2012, which enables user cloud storage, file sharing and collaborative editing. Rumors about Google Drive began circulating as early as March 2006. Files shared publicly on Google Drive can be searched with web search engines. As of June 2014, Google Drive had 190 million monthly active users.",tags:["tools"]},
+    {iconname:"visualstudio",key:"\\e60c",name:"Microsoft Visual Studio", desc:"Microsoft Visual Studio is an integrated development environment (IDE) from Microsoft. It is used to develop computer programs for Microsoft Windows, as well as web sites, web applications and web services. Visual Studio uses Microsoft software development platforms such as Windows API, Windows Forms, Windows Presentation Foundation, Windows Store and Microsoft Silverlight. It can produce both native code and managed code.",tags:["tools","ides"]},
+    {iconname:"atom",key:"\\e664",name:"Atom IDE", desc:"A hackable text editor for the 21st Century",tags:["tools","ides"]},
+    {iconname:"unity_small",key:"\\e621",name:"Unity", desc:"Unity is a cross-platform game creation system developed by Unity Technologies, including a game engine and integrated development environment (IDE). It is used to develop video games for web sites, desktop platforms, consoles, and mobile devices. First announced only for Mac OS, at Apple’s Worldwide Developers Conference in 2005, it has since been extended to target more than fifteen platforms and is now the default software development kit (SDK) for the Nintendo Wii U.",tags:["tools","frameworks","misc"]},
+    {iconname:"rasberry_pi",key:"\\e622",name:"The Raspberry Pi", desc:"The Raspberry Pi is an index card-sized single-board computer developed in the UK by the Raspberry Pi Foundation with the intention of promoting the teaching of basic computer science in schools.",tags:["misc"]},
+    {iconname:"chrome",key:"\\e643",name:"Google Chrome", desc:"Google Chrome is a freeware web browser developed by Google. It used the WebKit layout engine until version 27 and, with the exception of its iOS releases, from version 28 and beyond uses the WebKit fork Blink. It was first released as a beta version for Microsoft Windows on September 2, 2008, and as a stable public release on December 11, 2008.",tags:["browsers"]},
+    {iconname:"ie",key:"\\e644",name:"Internet Explorer", desc:"Internet Explorer (formerly Microsoft Internet Explorer and Windows Internet Explorer, commonly abbreviated IE or MSIE) is a series of graphical web browsers developed by Microsoft and included as part of the Microsoft Windows line of operating systems, starting in 1995. It was first released as part of the add-on package Plus! for Windows 95 that year. Later versions were available as free downloads, or in service packs, and included in the Original Equipment Manufacturer (OEM) service releases of Windows 95 and later versions of Windows.",tags:["browsers"]},
+    {iconname:"firefox",key:"\\e645",name:"Mozilla Firefox", desc:"Mozilla Firefox (known simply as Firefox) is a free and open-source web browser developed for Windows, OS X, and Linux, with a mobile version for Android, by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.",tags:["browsers"]},
+    {iconname:"opera",key:"\\e646",name:"Opera", desc:"Opera is a web browser developed by Opera Software. Opera currently runs on Microsoft Windows and OS X operating systems and uses the Blink layout engine. Editions of Opera are available for devices running the Android, iOS, Symbian, Maemo, Bada, BlackBerry and Windows Mobile operating systems, and for Java ME capable devices.",tags:["browsers"]},
+    {iconname:"safari",key:"\\e648",name:"Safari", desc:"Safari is a web browser developed by Apple Inc. and included with the OS X and iOS operating systems. First released as a public beta on January 7, 2003, on the company's OS X operating system, it became Apple's default browser beginning with Mac OS X v10.3 'Panther'. Safari is also the native browser for iOS.",tags:["browsers"]},
+    {iconname:"nancy",key:"\\e666",name:"Nancy", desc:"Nancy is a lightweight, low-ceremony, framework for building HTTP based services on .Net and Mono.",tags:["tools","useful","frameworks"]},
+    {iconname:"clojure",key:"\\e668",name:"Clojure", desc:"Clojure is a dynamic programming language that targets the Java Virtual Machine (and the CLR, and JavaScript). It is designed to be a general-purpose language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming.",tags:["frameworks"]},
+    {iconname:"clojure_alt",key:"\\e66a",name:"Clojure", desc:"Clojure is a dynamic programming language that targets the Java Virtual Machine (and the CLR, and JavaScript). It is designed to be a general-purpose language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming.",tags:["frameworks"]},
+    {iconname:"perl",key:"\\e669",name:"Perl", desc:"Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages. The languages in this family include Perl 5 and Perl 6.",tags:["programming"]},
+    {iconname:"celluloid",key:"\\e66b",name:"Celluloid", desc:"Celluloid provides a simple and natural way to build fault-tolerant concurrent programs in Ruby. With Celluloid, you can build systems out of concurrent objects just as easily as you build sequential programs out of regular objects. Recommended for any developer, including novices, Celluloid should help ease your worries about building multithreaded Ruby programs.",tags:["frameworks"]},
+    {iconname:"w3c",key:"\\e66c",name:"The World Wide Web Consortium (W3C)", desc:"The World Wide Web Consortium (W3C) is the main international standards organization for the World Wide Web (abbreviated WWW or W3).Founded and currently led by Tim Berners-Lee, the consortium is made up of member organizations which maintain full-time staff for the purpose of working together in the development of standards for the World Wide Web. As of 24 May 2014, the World Wide Web Consortium (W3C) has 385 members.",tags:["useful","resources"]},
+    {iconname:"redis",key:"\\e66d",name:"Redis", desc:"Redis is an open-source, networked, in-memory, key-value data store with optional durability. It is written in ANSI C. The development of Redis has been sponsored by Pivotal Software since May 2013; before that, it was sponsored by VMware. According to the monthly ranking by DB-Engines.com, Redis is the most popular key-value store.[4] The name Redis means REmote DIctionary Server.",tags:["tools","programming"]},
+    {iconname:"postgresql",key:"\\e66e",name:"PostgreSQL", desc:"PostgreSQL, often simply 'Postgres', is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards-compliance. As a database server, its primary function is to store data, securely and supporting best practices, and retrieve it later, as requested by other software applications, be it those on the same computer or those running on another computer across a network (including the Internet). It can handle workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users. Recent versions also provide replication of the database itself for security and scalability.",tags:["tools","programming"]},
+    {iconname:"webplatform",key:"\\e66f",name:"WebPlatform.org", desc:"WebPlatform.org is a community convened by W3C that is seeking to create an online reference of Web standards. The project is a collaboration among Adobe Systems, Apple Inc., Facebook, Google, HP, Microsoft, Mozilla, Nokia, Opera Software, and W3C, who are called 'stewards' of the Web Platform project",tags:["useful","resources"]},
+    {iconname:"jenkins",key:"\\e667",name:"Jenkins", desc:"Jenkins is an award-winning application that monitors executions of repeated jobs, such as building a software project or jobs run by cron.",tags:["frameworks","tools","misc"]},
+    {iconname:"requirejs",key:"\\e670",name:"RequireJS", desc:"RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node.",tags:["js","frameworks"]},
+    {iconname:"opensource",key:"\\e671",name:"The Open Source Initiative (OSI)", desc:"The Open Source Initiative (OSI) is an organization dedicated to promoting open-source software. The organization was founded in February 1998, by Bruce Perens and Eric S. Raymond, prompted by Netscape Communications Corporation publishing the source code for its flagship Netscape Communicator product. Later, in August 1998 the organization added a board of directors.",tags:["misc"]},
+    {iconname:"typo3",key:"\\e672",name:"TYPO3", desc:"TYPO3 is a free and open source web content management framework based on PHP. It is released under the GNU General Public License. It can run on several web servers, such as Apache or IIS, on top of many operating systems, among them Linux, Microsoft Windows, FreeBSD, Mac OS X and OS/2.",tags:["cms"]},
+    {iconname:"uikit",key:"\\e673",name:"UIkit", desc:"A lightweight and modular front-end framework for developing fast and powerful web interfaces.",tags:["frameworks","tools","misc"]},
+    {iconname:"doctrine",key:"\\e674",name:"The Doctrine Project", desc:"The Doctrine Project is the home to several PHP libraries primarily focused on database storage and object mapping. The core projects are a Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.",tags:["frameworks","tools","misc"]},
+    {iconname:"groovy",key:"\\e675",name:"Groovy", desc:"Groovy is an agile and dynamic language for the Java Virtual Machine. It builds upon the strengths of Java, but has additional power features inspired by languages like Python, Ruby and Smalltalk.",tags:["tools","useful"]},
+    {iconname:"nginx",key:"\\e676",name:"Nginx", desc:"Nginx (pronounced 'engine-x') is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3, and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server). The nginx project started with a strong focus on high concurrency, high performance and low memory usage. It is licensed under the 2-clause BSD-like license and it runs on Linux, BSD variants, Mac OS X, Solaris, AIX, HP-UX, as well as on other *nix flavors. It also has a proof of concept port for Microsoft Windows.",tags:["tools","useful"]},
+    {iconname:"haskell",key:"\\e677",name:"Haskell", desc:"Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. It is named after logician Haskell Curry.",tags:["programming"]},
+    {iconname:"zend",key:"\\e678",name:"Zend Framework (ZF)", desc:"Zend Framework (ZF) is an open source, object-oriented web application framework implemented in PHP 5 and licensed under the New BSD License.",tags:["frameworks"]},
+    {iconname:"gnu",key:"\\e679",name:"GNU", desc:"GNU is a Unix-like computer operating system developed by the GNU Project. It is composed wholly of free software. It is based on the GNU Hurd kernel and is intended to be a 'complete Unix-compatible software system' GNU is a recursive acronym for 'GNU's Not Unix!', chosen because GNU's design is Unix-like, but differs from Unix by being free software and containing no Unix code.",tags:["misc"]},
+    {iconname:"yeoman",key:"\\e67a",name:"Yeoman", desc:"The web's scaffolding tool for modern webapps",tags:["tools","useful"]},
+    {iconname:"heroku",key:"\\e67b",name:"Heroku", desc:"Heroku is a cloud platform as a service (PaaS) supporting several programming languages. Heroku was acquired by Salesforce.com in 2010. Heroku, one of the first cloud platforms, has been in development since June 2007, when it supported only the Ruby programming language, but has since added support for Java, Node.js, Scala, Clojure, Python and PHP and (undocumented) Perl. The base operating system is Debian or, in the newest stack, the Debian-based Ubuntu",tags:["tools","useful"]},
+    {iconname:"debian",name:"",key:"\\e67d",desc:"",tags:{}},
+    /* new 1.5.0 */
+    {iconname:"travis",name:"Travis CI",key:"\\e67e",desc:"In software development, Travis CI is a hosted, distributed[1] continuous integration service used to build and test projects hosted at GitHub. The software is also available as an open source download on GitHub,[3] although its developers do not currently recommend it for on-premise use for closed projects.",tags:{}},
+    {iconname:"dotnet",name:".NET Framework",key:"\\e67f",desc:".NET Framework (pronounced dot net) is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library known as Framework Class Library (FCL) and provides language interoperability (each language can use code written in other languages) across several programming languages. Programs written for .NET Framework execute in a software environment (as contrasted to hardware environment), known as Common Language Runtime (CLR), an application virtual machine that provides services such as security, memory management, and exception handling. FCL and CLR together constitute .NET Framework.",tags:{}},
+    {iconname:"codeigniter",name:"CodeIgniter",key:"\\e680",desc:"CodeIgniter is an open source rapid development web application framework, for use in building dynamic web sites with PHP. The first public version of CodeIgniter was released on February 28, 2006, and the latest stable version 2.2.0 was released June 5, 2014.",tags:{}},
+    {iconname:"javascript_badge",name:"JavaScript",key:"\\e681",desc:"JavaScript (JS) is a dynamic computer programming language. It is most commonly used as part of web browsers, whose implementations allow client-side scripts to interact with the user, control the browser, communicate asynchronously, and alter the document content that is displayed. It is also being used in server-side network programming (with Node.js), game development and the creation of desktop and mobile applications.",tags:{}},
+    {iconname:"yii",name:"Yii",key:"\\e682",desc:"Yii is an open source, object-oriented, component-based MVC PHP web application framework. Yii is pronounced as 'Yee' or [ji:] and it's an acronym for 'Yes It Is!'.",tags:{}},
+    {iconname:"msql_server",name:"Microsoft SQL Server",key:"\\e67c",desc:"Microsoft SQL Server is a relational database management system developed by Microsoft. As a database, it is a software product whose primary function is to store and retrieve data as requested by other software applications, be it those on the same computer or those running on another computer across a network (including the Internet). There are at least a dozen different editions of Microsoft SQL Server aimed at different audiences and for workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users. Its primary query languages are T-SQL and ANSI SQL.",tags:{}},
+    {iconname:"composer",name:"Composer",key:"\\e683",desc:"Dependency Manager for PHP",tags:{}},
+    {iconname:"krakenjs_badge",name:"Kraken.js",key:"\\e684",desc:"Kraken is a secure and scalable layer that extends express by providing structure and convention.",tags:{}},
+    {iconname:"krakenjs",name:"Kraken.js",key:"\\e685",desc:"Kraken is a secure and scalable layer that extends express by providing structure and convention.",tags:{}},
+    {iconname:"mozilla",name:"Mozilla Foundation",key:"\\e686",desc:"The Mozilla Foundation is a non-profit organization that exists to support and lead the open source Mozilla project. Founded in July 2003, the organization sets the policies that govern development, operates key infrastructure and controls Mozilla trademarks and copyrights. It owns a taxable subsidiary: the Mozilla Corporation, which employs many Mozilla developers and coordinates releases of the Mozilla Firefox web browser and Mozilla Thunderbird email client. The subsidiary is 100% owned by the parent, and therefore follows the same non-profit principles. The Mozilla Foundation was founded by the Netscape-affiliated Mozilla Organization. The organization is currently based in the Silicon Valley city of Mountain View, California, USA.",tags:{}},
+    {iconname:"firebase",name:"Firebase",key:"\\e687",desc:"Firebase is a cloud services provider and backend as a service company based in San Francisco, California. The company makes a number of products for software developers building mobile or web applications. Firebase was founded in 2011 by Andrew Lee and James Tamplin and launched with a realtime cloud database in April 2012.[6] Firebase's primary product is a realtime database which provides an API that allows developers to store and sync data across multiple clients.",tags:{}},
+    {iconname:"sizzlejs",name:"Sizzle.js",key:"\\e688",desc:"A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.",tags:{}},
+    {iconname:"creativecommons",name:"Creative Commons",key:"\\e689",desc:"Creative Commons (CC) is a non-profit organization headquartered in Mountain View, California, United States, devoted to expanding the range of creative works available for others to build upon legally and to share.[1] The organization has released several copyright-licenses known as Creative Commons licenses free of charge to the public. These licenses allow creators to communicate which rights they reserve, and which rights they waive for the benefit of recipients or other creators.",tags:{}},
+    {iconname:"creativecommons_badge",name:"Creative Commons",key:"\\e68a",desc:"Creative Commons (CC) is a non-profit organization headquartered in Mountain View, California, United States, devoted to expanding the range of creative works available for others to build upon legally and to share.[1] The organization has released several copyright-licenses known as Creative Commons licenses free of charge to the public. These licenses allow creators to communicate which rights they reserve, and which rights they waive for the benefit of recipients or other creators.",tags:{}},
+    {iconname:"mitlicence",name:"MIT License",key:"\\e68b",desc:"The MIT License is a free software license originating at the Massachusetts Institute of Technology (MIT). It is a permissive free software license, meaning that it permits reuse within proprietary software provided all copies of the licensed software include a copy of the MIT License terms. Such proprietary software retains its proprietary nature even though it incorporates software under the MIT License. The license is also GPL-compatible, meaning that the GPL permits combination and redistribution with software that uses the MIT License.",tags:{}},
+    {iconname:"senchatouch",name:"Sencha Touch",key:"\\e68c",desc:"Sencha Touch is a user interface (UI) JavaScript library, or framework, specifically built for the Mobile Web. It can be used by Web developers to develop user interfaces for mobile web applications that look and feel like native applications on supported mobile devices. It is fully based on web standards such as HTML5, CSS3 and JavaScript. Sencha Touch aims to enable developers to quickly and easily create HTML5 based mobile apps that work on Android, iOS, Windows, Tizen and BlackBerry devices, and produce a native-app-like experience inside a browser.",tags:{}},
+    {iconname:"bugsense",name:"Bugsense",key:"\\e68d",desc:"Bugsense is a crash reporter for mobile phones. It collects and analyzes crash reports, performance and quality of applications on mobiles, which forwards them to the creators of those applications to act on them. Supported platforms include Android, iOS, Windows Phone 7, Windows Phone, Windows 8 and HTML 5.",tags:{}},
+    {iconname:"extjs",name:"Ext JS",key:"\\e68e",desc:"Ext JS is a pure JavaScript application framework for building interactive web applications using techniques such as Ajax, DHTML and DOM scripting.",tags:{}},
+    {iconname:"mootools_badge",name:"MooTools",key:"\\e68f",desc:"MooTools (My Object-Oriented Tools) is a lightweight, object-oriented, JavaScript framework. It is released under the free, open-source MIT License. It is used on more than 5% of all websites, and is one of the most popular JavaScript libraries.",tags:{}},
+    {iconname:"mootools",name:"MooTools",key:"\\e690",desc:"MooTools (My Object-Oriented Tools) is a lightweight, object-oriented, JavaScript framework. It is released under the free, open-source MIT License. It is used on more than 5% of all websites, and is one of the most popular JavaScript libraries.",tags:{}},
+    {iconname:"ruby_rough",name:"Ruby",key:"\\e691", desc:"Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro 'Matz' Matsumoto in Japan.",tags:["programming"]}]
+});
+
+app.controller( 'MainCtrl', function ( $scope ) {});
+app.directive('nagPrism', [function() {
+    return {
+        restrict: 'A',
+        scope: {
+            source: '@'
+        },
+        link: function(scope, element, attrs) {
+            scope.$watch('source', function(v) {
+                if(v) {
+                    Prism.highlightElement(element.find("code")[0]);
+                }
+            });
+        },
+        template: "<code ng-bind='source'></code>"
+    };
+}]);
+
+function StaticCtrl($scope, $routeParams) {};
+function UberCtrl($scope, $routeParams) {};
+
+
+
+
 
 
 

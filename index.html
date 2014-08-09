@@ -7,259 +7,349 @@
 	<meta property="og:title" content="Devicons | The developer's iconic font" />
 	<meta property="og:description" content=" Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds. " />
 	<meta property="og:image" content="//vorillaz.github.io/devicons/img/ogimage.png" />
-	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700|Oswald:400,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fira+Sans' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="favicon.ico">
 	<!-- Stylesheets we would like cleaned -->
 	<!-- build:css css/tidy.css -->
 		<link rel="stylesheet" href="css/devicons.css">
 		<link rel="stylesheet" href="css/main.css">
 	<!-- /build -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="js/modernizr.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-	<div class="overlay">
-		<a href="#" id="spawn">Devicons</a>
+<header>
+	<div class="headerinner clearfix">
+		<a href="#/main"><div id="logo"></div></a>
+		<div id="handler">
+			<a class="menu-icon open-menu"><span></span></a>
+		</div>
+		<div class="menu-wrap">
+			<nav>	
+				<ul class="menu-hider homepage">
+					<li><a href="#/main">Welcome</a></li>
+					<li><a href="#/dafont">The font</a></li>
+					<li><a href="#/usage">Usage</a></li>
+					<li><a href="#/cheat">Cheatsheet</a></li>
+					<li><a href="#/about">About</a></li>
+				</ul>
+			</nav>
+		</div>
 	</div>
-	<div id="outer-wrap">
-		<div id="inner-wrap">
-			<header>
-				<div id="headerinner">
-					<a class="nav-btn" id="nav-open-btn" href="#nav">Open Menu</a>
+</header>
+<div class="page-wrap">
+	<div id="wrapper">
+		
+			
+		
+		<!-- view & ctrl -->
+		<div class="main">
+			<div ng-controller="MainCtrl">
+			  <ng-view></ng-view>
+			</div>
+		</div>
+		
+		<footer></footer>
+	</div>
+</div>
+  
+<!-- main -->
+<script type="text/ng-template" id="main">
+  <section>
+  	<div class="txt cf">
+		Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds(sic).
+		More than 100 icons ready to use in your next project.
+	</div>
+
+	<div class="btns clearfix">
+		<iframe src="//ghbtns.com/github-btn.html?user=vorillaz&amp;repo=devicons&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+             
+             <iframe src="//ghbtns.com/github-btn.html?user=vorillaz&amp;repo=devicons&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+		 <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/tweet_button.1406859257.html#_=1406996503896&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=http%3A%2F%2Fvorillaz.github.io%2Fdevicons%2F&amp;size=m&amp;text=Devicons%20%7C%20The%20developer%27s%20iconic%20font&amp;url=http%3A%2F%2Fvorillaz.github.io%2Fdevicons%2F&amp;via=vorillas" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 107px; height: 20px;"></iframe>
+		 <iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1406859257.html#_=1406996504101&amp;id=twitter-widget-1&amp;lang=en&amp;screen_name=vorillas&amp;show_count=false&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 110px; height: 20px;"></iframe>
+	</div>
+	<div class="down cf">
+			<a href="https://github.com/vorillaz/devicons/archive/master.zip" class="btn" target="_blank">Download</a>
+		</div>
+  </section>
+</script>
+<!-- /main -->
+
+<!-- cheat -->
+<script type="text/ng-template" id="cheat">
+	<div id="cheat">
+		<h2>Cheatsheet <span>{{icons.length}} Icons</span></h2>
+		<div id="cheatinner">
+			<div ng-repeat="icon in icons" class="grid gridiconbig clearfix" ng-animate="'animate'">
+				<div class="innericns cleafix">
+					<span class="cheatgrid cheatgrid_f">
+						<span class="devicons devicons-{{icon.iconname}}"></span>
+						
+					</span>
+					<span class="cheatgrid cheatgrid_s">
+						<span class="devicons devicons-{{icon.iconname}}"></span>
+						
+					</span>
+					<span class="cheatgrid cheatgrid_t">
+						<span class="devicons devicons-{{icon.iconname}}"></span>
+						
+					</span>
+					<span class="cheatgrid cheatgrid_fo">
+						<span class="devicons devicons-{{icon.iconname}}"></span>
+						
+					</span>
+					<span class="cheatgrid cheatgrid_fi">
+						<span class="devicons devicons-{{icon.iconname}}"></span>
+
+					</span>
+					
+
 				</div>
-			</header>
-			<!--nav-->
-			    <nav id="nav" role="navigation">
-			        <div class="block">
-			            <ul>
-			                <li class="active">
-			                    <a href="#welcome">Welcome</a>
-			                </li><!--
-			             --><li>
-			                    <a href="#dafont">The font</a>
-			                </li><!--
-			                --><li>
-			                    <a href="#usage">Usage & FAQs</a>
-			                </li><!--
-			                --><li>
-			                    <a href="#cheat">Cheatsheet</a>
-			                </li><!--
-			             --><li>
-			                    <a href="#about">About</a>
-			                </li>
-			            </ul>
-			        </div>
-			    </nav>
-
-			<div id="main">
-				<div id="maininner">
-					<div id="welcome">
-						<a href="#" id="logo">Devicons</a>
+				<div class="innertxt clearfix">
+					<div class="innerblock"> 
+						<span>CSS Class name </span>
+						<input class="in" type="text"  onclick="this.select();" value="devicons devicons-{{icon.iconname}}">
 					</div>
-					<div id="txt">
-						Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.
-						<div class="down clearfix">
-							<p><a href="https://github.com/vorillaz/devicons/archive/master.zip" target="_blank">Download</a></p>
+					<div class="innerblock">
+						<span><em>before::</em> pseudoclass content</span>
+						<input class="in" type="text" onclick="this.select();" value="{{icon.key}}">
+					</div>
+					<div class="innerblock">
+						<span>Escaped HTML  character</span>
+						<input class="in" type="text" onclick="this.select();" value="{{ icon.key.replace('\\','&#x') }}">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</script>
+<!-- /cheat -->
+
+<script type="text/ng-template" id="dafont">
+	<div class='srcwrap clearfix'>
+		<input id="search" type="search" placeholder="Search" class="" data-ng-model="search.name">
+	</div>
+	<div class="iconwrapper">
+		<ul>
+			<li ng-repeat="icon in icons | filter:search" class="grid gridicon">
+				<a href="#/singleicon/{{icon.iconname}}"><span class="smallicon devicons devicons-{{icon.iconname}}"></span></a>
+
+			</li>
+		</ul>	
+	</div>
+</script>
+<!-- /dafont -->
+
+
+<script type="text/ng-template" id="use">
+  <div id="usage">
+		<h2>Usage & FAQs</h2>
+		<div class="usageinner">	
+			<h3>Use Devicons with a single line of code.<em>*</em></h3>
+			<div class="attention">
+				<p><span>Hey, hey</span> thanks to the wonderful guys of : <a href="http://www.jsdelivr.com/">http://www.jsdelivr.com/</a> you can now add Devicons into your project by adding the following code into the <pre nag-prism source="<HEAD>" class="language-markup inlined"></pre> section of your project's HTML: </p>
+				
+
+				<pre nag-prism source="<link href='//cdn.jsdelivr.net/devicons/1.4.0/css/devicons.min.css' rel='stylesheet'>" class="language-markup"></pre>
+			</p>
+			</div>
+			
+			<h3>Getting started <em>*</em></h3>
+			
+			<p>Setting up Devicons can be as <em>simple</em> as:</p>
+			<p>
+				<ol class="task-list">
+					<li>Download and extract the repository</li>
+					<li>Copy the <code>devicons.css</code> to your project</li>
+					<li>Copy the <code>fonts</code> folder to your project</li>
+					<li>Ensure the font urls within <code>devicons.css</code> properly reference the <code>fonts</code> path within your project.</li>
+					<li>Include a reference to the <code>devicons.css</code> file from every webpage you need to use it.</li>
+				</ol>
+			</p>
+			<p>
+				Putting an icon is as easy as adding 
+					<pre nag-prism source='<span class="devicons devicons-bing_small">' class="language-markup inlined"></pre>
+				into your document. On the Cheatsheet section below you can find all the available classes, as well as the HTML escape character of each icon.
+			</p>
+
+			<h3>But I want to create use my own styles? <em>*</em></h3>
+			<p>
+				If yout are a little familiar with CSS taking a look at devicons.css will make things clean and clear.
+				You can use Devicons into your custom made styles extending your defintions as: </p>
+				<pre nag-prism source='.my_own_class{font-family: "devicons";}  .my_own_class:before{ content:"\e604"}' class="language-css"></pre>
+
+				Or even use the HTML escape characters 
+				<pre nag-prism source='<span class="my_own_class">&amp;#xe624</span>' class="language-markup inlined"></pre>
+			</p>
+			<h3>Sass to the rescue <em>*</em></h3>
+			<p>
+				If you are an SASS enthousiast you can include Devicons into your project using : <pre nag-prism source='@import "devicons";' class="language-css inlined"></pre> Keep in mind that the Sass version of Devicons use nested lists.If you feel unfamiliar with the whole Sass-list-thing, take a look at this <a href="http://hugogiraudel.com/2013/07/15/understanding-sass-lists/" target="_blank">wonderful article</a> written by Hugo Giraudel
+			</p>
+			<h3>What's the browser support? <em>*</em></h3>
+			<p>
+				<i>* </i><span class="devicons devicons-ie"></span> <span class="middle"> 8+ </span>		 	
+			</p>
+			<p>
+				<i>* </i><span class="devicons devicons-chrome"></span>		 	
+			</p>
+			<p>
+				<i>* </i><span class="devicons devicons-firefox"></span>	 	
+			</p>
+			<p>
+				<i>* </i><span class="devicons devicons-opera"></span> 		 	
+			</p>
+			<p><i>* </i>All the modern mobile browsers</p>
+			<p>
+				<i>* </i> IE 8 partially supports <code>:pseudo-elements</code> . Using escaped HTML or a Javascript implementation will solve the problem. 
+			</p>
+			<p>
+				<i>* </i> Opera Mini might need SVG fallback 
+			</p>
+			<h3>How about SVG or even image fallbacks? <em>*</em></h3>
+			<p>
+				SVG and PNG sprites are also included in the project, use them wisely.
+			</p>
+			
+			<h3>But I don't want to load the entire font set. <em>*</em></h3>
+			<p>
+				In the repository you can find the IcoMoon manifest file. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like. 
+			</p>
+
+			<h3>What's the smartest way to detect an SVG or image fallback? <em>*</em></h3>
+			<p><a href="http://modernizr.com/" target="_blank">Modernizr.js</a> is your friend!</p>
+
+			<h3>My font seems rough/ stretched, what happened? <em>*</em></h3>
+			<p>
+				Different browsers and operating systems, tend to render fonts differently. Double check your CSS files for Devicons' declaration:
+				
+    <pre nag-prism source="@font-face {font-family:'devicons';
+    src:url('../fonts/devicons.eot?xqxft6');
+    src:url('../fonts/devicons.eot?#iefixxqxft6') format('embedded-opentype'), url('../fonts/devicons.woff?xqxft6') format('woff'), url('../fonts/devicons.ttf?xqxft6') format('truetype'), url('../fonts/devicons.svg?xqxft6#devicons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}" class="language-css"></pre>
+
+				If the problem insists check out  <a href="http://stackoverflow.com/questions/11487427/is-there-any-font-smoothing-in-google-chrome" target="_blank"> for some suggested solutions</a>. 
+			</p>
+			<h3>My icons are chopped off on the top!! <em>*</em></h3>
+			<p>Double check your CSS declared <code>line-height</code></p>
+			
+			
+			<h3>My icons seem to small! <em>*</em></h3>
+			<p>
+				Try increasing font-size. You can go up as much as needed. There is no pixel loss as Devicons is vector based.
+			</p>
+			<h3>Cool, how can I use Devicons?<em>*</em></h3>
+			<p>
+				Devicons is Open source (<a href="http://opensource.org/licenses/MIT" target="_blank">MIT Licence</a>). You may use the icon set as you want. You can create a list with your skills, use the the icon set for your next presentation or even print some badass stickers.
+			</p>
+			<h3>Sweet! Will you also include UberCool's logo on any upcoming release? <em>*</em></h3>
+			<p>
+				Drop me a line <a href="mailto:sayhi@vorillaz.com?Subject=Devicons">sayhi@vorillaz.com</a> and I'll do my best mate :]
+			</p>
+
+		</div>
+
+	</script>
+
+	<script type="text/ng-template" id="other.html">
+	  Other Page.
+	</script>
+	<!--about -->
+
+
+	<script type="text/ng-template" id="single">
+				<div class="presentation">
+			<div class="presentationInner">
+				<div ng-switch on="model.actualIcon">
+					<div ng-switch-when="undefined">
+						<h2>Oh snap. A cute baby Cthulhu ate this icon.</h2>
+						<div class="babyc clearfix">
+							<div id="babycinner"></div>
 						</div>
 					</div>
-					<div class="btns">
-						<iframe src="//ghbtns.com/github-btn.html?user=vorillaz&repo=devicons&type=fork&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-                             
-                             <iframe src="//ghbtns.com/github-btn.html?user=vorillaz&repo=devicons&type=watch&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-						 <a href="https://twitter.com/share" class="twitter-share-button" data-via="vorillas">Tweet</a>
-						 <a href="https://twitter.com/vorillas" class="twitter-follow-button" data-show-count="false">Follow @vorillas</a>
-					</div>
-					<div data-ng-controller="MainCtrl" id="dafont">
-						<div class="firsttext" >
-							<h2>The font <small>v1.4.0</small></h2>
-							<div id="tags" class="clearfix">
-								<ul>
-									<li ng-repeat="tag in tags" ng-class="{active: active}"><a href="#" data-ng-click="includeInFilter(tag.key);active = !active;; $event.preventDefault(); $event.stopPropagation();"><span>#</span>{{tag.name}}</a></li>
-								</ul>
-							
-							</div>
-							<div class="iconwrapper">
-								<div class="iconwrapperinner">
-									<div ng-repeat="icon in icons | filter:filterTheIcons" class="grid gridicon"  ng-animate="'animate'">
-										<div class="smallicon devicons devicons-{{icon.iconname}}">
-											<span ng-bind-html-unsafe="icon.desc" class="point {{icon.desc}}"></span>
-										</div>
+					<div ng-switch-default>
+						<h2>{{model.actualIcon.name}}</h2>
+						<div class="desc">
+						{{model.actualIcon.desc}}
+						</div>
+						<div class="moreinfos clearfix">
+
+							<div class="innertxt clearfix">
+								<h2>Sneak peak</h2>
+								<div class="innericns cleafix">
+									<span class="cheatgrid cheatgrid_f">
+										<span class="devicons devicons-{{model.actualIcon.iconname}}"></span>
 										
+									</span>
+									<span class="cheatgrid cheatgrid_s">
+										<span class="devicons devicons-{{model.actualIcon.iconname}}"></span>
+										
+									</span>
+									<span class="cheatgrid cheatgrid_t">
+										<span class="devicons devicons-{{model.actualIcon.iconname}}"></span>
+										
+									</span>
+									<span class="cheatgrid cheatgrid_fo">
+										<span class="devicons devicons-{{model.actualIcon.iconname}}"></span>
+										
+									</span>
+									<span class="cheatgrid cheatgrid_fi">
+										<span class="devicons devicons-{{model.actualIcon.iconname}}"></span>
+
+									</span>
+									
+
+								</div>
+								<div class="clearfix">
+									<div class="innerblock"> 
+										<span>CSS Class </span>
+										<input class="in" type="text"  onclick="this.select();" value="devicons devicons-{{model.actualIcon.iconname}}">
+									</div>
+									<div class="innerblock">
+										<span><em>before::</em> pseudoclass content</span>
+										<input class="in" type="text" onclick="this.select();" value="{{model.actualIcon.key}}">
+									</div>
+									<div class="innerblock">
+										<span>HTML escaped character</span>
+										<input class="in" type="text" onclick="this.select();" value="{{ model.actualIcon.key.replace('\\','&#x') }}">
 									</div>
 								</div>
 							</div>
-						</div>
-						<div id="usage">
-							<h2>Usage & FAQs</h2>
-
-							<h3>Use Devicons with a single line of code.<em>*</em></h3>
-							<div class="attention">
-								<p><span>Hey, hey</span> thanks to the wonderful guys of : <a href="http://www.jsdelivr.com/">http://www.jsdelivr.com/</a> you can now add Devicons into your project by adding the following code into the <code><HEAD></code> section of your project's HTML: </p>
-								<p><input class="in" type="text" onclick="this.select();" value="<link href='//cdn.jsdelivr.net/devicons/1.4.0/css/devicons.min.css' rel='stylesheet'>"></p>
-							</div>
-							
-							<h3>Getting started <em>*</em></h3>
-							
-							<p>Setting up Devicons can be as <em>simple</em> as:</p>
-							<p>
-								<ol class="task-list">
-									<li>Download and extract the repository</li>
-									<li>Copy the <code>devicons.css</code> to your project</li>
-									<li>Copy the <code>fonts</code> folder to your project</li>
-									<li>Ensure the font urls within <code>devicons.css</code> properly reference the <code>fonts</code> path within your project.</li>
-									<li>Include a reference to the <code>devicons.css</code> file from every webpage you need to use it.</li>
-								</ol>
-							</p>
-							<p>
-								Putting an icon is as easy as adding <code>&lt;span class=&quot;devicons devicons-bing_small&quot;&gt;&lt;/span&gt;</code> into your document. On the Cheatsheet section below you can find all the available classes, as well as the HTML escape character of each icon.
-							</p>
-
-							<h3>But I want to create use my own styles? <em>*</em></h3>
-							<p>
-								If yout are a little familiar with CSS taking a look at devicons.css will make things clean and clear.
-								You can use Devicons into your custom made styles extending your defintions as: </p>
-								<div><script src="https://gist.github.com/vorillaz/c01ec2577d6ba1f891c4.js"></script></div>
-								<p>
-								. Or even use the HTML escape characters 
-								<code>&lt;span class=&quot;my_own_class&quot;&gt;&amp;#xe624&lt;/span&gt;</code>
-							</p>
-							<h3>Sass to the rescue <em>*</em></h3>
-							<p>
-								If you are an SASS enthousiast you can include Devicons into your project using : <code>@import 'devicons';</code>. Keep in mind that the Sass version of Devicons use nested lists.If you feel unfamiliar with the whole Sass-list-thing, take a look at this <a href="http://hugogiraudel.com/2013/07/15/understanding-sass-lists/" target="_blank">wonderful article</a> written by Hugo Giraudel
-							</p>
-							<h3>What's the browser support? <em>*</em></h3>
-							<p>
-								<i>* </i><span class="devicons devicons-ie"></span> <span class="middle"> 8+ </span>		 	
-							</p>
-							<p>
-								<i>* </i><span class="devicons devicons-chrome"></span>		 	
-							</p>
-							<p>
-								<i>* </i><span class="devicons devicons-firefox"></span>	 	
-							</p>
-							<p>
-								<i>* </i><span class="devicons devicons-opera"></span> 		 	
-							</p>
-							<p><i>* </i>All the modern mobile browsers</p>
-							<p>
-								<i>* </i> IE 8 partially supports <code>:pseudo-elements</code> . Using escaped HTML or a Javascript implementation will solve the problem. 
-							</p>
-							<p>
-								<i>* </i> Opera Mini might need SVG fallback 
-							</p>
-							<h3>How about IE 7? <em>*</em></h3>
-							<p>
-								Devicons support IE as well using a special CSS file, Javascript and polyfills. Just add :
-								<div><script src="https://gist.github.com/vorillaz/46ea87984f689c8677a9.js"></script></div><p>
-								into your project's &lt;head&gt; section.
-							</p>
-							<h3>How about SVG or even image fallbacks? <em>*</em></h3>
-							<p>
-								SVG and PNG sprites are also included in the project, use them wisely.
-							</p>
-							
-							<h3>But I don't want to load the entire font set. <em>*</em></h3>
-							<p>
-								In the repository you can find the IcoMoon manifest file. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like. 
-							</p>
-
-							<h3>What's the smartest way to detect an SVG or image fallback? <em>*</em></h3>
-							<p><a href="http://modernizr.com/" target="_blank">Modernizr.js</a> is your friend!</p>
-
-							<h3>My font seems rough/ stretched, what happened? <em>*</em></h3>
-							<p>
-								Different browsers and operating systems, tend to render fonts differently. Double check your CSS files for Devicons' declaration:
-								<script src="https://gist.github.com/vorillaz/412e62056d8cbade4064.js"></script>
-
-								If the problem insists check out  <a href="http://stackoverflow.com/questions/11487427/is-there-any-font-smoothing-in-google-chrome" target="_blank"> for some suggested solutions</a>. 
-							</p>
-							<h3>My icons are chopped off on the top!! <em>*</em></h3>
-							<p>Double check your CSS declared <code>line-height</code></p>
-
-							
-							<h3>My icons seem to small! <em>*</em></h3>
-							<p>
-								Try increasing font-size. You can go up as much as needed. There is no pixel loss as Devicons is vector based.
-							</p>
-							<h3>Cool, how can I use Devicons?<em>*</em></h3>
-							<p>
-								Devicons is Open source (<a href="http://opensource.org/licenses/MIT" target="_blank">MIT Licence</a>). You may use the icon set as you want. You can create a list with your skills, use the the icon set for your next presentation or even print some badass stickers.
-							</p>
-							<h3>Sweet! Will you also include UberCool's logo on any upcoming release? <em>*</em></h3>
-							<p>
-								Drop me a line <a href="mailto:sayhi@vorillaz.com?Subject=Devicons">sayhi@vorillaz.com</a> and I'll do my best mate :]
-							</p>
-
-						</div>
-						<div id="cheat">
-							<h2>Cheatsheet</h2>
-							<div id="cheatinner">
-								<div ng-repeat="icon in icons" class="grid gridiconbig clearfix" ng-animate="'animate'">
-									<div class="innericns">
-										<span class="cheatgrid cheatgrid_f">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
-											
-										</span>
-										<span class="cheatgrid cheatgrid_s">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
-											
-										</span>
-										<span class="cheatgrid cheatgrid_t">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
-											
-										</span>
-										<span class="cheatgrid cheatgrid_fo">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
-											
-										</span>
-										<span class="cheatgrid cheatgrid_fi">
-											<span class="devicons devicons-{{icon.iconname}}"></span>
-
-										</span>
-										
-
-									</div>
-									<div class="innertxt clearfix">
-										<div class="innerblock"> 
-											<span>Class: </span>
-											<input class="in" type="text"  onclick="this.select();" value="devicons devicons-{{icon.iconname}}">
-										</div>
-										<div class="innerblock">
-											<span><em>before:</em> content</span>
-											<input class="in" type="text" onclick="this.select();" value="{{icon.key}}">
-										</div>
-										<div class="innerblock">
-											<span>HTML: </span>
-											<input class="in" type="text" onclick="this.select();" value="{{ icon.key.replace('\\','&#x') }}">
-										</div>
-									</div>
-										
-								</div>
-							</div>
-						</div>
-						<div id="about">
-							<h2>About</h2>
-							<p>Designed, handcrafted & coded by <a href="http://vorillaz.com">Theodore Vorillas</a>. Licenced under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT Licence</a></p>
-							<p>Shipped using <a href="http://icomoon.io" target="_blank">IcoMoon App</a>, Adobe Illustrator, Sublime Text 3 and GitHub </p>
-							<p>Wanna talk? <a href="mailto:sayhi@vorillaz.com?Subject=Devicons">sayhi@vorillaz.com</a></p>
-
-						</div>
-						<div id="note">
-							<h2>Note</h2>
-							<p>All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by the author, nor vice versa.</p>
-
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="back">
+			<a href="#/dafont" class="btn">Back</a>
+			</div>
 		</div>
-	</div>
+</script>
+<script type="text/ng-template" id="about">
+	<div id="about">
+		<h2>About</h2>
+		<div id="me">
+			<img src="img/me.jpg" alt="">
+		</div>
 
+		<div id="links">
+			<a href="#" target="_blank">LinkedIn</a>
+			<a href="#" target="_blank">Twitter</a>
+			<a href="#" target="_blank">Codepen</a>
+		</div>
 
+		<p>Designed, handcrafted &amp; coded by <a href="http://vorillaz.com">Theodore Vorillas</a>. Licenced under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT Licence</a></p>
+		<p>Shipped using <a href="http://icomoon.io" target="_blank">IcoMoon App</a>, Adobe Illustrator, Sublime Text 3 and GitHub </p>
+		<p>Wanna talk? <a href="mailto:sayhi@vorillaz.com?Subject=Devicons">sayhi@vorillaz.com</a></p>
+	</div>	
+</div>
+</script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
