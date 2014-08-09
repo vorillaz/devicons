@@ -11,13 +11,13 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set  1.4.0
-![Devicons](http://i.imgur.com/nTQC2my.png)
+###Devicons icon set  1.5.0
+![Devicons](http://i.imgur.com/VcgLGHN.png?1?6481)
 
 ## Use Devicons with a single line of code.
 Thanks to the wonderful guys of  [jsdelivr](http://www.jsdelivr.com/) you can now add Devicons into your project by adding the following code into the `<HEAD>` section of your project's HTML:
 
-`<link href='//cdn.jsdelivr.net/devicons/1.4.0/css/devicons.min.css' rel='stylesheet'>`
+`<link href='//cdn.jsdelivr.net/devicons/1.5.0/css/devicons.min.css' rel='stylesheet'>`
 
 
 ## Getting Started
@@ -53,11 +53,9 @@ New icons to be added in v.1.5.0
 
 **CSS & Preprocessors:** Bourbon
 
-**Javascript:** ExtJS, Handlebars.js, Marionette.js, QUnit.js,  YUI
+**Javascript:**  Handlebars.js, Marionette.js, QUnit.js,  YUI
 
 **PHP and Stuff:** CakePHP
-
-**Mobile:** Sencha Touch
 
 **Miscellaneous:** Piwik, Google Maps, Alfred app
 
@@ -67,7 +65,8 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 ##Changelog
-- v1.4.0 Added 12 new icons - 123 glyphs 
+- 1.5.0 Added 22 new icons - 145 glyphs 
+- 1.4.0 Added 12 new icons - 123 glyphs 
 - v1.3.1 Minor fixes for bower package manager
 - v1.3.0 Added 10 new icons - 111 glyphs 
 - v1.2.0 Added 3 new icons - 101 glyphs 

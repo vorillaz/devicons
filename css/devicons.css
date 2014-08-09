@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.4.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
   font-family: 'devicons';
@@ -373,7 +373,7 @@
 .devicons-groovy:before {
   content: "\e675"; }
 
-.devicons-ngnix:before {
+.devicons-nginx:before {
   content: "\e676"; }
 
 .devicons-haskell:before {
@@ -390,3 +390,69 @@
 
 .devicons-heroku:before {
   content: "\e67b"; }
+
+.devicons-debian:before {
+  content: "\e67d"; }
+
+.devicons-travis:before {
+  content: "\e67e"; }
+
+.devicons-dotnet:before {
+  content: "\e67f"; }
+
+.devicons-codeigniter:before {
+  content: "\e680"; }
+
+.devicons-javascript_badge:before {
+  content: "\e681"; }
+
+.devicons-yii:before {
+  content: "\e682"; }
+
+.devicons-msql_server:before {
+  content: "\e67c"; }
+
+.devicons-composer:before {
+  content: "\e683"; }
+
+.devicons-krakenjs_badge:before {
+  content: "\e684"; }
+
+.devicons-krakenjs:before {
+  content: "\e685"; }
+
+.devicons-mozilla:before {
+  content: "\e686"; }
+
+.devicons-firebase:before {
+  content: "\e687"; }
+
+.devicons-sizzlejs:before {
+  content: "\e688"; }
+
+.devicons-creativecommons:before {
+  content: "\e689"; }
+
+.devicons-creativecommons_badge:before {
+  content: "\e68a"; }
+
+.devicons-mitlicence:before {
+  content: "\e68b"; }
+
+.devicons-senchatouch:before {
+  content: "\e68c"; }
+
+.devicons-bugsense:before {
+  content: "\e68d"; }
+
+.devicons-extjs:before {
+  content: "\e68e"; }
+
+.devicons-mootools_badge:before {
+  content: "\e68f"; }
+
+.devicons-mootools:before {
+  content: "\e690"; }
+
+.devicons-ruby_rough:before {
+  content: "\e691"; }

@@ -1,3 +1,7 @@
+/*!
+ *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
+ */
+ 
 /* To avoid CSS expressions while still supporting IE 7 and IE 6, use this script */
 /* The script tag referring to this file must be placed before the ending body tag. */
 
@@ -131,12 +135,34 @@
 		'devicons-uikit': '&#xe673;',
 		'devicons-doctrine': '&#xe674;',
 		'devicons-groovy': '&#xe675;',
-		'devicons-ngnix': '&#xe676;',
+		'devicons-nginx': '&#xe676;',
 		'devicons-haskell': '&#xe677;',
 		'devicons-zend': '&#xe678;',
 		'devicons-gnu': '&#xe679;',
 		'devicons-yeoman': '&#xe67a;',
 		'devicons-heroku': '&#xe67b;',
+		'devicons-debian': '&#xe67d;',
+		'devicons-travis': '&#xe67e;',
+		'devicons-dotnet': '&#xe67f;',
+		'devicons-codeigniter': '&#xe680;',
+		'devicons-javascript_badge': '&#xe681;',
+		'devicons-yii': '&#xe682;',
+		'devicons-msql_server': '&#xe67c;',
+		'devicons-composer': '&#xe683;',
+		'devicons-krakenjs_badge': '&#xe684;',
+		'devicons-krakenjs': '&#xe685;',
+		'devicons-mozilla': '&#xe686;',
+		'devicons-firebase': '&#xe687;',
+		'devicons-sizzlejs': '&#xe688;',
+		'devicons-creativecommons': '&#xe689;',
+		'devicons-creativecommons_badge': '&#xe68a;',
+		'devicons-mitlicence': '&#xe68b;',
+		'devicons-senchatouch': '&#xe68c;',
+		'devicons-bugsense': '&#xe68d;',
+		'devicons-extjs': '&#xe68e;',
+		'devicons-mootools_badge': '&#xe68f;',
+		'devicons-mootools': '&#xe690;',
+		'devicons-ruby_rough': '&#xe691;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

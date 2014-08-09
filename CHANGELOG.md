@@ -6,6 +6,16 @@
 [v1.2](#v1.2)
 [v1.3](#v1.3)
 [v1.3.1](#v1.3.1)
+[1.4.0](#1.4.0)
+[1.5.0](#1.5.0)
+
+## 1.5.0
+Change log and fixes in version 1.5.0:
+1. Polishing Ruby and Javascript icons
+2. Added Debian,Travis, Mootools,Mit licence, CC,Mozilla foundation, Dart, Composer, Yii, Kraken.js, Firebase, Sizzle.js, Ext.js, MS Sql server, Sencha Touch and Composer icons.
+3. Updated the presentation page to a faster / sweeter one.
+
+
 ## 1.4.0
 Change log and fixes in version 1.4.0:
 1. Remove the "v" from versioning

@@ -1,0 +1,448 @@
+/*!
+ *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
+ */
+ 
+.icon {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	fill: currentColor;
+}
+.icon-git {
+	/*fill: #000000;*/
+}
+.icon-git_compare {
+	/*fill: #000000;*/
+}
+.icon-git_branch {
+	/*fill: #000000;*/
+}
+.icon-git_commit {
+	/*fill: #000000;*/
+}
+.icon-git_pull_request {
+	/*fill: #000000;*/
+}
+.icon-git_merge {
+	/*fill: #000000;*/
+}
+.icon-bitbucket {
+	/*fill: #000000;*/
+}
+.icon-github_alt {
+	/*fill: #000000;*/
+}
+.icon-github_badge {
+	/*fill: #000000;*/
+}
+.icon-github {
+	/*fill: #000000;*/
+}
+.icon-github_full {
+	/*fill: #000000;*/
+}
+.icon-java {
+	/*fill: #000000;*/
+}
+.icon-ruby {
+	/*fill: #000000;*/
+}
+.icon-scala {
+	/*fill: #000000;*/
+}
+.icon-python {
+	/*fill: #000000;*/
+}
+.icon-go {
+	/*fill: #000000;*/
+}
+.icon-ror {
+	/*fill: #000000;*/
+}
+.icon-django {
+	/*fill: #000000;*/
+}
+.icon-markdown {
+	/*fill: #000000;*/
+}
+.icon-php {
+	/*fill: #000000;*/
+}
+.icon-mysql {
+	/*fill: #000000;*/
+}
+.icon-streamline {
+	/*fill: #000000;*/
+}
+.icon-database {
+	/*fill: #000000;*/
+}
+.icon-laravel {
+	/*fill: #000000;*/
+}
+.icon-javascript_1 {
+	/*fill: #000000;*/
+}
+.icon-angular_simple {
+	/*fill: #000000;*/
+}
+.icon-backbone {
+	/*fill: #000000;*/
+}
+.icon-coffeescript {
+	/*fill: #000000;*/
+}
+.icon-jquery_logo {
+	/*fill: #000000;*/
+}
+.icon-modernizr {
+	/*fill: #000000;*/
+}
+.icon-jquery_ui_logo {
+	/*fill: #000000;*/
+}
+.icon-ember {
+	/*fill: #000000;*/
+}
+.icon-dojo {
+	/*fill: #000000;*/
+}
+.icon-nodejs {
+	/*fill: #000000;*/
+}
+.icon-nodejs_small {
+	/*fill: #000000;*/
+}
+.icon-javascript {
+	/*fill: #000000;*/
+}
+.icon-bootstrap {
+	/*fill: #000000;*/
+}
+.icon-sass {
+	/*fill: #000000;*/
+}
+.icon-css3_full {
+	/*fill: #000000;*/
+}
+.icon-css3 {
+	/*fill: #000000;*/
+}
+.icon-html5 {
+	/*fill: #000000;*/
+}
+.icon-html5_multimedia {
+	/*fill: #000000;*/
+}
+.icon-html5_device_access {
+	/*fill: #000000;*/
+}
+.icon-html5_3d_effects {
+	/*fill: #000000;*/
+}
+.icon-html5_connectivity {
+	/*fill: #000000;*/
+}
+.icon-ghost_small {
+	/*fill: #000000;*/
+}
+.icon-ghost {
+	/*fill: #000000;*/
+}
+.icon-magento {
+	/*fill: #000000;*/
+}
+.icon-joomla {
+	/*fill: #000000;*/
+}
+.icon-jekyll_small {
+	/*fill: #000000;*/
+}
+.icon-drupal {
+	/*fill: #000000;*/
+}
+.icon-wordpress {
+	/*fill: #000000;*/
+}
+.icon-grunt {
+	/*fill: #000000;*/
+}
+.icon-bower {
+	/*fill: #000000;*/
+}
+.icon-npm {
+	/*fill: #000000;*/
+}
+.icon-yahoo_small {
+	/*fill: #000000;*/
+}
+.icon-yahoo {
+	/*fill: #000000;*/
+}
+.icon-bing_small {
+	/*fill: #000000;*/
+}
+.icon-windows {
+	/*fill: #000000;*/
+}
+.icon-linux {
+	/*fill: #000000;*/
+}
+.icon-ubuntu {
+	/*fill: #000000;*/
+}
+.icon-android {
+	/*fill: #000000;*/
+}
+.icon-apple {
+	/*fill: #000000;*/
+}
+.icon-appstore {
+	/*fill: #000000;*/
+}
+.icon-phonegap {
+	/*fill: #000000;*/
+}
+.icon-blackberry {
+	/*fill: #000000;*/
+}
+.icon-stackoverflow {
+	/*fill: #000000;*/
+}
+.icon-techcrunch {
+	/*fill: #000000;*/
+}
+.icon-codrops {
+	/*fill: #000000;*/
+}
+.icon-css_tricks {
+	/*fill: #000000;*/
+}
+.icon-smashing_magazine {
+	/*fill: #000000;*/
+}
+.icon-netmagazine {
+	/*fill: #000000;*/
+}
+.icon-codepen {
+	/*fill: #000000;*/
+}
+.icon-cssdeck {
+	/*fill: #000000;*/
+}
+.icon-hackernews {
+	/*fill: #000000;*/
+}
+.icon-dropbox {
+	/*fill: #000000;*/
+}
+.icon-google_drive {
+	/*fill: #000000;*/
+}
+.icon-visualstudio {
+	/*fill: #000000;*/
+}
+.icon-unity_small {
+	/*fill: #000000;*/
+}
+.icon-rasberry_pi {
+	/*fill: #000000;*/
+}
+.icon-chrome {
+	/*fill: #000000;*/
+}
+.icon-ie {
+	/*fill: #000000;*/
+}
+.icon-firefox {
+	/*fill: #000000;*/
+}
+.icon-opera {
+	/*fill: #000000;*/
+}
+.icon-safari {
+	/*fill: #000000;*/
+}
+.icon-swift {
+	/*fill: #000000;*/
+}
+.icon-symfony {
+	/*fill: #000000;*/
+}
+.icon-symfony_badge {
+	/*fill: #000000;*/
+}
+.icon-less {
+	/*fill: #000000;*/
+}
+.icon-stylus {
+	/*fill: #000000;*/
+}
+.icon-trello {
+	/*fill: #000000;*/
+}
+.icon-atlassian {
+	/*fill: #000000;*/
+}
+.icon-jira {
+	/*fill: #000000;*/
+}
+.icon-envato {
+	/*fill: #000000;*/
+}
+.icon-snap_svg {
+	/*fill: #000000;*/
+}
+.icon-raphael {
+	/*fill: #000000;*/
+}
+.icon-google_analytics {
+	/*fill: #000000;*/
+}
+.icon-compass {
+	/*fill: #000000;*/
+}
+.icon-onedrive {
+	/*fill: #000000;*/
+}
+.icon-gulp {
+	/*fill: #000000;*/
+}
+.icon-atom {
+	/*fill: #000000;*/
+}
+.icon-cisco {
+	/*fill: #000000;*/
+}
+.icon-nancy {
+	/*fill: #000000;*/
+}
+.icon-clojure {
+	/*fill: #000000;*/
+}
+.icon-clojure_alt {
+	/*fill: #000000;*/
+}
+.icon-perl {
+	/*fill: #000000;*/
+}
+.icon-celluloid {
+	/*fill: #000000;*/
+}
+.icon-w3c {
+	/*fill: #000000;*/
+}
+.icon-redis {
+	/*fill: #000000;*/
+}
+.icon-postgresql {
+	/*fill: #000000;*/
+}
+.icon-webplatform {
+	/*fill: #000000;*/
+}
+.icon-jenkins {
+	/*fill: #000000;*/
+}
+.icon-requirejs {
+	/*fill: #000000;*/
+}
+.icon-opensource {
+	/*fill: #000000;*/
+}
+.icon-typo3 {
+	/*fill: #000000;*/
+}
+.icon-uikit {
+	/*fill: #000000;*/
+}
+.icon-doctrine {
+	/*fill: #000000;*/
+}
+.icon-groovy {
+	/*fill: #000000;*/
+}
+.icon-nginx {
+	/*fill: #000000;*/
+}
+.icon-haskell {
+	/*fill: #000000;*/
+}
+.icon-zend {
+	/*fill: #000000;*/
+}
+.icon-gnu {
+	/*fill: #000000;*/
+}
+.icon-yeoman {
+	/*fill: #000000;*/
+}
+.icon-heroku {
+	/*fill: #000000;*/
+}
+.icon-debian {
+	/*fill: #000000;*/
+}
+.icon-travis {
+	/*fill: #000000;*/
+}
+.icon-dotnet {
+	/*fill: #000000;*/
+}
+.icon-codeigniter {
+	/*fill: #000000;*/
+}
+.icon-js_badge {
+	/*fill: #000000;*/
+}
+.icon-yii {
+	/*fill: #000000;*/
+}
+.icon-msql_server {
+	/*fill: #000000;*/
+}
+.icon-composer {
+	/*fill: #000000;*/
+}
+.icon-krakenjs_badge {
+	/*fill: #000000;*/
+}
+.icon-krakenjs {
+	/*fill: #000000;*/
+}
+.icon-mozilla {
+	/*fill: #000000;*/
+}
+.icon-firebase {
+	/*fill: #000000;*/
+}
+.icon-sizzlejs {
+	/*fill: #000000;*/
+}
+.icon-creativecommons {
+	/*fill: #000000;*/
+}
+.icon-creativecommons_badge {
+	/*fill: #000000;*/
+}
+.icon-mitlicence {
+	/*fill: #000000;*/
+}
+.icon-senchatouch {
+	/*fill: #000000;*/
+}
+.icon-bugsense {
+	/*fill: #000000;*/
+}
+.icon-extjs {
+	/*fill: #000000;*/
+}
+.icon-mootools_badge {
+	/*fill: #000000;*/
+}
+.icon-mootools {
+	/*fill: #000000;*/
+}
+.icon-ruby_rough {
+	/*fill: #000000;*/
+}
