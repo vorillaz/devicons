@@ -7,7 +7,7 @@
      $(".menu-wrap").toggle().delay(1500).toggleClass('open');
     });
 
-    $(".menu-hider li a").on(isTouch ? 'touchend' : 'click',function(event){
+    $(".menu-hider li a").on('click',function(event){
       closeNav(); 
     });
     $("#search").on('focus blur',function(event){

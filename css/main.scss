@@ -3,11 +3,11 @@
 @font-face {
 
   font-family: 'Gotham-Book';
-  src: url('fonts/Gotham-Book.eot?') format('eot'), 
-       url('fonts/Gotham-Book.otf')  format('opentype'),
-       url('fonts/Gotham-Book.woff') format('woff'), 
-       url('fonts/Gotham-Book.ttf')  format('truetype'),
-       url('fonts/Gotham-Book.svg#Gotham-Book') format('svg');
+  src: url('../fonts/Gotham-Book.eot?') format('eot'), 
+       url('../fonts/Gotham-Book.otf')  format('opentype'),
+       url('../fonts/Gotham-Book.woff') format('woff'), 
+       url('../fonts/Gotham-Book.ttf')  format('truetype'),
+       url('../fonts/Gotham-Book.svg#Gotham-Book') format('svg');
        font-weight: lighter;
        font-style: normal;
 }
@@ -15,11 +15,11 @@
 @font-face {
 
   font-family: 'Gotham-Medium';
-  src: url('fonts/Gotham-Medium.eot?') format('eot'), 
-       url('fonts/Gotham-Medium.otf')  format('opentype'),
-       url('fonts/Gotham-Medium.woff') format('woff'), 
-       url('fonts/Gotham-Medium.ttf')  format('truetype'),
-       url('fonts/Gotham-Medium.svg#Gotham-Medium') format('svg');
+  src: url('../fonts/Gotham-Medium.eot?') format('eot'), 
+       url('../fonts/Gotham-Medium.otf')  format('opentype'),
+       url('../fonts/Gotham-Medium.woff') format('woff'), 
+       url('../fonts/Gotham-Medium.ttf')  format('truetype'),
+       url('../fonts/Gotham-Medium.svg#Gotham-Medium') format('svg');
        font-weight: lighter;
        font-style: normal;
 
@@ -659,6 +659,8 @@ header {
   }
   #handler .menu-icon span:after{ margin-top: 10px; }
   #handler .menu-icon span:before{margin-top: -10px;}
+  #handler{bottom: 7px;}
+  #usage{padding: 0 1em; }
 }
 #handler{
   float: right;
@@ -1121,6 +1123,9 @@ color: #f92672;
    .iconwrapper ul li{width: 30%;}
    .page-wrap { padding: 0 0em; }
    input[type="search"]{width: 80% }
+   .cheatgrid.cheatgrid_fi{display: none }
+   #cheatinner{padding: 0 1em; }
+   .innerblock{width: 100%;margin-right: 0%;margin-bottom: 1em; }
 }
 @media all and (min-width: 500px) and (max-width: 700px) {
    .iconwrapper ul li{width: 12%;}
