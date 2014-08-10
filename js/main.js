@@ -58,7 +58,7 @@ app.config( function ( $routeProvider ) {
       }
     })[0];
   };
-
+  $('html, body').animate({scrollTop:(0)}, '2000');
 });
 
 app.run(function($rootScope) {

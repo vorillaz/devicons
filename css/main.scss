@@ -1112,7 +1112,9 @@ color: #f92672;
 .token.entity {
   cursor: help;
 }
-
+.menu-hider a.active{
+  font-weight: bold;
+}
 
 /* Media queries */
 @media all and (max-width: 1330px) and (min-width: 500px) {
