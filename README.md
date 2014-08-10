@@ -4,7 +4,7 @@
 [![NPM version][npm-image]][npm-url] 
 [![Downloads][downloads-image]][npm-url] 
 [![Support me][gittip-image]][gittip-url] 
-[![Issue tracking][issues-image]][issues-url]
+
 
 
 Devicons is a full stack iconic font ready to be shipped with your next project. Created, handcrafted and coded by [Theodore Vorillas](http://twitter.com/vorillas) Devicons contains 85 vectorized sharp glyphs .
@@ -99,6 +99,5 @@ Note: All brand icons are trademarks of their respective owners. The use of thes
 
 
 [issues-url]: https://github.com/vorillaz/devicons/issues
-[issues-image]: http://img.shields.io/github/issues/vorillaz/devicons.svg?style=flat
 
 [tag-release]: http://img.shields.io/github/tag/vorillaz/devicons.svg?style=flat
