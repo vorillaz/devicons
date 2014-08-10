@@ -45,8 +45,7 @@ html {
  */
 
 body {
-  border-top: 4px solid #0090AD;
-  margin: 0;
+   margin: 0;
 }
 
 /* HTML5 display definitions
@@ -634,6 +633,7 @@ a:hover{
 }
 
 header {
+  border-top: 4px solid #0090AD;
   width: 100%;
   position: fixed;
   z-index: 999;
