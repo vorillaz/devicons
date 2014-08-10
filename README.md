@@ -5,7 +5,7 @@
 [![Downloads][downloads-image]][npm-url] 
 [![Support me][gittip-image]][gittip-url] 
 [![Issue tracking][issues-image]][issues-url]
-[![Tag release][tag-release]][tags-url]
+
 
 Devicons is a full stack iconic font ready to be shipped with your next project. Created, handcrafted and coded by [Theodore Vorillas](http://twitter.com/vorillas) Devicons contains 85 vectorized sharp glyphs .
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
@@ -91,15 +91,14 @@ Note: All brand icons are trademarks of their respective owners. The use of thes
 
 
 [gittip-url]: https://www.gittip.com/vorillaz/
-[gittip-image]: http://img.shields.io/gittip/vorillaz.svg
+[gittip-image]: http://img.shields.io/gittip/vorillaz.svg?style=flat
 
-[downloads-image]: http://img.shields.io/npm/dm/devicons.svg
+[downloads-image]: http://img.shields.io/npm/dm/devicons.svg?style=flat
 [npm-url]: https://npmjs.org/package/devicons
-[npm-image]: http://img.shields.io/npm/v/devicons.svg
+[npm-image]: http://img.shields.io/npm/v/devicons.svg?style=flat
 
 
 [issues-url]: https://github.com/vorillaz/devicons/issues
-[issues-image]: http://img.shields.io/github/issues/vorillaz/devicons.svg
+[issues-image]: http://img.shields.io/github/issues/vorillaz/devicons.svg?style=flat
 
-[tag-release]: http://img.shields.io/github/tag/vorillaz/devicons.svg
-[tags-url]: https://github.com/vorillaz/devicons/releases
+[tag-release]: http://img.shields.io/github/tag/vorillaz/devicons.svg?style=flat
