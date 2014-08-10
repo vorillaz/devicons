@@ -2681,8 +2681,12 @@
 				],
 				"tags": [
 					"nginx"
+<<<<<<< HEAD
 				],
 				"grid": 14
+=======
+				]
+>>>>>>> a37134208884d700f30b93ae3cc5c0442ae4937c
 			},
 			"properties": {
 				"order": 125,
