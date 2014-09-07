@@ -19,7 +19,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	
 	<script type="text/javascript" src="js/modernizr.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -63,7 +62,13 @@
   <section>
   	<div class="txt cf">
 		Meet Devicons, an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds(sic).
-		More than 100 icons ready to use in your next project.
+		100+ icons ready to use in your next project.
+	</div>
+	<div id="taste">
+		<span id="headit">Taste some random awesomeness:</span> 
+		<span class="rndmicons">
+			<i ng-repeat="randomIcon in localrndm" class="devicons devicons-{{randomIcon.iconname}}"></i>
+		</span> 
 	</div>
 
 	<div class="btns clearfix">
@@ -83,7 +88,7 @@
 <!-- cheat -->
 <script type="text/ng-template" id="cheat">
 	<div id="cheat">
-		<h2>Cheatsheet <span>{{icons.length}} Icons</span></h2>
+		<h2>Cheatsheet > <span>{{icons.length}} Icons</span></h2>
 		<div id="cheatinner">
 			<div ng-repeat="icon in icons" class="grid gridiconbig clearfix" ng-animate="'animate'">
 				<div class="innericns cleafix">

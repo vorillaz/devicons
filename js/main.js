@@ -2,9 +2,10 @@
   var isTouch=Modernizr.touch;
   
   $(document).ready(function(){
-    $("#handler").on(isTouch ? 'touchend' : 'click',function(event){
+    $("#handler").on(isTouch ? 'touchstart' : 'click',function(event){
      $(".menu-icon").toggleClass('open');
      $(".menu-wrap").toggle().delay(1500).toggleClass('open');
+     $("header").toggleClass('headerNavOpen'); 
     });
 
     $(".menu-hider li a").on('click',function(event){
@@ -26,6 +27,7 @@
 function closeNav(){
    $(".menu-icon").removeClass("open");
    $(".menu-wrap").hide().delay(1500).removeClass('open');
+   $("header").removeClass('headerNavOpen'); 
 }
 
 
@@ -37,7 +39,7 @@ app.config( function ( $routeProvider ) {
     .when( '/usage', { templateUrl: 'use' } )
     .when( '/cheat', { templateUrl: 'cheat' } )
     .when( '/about', { templateUrl: 'about' } )
-    .when( '/main', { templateUrl: 'main'  } )
+    .when( '/main', { templateUrl: 'main',controller: "MainCtrl"  } )
     .when('/singleicon/:iconame', {
           templateUrl: 'single',
           controller: "SingleCtrl",
@@ -51,6 +53,7 @@ app.config( function ( $routeProvider ) {
     actualIcon: findTheIcon,
   }
 
+
   function getByIconname(iconname, myArray) {
     return myArray.filter(function(obj) {
       if(obj.iconname == iconname) {
@@ -62,6 +65,28 @@ app.config( function ( $routeProvider ) {
 });
 
 app.run(function($rootScope) {
+  $rootScope.rndmicons=[
+  {iconname:"bitbucket",key:"\\e603",name:"Bitbucket"},
+  {iconname:"go",key:"\\e624",name:"Go"},
+  {iconname:"symfony",key:"\\e656",name:"Symfony"},
+  {iconname:"nodejs",key:"\\e619",name:"Node.js"},
+  {iconname:"modernizr",key:"\\e620",name:"Modernizr"},
+  {iconname:"sass",key:"\\e64b",name:"Sass"},
+  {iconname:"css3",key:"\\e649",name:"CSS 3"},
+  {iconname:"bower",key:"\\e64d",name:"Bower"},
+  {iconname:"gulp",key:"\\e663",name:"Gulp"},
+  {iconname:"npm",key:"\\e61e",name:"NPM"}, 
+  {iconname:"atom",key:"\\e664",name:"Atom IDE"},
+  {iconname:"unity_small",key:"\\e621",name:"Unity"},
+  {iconname:"jenkins",key:"\\e667",name:"Jenkins"},
+  {iconname:"yeoman",key:"\\e67a",name:"Yeoman"},
+  {iconname:"mozilla",name:"Mozilla Foundation"},
+  {iconname:"bugsense",name:"Bugsense",key:"\\ee68d"},
+  {iconname:"prolog",name:"Prolog",key:"\\e6a1"},
+  {iconname:"grunt",key:"\\e64c",name:"Grunt"},
+  {iconname:"laravel",key:"\\e63f",name:"Laravel"},
+  ];
+
   $rootScope.icons=
     [{iconname:"git",key:"\\e602",name:"Git", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
     {iconname:"git_compare",key:"\\e628",name:"Git Compare", desc:"Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.",tags:["source","tools"]},
@@ -121,10 +146,10 @@ app.run(function($rootScope) {
     {iconname:"ghost_small",key:"\\e614",name:"Ghost", desc:"Ghost is a simple, powerful publishing platform that allows you to share your story with the world.",tags:["tools","cms"]},
     {iconname:"ghost",key:"\\e61f",name:"Ghost", desc:"Ghost is a simple, powerful publishing platform that allows you to share your story with the world.",tags:["tools","cms"]},
     {iconname:"magento",key:"\\e640",name:"Magento", desc:"Magento is an open-source content management system for e-commerce web sites. The software was originally developed by Varien Inc., a US private company headquartered in Los Angeles, with assistance from volunteers.",tags:["tools","cms"]},
-    {iconname:"joomla",key:"\\e641",name:"Magento", desc:"Joomla is a free and open-source content management system (CMS) for publishing web content. It is built on a model–view–controller web application framework that can be used independently of the CMS.",tags:["tools","cms"]},
-    {iconname:"jekyll_small",key:"\\e60d",name:"Magento", desc:"Jekyll is a free-software, written in Ruby by Tom Preston-Werner, GitHub's co-founder. Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites. It is a file-based CMS; instead of using databases, Jekyll takes the content, renders Markdown or Textile and Liquid templates, and produces a complete, static website ready to be served by Apache, Nginx or another web server.",tags:["tools","cms"]},
-    {iconname:"drupal",key:"\\e642",name:"Magento", desc:"Drupal is a free and open-source content management framework written in PHP and distributed under the GNU General Public License. It is used as a back-end framework for at least 2.1% of all websites worldwide ranging from personal blogs to corporate, political, and government sites including whitehouse.gov and data.gov.uk.",tags:["tools","cms"]},
-    {iconname:"wordpress",key:"\\e60b",name:"Magento", desc:"WordPress is a free and open source blogging tool and a content management system (CMS) based on PHP and MySQL. Features include a plugin architecture and a template system. WordPress was used by more than 22.0% of the top 10 million websites as of August 2013. WordPress is the most popular blogging system in use on the Web, at more than 60 million websites.",tags:["tools","cms"]},
+    {iconname:"joomla",key:"\\e641",name:"Joomla", desc:"Joomla is a free and open-source content management system (CMS) for publishing web content. It is built on a model–view–controller web application framework that can be used independently of the CMS.",tags:["tools","cms"]},
+    {iconname:"jekyll_small",key:"\\e60d",name:"Jekyll", desc:"Jekyll is a free-software, written in Ruby by Tom Preston-Werner, GitHub's co-founder. Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites. It is a file-based CMS; instead of using databases, Jekyll takes the content, renders Markdown or Textile and Liquid templates, and produces a complete, static website ready to be served by Apache, Nginx or another web server.",tags:["tools","cms"]},
+    {iconname:"drupal",key:"\\e642",name:"Drupal", desc:"Drupal is a free and open-source content management framework written in PHP and distributed under the GNU General Public License. It is used as a back-end framework for at least 2.1% of all websites worldwide ranging from personal blogs to corporate, political, and government sites including whitehouse.gov and data.gov.uk.",tags:["tools","cms"]},
+    {iconname:"wordpress",key:"\\e60b",name:"WordPress", desc:"WordPress is a free and open source blogging tool and a content management system (CMS) based on PHP and MySQL. Features include a plugin architecture and a template system. WordPress was used by more than 22.0% of the top 10 million websites as of August 2013. WordPress is the most popular blogging system in use on the Web, at more than 60 million websites.",tags:["tools","cms"]},
     {iconname:"grunt",key:"\\e64c",name:"Grunt", desc:"Built on top of Node.js, Grunt is a task-based command-line tool that speeds up workflows by reducing the effort required to prepare assets for production. It does this by wrapping up jobs into tasks that are compiled automatically as you go along. Basically, you can use Grunt on most tasks that you consider to be grunt work and would normally have to manually configure and run yourself.",tags:["tools","node"]},
     {iconname:"bower",key:"\\e64d",name:"Bower", desc:"Web sites are made of lots of things — frameworks, libraries, assets, utilities, and rainbows. Bower manages all these things for you. Bower works by fetching and installing packages from all over, taking care of hunting, finding, downloading, and saving the stuff you’re looking for.",tags:["tools","node"]},
     {iconname:"gulp",key:"\\e663",name:"Gulp", desc:"Gulp is a task runner which uses Node.js.",tags:["tools","js"]},
@@ -208,10 +233,43 @@ app.run(function($rootScope) {
     {iconname:"extjs",name:"Ext JS",key:"\\e68e",desc:"Ext JS is a pure JavaScript application framework for building interactive web applications using techniques such as Ajax, DHTML and DOM scripting.",tags:{}},
     {iconname:"mootools_badge",name:"MooTools",key:"\\e68f",desc:"MooTools (My Object-Oriented Tools) is a lightweight, object-oriented, JavaScript framework. It is released under the free, open-source MIT License. It is used on more than 5% of all websites, and is one of the most popular JavaScript libraries.",tags:{}},
     {iconname:"mootools",name:"MooTools",key:"\\e690",desc:"MooTools (My Object-Oriented Tools) is a lightweight, object-oriented, JavaScript framework. It is released under the free, open-source MIT License. It is used on more than 5% of all websites, and is one of the most popular JavaScript libraries.",tags:{}},
-    {iconname:"ruby_rough",name:"Ruby",key:"\\e691", desc:"Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro 'Matz' Matsumoto in Japan.",tags:["programming"]}]
+    {iconname:"ruby_rough",name:"Ruby",key:"\\e691", desc:"Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro 'Matz' Matsumoto in Japan.",tags:["programming"]},
+    /* new 1.6.0 */
+    {iconname:"komodo",name:"Komodo IDE",key:"\\e692","desc":"",tags:["tools","ides"]},
+    {iconname:"coda",name:"Coda IDE",key:"\\e693","desc":"Coda is a commercial and proprietary web development application for Mac OS X, developed by Panic. It was released in 2007 and won the 2007 Apple Design Award for Best User Experience. Coda version 2.0 was released on 24 May 2012, along with an iPad version called Diet Coda. Although formerly available on the Mac App Store, it was announced on May 14, 2014 that the update to Coda 2.5 would not be available in the Mac App Store due to sandboxing restrictions.",tags:["tools","ides"]},
+    {iconname:"bintray",name:"Bintray",key:"\\e694","desc":"Bintray is a social platform for developers to publish, download, store, promote, and share open source software packages. With Bintray's full self-service platform developers have full control over their published software and how it is distributed to the world.",tags:["tools","useful","social","websites"]},
+    {iconname:"terminal",name:"Terminal",key:"\\e695","desc":"A computer terminal is an electronic or electromechanical hardware device that is used for entering data into, and displaying data from, a computer or a computing system. Early terminals were inexpensive devices but very slow compared to punched cards or paper tape for input, but as the technology improved and video displays were introduced, terminals pushed these older forms of interaction from the industry. A related development was timesharing systems, which evolved in parallel and made up for any inefficiencies of the user's typing ability with the ability to support multiple users on the same machine, each at their own terminal.",tags:["tools","useful"]},
+    {iconname:"terminal_badge",name:"Terminal",key:"\\e6a2","desc":"A computer terminal is an electronic or electromechanical hardware device that is used for entering data into, and displaying data from, a computer or a computing system. Early terminals were inexpensive devices but very slow compared to punched cards or paper tape for input, but as the technology improved and video displays were introduced, terminals pushed these older forms of interaction from the industry. A related development was timesharing systems, which evolved in parallel and made up for any inefficiencies of the user's typing ability with the ability to support multiple users on the same machine, each at their own terminal.",tags:["tools","useful"]},
+    {iconname:"code",name:"Source code",key:"\\e696","desc":"In computing, source code is any collection of computer instructions (possibly with comments) written using some human-readable computer language, usually as text. The source code of a program is specially designed to facilitate the work of computer programmers, who specify the actions to be performed by a computer mostly by writing source code. The source code is often transformed by a compiler program into low-level machine code understood by the computer. The machine code might then be stored for execution at a later time. Alternatively, an interpreter can be used to analyze and perform the outcomes of the source code program directly on the fly.",tags:["tools","useful"]},
+    {iconname:"code_badge",name:"Source code",key:"\\e6a3","desc":"In computing, source code is any collection of computer instructions (possibly with comments) written using some human-readable computer language, usually as text. The source code of a program is specially designed to facilitate the work of computer programmers, who specify the actions to be performed by a computer mostly by writing source code. The source code is often transformed by a compiler program into low-level machine code understood by the computer. The machine code might then be stored for execution at a later time. Alternatively, an interpreter can be used to analyze and perform the outcomes of the source code program directly on the fly.",tags:["tools","useful"]},
+    {iconname:"responsive",name:"Responsive web design",key:"\\e697","desc":"Responsive web design (RWD) is a web design approach aimed at crafting sites to provide an optimal viewing experience—easy reading and navigation with a minimum of resizing, panning, and scrolling—across a wide range of devices (from mobile phones to desktop computer monitors).",tags:["tools","useful"]},
+    {iconname:"dart",name:"Dart",key:"\\e698","desc":"Dart is an open-source Web programming language developed by Google. It was unveiled at the GOTO conference in Aarhus, October 10–12, 2011. The goal of Dart is ultimately to replace JavaScript as the lingua franca of web development on the open web platform.",tags:["programming"]},
+    {iconname:"aptana",name:"Aptana Studio",key:"\\e699","desc":"Aptana Studio is an open source integrated development environment (IDE) for building Ajax web applications. Based on Eclipse, it supports JavaScript, HTML, DOM and CSS with code-completion, outlining, JavaScript debugging, error and warning notifications and integrated documentation. Additional plugins allow Aptana Studio to support Ruby on Rails, PHP, Python, Perl,[1] Adobe AIR, Apple iPhone and Nokia WRT (Web Runtime). Aptana Studio is available as a standalone on Windows, Mac OS X and Linux, or as a plugin for Eclipse.",tags:["tools","ides"]},
+    {iconname:"mailchimp",name:"MailChimp",key:"\\e69a","desc":"MailChimp is an email marketing service provider, founded in 2001. It has 6 million users that collectively send over 10 billion emails through the service each month.",tags:["tools","useful","websites"]},
+    {iconname:"netbeans",name:"NetBeans",key:"\\e69b","desc":"NetBeans is an integrated development environment (IDE) for developing primarily with Java, but also with other languages, in particular PHP, C/C++, and HTML5.It is also an application platform framework for Java desktop applications and others.",tags:["tools","ides"]},
+    {iconname:"dreamweaver",name:"Dreamweaver",key:"\\e69c","desc":"Adobe Dreamweaver is a proprietary web development tool developed by Adobe Systems. Dreamweaver was created by Macromedia in 1997, and was maintained by them until Macromedia was acquired by Adobe Systems in 2005.",tags:["tools","ides"]},
+    {iconname:"brackets",name:"Brackets IDE",key:"\\e69d","desc":"Brackets is an open source code editor for web designers and front-end developers.",tags:["tools","ides"]},
+    {iconname:"eclipse",name:"Eclipse IDE",key:"\\e69e","desc":"In computer programming, Eclipse is an integrated development environment (IDE). It contains a base workspace and an extensible plug-in system for customizing the environment. Written mostly in Java, Eclipse can be used to develop applications. By means of various plug-ins, Eclipse may also be used to develop applications in other programming languages: Ada, ABAP, C, C++, COBOL, Fortran, Haskell, JavaScript, Lasso, Natural, Perl, PHP, Prolog, Python, R, Ruby (including Ruby on Rails framework), Scala, Clojure, Groovy, Scheme, and Erlang. It can also be used to develop packages for the software Mathematica. Development environments include the Eclipse Java development tools (JDT) for Java and Scala, Eclipse CDT for C/C++ and Eclipse PDT for PHP, among others.",tags:["tools","ides"]},
+    {iconname:"cloud9",name:"Cloud9",key:"\\e69f","desc":"Cloud9 combines a powerful online code editor with a full Ubuntu workspace in the cloud",tags:["tools","ides","websites"]},
+    {iconname:"scrum",name:"Scrum",key:"\\e6a0","desc":"Scrum is an iterative and incremental agile software development framework for managing product development. It defines a flexible, holistic product development strategy where a development team works as a unit to reach a common goal, challenges assumptions of the traditional, sequential approach to product development, and enables teams to self-organize by encouraging physical co-location or close online collaboration of all team members, as well as daily face-to-face communication among all team members and disciplines in the project.",tags:["tools","useful"]},
+    {iconname:"prolog",name:"Prolog",key:"\\e6a1","desc":"Prolog is a general purpose logic programming language associated with artificial intelligence and computational linguistics. Prolog has its roots in first-order logic, a formal logic, and unlike many other programming languages, Prolog is declarative: the program logic is expressed in terms of relations, represented as facts and rules. A computation is initiated by running a query over these relations.",tags:["programming"]}
+    ];
 });
 
-app.controller( 'MainCtrl', function ( $scope ) {});
+app.controller( 'MainCtrl', function ( $scope ) {
+  
+  $scope.localrndm=[];
+  $scope.tmpitem={};
+  $scope.localkeys=[];
+  while ($scope.localrndm.length < 3 ) {
+      
+      $scope.tmpitem = $scope.rndmicons[Math.floor(Math.random() * $scope.rndmicons.length)];
+      if(!$scope.localkeys.indexOf($scope.tmpitem.iconname) > -1){
+        $scope.localrndm.push($scope.tmpitem );
+        $scope.localkeys.push($scope.tmpitem.iconname);
+      }
+  }
+});
 app.directive('nagPrism', [function() {
     return {
         restrict: 'A',

@@ -638,7 +638,13 @@ header {
   position: fixed;
   z-index: 999;
   padding-top: 65px;
-  background-color: #F6F6F6;
+  background-image: none, -moz-linear-gradient(bottom,rgba(246,246,246,0.75) 0px,rgba(246,246,246,0.8) 5px,rgba(246,246,246,0.86) 10px,rgba(246,246,246,0.9) 15px,rgba(246,246,246,0.94) 20px,rgba(246,246,246,0.98) 25px,rgba(246,246,246,0.99) 30px,#F6F6F6 40px);
+  background-image: none, -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(246,246,246,0)),color-stop(100%,#F6F6F6));
+  background-image: none, -webkit-linear-gradient(bottom,rgba(246,246,246,0.75) 0px,rgba(246,246,246,0.8) 5px,rgba(246,246,246,0.86) 10px,rgba(246,246,246,0.9) 15px,rgba(246,246,246,0.94) 20px,rgba(246,246,246,0.98) 25px,rgba(246,246,246,0.99) 30px,#F6F6F6 40px);
+  background-image: none, -o-linear-gradient(bottom,rgba(246,246,246,0.75) 0px,rgba(246,246,246,0.8) 5px,rgba(246,246,246,0.86) 10px,rgba(246,246,246,0.9) 15px,rgba(246,246,246,0.94) 20px,rgba(246,246,246,0.98) 25px,rgba(246,246,246,0.99) 30px,#F6F6F6 40px);
+  background-image: none, -ms-linear-gradient(bottom,rgba(246,246,246,0.75) 0px,rgba(246,246,246,0.8) 5px,rgba(246,246,246,0.86) 10px,rgba(246,246,246,0.9) 15px,rgba(246,246,246,0.94) 20px,rgba(246,246,246,0.98) 25px,rgba(246,246,246,0.99) 30px,#F6F6F6 40px);
+  background-image: none, linear-gradient(to top,rgba(246,246,246,0.75) 0px,rgba(246,246,246,0.8) 5px,rgba(246,246,246,0.86) 10px,rgba(246,246,246,0.9) 15px,rgba(246,246,246,0.94) 20px,rgba(246,246,246,0.98) 25px,rgba(246,246,246,0.99) 30px,#F6F6F6 40px);
+  background-color: transparent;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
@@ -648,6 +654,10 @@ header {
     list-style-type: none; 
   }
 }
+.headerNavOpen{
+  border-bottom: 4px solid #0090AD;
+}
+#cheatinner{padding-bottom: 4em;}
 .headerinner{
   max-width: 1290px;
   margin: 0 auto;
@@ -659,7 +669,7 @@ header {
   }
   #handler .menu-icon span:after{ margin-top: 10px; }
   #handler .menu-icon span:before{margin-top: -10px;}
-  #handler{bottom: 7px;}
+  #handler{bottom: 7px;display: inline-block;width: 27px;-webkit-tap-highlight-color: rgba(0,0,0,0);}
   #usage{padding: 0 1em; }
 }
 #handler{
@@ -705,6 +715,7 @@ header {
       }      
     }
   }
+
   .menu-icon span, .menu-icon span:before, .menu-icon span:after {
     width: 20px;
     height: 2px;
@@ -756,7 +767,9 @@ nav{
   float: left;
   vertical-align: middle; 
 }
-
+.rndmicons i { display: inline-block; font-size: 84px; }
+div#taste { margin-bottom: 2em; }
+span#headit { clear: right; display: block; font-weight: bold; color:#0090AD; }
 @-webkit-keyframes spaceboots {
   0%   { -webkit-transform: translate(2px, 1px)   rotate(0deg); }
   10%  { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
@@ -850,7 +863,7 @@ nav{
 }
 .down,
 .txt{
-  padding: 3em; 
+  padding: 3em 3em 1em 3em;
 }
 .main{
   position: relative;
@@ -1129,14 +1142,18 @@ color: #f92672;
    .cheatgrid.cheatgrid_fi{display: none }
    #cheatinner{padding: 0 1em; }
    .innerblock{width: 100%;margin-right: 0%;margin-bottom: 1em; }
+  .presentation { padding: 1em 2em; }
+   h2 .cheatgrid.cheatgrid_fi{display: block; text-align: center; width: 20%; margin: 0 auto; font-size: 36%;}
 }
 @media all and (min-width: 500px) and (max-width: 700px) {
    .iconwrapper ul li{width: 12%;}
    .iconwrapper ul li span{font-size: 48px;}
+   .desc { font-size: 1.2em; }
    
 }
 @media all and (min-width: 700px) and (max-width: 1024px) {
   .iconwrapper ul li{width: 8%;}
+  .desc { font-size: 1.2em; }
   .iconwrapper ul li span{font-size: 1.2em;}
 }
 @media all and (min-width: 1000px) {
