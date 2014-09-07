@@ -1,7 +1,3 @@
-/*!
- *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
- */
- 
 /* To avoid CSS expressions while still supporting IE 7 and IE 6, use this script */
 /* The script tag referring to this file must be placed before the ending body tag. */
 
@@ -163,6 +159,25 @@
 		'devicons-mootools_badge': '&#xe68f;',
 		'devicons-mootools': '&#xe690;',
 		'devicons-ruby_rough': '&#xe691;',
+		'devicons-komodo': '&#xe692;',
+		'devicons-coda': '&#xe693;',
+		'devicons-bintray': '&#xe694;',
+		'devicons-terminal': '&#xe695;',
+		'devicons-code': '&#xe696;',
+		'devicons-responsive': '&#xe697;',
+		'devicons-dart': '&#xe698;',
+		'devicons-aptana': '&#xe699;',
+		'devicons-mailchimp': '&#xe69a;',
+		'devicons-netbeans': '&#xe69b;',
+		'devicons-dreamweaver': '&#xe69c;',
+		'devicons-brackets': '&#xe69d;',
+		'devicons-eclipse': '&#xe69e;',
+		'devicons-cloud9': '&#xe69f;',
+		'devicons-scrum': '&#xe6a0;',
+		'devicons-prolog': '&#xe6a1;',
+		'devicons-terminal_badge': '&#xe6a2;',
+		'devicons-code_badge': '&#xe6a3;',
+		'devicons-mongodb': '&#xe6a4;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

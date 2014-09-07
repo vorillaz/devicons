@@ -11,7 +11,7 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set  1.5.0
+###Devicons icon set  1.6.0
 ![Devicons](http://i.imgur.com/VcgLGHN.png?1?6481)
 
 ## Use Devicons with a single line of code.
@@ -43,22 +43,6 @@ IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes a
 
 
 You may also take a look at [Devicons Cheatsheet](http://vorillaz.github.io/devicons/#cheat)
-
-##Upcoming releases
-New icons to be added in v.1.5.0
-
-**Node.js & Stuff:** Express, Sails
-
-**IDES:** Coda, Espresso, Sublime text
-
-**CSS & Preprocessors:** Bourbon
-
-**Javascript:**  Handlebars.js, Marionette.js, QUnit.js,  YUI
-
-**PHP and Stuff:** CakePHP
-
-**Miscellaneous:** Piwik, Google Maps, Alfred app
-
 
 Do you have any additional request? Drop me a line or support an issue.
 

@@ -1,448 +1,504 @@
 /*!
- *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.6.0 made by Theodore Vorillas / http://vorillaz.com 
  */
- 
-.icon {
+.devicons {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
 	fill: currentColor;
 }
-.icon-git {
+.devicons-git {
 	/*fill: #000000;*/
 }
-.icon-git_compare {
+.devicons-git_compare {
 	/*fill: #000000;*/
 }
-.icon-git_branch {
+.devicons-git_branch {
 	/*fill: #000000;*/
 }
-.icon-git_commit {
+.devicons-git_commit {
 	/*fill: #000000;*/
 }
-.icon-git_pull_request {
+.devicons-git_pull_request {
 	/*fill: #000000;*/
 }
-.icon-git_merge {
+.devicons-git_merge {
 	/*fill: #000000;*/
 }
-.icon-bitbucket {
+.devicons-bitbucket {
 	/*fill: #000000;*/
 }
-.icon-github_alt {
+.devicons-github_alt {
 	/*fill: #000000;*/
 }
-.icon-github_badge {
+.devicons-github_badge {
 	/*fill: #000000;*/
 }
-.icon-github {
+.devicons-github {
 	/*fill: #000000;*/
 }
-.icon-github_full {
+.devicons-github_full {
 	/*fill: #000000;*/
 }
-.icon-java {
+.devicons-java {
 	/*fill: #000000;*/
 }
-.icon-ruby {
+.devicons-ruby {
 	/*fill: #000000;*/
 }
-.icon-scala {
+.devicons-scala {
 	/*fill: #000000;*/
 }
-.icon-python {
+.devicons-python {
 	/*fill: #000000;*/
 }
-.icon-go {
+.devicons-go {
 	/*fill: #000000;*/
 }
-.icon-ror {
+.devicons-ror {
 	/*fill: #000000;*/
 }
-.icon-django {
+.devicons-django {
 	/*fill: #000000;*/
 }
-.icon-markdown {
+.devicons-markdown {
 	/*fill: #000000;*/
 }
-.icon-php {
+.devicons-php {
 	/*fill: #000000;*/
 }
-.icon-mysql {
+.devicons-mysql {
 	/*fill: #000000;*/
 }
-.icon-streamline {
+.devicons-streamline {
 	/*fill: #000000;*/
 }
-.icon-database {
+.devicons-database {
 	/*fill: #000000;*/
 }
-.icon-laravel {
+.devicons-laravel {
 	/*fill: #000000;*/
 }
-.icon-javascript_1 {
+.devicons-javascript_1 {
 	/*fill: #000000;*/
 }
-.icon-angular_simple {
+.devicons-angular_simple {
 	/*fill: #000000;*/
 }
-.icon-backbone {
+.devicons-backbone {
 	/*fill: #000000;*/
 }
-.icon-coffeescript {
+.devicons-coffeescript {
 	/*fill: #000000;*/
 }
-.icon-jquery_logo {
+.devicons-jquery_logo {
 	/*fill: #000000;*/
 }
-.icon-modernizr {
+.devicons-modernizr {
 	/*fill: #000000;*/
 }
-.icon-jquery_ui_logo {
+.devicons-jquery_ui_logo {
 	/*fill: #000000;*/
 }
-.icon-ember {
+.devicons-ember {
 	/*fill: #000000;*/
 }
-.icon-dojo {
+.devicons-dojo {
 	/*fill: #000000;*/
 }
-.icon-nodejs {
+.devicons-nodejs {
 	/*fill: #000000;*/
 }
-.icon-nodejs_small {
+.devicons-nodejs_small {
 	/*fill: #000000;*/
 }
-.icon-javascript {
+.devicons-javascript {
 	/*fill: #000000;*/
 }
-.icon-bootstrap {
+.devicons-bootstrap {
 	/*fill: #000000;*/
 }
-.icon-sass {
+.devicons-sass {
 	/*fill: #000000;*/
 }
-.icon-css3_full {
+.devicons-css3_full {
 	/*fill: #000000;*/
 }
-.icon-css3 {
+.devicons-css3 {
 	/*fill: #000000;*/
 }
-.icon-html5 {
+.devicons-html5 {
 	/*fill: #000000;*/
 }
-.icon-html5_multimedia {
+.devicons-html5_multimedia {
 	/*fill: #000000;*/
 }
-.icon-html5_device_access {
+.devicons-html5_device_access {
 	/*fill: #000000;*/
 }
-.icon-html5_3d_effects {
+.devicons-html5_3d_effects {
 	/*fill: #000000;*/
 }
-.icon-html5_connectivity {
+.devicons-html5_connectivity {
 	/*fill: #000000;*/
 }
-.icon-ghost_small {
+.devicons-ghost_small {
 	/*fill: #000000;*/
 }
-.icon-ghost {
+.devicons-ghost {
 	/*fill: #000000;*/
 }
-.icon-magento {
+.devicons-magento {
 	/*fill: #000000;*/
 }
-.icon-joomla {
+.devicons-joomla {
 	/*fill: #000000;*/
 }
-.icon-jekyll_small {
+.devicons-jekyll_small {
 	/*fill: #000000;*/
 }
-.icon-drupal {
+.devicons-drupal {
 	/*fill: #000000;*/
 }
-.icon-wordpress {
+.devicons-wordpress {
 	/*fill: #000000;*/
 }
-.icon-grunt {
+.devicons-grunt {
 	/*fill: #000000;*/
 }
-.icon-bower {
+.devicons-bower {
 	/*fill: #000000;*/
 }
-.icon-npm {
+.devicons-npm {
 	/*fill: #000000;*/
 }
-.icon-yahoo_small {
+.devicons-yahoo_small {
 	/*fill: #000000;*/
 }
-.icon-yahoo {
+.devicons-yahoo {
 	/*fill: #000000;*/
 }
-.icon-bing_small {
+.devicons-bing_small {
 	/*fill: #000000;*/
 }
-.icon-windows {
+.devicons-windows {
 	/*fill: #000000;*/
 }
-.icon-linux {
+.devicons-linux {
 	/*fill: #000000;*/
 }
-.icon-ubuntu {
+.devicons-ubuntu {
 	/*fill: #000000;*/
 }
-.icon-android {
+.devicons-android {
 	/*fill: #000000;*/
 }
-.icon-apple {
+.devicons-apple {
 	/*fill: #000000;*/
 }
-.icon-appstore {
+.devicons-appstore {
 	/*fill: #000000;*/
 }
-.icon-phonegap {
+.devicons-phonegap {
 	/*fill: #000000;*/
 }
-.icon-blackberry {
+.devicons-blackberry {
 	/*fill: #000000;*/
 }
-.icon-stackoverflow {
+.devicons-stackoverflow {
 	/*fill: #000000;*/
 }
-.icon-techcrunch {
+.devicons-techcrunch {
 	/*fill: #000000;*/
 }
-.icon-codrops {
+.devicons-codrops {
 	/*fill: #000000;*/
 }
-.icon-css_tricks {
+.devicons-css_tricks {
 	/*fill: #000000;*/
 }
-.icon-smashing_magazine {
+.devicons-smashing_magazine {
 	/*fill: #000000;*/
 }
-.icon-netmagazine {
+.devicons-netmagazine {
 	/*fill: #000000;*/
 }
-.icon-codepen {
+.devicons-codepen {
 	/*fill: #000000;*/
 }
-.icon-cssdeck {
+.devicons-cssdeck {
 	/*fill: #000000;*/
 }
-.icon-hackernews {
+.devicons-hackernews {
 	/*fill: #000000;*/
 }
-.icon-dropbox {
+.devicons-dropbox {
 	/*fill: #000000;*/
 }
-.icon-google_drive {
+.devicons-google_drive {
 	/*fill: #000000;*/
 }
-.icon-visualstudio {
+.devicons-visualstudio {
 	/*fill: #000000;*/
 }
-.icon-unity_small {
+.devicons-unity_small {
 	/*fill: #000000;*/
 }
-.icon-rasberry_pi {
+.devicons-rasberry_pi {
 	/*fill: #000000;*/
 }
-.icon-chrome {
+.devicons-chrome {
 	/*fill: #000000;*/
 }
-.icon-ie {
+.devicons-ie {
 	/*fill: #000000;*/
 }
-.icon-firefox {
+.devicons-firefox {
 	/*fill: #000000;*/
 }
-.icon-opera {
+.devicons-opera {
 	/*fill: #000000;*/
 }
-.icon-safari {
+.devicons-safari {
 	/*fill: #000000;*/
 }
-.icon-swift {
+.devicons-swift {
 	/*fill: #000000;*/
 }
-.icon-symfony {
+.devicons-symfony {
 	/*fill: #000000;*/
 }
-.icon-symfony_badge {
+.devicons-symfony_badge {
 	/*fill: #000000;*/
 }
-.icon-less {
+.devicons-less {
 	/*fill: #000000;*/
 }
-.icon-stylus {
+.devicons-stylus {
 	/*fill: #000000;*/
 }
-.icon-trello {
+.devicons-trello {
 	/*fill: #000000;*/
 }
-.icon-atlassian {
+.devicons-atlassian {
 	/*fill: #000000;*/
 }
-.icon-jira {
+.devicons-jira {
 	/*fill: #000000;*/
 }
-.icon-envato {
+.devicons-envato {
 	/*fill: #000000;*/
 }
-.icon-snap_svg {
+.devicons-snap_svg {
 	/*fill: #000000;*/
 }
-.icon-raphael {
+.devicons-raphael {
 	/*fill: #000000;*/
 }
-.icon-google_analytics {
+.devicons-google_analytics {
 	/*fill: #000000;*/
 }
-.icon-compass {
+.devicons-compass {
 	/*fill: #000000;*/
 }
-.icon-onedrive {
+.devicons-onedrive {
 	/*fill: #000000;*/
 }
-.icon-gulp {
+.devicons-gulp {
 	/*fill: #000000;*/
 }
-.icon-atom {
+.devicons-atom {
 	/*fill: #000000;*/
 }
-.icon-cisco {
+.devicons-cisco {
 	/*fill: #000000;*/
 }
-.icon-nancy {
+.devicons-nancy {
 	/*fill: #000000;*/
 }
-.icon-clojure {
+.devicons-clojure {
 	/*fill: #000000;*/
 }
-.icon-clojure_alt {
+.devicons-clojure_alt {
 	/*fill: #000000;*/
 }
-.icon-perl {
+.devicons-perl {
 	/*fill: #000000;*/
 }
-.icon-celluloid {
+.devicons-celluloid {
 	/*fill: #000000;*/
 }
-.icon-w3c {
+.devicons-w3c {
 	/*fill: #000000;*/
 }
-.icon-redis {
+.devicons-redis {
 	/*fill: #000000;*/
 }
-.icon-postgresql {
+.devicons-postgresql {
 	/*fill: #000000;*/
 }
-.icon-webplatform {
+.devicons-webplatform {
 	/*fill: #000000;*/
 }
-.icon-jenkins {
+.devicons-jenkins {
 	/*fill: #000000;*/
 }
-.icon-requirejs {
+.devicons-requirejs {
 	/*fill: #000000;*/
 }
-.icon-opensource {
+.devicons-opensource {
 	/*fill: #000000;*/
 }
-.icon-typo3 {
+.devicons-typo3 {
 	/*fill: #000000;*/
 }
-.icon-uikit {
+.devicons-uikit {
 	/*fill: #000000;*/
 }
-.icon-doctrine {
+.devicons-doctrine {
 	/*fill: #000000;*/
 }
-.icon-groovy {
+.devicons-groovy {
 	/*fill: #000000;*/
 }
-.icon-nginx {
+.devicons-nginx {
 	/*fill: #000000;*/
 }
-.icon-haskell {
+.devicons-haskell {
 	/*fill: #000000;*/
 }
-.icon-zend {
+.devicons-zend {
 	/*fill: #000000;*/
 }
-.icon-gnu {
+.devicons-gnu {
 	/*fill: #000000;*/
 }
-.icon-yeoman {
+.devicons-yeoman {
 	/*fill: #000000;*/
 }
-.icon-heroku {
+.devicons-heroku {
 	/*fill: #000000;*/
 }
-.icon-debian {
+.devicons-debian {
 	/*fill: #000000;*/
 }
-.icon-travis {
+.devicons-travis {
 	/*fill: #000000;*/
 }
-.icon-dotnet {
+.devicons-dotnet {
 	/*fill: #000000;*/
 }
-.icon-codeigniter {
+.devicons-codeigniter {
 	/*fill: #000000;*/
 }
-.icon-js_badge {
+.devicons-js_badge {
 	/*fill: #000000;*/
 }
-.icon-yii {
+.devicons-yii {
 	/*fill: #000000;*/
 }
-.icon-msql_server {
+.devicons-msql_server {
 	/*fill: #000000;*/
 }
-.icon-composer {
+.devicons-composer {
 	/*fill: #000000;*/
 }
-.icon-krakenjs_badge {
+.devicons-krakenjs_badge {
 	/*fill: #000000;*/
 }
-.icon-krakenjs {
+.devicons-krakenjs {
 	/*fill: #000000;*/
 }
-.icon-mozilla {
+.devicons-mozilla {
 	/*fill: #000000;*/
 }
-.icon-firebase {
+.devicons-firebase {
 	/*fill: #000000;*/
 }
-.icon-sizzlejs {
+.devicons-sizzlejs {
 	/*fill: #000000;*/
 }
-.icon-creativecommons {
+.devicons-creativecommons {
 	/*fill: #000000;*/
 }
-.icon-creativecommons_badge {
+.devicons-creativecommons_badge {
 	/*fill: #000000;*/
 }
-.icon-mitlicence {
+.devicons-mitlicence {
 	/*fill: #000000;*/
 }
-.icon-senchatouch {
+.devicons-senchatouch {
 	/*fill: #000000;*/
 }
-.icon-bugsense {
+.devicons-bugsense {
 	/*fill: #000000;*/
 }
-.icon-extjs {
+.devicons-extjs {
 	/*fill: #000000;*/
 }
-.icon-mootools_badge {
+.devicons-mootools_badge {
 	/*fill: #000000;*/
 }
-.icon-mootools {
+.devicons-mootools {
 	/*fill: #000000;*/
 }
-.icon-ruby_rough {
+.devicons-ruby_rough {
+	/*fill: #000000;*/
+}
+.devicons-komodo {
+	/*fill: #000000;*/
+}
+.devicons-coda {
+	/*fill: #000000;*/
+}
+.devicons-bintray {
+	/*fill: #000000;*/
+}
+.devicons-terminal {
+	/*fill: #000000;*/
+}
+.devicons-code {
+	/*fill: #000000;*/
+}
+.devicons-responsive {
+	/*fill: #000000;*/
+}
+.devicons-dart {
+	/*fill: #000000;*/
+}
+.devicons-aptana {
+	/*fill: #000000;*/
+}
+.devicons-mailchimp {
+	/*fill: #000000;*/
+}
+.devicons-netbeans {
+	/*fill: #000000;*/
+}
+.devicons-dreamweaver {
+	/*fill: #000000;*/
+}
+.devicons-brackets {
+	/*fill: #000000;*/
+}
+.devicons-eclipse {
+	/*fill: #000000;*/
+}
+.devicons-cloud9 {
+	/*fill: #000000;*/
+}
+.devicons-scrum {
+	/*fill: #000000;*/
+}
+.devicons-prolog {
+	/*fill: #000000;*/
+}
+.devicons-terminal_badge {
+	/*fill: #000000;*/
+}
+.devicons-code_badge {
+	/*fill: #000000;*/
+}
+.devicons-mongodb {
 	/*fill: #000000;*/
 }

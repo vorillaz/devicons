@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.5.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.6.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -172,7 +172,26 @@ $devicons:	(git "\e602"),
 			(extjs "\e68e"),
 			(mootools_badge "\e68f"),
 			(mootools "\e690"),
-			(ruby_rough "\e691");
+			(ruby_rough "\e691"),
+			(komodo "\e692"),
+			(coda "\e693"),
+			(bintray "\e694"),
+			(terminal "\e695"),
+			(code "\e696"),
+			(responsive "\e697"),
+			(dart "\e698"),
+			(aptana "\e699"),
+			(mailchimp "\e69a"),
+			(netbeans "\e69b"),
+			(dreamweaver "\e69c"),
+			(brackets "\e69d"),
+			(eclipse "\e69e"),
+			(cloud9 "\e69f"),
+			(scrum "\e6a0"),
+			(prolog "\e6a1"),
+			(terminal_badge "\e6a2"),
+			(code_badge "\e6a3"),
+			(mongodb "\e6a4");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);

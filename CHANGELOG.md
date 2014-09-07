@@ -3,15 +3,16 @@
 ### Versions
 
 [v1.1](#v1.1)
-
 [v1.2](#v1.2)
-
 [v1.3](#v1.3)
-
 [v1.3.1](#v1.3.1)
-<<<<<<< HEAD
 [1.4.0](#1.4.0)
 [1.5.0](#1.5.0)
+[1.6.0](#1.5.0)
+
+## 1.5.0
+Change log and fixes in version 1.6.0:
+1. Added Komodo, Coda, Bintray, Terminal, Source code, Responsive web design, Dart, Aptana, MailChimp, NetBeans, Dreamweaver, Brackets, Eclipse, Cloud9, Scrum, MongoDB and Prolog icons.
 
 ## 1.5.0
 Change log and fixes in version 1.5.0:
@@ -21,7 +22,7 @@ Change log and fixes in version 1.5.0:
 
 =======
 [1.4.0](#v1.4.0)
->>>>>>> a37134208884d700f30b93ae3cc5c0442ae4937c
+
 
 ## 1.4.0
 Change log and fixes in version 1.4.0:
