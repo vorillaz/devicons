@@ -1,5 +1,5 @@
 /* To avoid CSS expressions while still supporting IE 7 and IE 6, use this script */
-/* The script tag referring to this file must be placed before the ending body tag. */
+/* The script tag referencing this file must be placed before the ending body tag. */
 
 /* Use conditional comments in order to target IE 7 and older:
 	<!--[if lt IE 8]><!-->
@@ -178,6 +178,12 @@
 		'devicons-terminal_badge': '&#xe6a2;',
 		'devicons-code_badge': '&#xe6a3;',
 		'devicons-mongodb': '&#xe6a4;',
+		'devicons-meteor': '&#xe6a5;',
+		'devicons-meteorfull': '&#xe6a6;',
+		'devicons-fsharp': '&#xe6a7;',
+		'devicons-rust': '&#xe6a8;',
+		'devicons-ionic': '&#xe6a9;',
+		'devicons-sublime': '&#xe6aa;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.6.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.7.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -191,7 +191,13 @@ $devicons:	(git "\e602"),
 			(prolog "\e6a1"),
 			(terminal_badge "\e6a2"),
 			(code_badge "\e6a3"),
-			(mongodb "\e6a4");
+			(mongodb "\e6a4"),
+			(meteor "\e6a5"),
+			(meteorfull "\e6a6"),
+			(fsharp "\e6a7"),
+			(rust "\e6a8"),
+			(ionic "\e6a9"),
+			(sublime "\e6aa");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);
