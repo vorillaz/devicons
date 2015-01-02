@@ -10,8 +10,11 @@
   "homepage": "http://vorillaz.github.io/devicons/",
   "license": "MIT",
   "main": [
-    "./css/*",
-    "./fonts/*"
+    "css/devicons.css",
+    "fonts/devicons.eot",
+    "fonts/devicons.svg",
+    "fonts/devicons.ttf",
+    "fonts/devicons.woff"
   ],
   "ignore": [
     "*/.*",
