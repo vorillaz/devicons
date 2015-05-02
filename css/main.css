@@ -88,7 +88,13 @@ small {
 
 img {
   border: 0; }
-
+.svg{
+  min-width: 180px;
+  height: auto;
+}
+.padtop{
+  margin-top: 20px;
+}
 /**
  * Correct overflow displayed oddly in IE 9.
  */
