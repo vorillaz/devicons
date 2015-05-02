@@ -17,7 +17,7 @@ Devicons iconic font is free to use and licensed under [MIT](http://opensource.o
 ## Use Devicons with a single line of code.
 Thanks to the wonderful guys of  [jsdelivr](http://www.jsdelivr.com/) you can now add Devicons into your project by adding the following code into the `<HEAD>` section of your project's HTML:
 
-`<link href='//cdn.jsdelivr.net/devicons/1.7.0/css/devicons.min.css' rel='stylesheet'>`
+`<link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>`
 
 
 ## Getting Started
@@ -49,6 +49,7 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 ##Changelog
+- 1.8.0 Added 21 new icons - 191 glyphs 
 - 1.7.0 Added 6 new icons - 170 glyphs 
 - 1.6.0 Added 19 new icons - 164 glyphs 
 - 1.5.0 Added 22 new icons - 145 glyphs 

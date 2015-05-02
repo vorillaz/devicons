@@ -1,5 +1,5 @@
-/*!
- *  Devicons 1.7.0 made by Theodore Vorillas / http://vorillaz.com 
+﻿/*!
+ *  Devicons 1.8.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
   font-family: 'devicons';
@@ -8,6 +8,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .devicons {
   font-family: 'devicons';
   speak: none;
@@ -703,4 +704,84 @@
 
 .devicons-sublime:before {
   content: "\e6aa";
+}
+
+.devicons-appcelerator:before {
+  content: "\e6ab";
+}
+
+.devicons-asterisk:before {
+  content: "\e6ac";
+}
+
+.devicons-aws:before {
+  content: "\e6ad";
+}
+
+.devicons-digital-ocean:before {
+  content: "\e6ae";
+}
+
+.devicons-dlang:before {
+  content: "\e6af";
+}
+
+.devicons-docker:before {
+  content: "\e6b0";
+}
+
+.devicons-erlang:before {
+  content: "\e6b1";
+}
+
+.devicons-google-cloud-platform:before {
+  content: "\e6b2";
+}
+
+.devicons-grails:before {
+  content: "\e6b3";
+}
+
+.devicons-illustrator:before {
+  content: "\e6b4";
+}
+
+.devicons-intellij:before {
+  content: "\e6b5";
+}
+
+.devicons-materializecss:before {
+  content: "\e6b6";
+}
+
+.devicons-openshift:before {
+  content: "\e6b7";
+}
+
+.devicons-photoshop:before {
+  content: "\e6b8";
+}
+
+.devicons-rackspace:before {
+  content: "\e6b9";
+}
+
+.devicons-react:before {
+  content: "\e6ba";
+}
+
+.devicons-redhat:before {
+  content: "\e6bb";
+}
+
+.devicons-scriptcs:before {
+  content: "\e6bc";
+}
+
+.devicons-sqllite:before {
+  content: "\e6c4";
+}
+
+.devicons-vim:before {
+  content: "\e6c5";
 }

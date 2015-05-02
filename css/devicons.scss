@@ -1,5 +1,5 @@
 /*!
- *  Devicons 1.7.0 made by Theodore Vorillas / http://vorillaz.com 
+ *  Devicons 1.8.0 made by Theodore Vorillas / http://vorillaz.com 
  */
 @font-face {
 	font-family: 'devicons';
@@ -197,7 +197,27 @@ $devicons:	(git "\e602"),
 			(fsharp "\e6a7"),
 			(rust "\e6a8"),
 			(ionic "\e6a9"),
-			(sublime "\e6aa");
+			(sublime "\e6aa"),
+			(appcelerator "\e6ab"),
+			(asterisk "\e6ac"),
+			(aws "\e6ad"),
+			(digital-ocean "\e6ae"),
+			(dlang "\e6af"),
+			(docker "\e6b0"),
+			(erlang "\e6b1"),
+			(google-cloud-platform "\e6b2"),
+			(grails "\e6b3"),
+			(illustrator "\e6b4"),
+			(intellij "\e6b5"),
+			(materializecss "\e6b6"),
+			(openshift "\e6b7"),
+			(photoshop "\e6b8"),
+			(rackspace "\e6b9"),
+			(react "\e6ba"),
+			(redhat "\e6bb"),
+			(scriptcs "\e6bc"),
+			(sqllite "\e6c4"),
+			(vim "\e6c5");
 
 @each $devicon in $devicons {
 	  $iconClass: nth($devicon, 1);
