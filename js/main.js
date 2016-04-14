@@ -1,27 +1,19 @@
 (function ($) {
-  var isTouch=Modernizr.touch;
-  
   $(document).ready(function(){
-    $("#handler").on(isTouch ? 'touchstart' : 'click',function(event){
+    $("#handler").click(function(){
      $(".menu-icon").toggleClass('open');
      $(".menu-wrap").toggle().delay(1500).toggleClass('open');
      $("header").toggleClass('headerNavOpen'); 
     });
 
-    $(".menu-hider li a").on('click',function(event){
-      closeNav(); 
-    });
-    $("#search").on('focus blur',function(event){
+    $(".menu-hider li a").on('click',closeNav);
+
+    $("#search").on('focus blur',function(){
       $(".iconwrapper").toggleClass('blurred');
     });
-
-
-  });
-  
-  $(document).on("scroll",function(){
-     closeNav();
   });
 
+  $(document).on("scroll",closeNav);
 }(jQuery))
 
 function closeNav(){
