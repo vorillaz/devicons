@@ -10,6 +10,11 @@
 [1.5.0](#1.5.0)
 [1.6.0](#1.6.0)
 [1.8.0](#1.8.0)
+[1.8.1](#1.8.1)
+
+## 1.8.1
+Change log and fixes in version 1.8.1:
+1. Updated Stylus.
 
 ## 1.8.0
 Change log and fixes in version 1.7.0:
@@ -46,12 +51,12 @@ Change log and fixes in version 1.4.0:
 
 3. Added Zend icon as suggested by [@acelaya](https://github.com/acelaya).
 
-4. Added Heroku, NGINX icons as suggested by [@triplec1988](https://github.com/triplec1988). 
+4. Added Heroku, NGINX icons as suggested by [@triplec1988](https://github.com/triplec1988).
 5. Added Typo3 icon as suggested by Sebastian Schmal
 
-6. Added Groovy icon as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge). 
+6. Added Groovy icon as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge).
 
-7. Also added UiKit, Require.js, Haskell, Yeoman, Doctrine, Open Source,GNU icons as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge). 
+7. Also added UiKit, Require.js, Haskell, Yeoman, Doctrine, Open Source,GNU icons as suggested by by [@Guillaume Laforge](https://twitter.com/glaforge).
 
 ## v1.3.1
 
@@ -62,7 +67,7 @@ Change log and fixes in version 1.3.1:
 ## v1.3
 
 Change log and fixes in version 1.3:
-1. Added Clojure and Clojure badge icons as suggested by [@arrdem](https://github.com/arrdem) , [@stevenfourie](https://github.com/stevenfourie) & [@TakaGoto](https://github.com/TakaGoto). 
+1. Added Clojure and Clojure badge icons as suggested by [@arrdem](https://github.com/arrdem) , [@stevenfourie](https://github.com/stevenfourie) & [@TakaGoto](https://github.com/TakaGoto).
 
 2. Added Nancy icon as suggested by [@khellang](https://github.com/khellang).
 
@@ -77,11 +82,11 @@ Change log and fixes in version 1.3:
 ## v1.2
 
 Change log and fixes in version 1.2:
-1. Added Gulp.js badge as suggested by [@pkozlowski-opensource](https://github.com/pkozlowski-opensource). 
+1. Added Gulp.js badge as suggested by [@pkozlowski-opensource](https://github.com/pkozlowski-opensource).
 
 2. Added Cisco, and Atom IDE icons as well.
 
-3. Devicons is also available via NPM 
+3. Devicons is also available via NPM
 
 4. Added status and issue badges in README.md
 
@@ -89,7 +94,7 @@ Change log and fixes in version 1.2:
 
 Change log and fixes in version 1.1:
 
-1. Added Symfony and Symfony badge as suggested by [@ProPheT777](https://github.com/ProPheT777) & Javier Eguiluz 
+1. Added Symfony and Symfony badge as suggested by [@ProPheT777](https://github.com/ProPheT777) & Javier Eguiluz
 
 2. Added Less and Stylus icons as suggested by [@futekov](https://github.com/futekov).
 

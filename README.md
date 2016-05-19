@@ -1,8 +1,8 @@
 # Meet  [Devicons](http://vorillaz.github.io/devicons/)
 ### an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.
 
-[![NPM version][npm-image]][npm-url] 
-[![Downloads][downloads-image]][npm-url] 
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
 
 
 
@@ -48,22 +48,23 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 ##Changelog
-- 1.8.0 Added 21 new icons - 191 glyphs 
-- 1.7.0 Added 6 new icons - 170 glyphs 
-- 1.6.0 Added 19 new icons - 164 glyphs 
-- 1.5.0 Added 22 new icons - 145 glyphs 
-- 1.4.0 Added 12 new icons - 123 glyphs 
+- 1.8.1 Updated Stylus icon.
+- 1.8.0 Added 21 new icons - 191 glyphs
+- 1.7.0 Added 6 new icons - 170 glyphs
+- 1.6.0 Added 19 new icons - 164 glyphs
+- 1.5.0 Added 22 new icons - 145 glyphs
+- 1.4.0 Added 12 new icons - 123 glyphs
 - v1.3.1 Minor fixes for bower package manager
-- v1.3.0 Added 10 new icons - 111 glyphs 
-- v1.2.0 Added 3 new icons - 101 glyphs 
-- v1.1.0 Added 12 new icons - 97 glyphs 
-- v1.0.0 Initial launch of Devicons iconic fonts - 85 glyphs 
+- v1.3.0 Added 10 new icons - 111 glyphs
+- v1.2.0 Added 3 new icons - 101 glyphs
+- v1.1.0 Added 12 new icons - 97 glyphs
+- v1.0.0 Initial launch of Devicons iconic fonts - 85 glyphs
 [Detailed changelog & contributors](/CHANGELOG.md)
 
 
-##Do you like (♥) Devicons? 
+##Do you like (♥) Devicons?
 
-[![Support me][gittip-image]][gittip-url] 
+[![Support me][gittip-image]][gittip-url]
 
 
 ##Author
