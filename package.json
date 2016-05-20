@@ -1,7 +1,7 @@
 {
   "name": "devicons",
   "description": "An iconic font made for developers",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "keywords": ["font", "icons", "devicons", "glyphs" ],
   "homepage": "http://vorillaz.github.io/devicons/",
   "bugs": {
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/vorillaz/devicons.git"
   },
-  "licenses": 
+  "licenses":
     {
       "type": "MIT",
       "url": "http://opensource.org/licenses/mit-license.html"
