@@ -1,235 +1,974 @@
-/*!
- *  Devicons 1.8.0 made by Theodore Vorillas / http://vorillaz.com 
- */
+@import "variables";
+
 @font-face {
-	font-family: 'devicons';
-	src:url('../fonts/devicons.eot?xqxft6');
-	src:url('../fonts/devicons.eot?#iefixxqxft6') format('embedded-opentype'),
-		url('../fonts/devicons.woff?xqxft6') format('woff'),
-		url('../fonts/devicons.ttf?xqxft6') format('truetype'),
-		url('../fonts/devicons.svg?xqxft6#devicons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'devicons';
+  src:  url('#{$devicons-font-path}/devicons.eot?k42glo');
+  src:  url('#{$devicons-font-path}/devicons.eot?k42glo#iefix') format('embedded-opentype'),
+    url('#{$devicons-font-path}/devicons.ttf?k42glo') format('truetype'),
+    url('#{$devicons-font-path}/devicons.woff?k42glo') format('woff'),
+    url('#{$devicons-font-path}/devicons.svg?k42glo#devicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.devicons {
-	font-family: 'devicons';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+[class^="devicons-"], [class*=" devicons-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'devicons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-$devicons:	(git "\e602"),
-			(git_compare "\e628"),
-			(git_branch "\e625"),
-			(git_commit "\e629"),
-			(git_pull_request "\e626"),
-			(git_merge "\e627"),
-			(bitbucket "\e603"),
-			(github_alt "\e608"),
-			(github_badge "\e609"),
-			(github "\e60a"),
-			(github_full "\e617"),
-			(java "\e638"),
-			(ruby "\e639"),
-			(scala "\e637"),
-			(python "\e63c"),
-			(go "\e624"),
-			(ruby_on_rails "\e63b"),
-			(django "\e61d"),
-			(markdown "\e63e"),
-			(php "\e63d"),
-			(mysql "\e604"),
-			(streamline "\e605"),
-			(database "\e606"),
-			(laravel "\e63f"),
-			(javascript "\e64e"),
-			(angular "\e653"),
-			(backbone "\e652"),
-			(coffeescript "\e651"),
-			(jquery "\e650"),
-			(modernizr "\e620"),
-			(jquery_ui "\e654"),
-			(ember "\e61b"),
-			(dojo "\e61c"),
-			(nodejs "\e619"),
-			(nodejs_small "\e618"),
-			(javascript_shield "\e64f"),
-			(bootstrap "\e647"),
-			(sass "\e64b"),
-			(css3_full "\e64a"),
-			(css3 "\e649"),
-			(html5 "\e636"),
-			(html5_multimedia "\e632"),
-			(html5_device_access "\e633"),
-			(html5_3d_effects "\e635"),
-			(html5_connectivity "\e634"),
-			(ghost_small "\e614"),
-			(ghost "\e61f"),
-			(magento "\e640"),
-			(joomla "\e641"),
-			(jekyll_small "\e60d"),
-			(drupal "\e642"),
-			(wordpress "\e60b"),
-			(grunt "\e64c"),
-			(bower "\e64d"),
-			(npm "\e61e"),
-			(yahoo_small "\e62b"),
-			(yahoo "\e615"),
-			(bing_small "\e600"),
-			(windows "\e60f"),
-			(linux "\e612"),
-			(ubuntu "\e63a"),
-			(android "\e60e"),
-			(apple "\e611"),
-			(appstore "\e613"),
-			(phonegap "\e630"),
-			(blackberry "\e623"),
-			(stackoverflow "\e610"),
-			(techcrunch "\e62c"),
-			(codrops "\e62f"),
-			(css_tricks "\e601"),
-			(smashing_magazine "\e62d"),
-			(netmagazine "\e62e"),
-			(codepen "\e616"),
-			(cssdeck "\e62a"),
-			(hackernews "\e61a"),
-			(dropbox "\e607"),
-			(google_drive "\e631"),
-			(visualstudio "\e60c"),
-			(unity_small "\e621"),
-			(raspberry_pi "\e622"),
-			(chrome "\e643"),
-			(ie "\e644"),
-			(firefox "\e645"),
-			(opera "\e646"),
-			(safari "\e648"),
-			(swift "\e655"),
-			(symfony "\e656"),
-			(symfony_badge "\e657"),
-			(less "\e658"),
-			(stylus "\e659"),
-			(trello "\e65a"),
-			(atlassian "\e65b"),
-			(jira "\e65c"),
-			(envato "\e65d"),
-			(snap_svg "\e65e"),
-			(raphael "\e65f"),
-			(google_analytics "\e660"),
-			(compass "\e661"),
-			(onedrive "\e662"),
-			(gulp "\e663"),
-			(atom  "\e664"),
-			(cisco "\e665"),
-			(nancy "\e666"),
-			(clojure "\e668"),
-			(clojure_alt "\e66a"),
-			(perl "\e669"),
-			(celluloid "\e66b"),
-			(w3c "\e66c"),
-			(redis "\e66d"),
-			(postgresql "\e66e"),
-			(webplatform "\e66f"),
-			(jenkins "\e667"),
-			(requirejs "\e670"),
-			(opensource "\e671"),
-			(typo3 "\e672"),
-			(uikit "\e673"),
-			(doctrine "\e674"),
-			(groovy "\e675"),
-			(nginx "\e676"),
-			(haskell "\e677"),
-			(zend "\e678"),
-			(gnu "\e679"),
-			(yeoman "\e67a"),
-			(heroku "\e67b"),
-			/* new in 1.5.0 */
-			(debian "\e67d"),
-			(travis "\e67e"),
-			(dotnet "\e67f"),
-			(codeigniter "\e680"),
-			(javascript_badge "\e681"),
-			(yii "\e682"),
-			(msql_server "\e67c"),
-			(composer "\e683"),
-			(krakenjs_badge "\e684"),
-			(krakenjs "\e685"),
-			(mozilla "\e686"),
-			(firebase "\e687"),
-			(sizzlejs "\e688"),
-			(creativecommons "\e689"),
-			(creativecommons_badge "\e68a"),
-			(mitlicence "\e68b"),
-			(senchatouch "\e68c"),
-			(bugsense "\e68d"),
-			(extjs "\e68e"),
-			(mootools_badge "\e68f"),
-			(mootools "\e690"),
-			(ruby_rough "\e691"),
-			(komodo "\e692"),
-			(coda "\e693"),
-			(bintray "\e694"),
-			(terminal "\e695"),
-			(code "\e696"),
-			(responsive "\e697"),
-			(dart "\e698"),
-			(aptana "\e699"),
-			(mailchimp "\e69a"),
-			(netbeans "\e69b"),
-			(dreamweaver "\e69c"),
-			(brackets "\e69d"),
-			(eclipse "\e69e"),
-			(cloud9 "\e69f"),
-			(scrum "\e6a0"),
-			(prolog "\e6a1"),
-			(terminal_badge "\e6a2"),
-			(code_badge "\e6a3"),
-			(mongodb "\e6a4"),
-			(meteor "\e6a5"),
-			(meteorfull "\e6a6"),
-			(fsharp "\e6a7"),
-			(rust "\e6a8"),
-			(ionic "\e6a9"),
-			(sublime "\e6aa"),
-			(appcelerator "\e6ab"),
-			(asterisk "\e6ac"),
-			(aws "\e6ad"),
-			(digital-ocean "\e6ae"),
-			(dlang "\e6af"),
-			(docker "\e6b0"),
-			(erlang "\e6b1"),
-			(google-cloud-platform "\e6b2"),
-			(grails "\e6b3"),
-			(illustrator "\e6b4"),
-			(intellij "\e6b5"),
-			(materializecss "\e6b6"),
-			(openshift "\e6b7"),
-			(photoshop "\e6b8"),
-			(rackspace "\e6b9"),
-			(react "\e6ba"),
-			(redhat "\e6bb"),
-			(scriptcs "\e6bc"),
-			(sqllite "\e6c4"),
-			(vim "\e6c5");
-
-@each $devicon in $devicons {
-	  $iconClass: nth($devicon, 1);
-	  $iconClassBefore: nth($devicon, 2);
-	  .devicons-#{$iconClass}{
-	  	&:before{
-	  		content: "#{$iconClassBefore}";	
-	  	}
-	  	
-	  
-	  }
-}	
-
-
+.devicons-mocha {
+  &:before {
+    content: $devicons-mocha;
+  }
+}
+.devicons-typescript {
+  &:before {
+    content: $devicons-typescript;
+  }
+}
+.devicons-git {
+  &:before {
+    content: $devicons-git;
+  }
+}
+.devicons-git_compare {
+  &:before {
+    content: $devicons-git_compare;
+  }
+}
+.devicons-git_branch {
+  &:before {
+    content: $devicons-git_branch;
+  }
+}
+.devicons-git_commit {
+  &:before {
+    content: $devicons-git_commit;
+  }
+}
+.devicons-git_pull_request {
+  &:before {
+    content: $devicons-git_pull_request;
+  }
+}
+.devicons-git_merge {
+  &:before {
+    content: $devicons-git_merge;
+  }
+}
+.devicons-bitbucket {
+  &:before {
+    content: $devicons-bitbucket;
+  }
+}
+.devicons-github_alt {
+  &:before {
+    content: $devicons-github_alt;
+  }
+}
+.devicons-github_badge {
+  &:before {
+    content: $devicons-github_badge;
+  }
+}
+.devicons-github {
+  &:before {
+    content: $devicons-github;
+  }
+}
+.devicons-github_full {
+  &:before {
+    content: $devicons-github_full;
+  }
+}
+.devicons-java {
+  &:before {
+    content: $devicons-java;
+  }
+}
+.devicons-ruby {
+  &:before {
+    content: $devicons-ruby;
+  }
+}
+.devicons-scala {
+  &:before {
+    content: $devicons-scala;
+  }
+}
+.devicons-python {
+  &:before {
+    content: $devicons-python;
+  }
+}
+.devicons-go {
+  &:before {
+    content: $devicons-go;
+  }
+}
+.devicons-ruby_on_rails {
+  &:before {
+    content: $devicons-ruby_on_rails;
+  }
+}
+.devicons-django {
+  &:before {
+    content: $devicons-django;
+  }
+}
+.devicons-markdown {
+  &:before {
+    content: $devicons-markdown;
+  }
+}
+.devicons-php {
+  &:before {
+    content: $devicons-php;
+  }
+}
+.devicons-mysql {
+  &:before {
+    content: $devicons-mysql;
+  }
+}
+.devicons-streamline {
+  &:before {
+    content: $devicons-streamline;
+  }
+}
+.devicons-database {
+  &:before {
+    content: $devicons-database;
+  }
+}
+.devicons-laravel {
+  &:before {
+    content: $devicons-laravel;
+  }
+}
+.devicons-javascript {
+  &:before {
+    content: $devicons-javascript;
+  }
+}
+.devicons-angular {
+  &:before {
+    content: $devicons-angular;
+  }
+}
+.devicons-backbone {
+  &:before {
+    content: $devicons-backbone;
+  }
+}
+.devicons-coffeescript {
+  &:before {
+    content: $devicons-coffeescript;
+  }
+}
+.devicons-jquery {
+  &:before {
+    content: $devicons-jquery;
+  }
+}
+.devicons-modernizr {
+  &:before {
+    content: $devicons-modernizr;
+  }
+}
+.devicons-jquery_ui {
+  &:before {
+    content: $devicons-jquery_ui;
+  }
+}
+.devicons-ember {
+  &:before {
+    content: $devicons-ember;
+  }
+}
+.devicons-dojo {
+  &:before {
+    content: $devicons-dojo;
+  }
+}
+.devicons-nodejs {
+  &:before {
+    content: $devicons-nodejs;
+  }
+}
+.devicons-nodejs_small {
+  &:before {
+    content: $devicons-nodejs_small;
+  }
+}
+.devicons-javascript_shield {
+  &:before {
+    content: $devicons-javascript_shield;
+  }
+}
+.devicons-bootstrap {
+  &:before {
+    content: $devicons-bootstrap;
+  }
+}
+.devicons-sass {
+  &:before {
+    content: $devicons-sass;
+  }
+}
+.devicons-css3_full {
+  &:before {
+    content: $devicons-css3_full;
+  }
+}
+.devicons-css3 {
+  &:before {
+    content: $devicons-css3;
+  }
+}
+.devicons-html5 {
+  &:before {
+    content: $devicons-html5;
+  }
+}
+.devicons-html5_multimedia {
+  &:before {
+    content: $devicons-html5_multimedia;
+  }
+}
+.devicons-html5_device_access {
+  &:before {
+    content: $devicons-html5_device_access;
+  }
+}
+.devicons-html5_3d_effects {
+  &:before {
+    content: $devicons-html5_3d_effects;
+  }
+}
+.devicons-html5_connectivity {
+  &:before {
+    content: $devicons-html5_connectivity;
+  }
+}
+.devicons-ghost_small {
+  &:before {
+    content: $devicons-ghost_small;
+  }
+}
+.devicons-ghost {
+  &:before {
+    content: $devicons-ghost;
+  }
+}
+.devicons-magento {
+  &:before {
+    content: $devicons-magento;
+  }
+}
+.devicons-joomla {
+  &:before {
+    content: $devicons-joomla;
+  }
+}
+.devicons-jekyll_small {
+  &:before {
+    content: $devicons-jekyll_small;
+  }
+}
+.devicons-drupal {
+  &:before {
+    content: $devicons-drupal;
+  }
+}
+.devicons-wordpress {
+  &:before {
+    content: $devicons-wordpress;
+  }
+}
+.devicons-grunt {
+  &:before {
+    content: $devicons-grunt;
+  }
+}
+.devicons-bower {
+  &:before {
+    content: $devicons-bower;
+  }
+}
+.devicons-npm {
+  &:before {
+    content: $devicons-npm;
+  }
+}
+.devicons-yahoo_small {
+  &:before {
+    content: $devicons-yahoo_small;
+  }
+}
+.devicons-yahoo {
+  &:before {
+    content: $devicons-yahoo;
+  }
+}
+.devicons-bing_small {
+  &:before {
+    content: $devicons-bing_small;
+  }
+}
+.devicons-windows {
+  &:before {
+    content: $devicons-windows;
+  }
+}
+.devicons-linux {
+  &:before {
+    content: $devicons-linux;
+  }
+}
+.devicons-ubuntu {
+  &:before {
+    content: $devicons-ubuntu;
+  }
+}
+.devicons-android {
+  &:before {
+    content: $devicons-android;
+  }
+}
+.devicons-apple {
+  &:before {
+    content: $devicons-apple;
+  }
+}
+.devicons-appstore {
+  &:before {
+    content: $devicons-appstore;
+  }
+}
+.devicons-phonegap {
+  &:before {
+    content: $devicons-phonegap;
+  }
+}
+.devicons-blackberry {
+  &:before {
+    content: $devicons-blackberry;
+  }
+}
+.devicons-stackoverflow {
+  &:before {
+    content: $devicons-stackoverflow;
+  }
+}
+.devicons-techcrunch {
+  &:before {
+    content: $devicons-techcrunch;
+  }
+}
+.devicons-codrops {
+  &:before {
+    content: $devicons-codrops;
+  }
+}
+.devicons-css_tricks {
+  &:before {
+    content: $devicons-css_tricks;
+  }
+}
+.devicons-smashing_magazine {
+  &:before {
+    content: $devicons-smashing_magazine;
+  }
+}
+.devicons-netmagazine {
+  &:before {
+    content: $devicons-netmagazine;
+  }
+}
+.devicons-codepen {
+  &:before {
+    content: $devicons-codepen;
+  }
+}
+.devicons-cssdeck {
+  &:before {
+    content: $devicons-cssdeck;
+  }
+}
+.devicons-hackernews {
+  &:before {
+    content: $devicons-hackernews;
+  }
+}
+.devicons-dropbox {
+  &:before {
+    content: $devicons-dropbox;
+  }
+}
+.devicons-google_drive {
+  &:before {
+    content: $devicons-google_drive;
+  }
+}
+.devicons-visualstudio {
+  &:before {
+    content: $devicons-visualstudio;
+  }
+}
+.devicons-unity_small {
+  &:before {
+    content: $devicons-unity_small;
+  }
+}
+.devicons-rasberry_pi {
+  &:before {
+    content: $devicons-rasberry_pi;
+  }
+}
+.devicons-chrome {
+  &:before {
+    content: $devicons-chrome;
+  }
+}
+.devicons-ie {
+  &:before {
+    content: $devicons-ie;
+  }
+}
+.devicons-firefox {
+  &:before {
+    content: $devicons-firefox;
+  }
+}
+.devicons-opera {
+  &:before {
+    content: $devicons-opera;
+  }
+}
+.devicons-safari {
+  &:before {
+    content: $devicons-safari;
+  }
+}
+.devicons-swift {
+  &:before {
+    content: $devicons-swift;
+  }
+}
+.devicons-symfony {
+  &:before {
+    content: $devicons-symfony;
+  }
+}
+.devicons-symfony_badge {
+  &:before {
+    content: $devicons-symfony_badge;
+  }
+}
+.devicons-less {
+  &:before {
+    content: $devicons-less;
+  }
+}
+.devicons-stylus {
+  &:before {
+    content: $devicons-stylus;
+  }
+}
+.devicons-trello {
+  &:before {
+    content: $devicons-trello;
+  }
+}
+.devicons-atlassian {
+  &:before {
+    content: $devicons-atlassian;
+  }
+}
+.devicons-jira {
+  &:before {
+    content: $devicons-jira;
+  }
+}
+.devicons-envato {
+  &:before {
+    content: $devicons-envato;
+  }
+}
+.devicons-snap_svg {
+  &:before {
+    content: $devicons-snap_svg;
+  }
+}
+.devicons-raphael {
+  &:before {
+    content: $devicons-raphael;
+  }
+}
+.devicons-google_analytics {
+  &:before {
+    content: $devicons-google_analytics;
+  }
+}
+.devicons-compass {
+  &:before {
+    content: $devicons-compass;
+  }
+}
+.devicons-onedrive {
+  &:before {
+    content: $devicons-onedrive;
+  }
+}
+.devicons-gulp {
+  &:before {
+    content: $devicons-gulp;
+  }
+}
+.devicons-atom {
+  &:before {
+    content: $devicons-atom;
+  }
+}
+.devicons-cisco {
+  &:before {
+    content: $devicons-cisco;
+  }
+}
+.devicons-nancy {
+  &:before {
+    content: $devicons-nancy;
+  }
+}
+.devicons-clojure {
+  &:before {
+    content: $devicons-clojure;
+  }
+}
+.devicons-clojure_alt {
+  &:before {
+    content: $devicons-clojure_alt;
+  }
+}
+.devicons-perl {
+  &:before {
+    content: $devicons-perl;
+  }
+}
+.devicons-celluloid {
+  &:before {
+    content: $devicons-celluloid;
+  }
+}
+.devicons-w3c {
+  &:before {
+    content: $devicons-w3c;
+  }
+}
+.devicons-redis {
+  &:before {
+    content: $devicons-redis;
+  }
+}
+.devicons-postgresql {
+  &:before {
+    content: $devicons-postgresql;
+  }
+}
+.devicons-webplatform {
+  &:before {
+    content: $devicons-webplatform;
+  }
+}
+.devicons-jenkins {
+  &:before {
+    content: $devicons-jenkins;
+  }
+}
+.devicons-requirejs {
+  &:before {
+    content: $devicons-requirejs;
+  }
+}
+.devicons-opensource {
+  &:before {
+    content: $devicons-opensource;
+  }
+}
+.devicons-typo3 {
+  &:before {
+    content: $devicons-typo3;
+  }
+}
+.devicons-uikit {
+  &:before {
+    content: $devicons-uikit;
+  }
+}
+.devicons-doctrine {
+  &:before {
+    content: $devicons-doctrine;
+  }
+}
+.devicons-groovy {
+  &:before {
+    content: $devicons-groovy;
+  }
+}
+.devicons-nginx {
+  &:before {
+    content: $devicons-nginx;
+  }
+}
+.devicons-haskell {
+  &:before {
+    content: $devicons-haskell;
+  }
+}
+.devicons-zend {
+  &:before {
+    content: $devicons-zend;
+  }
+}
+.devicons-gnu {
+  &:before {
+    content: $devicons-gnu;
+  }
+}
+.devicons-yeoman {
+  &:before {
+    content: $devicons-yeoman;
+  }
+}
+.devicons-heroku {
+  &:before {
+    content: $devicons-heroku;
+  }
+}
+.devicons-debian {
+  &:before {
+    content: $devicons-debian;
+  }
+}
+.devicons-travis {
+  &:before {
+    content: $devicons-travis;
+  }
+}
+.devicons-dotnet {
+  &:before {
+    content: $devicons-dotnet;
+  }
+}
+.devicons-codeigniter {
+  &:before {
+    content: $devicons-codeigniter;
+  }
+}
+.devicons-javascript_badge {
+  &:before {
+    content: $devicons-javascript_badge;
+  }
+}
+.devicons-yii {
+  &:before {
+    content: $devicons-yii;
+  }
+}
+.devicons-msql_server {
+  &:before {
+    content: $devicons-msql_server;
+  }
+}
+.devicons-composer {
+  &:before {
+    content: $devicons-composer;
+  }
+}
+.devicons-krakenjs_badge {
+  &:before {
+    content: $devicons-krakenjs_badge;
+  }
+}
+.devicons-krakenjs {
+  &:before {
+    content: $devicons-krakenjs;
+  }
+}
+.devicons-mozilla {
+  &:before {
+    content: $devicons-mozilla;
+  }
+}
+.devicons-firebase {
+  &:before {
+    content: $devicons-firebase;
+  }
+}
+.devicons-sizzlejs {
+  &:before {
+    content: $devicons-sizzlejs;
+  }
+}
+.devicons-creativecommons {
+  &:before {
+    content: $devicons-creativecommons;
+  }
+}
+.devicons-creativecommons_badge {
+  &:before {
+    content: $devicons-creativecommons_badge;
+  }
+}
+.devicons-mitlicence {
+  &:before {
+    content: $devicons-mitlicence;
+  }
+}
+.devicons-senchatouch {
+  &:before {
+    content: $devicons-senchatouch;
+  }
+}
+.devicons-bugsense {
+  &:before {
+    content: $devicons-bugsense;
+  }
+}
+.devicons-extjs {
+  &:before {
+    content: $devicons-extjs;
+  }
+}
+.devicons-mootools_badge {
+  &:before {
+    content: $devicons-mootools_badge;
+  }
+}
+.devicons-mootools {
+  &:before {
+    content: $devicons-mootools;
+  }
+}
+.devicons-ruby_rough {
+  &:before {
+    content: $devicons-ruby_rough;
+  }
+}
+.devicons-komodo {
+  &:before {
+    content: $devicons-komodo;
+  }
+}
+.devicons-coda .path1 {
+  &:before {
+    content: $devicons-coda-path1;  
+    color: #91CC62;
+  }
+}
+.devicons-coda .path2 {
+  &:before {
+    content: $devicons-coda-path2;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-coda .path3 {
+  &:before {
+    content: $devicons-coda-path3;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-bintray {
+  &:before {
+    content: $devicons-bintray;
+  }
+}
+.devicons-terminal {
+  &:before {
+    content: $devicons-terminal;
+  }
+}
+.devicons-code {
+  &:before {
+    content: $devicons-code;
+  }
+}
+.devicons-responsive .path1 {
+  &:before {
+    content: $devicons-responsive-path1;  
+    color: #FFFFFF;
+  }
+}
+.devicons-responsive .path2 {
+  &:before {
+    content: $devicons-responsive-path2;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-responsive .path3 {
+  &:before {
+    content: $devicons-responsive-path3;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-responsive .path4 {
+  &:before {
+    content: $devicons-responsive-path4;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-responsive .path5 {
+  &:before {
+    content: $devicons-responsive-path5;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-responsive .path6 {
+  &:before {
+    content: $devicons-responsive-path6;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.devicons-responsive .path7 {
+  &:before {
+    content: $devicons-responsive-path7;  
+    margin-left: -1em;  
+    color: #FFFFFF;
+  }
+}
+.devicons-dart {
+  &:before {
+    content: $devicons-dart;
+  }
+}
+.devicons-aptana {
+  &:before {
+    content: $devicons-aptana;
+  }
+}
+.devicons-mailchimp {
+  &:before {
+    content: $devicons-mailchimp;
+  }
+}
+.devicons-netbeans {
+  &:before {
+    content: $devicons-netbeans;
+  }
+}
+.devicons-dreamweaver {
+  &:before {
+    content: $devicons-dreamweaver;
+  }
+}
+.devicons-brackets {
+  &:before {
+    content: $devicons-brackets;
+  }
+}
+.devicons-eclipse {
+  &:before {
+    content: $devicons-eclipse;
+  }
+}
+.devicons-cloud9 {
+  &:before {
+    content: $devicons-cloud9;
+  }
+}
+.devicons-scrum {
+  &:before {
+    content: $devicons-scrum;
+  }
+}
+.devicons-prolog {
+  &:before {
+    content: $devicons-prolog;
+  }
+}
+.devicons-terminal_badge {
+  &:before {
+    content: $devicons-terminal_badge;
+  }
+}
+.devicons-code_badge .path1 {
+  &:before {
+    content: $devicons-code_badge-path1;  
+    color: #000;
+  }
+}
+.devicons-code_badge .path2 {
+  &:before {
+    content: $devicons-code_badge-path2;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.devicons-code_badge .path3 {
+  &:before {
+    content: $devicons-code_badge-path3;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.devicons-code_badge .path4 {
+  &:before {
+    content: $devicons-code_badge-path4;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.devicons-mongodb {
+  &:before {
+    content: $devicons-mongodb;
+  }
+}
+.devicons-meteor {
+  &:before {
+    content: $devicons-meteor;
+  }
+}
+.devicons-meteorfull {
+  &:before {
+    content: $devicons-meteorfull;
+  }
+}
+.devicons-fsharp {
+  &:before {
+    content: $devicons-fsharp;
+  }
+}
+.devicons-rust {
+  &:before {
+    content: $devicons-rust;
+  }
+}
+.devicons-ionic {
+  &:before {
+    content: $devicons-ionic;
+  }
+}
+.devicons-sublime {
+  &:before {
+    content: $devicons-sublime;
+  }
+}
 
