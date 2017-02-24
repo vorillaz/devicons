@@ -6259,8 +6259,8 @@
   ],
   "height": 1024,
   "metadata": {
-    "name": "devicons",
-    "url": "https://github.com/mirmat/devicons",
+    "name": "iconsfordevs",
+    "url": "https://github.com/mirmat/iconsfordevs",
     "designerURL": "http://zaprogramowany.pl",
     "license": "MIT Licence",
     "licenseURL": "http://opensource.org/licenses/MIT"
@@ -6269,13 +6269,13 @@
     "showGlyphs": true,
     "showQuickUse": true,
     "fontPref": {
-      "prefix": "devicons-",
+      "prefix": "iconsfordevs-",
       "metadata": {
-        "fontFamily": "devicons",
+        "fontFamily": "iconsfordevs",
         "majorVersion": 2,
         "minorVersion": 0,
-        "fontURL": "https://github.com/mirmat/devicons",
-        "description": "Devicons | The developer's iconic font",
+        "fontURL": "https://github.com/mirmat/iconsfordevs",
+        "description": "Icons for Devs | The developer's iconic font",
         "license": "MIT Licence",
         "designerURL": "http://zaprogramowany.pl",
         "licenseURL": "http://opensource.org/licenses/MIT"
