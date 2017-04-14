@@ -31,13 +31,15 @@ Thanks to the wonderful guys of  [jsdelivr](http://www.jsdelivr.com/) you can no
 
 `bower install devicons`
 
-##Install using NPM
+## Install using NPM
 `npm install devicons`
 
-##Create a custom set
+## Create a custom set
+
 In the repository you can find the IcoMoon manifest file [ `selection.json` ]. Load it into IcoMoon, make a proper selection of your desired icons and use them as you like. IcoMoon also can load `devicons.svg` file.
 
-##Contribute to the project.
+## Contribute to the project.
+
 IcoMoon is your dear friend. Load your SVG file into IcoMoon, make any changes and ship produced the `selection.json` file. I don't recommend using the `selections.json` file from the master branch as I want to keep encoded HTML characters serialized. New icons will be added in ascending order. You may also contribute just by shipping a vector based icon. (EPS,AI,SVG).
 
 
@@ -47,7 +49,8 @@ Do you have any additional request? Drop me a line or support an issue.
 
 
 
-##Changelog
+## Changelog
+
 - 1.8.0 Added 21 new icons - 191 glyphs 
 - 1.7.0 Added 6 new icons - 170 glyphs 
 - 1.6.0 Added 19 new icons - 164 glyphs 
@@ -61,12 +64,12 @@ Do you have any additional request? Drop me a line or support an issue.
 [Detailed changelog & contributors](/CHANGELOG.md)
 
 
-##Do you like (♥) Devicons? 
+## Do you like (♥) Devicons? 
 
 [![Support me][gittip-image]][gittip-url] 
 
 
-##Author
+## Author
 - Email: sayhi@vorillaz.com
 - Twitter: http://twitter.com/vorillas
 - Website: http://vorillaz.com
