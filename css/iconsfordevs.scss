@@ -28,6 +28,11 @@
 
 .iconsfordevs-mocha {
   &:before {
+    content: $iconsfordevs-yarn_kitten;
+  }
+}
+.iconsfordevs-mocha {
+  &:before {
     content: $iconsfordevs-mocha;
   }
 }
