@@ -26,7 +26,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.iconsfordevs-mocha {
+.iconsfordevs-yarn {
+  &:before {
+    content: $iconsfordevs-yarn;
+  }
+}
+.iconsfordevs-yarn_kitten {
   &:before {
     content: $iconsfordevs-yarn_kitten;
   }
