@@ -1,0 +1,984 @@
+@import "iconsfordevs-vars";
+
+@font-face {
+  font-family: 'iconsfordevs';
+  src:  url('#{$iconsfordevs-font-path}/iconsfordevs.eot?k42glo');
+  src:  url('#{$iconsfordevs-font-path}/iconsfordevs.eot?k42glo#iefix') format('embedded-opentype'),
+    url('#{$iconsfordevs-font-path}/iconsfordevs.ttf?k42glo') format('truetype'),
+    url('#{$iconsfordevs-font-path}/iconsfordevs.woff?k42glo') format('woff'),
+    url('#{$iconsfordevs-font-path}/iconsfordevs.svg?k42glo#iconsfordevs') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="iconsfordevs-"], [class*=" iconsfordevs-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconsfordevs' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconsfordevs-yarn {
+  &:before {
+    content: $iconsfordevs-yarn;
+  }
+}
+.iconsfordevs-yarn_kitten {
+  &:before {
+    content: $iconsfordevs-yarn_kitten;
+  }
+}
+.iconsfordevs-mocha {
+  &:before {
+    content: $iconsfordevs-mocha;
+  }
+}
+.iconsfordevs-typescript {
+  &:before {
+    content: $iconsfordevs-typescript;
+  }
+}
+.iconsfordevs-git {
+  &:before {
+    content: $iconsfordevs-git;
+  }
+}
+.iconsfordevs-git_compare {
+  &:before {
+    content: $iconsfordevs-git_compare;
+  }
+}
+.iconsfordevs-git_branch {
+  &:before {
+    content: $iconsfordevs-git_branch;
+  }
+}
+.iconsfordevs-git_commit {
+  &:before {
+    content: $iconsfordevs-git_commit;
+  }
+}
+.iconsfordevs-git_pull_request {
+  &:before {
+    content: $iconsfordevs-git_pull_request;
+  }
+}
+.iconsfordevs-git_merge {
+  &:before {
+    content: $iconsfordevs-git_merge;
+  }
+}
+.iconsfordevs-bitbucket {
+  &:before {
+    content: $iconsfordevs-bitbucket;
+  }
+}
+.iconsfordevs-github_alt {
+  &:before {
+    content: $iconsfordevs-github_alt;
+  }
+}
+.iconsfordevs-github_badge {
+  &:before {
+    content: $iconsfordevs-github_badge;
+  }
+}
+.iconsfordevs-github {
+  &:before {
+    content: $iconsfordevs-github;
+  }
+}
+.iconsfordevs-github_full {
+  &:before {
+    content: $iconsfordevs-github_full;
+  }
+}
+.iconsfordevs-java {
+  &:before {
+    content: $iconsfordevs-java;
+  }
+}
+.iconsfordevs-ruby {
+  &:before {
+    content: $iconsfordevs-ruby;
+  }
+}
+.iconsfordevs-scala {
+  &:before {
+    content: $iconsfordevs-scala;
+  }
+}
+.iconsfordevs-python {
+  &:before {
+    content: $iconsfordevs-python;
+  }
+}
+.iconsfordevs-go {
+  &:before {
+    content: $iconsfordevs-go;
+  }
+}
+.iconsfordevs-ruby_on_rails {
+  &:before {
+    content: $iconsfordevs-ruby_on_rails;
+  }
+}
+.iconsfordevs-django {
+  &:before {
+    content: $iconsfordevs-django;
+  }
+}
+.iconsfordevs-markdown {
+  &:before {
+    content: $iconsfordevs-markdown;
+  }
+}
+.iconsfordevs-php {
+  &:before {
+    content: $iconsfordevs-php;
+  }
+}
+.iconsfordevs-mysql {
+  &:before {
+    content: $iconsfordevs-mysql;
+  }
+}
+.iconsfordevs-streamline {
+  &:before {
+    content: $iconsfordevs-streamline;
+  }
+}
+.iconsfordevs-database {
+  &:before {
+    content: $iconsfordevs-database;
+  }
+}
+.iconsfordevs-laravel {
+  &:before {
+    content: $iconsfordevs-laravel;
+  }
+}
+.iconsfordevs-javascript {
+  &:before {
+    content: $iconsfordevs-javascript;
+  }
+}
+.iconsfordevs-angular {
+  &:before {
+    content: $iconsfordevs-angular;
+  }
+}
+.iconsfordevs-backbone {
+  &:before {
+    content: $iconsfordevs-backbone;
+  }
+}
+.iconsfordevs-coffeescript {
+  &:before {
+    content: $iconsfordevs-coffeescript;
+  }
+}
+.iconsfordevs-jquery {
+  &:before {
+    content: $iconsfordevs-jquery;
+  }
+}
+.iconsfordevs-modernizr {
+  &:before {
+    content: $iconsfordevs-modernizr;
+  }
+}
+.iconsfordevs-jquery_ui {
+  &:before {
+    content: $iconsfordevs-jquery_ui;
+  }
+}
+.iconsfordevs-ember {
+  &:before {
+    content: $iconsfordevs-ember;
+  }
+}
+.iconsfordevs-dojo {
+  &:before {
+    content: $iconsfordevs-dojo;
+  }
+}
+.iconsfordevs-nodejs {
+  &:before {
+    content: $iconsfordevs-nodejs;
+  }
+}
+.iconsfordevs-nodejs_small {
+  &:before {
+    content: $iconsfordevs-nodejs_small;
+  }
+}
+.iconsfordevs-javascript_shield {
+  &:before {
+    content: $iconsfordevs-javascript_shield;
+  }
+}
+.iconsfordevs-bootstrap {
+  &:before {
+    content: $iconsfordevs-bootstrap;
+  }
+}
+.iconsfordevs-sass {
+  &:before {
+    content: $iconsfordevs-sass;
+  }
+}
+.iconsfordevs-css3_full {
+  &:before {
+    content: $iconsfordevs-css3_full;
+  }
+}
+.iconsfordevs-css3 {
+  &:before {
+    content: $iconsfordevs-css3;
+  }
+}
+.iconsfordevs-html5 {
+  &:before {
+    content: $iconsfordevs-html5;
+  }
+}
+.iconsfordevs-html5_multimedia {
+  &:before {
+    content: $iconsfordevs-html5_multimedia;
+  }
+}
+.iconsfordevs-html5_device_access {
+  &:before {
+    content: $iconsfordevs-html5_device_access;
+  }
+}
+.iconsfordevs-html5_3d_effects {
+  &:before {
+    content: $iconsfordevs-html5_3d_effects;
+  }
+}
+.iconsfordevs-html5_connectivity {
+  &:before {
+    content: $iconsfordevs-html5_connectivity;
+  }
+}
+.iconsfordevs-ghost_small {
+  &:before {
+    content: $iconsfordevs-ghost_small;
+  }
+}
+.iconsfordevs-ghost {
+  &:before {
+    content: $iconsfordevs-ghost;
+  }
+}
+.iconsfordevs-magento {
+  &:before {
+    content: $iconsfordevs-magento;
+  }
+}
+.iconsfordevs-joomla {
+  &:before {
+    content: $iconsfordevs-joomla;
+  }
+}
+.iconsfordevs-jekyll_small {
+  &:before {
+    content: $iconsfordevs-jekyll_small;
+  }
+}
+.iconsfordevs-drupal {
+  &:before {
+    content: $iconsfordevs-drupal;
+  }
+}
+.iconsfordevs-wordpress {
+  &:before {
+    content: $iconsfordevs-wordpress;
+  }
+}
+.iconsfordevs-grunt {
+  &:before {
+    content: $iconsfordevs-grunt;
+  }
+}
+.iconsfordevs-bower {
+  &:before {
+    content: $iconsfordevs-bower;
+  }
+}
+.iconsfordevs-npm {
+  &:before {
+    content: $iconsfordevs-npm;
+  }
+}
+.iconsfordevs-yahoo_small {
+  &:before {
+    content: $iconsfordevs-yahoo_small;
+  }
+}
+.iconsfordevs-yahoo {
+  &:before {
+    content: $iconsfordevs-yahoo;
+  }
+}
+.iconsfordevs-bing_small {
+  &:before {
+    content: $iconsfordevs-bing_small;
+  }
+}
+.iconsfordevs-windows {
+  &:before {
+    content: $iconsfordevs-windows;
+  }
+}
+.iconsfordevs-linux {
+  &:before {
+    content: $iconsfordevs-linux;
+  }
+}
+.iconsfordevs-ubuntu {
+  &:before {
+    content: $iconsfordevs-ubuntu;
+  }
+}
+.iconsfordevs-android {
+  &:before {
+    content: $iconsfordevs-android;
+  }
+}
+.iconsfordevs-apple {
+  &:before {
+    content: $iconsfordevs-apple;
+  }
+}
+.iconsfordevs-appstore {
+  &:before {
+    content: $iconsfordevs-appstore;
+  }
+}
+.iconsfordevs-phonegap {
+  &:before {
+    content: $iconsfordevs-phonegap;
+  }
+}
+.iconsfordevs-blackberry {
+  &:before {
+    content: $iconsfordevs-blackberry;
+  }
+}
+.iconsfordevs-stackoverflow {
+  &:before {
+    content: $iconsfordevs-stackoverflow;
+  }
+}
+.iconsfordevs-techcrunch {
+  &:before {
+    content: $iconsfordevs-techcrunch;
+  }
+}
+.iconsfordevs-codrops {
+  &:before {
+    content: $iconsfordevs-codrops;
+  }
+}
+.iconsfordevs-css_tricks {
+  &:before {
+    content: $iconsfordevs-css_tricks;
+  }
+}
+.iconsfordevs-smashing_magazine {
+  &:before {
+    content: $iconsfordevs-smashing_magazine;
+  }
+}
+.iconsfordevs-netmagazine {
+  &:before {
+    content: $iconsfordevs-netmagazine;
+  }
+}
+.iconsfordevs-codepen {
+  &:before {
+    content: $iconsfordevs-codepen;
+  }
+}
+.iconsfordevs-cssdeck {
+  &:before {
+    content: $iconsfordevs-cssdeck;
+  }
+}
+.iconsfordevs-hackernews {
+  &:before {
+    content: $iconsfordevs-hackernews;
+  }
+}
+.iconsfordevs-dropbox {
+  &:before {
+    content: $iconsfordevs-dropbox;
+  }
+}
+.iconsfordevs-google_drive {
+  &:before {
+    content: $iconsfordevs-google_drive;
+  }
+}
+.iconsfordevs-visualstudio {
+  &:before {
+    content: $iconsfordevs-visualstudio;
+  }
+}
+.iconsfordevs-unity_small {
+  &:before {
+    content: $iconsfordevs-unity_small;
+  }
+}
+.iconsfordevs-rasberry_pi {
+  &:before {
+    content: $iconsfordevs-rasberry_pi;
+  }
+}
+.iconsfordevs-chrome {
+  &:before {
+    content: $iconsfordevs-chrome;
+  }
+}
+.iconsfordevs-ie {
+  &:before {
+    content: $iconsfordevs-ie;
+  }
+}
+.iconsfordevs-firefox {
+  &:before {
+    content: $iconsfordevs-firefox;
+  }
+}
+.iconsfordevs-opera {
+  &:before {
+    content: $iconsfordevs-opera;
+  }
+}
+.iconsfordevs-safari {
+  &:before {
+    content: $iconsfordevs-safari;
+  }
+}
+.iconsfordevs-swift {
+  &:before {
+    content: $iconsfordevs-swift;
+  }
+}
+.iconsfordevs-symfony {
+  &:before {
+    content: $iconsfordevs-symfony;
+  }
+}
+.iconsfordevs-symfony_badge {
+  &:before {
+    content: $iconsfordevs-symfony_badge;
+  }
+}
+.iconsfordevs-less {
+  &:before {
+    content: $iconsfordevs-less;
+  }
+}
+.iconsfordevs-stylus {
+  &:before {
+    content: $iconsfordevs-stylus;
+  }
+}
+.iconsfordevs-trello {
+  &:before {
+    content: $iconsfordevs-trello;
+  }
+}
+.iconsfordevs-atlassian {
+  &:before {
+    content: $iconsfordevs-atlassian;
+  }
+}
+.iconsfordevs-jira {
+  &:before {
+    content: $iconsfordevs-jira;
+  }
+}
+.iconsfordevs-envato {
+  &:before {
+    content: $iconsfordevs-envato;
+  }
+}
+.iconsfordevs-snap_svg {
+  &:before {
+    content: $iconsfordevs-snap_svg;
+  }
+}
+.iconsfordevs-raphael {
+  &:before {
+    content: $iconsfordevs-raphael;
+  }
+}
+.iconsfordevs-google_analytics {
+  &:before {
+    content: $iconsfordevs-google_analytics;
+  }
+}
+.iconsfordevs-compass {
+  &:before {
+    content: $iconsfordevs-compass;
+  }
+}
+.iconsfordevs-onedrive {
+  &:before {
+    content: $iconsfordevs-onedrive;
+  }
+}
+.iconsfordevs-gulp {
+  &:before {
+    content: $iconsfordevs-gulp;
+  }
+}
+.iconsfordevs-atom {
+  &:before {
+    content: $iconsfordevs-atom;
+  }
+}
+.iconsfordevs-cisco {
+  &:before {
+    content: $iconsfordevs-cisco;
+  }
+}
+.iconsfordevs-nancy {
+  &:before {
+    content: $iconsfordevs-nancy;
+  }
+}
+.iconsfordevs-clojure {
+  &:before {
+    content: $iconsfordevs-clojure;
+  }
+}
+.iconsfordevs-clojure_alt {
+  &:before {
+    content: $iconsfordevs-clojure_alt;
+  }
+}
+.iconsfordevs-perl {
+  &:before {
+    content: $iconsfordevs-perl;
+  }
+}
+.iconsfordevs-celluloid {
+  &:before {
+    content: $iconsfordevs-celluloid;
+  }
+}
+.iconsfordevs-w3c {
+  &:before {
+    content: $iconsfordevs-w3c;
+  }
+}
+.iconsfordevs-redis {
+  &:before {
+    content: $iconsfordevs-redis;
+  }
+}
+.iconsfordevs-postgresql {
+  &:before {
+    content: $iconsfordevs-postgresql;
+  }
+}
+.iconsfordevs-webplatform {
+  &:before {
+    content: $iconsfordevs-webplatform;
+  }
+}
+.iconsfordevs-jenkins {
+  &:before {
+    content: $iconsfordevs-jenkins;
+  }
+}
+.iconsfordevs-requirejs {
+  &:before {
+    content: $iconsfordevs-requirejs;
+  }
+}
+.iconsfordevs-opensource {
+  &:before {
+    content: $iconsfordevs-opensource;
+  }
+}
+.iconsfordevs-typo3 {
+  &:before {
+    content: $iconsfordevs-typo3;
+  }
+}
+.iconsfordevs-uikit {
+  &:before {
+    content: $iconsfordevs-uikit;
+  }
+}
+.iconsfordevs-doctrine {
+  &:before {
+    content: $iconsfordevs-doctrine;
+  }
+}
+.iconsfordevs-groovy {
+  &:before {
+    content: $iconsfordevs-groovy;
+  }
+}
+.iconsfordevs-nginx {
+  &:before {
+    content: $iconsfordevs-nginx;
+  }
+}
+.iconsfordevs-haskell {
+  &:before {
+    content: $iconsfordevs-haskell;
+  }
+}
+.iconsfordevs-zend {
+  &:before {
+    content: $iconsfordevs-zend;
+  }
+}
+.iconsfordevs-gnu {
+  &:before {
+    content: $iconsfordevs-gnu;
+  }
+}
+.iconsfordevs-yeoman {
+  &:before {
+    content: $iconsfordevs-yeoman;
+  }
+}
+.iconsfordevs-heroku {
+  &:before {
+    content: $iconsfordevs-heroku;
+  }
+}
+.iconsfordevs-debian {
+  &:before {
+    content: $iconsfordevs-debian;
+  }
+}
+.iconsfordevs-travis {
+  &:before {
+    content: $iconsfordevs-travis;
+  }
+}
+.iconsfordevs-dotnet {
+  &:before {
+    content: $iconsfordevs-dotnet;
+  }
+}
+.iconsfordevs-codeigniter {
+  &:before {
+    content: $iconsfordevs-codeigniter;
+  }
+}
+.iconsfordevs-javascript_badge {
+  &:before {
+    content: $iconsfordevs-javascript_badge;
+  }
+}
+.iconsfordevs-yii {
+  &:before {
+    content: $iconsfordevs-yii;
+  }
+}
+.iconsfordevs-msql_server {
+  &:before {
+    content: $iconsfordevs-msql_server;
+  }
+}
+.iconsfordevs-composer {
+  &:before {
+    content: $iconsfordevs-composer;
+  }
+}
+.iconsfordevs-krakenjs_badge {
+  &:before {
+    content: $iconsfordevs-krakenjs_badge;
+  }
+}
+.iconsfordevs-krakenjs {
+  &:before {
+    content: $iconsfordevs-krakenjs;
+  }
+}
+.iconsfordevs-mozilla {
+  &:before {
+    content: $iconsfordevs-mozilla;
+  }
+}
+.iconsfordevs-firebase {
+  &:before {
+    content: $iconsfordevs-firebase;
+  }
+}
+.iconsfordevs-sizzlejs {
+  &:before {
+    content: $iconsfordevs-sizzlejs;
+  }
+}
+.iconsfordevs-creativecommons {
+  &:before {
+    content: $iconsfordevs-creativecommons;
+  }
+}
+.iconsfordevs-creativecommons_badge {
+  &:before {
+    content: $iconsfordevs-creativecommons_badge;
+  }
+}
+.iconsfordevs-mitlicence {
+  &:before {
+    content: $iconsfordevs-mitlicence;
+  }
+}
+.iconsfordevs-senchatouch {
+  &:before {
+    content: $iconsfordevs-senchatouch;
+  }
+}
+.iconsfordevs-bugsense {
+  &:before {
+    content: $iconsfordevs-bugsense;
+  }
+}
+.iconsfordevs-extjs {
+  &:before {
+    content: $iconsfordevs-extjs;
+  }
+}
+.iconsfordevs-mootools_badge {
+  &:before {
+    content: $iconsfordevs-mootools_badge;
+  }
+}
+.iconsfordevs-mootools {
+  &:before {
+    content: $iconsfordevs-mootools;
+  }
+}
+.iconsfordevs-ruby_rough {
+  &:before {
+    content: $iconsfordevs-ruby_rough;
+  }
+}
+.iconsfordevs-komodo {
+  &:before {
+    content: $iconsfordevs-komodo;
+  }
+}
+.iconsfordevs-coda .path1 {
+  &:before {
+    content: $iconsfordevs-coda-path1;  
+    color: #91CC62;
+  }
+}
+.iconsfordevs-coda .path2 {
+  &:before {
+    content: $iconsfordevs-coda-path2;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-coda .path3 {
+  &:before {
+    content: $iconsfordevs-coda-path3;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-bintray {
+  &:before {
+    content: $iconsfordevs-bintray;
+  }
+}
+.iconsfordevs-terminal {
+  &:before {
+    content: $iconsfordevs-terminal;
+  }
+}
+.iconsfordevs-code {
+  &:before {
+    content: $iconsfordevs-code;
+  }
+}
+.iconsfordevs-responsive .path1 {
+  &:before {
+    content: $iconsfordevs-responsive-path1;  
+    color: #FFFFFF;
+  }
+}
+.iconsfordevs-responsive .path2 {
+  &:before {
+    content: $iconsfordevs-responsive-path2;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-responsive .path3 {
+  &:before {
+    content: $iconsfordevs-responsive-path3;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-responsive .path4 {
+  &:before {
+    content: $iconsfordevs-responsive-path4;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-responsive .path5 {
+  &:before {
+    content: $iconsfordevs-responsive-path5;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-responsive .path6 {
+  &:before {
+    content: $iconsfordevs-responsive-path6;  
+    margin-left: -1em;  
+    color: #000;
+  }
+}
+.iconsfordevs-responsive .path7 {
+  &:before {
+    content: $iconsfordevs-responsive-path7;  
+    margin-left: -1em;  
+    color: #FFFFFF;
+  }
+}
+.iconsfordevs-dart {
+  &:before {
+    content: $iconsfordevs-dart;
+  }
+}
+.iconsfordevs-aptana {
+  &:before {
+    content: $iconsfordevs-aptana;
+  }
+}
+.iconsfordevs-mailchimp {
+  &:before {
+    content: $iconsfordevs-mailchimp;
+  }
+}
+.iconsfordevs-netbeans {
+  &:before {
+    content: $iconsfordevs-netbeans;
+  }
+}
+.iconsfordevs-dreamweaver {
+  &:before {
+    content: $iconsfordevs-dreamweaver;
+  }
+}
+.iconsfordevs-brackets {
+  &:before {
+    content: $iconsfordevs-brackets;
+  }
+}
+.iconsfordevs-eclipse {
+  &:before {
+    content: $iconsfordevs-eclipse;
+  }
+}
+.iconsfordevs-cloud9 {
+  &:before {
+    content: $iconsfordevs-cloud9;
+  }
+}
+.iconsfordevs-scrum {
+  &:before {
+    content: $iconsfordevs-scrum;
+  }
+}
+.iconsfordevs-prolog {
+  &:before {
+    content: $iconsfordevs-prolog;
+  }
+}
+.iconsfordevs-terminal_badge {
+  &:before {
+    content: $iconsfordevs-terminal_badge;
+  }
+}
+.iconsfordevs-code_badge .path1 {
+  &:before {
+    content: $iconsfordevs-code_badge-path1;  
+    color: #000;
+  }
+}
+.iconsfordevs-code_badge .path2 {
+  &:before {
+    content: $iconsfordevs-code_badge-path2;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.iconsfordevs-code_badge .path3 {
+  &:before {
+    content: $iconsfordevs-code_badge-path3;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.iconsfordevs-code_badge .path4 {
+  &:before {
+    content: $iconsfordevs-code_badge-path4;  
+    margin-left: -1em;  
+    color: #231F20;
+  }
+}
+.iconsfordevs-mongodb {
+  &:before {
+    content: $iconsfordevs-mongodb;
+  }
+}
+.iconsfordevs-meteor {
+  &:before {
+    content: $iconsfordevs-meteor;
+  }
+}
+.iconsfordevs-meteorfull {
+  &:before {
+    content: $iconsfordevs-meteorfull;
+  }
+}
+.iconsfordevs-fsharp {
+  &:before {
+    content: $iconsfordevs-fsharp;
+  }
+}
+.iconsfordevs-rust {
+  &:before {
+    content: $iconsfordevs-rust;
+  }
+}
+.iconsfordevs-ionic {
+  &:before {
+    content: $iconsfordevs-ionic;
+  }
+}
+.iconsfordevs-sublime {
+  &:before {
+    content: $iconsfordevs-sublime;
+  }
+}
+
