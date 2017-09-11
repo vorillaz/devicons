@@ -2,6 +2,7 @@
   "name": "devicons",
   "description": "An iconic font made for developers",
   "version": "1.8.0",
+  "jsdelivr": "css/devicons.min.css",
   "keywords": ["font", "icons", "devicons", "glyphs" ],
   "homepage": "http://vorillaz.github.io/devicons/",
   "bugs": {
