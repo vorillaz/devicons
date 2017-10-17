@@ -1,0 +1,86 @@
+{
+	"selection": [
+		{
+			"order": 2,
+			"id": 0
+		}
+	],
+	"metadata": {
+		"name": "livescript",
+		"importSize": {
+			"width": 20,
+			"height": 20
+		},
+		"url": "http://livescript.net/",
+		"iconsHash": 526909930
+	},
+	"height": 1024,
+	"prevSize": 32,
+	"icons": [
+		{
+			"paths": [
+				"M181.169 72.976h110.277v882.215h-110.277v-882.215z",
+				"M70.892 734.638h882.215v110.277h-882.215v-110.277z",
+				"M346.585 128.115h55.138v551.385h-55.138v-551.385z",
+				"M346.585 624.361h551.385v55.138h-551.385v-55.138z",
+				"M456.862 128.115h55.138v441.108h-55.138v-441.108z",
+				"M456.862 514.084h441.108v55.138h-441.108v-55.138z",
+				"M567.138 128.115h55.138v330.831h-55.138v-330.831z",
+				"M567.138 403.807h330.831v55.138h-330.831v-55.138z",
+				"M677.415 128.115h55.138v220.554h-55.138v-220.554z",
+				"M677.415 293.53h220.554v55.138h-220.554v-55.138z",
+				"M787.692 128.115h55.138v110.277h-55.138v-110.277z",
+				"M787.692 183.253h110.277v55.138h-110.277v-55.138z",
+				"M798.602 193.735l39.071 38.906-579.695 582.16-39.071-38.906 579.695-582.16z"
+			],
+			"attrs": [
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{}
+			],
+			"isMulticolor": false,
+			"grid": 14,
+			"tags": [
+				"livescript_logo_1"
+			]
+		}
+	],
+	"colorThemes": [],
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			}
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 4473924,
+			"bgColor": 16777215
+		},
+		"historySize": 100,
+		"showCodes": false,
+		"gridSize": 16,
+		"showGrid": true
+	},
+	"IcoMoonType": "icon-set"
+}
