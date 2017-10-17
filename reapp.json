@@ -1,0 +1,95 @@
+{
+	"selection": [
+		{
+			"order": 0,
+			"id": 0
+		}
+	],
+	"metadata": {
+		"name": "reapp",
+		"importSize": {
+			"width": 200,
+			"height": 200
+		},
+		"url": "http://reapp.io/",
+		"iconsHash": 148325219
+	},
+	"height": 1024,
+	"prevSize": 32,
+	"icons": [
+		{
+			"paths": [
+				"M70.53 70.53h882.939v882.939h-882.939v-882.939z",
+				"M631.197 187.52c0 0 0 0 0 0h-261.35c-56.508 0-102.863 46.354-102.863 102.863v441.47c0 0.883 0 2.207 0 3.090 0.883 0 2.207 0 3.090 0 66.22 0 120.080-54.301 120.080-120.080v-265.323c0-21.191 17.218-38.408 38.408-38.408h82.114c67.545 0 122.287-56.066 120.521-123.611z",
+				"M754.808 285.968c-0.883 0-2.207 0-3.090 0-66.662 0-120.521 53.859-120.521 120.080v265.324c0 21.191-17.218 38.408-38.408 38.408h-82.114c-67.103 0-122.287 56.066-120.080 123.611 0 0 0 0 0 0h261.35c56.508 0 102.862-46.354 102.862-102.862v-441.47c0-0.883 0-1.766 0-3.090z"
+			],
+			"attrs": [
+				{
+					"fill": "rgb(35, 31, 32)"
+				},
+				{
+					"fill": "rgb(255, 255, 255)"
+				},
+				{
+					"fill": "rgb(255, 255, 255)"
+				}
+			],
+			"isMulticolor": true,
+			"grid": 14,
+			"tags": [
+				"reapp"
+			],
+			"colorPermutations": {
+				"25525525513531321": [
+					0,
+					1,
+					1
+				]
+			}
+		}
+	],
+	"colorThemes": [
+		[
+			[
+				35,
+				31,
+				32,
+				1
+			],
+			[
+				255,
+				255,
+				255,
+				1
+			]
+		]
+	],
+	"colorThemeIdx": 0,
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			}
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 4473924,
+			"bgColor": 16777215
+		},
+		"historySize": 100,
+		"showCodes": false,
+		"gridSize": 16,
+		"showGrid": true
+	},
+	"IcoMoonType": "icon-set"
+}
