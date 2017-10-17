@@ -10,7 +10,7 @@ Devicons is a full stack iconic font ready to be shipped with your next project.
 Devicons iconic font is free to use and licensed under [MIT](http://opensource.org/licenses/MIT).  
 
 
-###Devicons icon set  1.8.0
+### Devicons icon set  1.8.0
 ![Devicons](http://i.imgur.com/VcgLGHN.png?1?6481)
 
 ## Use Devicons with a single line of code.
