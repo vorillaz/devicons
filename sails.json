@@ -1,0 +1,70 @@
+{
+	"selection": [
+		{
+			"order": 1,
+			"id": 258,
+			"prevSize": 32,
+			"code": 58880,
+			"name": "sails",
+			"tempChar": ""
+		}
+	],
+	"metadata": {
+		"name": "sails",
+		"designer": "",
+		"url": "http://sailsjs.org/",
+		"iconsHash": -174265139
+	},
+	"height": 1024,
+	"prevSize": 32,
+	"icons": [
+		{
+			"width": 1026,
+			"paths": [
+				"M508.733 79.728c-117.36 56.236-197.554 123.227-245.964 170.172-47.921 46.455-93.397 91.443-130.562 166.258-50.854 103.177-52.322 197.067-52.322 241.564-0.488 131.54 43.031 232.761 71.884 287.041h356.964z",
+				"M613.867 411.268v533.003h332.516z"
+			],
+			"attrs": [
+				{},
+				{}
+			],
+			"isMulticolor": false,
+			"tags": [
+				"sails"
+			],
+			"grid": 14,
+			"defaultCode": 58880
+		}
+	],
+	"colorThemes": [],
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {
+				"fontFamily": "icomoon"
+			},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"embed": false
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 4473924,
+			"bgColor": 16777215
+		},
+		"historySize": 100,
+		"showCodes": false,
+		"gridSize": 16,
+		"showGrid": true
+	},
+	"IcoMoonType": "icon-set"
+}
