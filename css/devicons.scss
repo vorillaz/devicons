@@ -1,13 +1,16 @@
 /*!
  *  Devicons 1.8.0 made by Theodore Vorillas / http://vorillaz.com 
  */
+
+@import "./_variables";
+
 @font-face {
 	font-family: 'devicons';
-	src:url('../fonts/devicons.eot?xqxft6');
-	src:url('../fonts/devicons.eot?#iefixxqxft6') format('embedded-opentype'),
-		url('../fonts/devicons.woff?xqxft6') format('woff'),
-		url('../fonts/devicons.ttf?xqxft6') format('truetype'),
-		url('../fonts/devicons.svg?xqxft6#devicons') format('svg');
+	src:url('#{$devicons-font-path}/devicons.eot?xqxft6');
+	src:url('#{$devicons-font-path}/devicons.eot?#iefixxqxft6') format('embedded-opentype'),
+		url('#{$devicons-font-path}/devicons.woff?xqxft6') format('woff'),
+		url('#{$devicons-font-path}/devicons.ttf?xqxft6') format('truetype'),
+		url('#{$devicons-font-path}/devicons.svg?xqxft6#devicons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
