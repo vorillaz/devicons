@@ -4,6 +4,7 @@ Since the original package did not include all SVG files I needed for my portfol
 ## This fork has the following additional Devicons included:
 * Express
 * Sequelize
+* Gatsby
 
 
 
