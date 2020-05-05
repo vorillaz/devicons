@@ -1,8 +1,10 @@
-# Meet  [Devicons](http://vorillaz.github.io/devicons/)
-### an iconic font made for developers, code jedis, ninjas, HTTPsters, evangelists and nerds.
+# This is my forked version of [Devicons](http://vorillaz.github.io/devicons/)
+Since the original package did not include all SVG files I needed for my portfolio website, I have forked the original repository and included some additional icons.
 
-[![NPM version][npm-image]][npm-url] 
-[![Downloads][downloads-image]][npm-url] 
+## This fork has the following additional Devicons included:
+* Express
+* Sequelize
+* Gatsby
 
 
 
@@ -76,15 +78,6 @@ Do you have any additional request? Drop me a line or support an issue.
 
 Note: All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by the author, nor vice versa.
 
-
-
-
-[gittip-url]: https://www.gittip.com/vorillaz/
-[gittip-image]: http://img.shields.io/gittip/vorillaz.svg?style=flat
-
-[downloads-image]: http://img.shields.io/npm/dm/devicons.svg?style=flat
-[npm-url]: https://npmjs.org/package/devicons
-[npm-image]: http://img.shields.io/npm/v/devicons.svg?style=flat
 
 
 [issues-url]: https://github.com/vorillaz/devicons/issues
