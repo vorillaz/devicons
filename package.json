@@ -3,29 +3,33 @@
   "description": "An iconic font made for developers",
   "version": "1.8.0",
   "jsdelivr": "css/devicons.min.css",
-  "keywords": ["font", "icons", "devicons", "glyphs" ],
-  "homepage": "http://vorillaz.github.io/devicons/",
+  "keywords": [
+    "font",
+    "icons",
+    "devicons",
+    "glyphs"
+  ],
+  "homepage": "http://py563.github.io/devicons/",
   "bugs": {
-    "url" : "http://github.com/vorillaz/devicons/issues"
+    "url": "http://github.com/py563/devicons/issues"
   },
   "author": {
-    "name": "Theodore Vorillas",
-    "email": "sayhi@vorillaz.com",
-    "web": "http://twitter.com/vorillas"
+    "name": "Prajwal",
+    "email": "prajwalyashasvi@yahoo.co.in",
+    "web": "https://prajwalyashasvi.in/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vorillaz/devicons.git"
+    "url": "https://github.com/py563/devicons.git"
   },
-  "licenses": 
+  "licenses": [
     {
       "type": "MIT",
-      "url": "http://opensource.org/licenses/mit-license.html"
+      "url": "https://opensource.org/licenses/mit-license.html"
     }
-  ,
-  "dependencies": {
-  },
-  "engines" : {
-    "node" : ">=0.10.3"
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": ">=0.10.3"
   }
 }

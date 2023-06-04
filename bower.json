@@ -1,12 +1,8 @@
 {
   "name": "devicons",
   "description": "Devicons - An icon font made for developers",
-  "keywords": [
-    "icons",
-    "devicons",
-    "font"
-  ],
-  "homepage": "http://vorillaz.github.io/devicons/",
+  "keywords": ["icons", "devicons", "font"],
+  "homepage": "http://py563.github.io/devicons/",
   "license": "MIT",
   "main": [
     "css/devicons.css",
@@ -28,6 +24,7 @@
     "tests"
   ],
   "authors": [
-    "vorillaz <theodorevorillas@yahoo.gr>"
+    "vorillaz <theodorevorillas@yahoo.gr>",
+    "prajwal <prajwalyashasvi@yahoo.co.in>"
   ]
 }
