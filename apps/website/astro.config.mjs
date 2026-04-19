@@ -4,6 +4,9 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svgr from 'vite-plugin-svgr';
 
+/** @type {(value: string) => any} */
+const freq = value => value;
+
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -67,13 +70,36 @@ export default defineConfig({
       changefreq: 'weekly',
       serialize(item) {
         const url = item.url;
-        if (/\/(?:$|index)?$/.test(new URL(url).pathname)) {
+        const pathname = new URL(url).pathname;
+        const isRoot = /\/(?:$|index)?$/.test(pathname);
+        const isIconListing =
+          pathname === '/icons' ||
+          pathname === '/icons/' ||
+          pathname === '/icons/popular' ||
+          pathname === '/icons/popular/' ||
+          pathname.startsWith('/icons/tag/') ||
+          pathname.startsWith('/icons/color/');
+        const isIconDetail =
+          pathname.startsWith('/icons/') && !isIconListing;
+
+        if (isRoot) {
           item.priority = 1.0;
-          item.changefreq = 'daily';
-        } else if (url.includes('/docs')) {
+          item.changefreq = freq('daily');
+        } else if (pathname.startsWith('/docs')) {
           item.priority = 0.8;
-        } else if (url.includes('/icons/')) {
+          item.changefreq = freq('weekly');
+        } else if (isIconListing) {
+          item.priority = 0.8;
+          item.changefreq = freq('weekly');
+        } else if (isIconDetail) {
           item.priority = 0.7;
+          item.changefreq = freq('monthly');
+        } else if (pathname.startsWith('/compare/')) {
+          item.priority = 0.6;
+          item.changefreq = freq('monthly');
+        } else if (pathname.startsWith('/packs')) {
+          item.priority = 0.6;
+          item.changefreq = freq('weekly');
         } else {
           item.priority = 0.5;
         }

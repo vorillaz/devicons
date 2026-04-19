@@ -6,9 +6,15 @@ import Breadcrumbs from '../components/seo/breadcrumbs.astro';
 import RelatedIcons from '../components/seo/related-icons.astro';
 import { Badge } from '../components/ui/badge';
 import { Tag } from '../components/ui/tag';
-import { breadcrumbSchema, iconBrandSchema, iconImageSchema } from '../lib/seo';
+import {
+  breadcrumbSchema,
+  iconBrandSchema,
+  iconImageSchema,
+  faqSchema,
+} from '../lib/seo';
 import { getRelatedIcons } from '../lib/related-icons';
-import { slugifyTag } from '../lib/icons-query';
+import { slugifyTag, formatTagLabel } from '../lib/icons-query';
+import { buildIconFaq } from '../lib/icon-faq';
 
 type IconNav = { slug: string; name: string } | null;
 type Props = CollectionEntry<'icons'>['data'] & {
@@ -27,6 +33,7 @@ const {
   website,
   license,
   mainColor,
+  otherColors,
   aliases,
   badInDark,
   badInLight,
@@ -43,19 +50,36 @@ const contrastHint = badInDark && badInLight
       ? 'Looks better on a dark background'
       : null;
 
-const title = `${name} Icon — Free SVG & Component | Devicons`;
+const title = `${name} Logo — Free SVG Icon & React Component | Devicons`;
 const metaDescription =
-  description ??
-  `Download the ${name} logo as an optimized SVG, or drop it into React, Vue, or Svelte. Free, open-source developer icon.`;
+  description
+    ? `${description} Download the ${name} logo as a free SVG, or use the React, Vue, and Svelte components.`
+    : `Download the ${name} logo as an optimized SVG. Free React, Vue, and Svelte components under the MIT license.`;
 
 const keywords = [
-  `${name} icon`,
   `${name} logo`,
+  `${name} icon`,
   `${name} svg`,
-  ...(aliases ?? []),
-  ...(tags ?? []),
+  `${name} logo svg`,
+  `${name} logo download`,
+  `${name} logo png`,
+  `${name} react component`,
+  `${name} brand color`,
+  ...(aliases ?? []).flatMap(a => [`${a} logo`, `${a} icon`]),
+  ...(tags ?? []).map(t => `${formatTagLabel(t)} icons`),
   'developer icons',
+  'developer logos',
 ].filter(Boolean);
+
+const faqEntries = buildIconFaq({
+  name,
+  description,
+  slug,
+  tags,
+  aliases,
+  mainColor,
+  license,
+});
 
 const jsonLd = [
   breadcrumbSchema([
@@ -65,6 +89,7 @@ const jsonLd = [
   ]),
   iconBrandSchema({ name, description, slug, website, mainColor }),
   iconImageSchema({ name, slug, license }),
+  faqSchema(faqEntries),
 ];
 
 const related = await getRelatedIcons(slug, tags, 8);
@@ -141,6 +166,91 @@ const related = await getRelatedIcons(slug, tags, 8);
     badInDark={badInDark}
     badInLight={badInLight}
   />
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16">
+    <div class="border-t border-border pt-8 sm:pt-10">
+      <h2 class="type-h2 mb-4">About the {name} logo</h2>
+      <p class="type-body max-w-[70ch]">
+        {
+          description
+            ? `${description} The ${name} logo is published here as an optimized SVG alongside React, Vue, and Svelte components — free under the ${license ?? 'MIT'} license.`
+            : `${name} is a developer brand featured in the Devicons library. The logo ships as an optimized SVG plus React, Vue, and Svelte components — free under the ${license ?? 'MIT'} license.`
+        }
+      </p>
+      {
+        tags.length > 0 && (
+          <p class="type-body max-w-[70ch] mt-3 text-text-muted">
+            You'll see the {name} logo across{' '}
+            {tags
+              .slice(0, 3)
+              .map(t => formatTagLabel(t).toLowerCase())
+              .join(', ')}{' '}
+            stacks. Browse every{' '}
+            <a
+              href={`/icons/tag/${slugifyTag(tags[0])}`}
+              class="text-accent hover:text-accent-hover transition-colors">
+              {formatTagLabel(tags[0]).toLowerCase()} logo
+            </a>{' '}
+            in the same category.
+          </p>
+        )
+      }
+    </div>
+
+    {
+      mainColor && (
+        <div class="mt-10 sm:mt-12 pt-8 border-t border-border">
+          <h2 class="type-h2 mb-4">{name} brand color</h2>
+          <p class="type-body max-w-[70ch] mb-6">
+            The primary {name} brand color. Use the hex below when pairing the{' '}
+            {name} logo with your UI, slides, or documentation.
+          </p>
+          <ul class="flex flex-wrap gap-3">
+            <li class="flex items-center gap-3 p-3 border border-border min-w-45">
+              <span
+                aria-hidden="true"
+                class="inline-block w-10 h-10 border border-border shrink-0"
+                style={`background-color: ${mainColor}`}
+              />
+              <div class="flex flex-col gap-0.5">
+                <span class="type-label">Primary</span>
+                <code class="font-mono text-sm">{mainColor.toUpperCase()}</code>
+              </div>
+            </li>
+            {otherColors?.map((hex: string) => (
+              <li class="flex items-center gap-3 p-3 border border-border min-w-45">
+                <span
+                  aria-hidden="true"
+                  class="inline-block w-10 h-10 border border-border shrink-0"
+                  style={`background-color: ${hex}`}
+                />
+                <div class="flex flex-col gap-0.5">
+                  <span class="type-label">Secondary</span>
+                  <code class="font-mono text-sm">{hex.toUpperCase()}</code>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    <div class="mt-10 sm:mt-12 pt-8 border-t border-border">
+      <h2 class="type-h2 mb-6">{name} logo FAQ</h2>
+      <dl class="divide-y divide-border">
+        {
+          faqEntries.map(entry => (
+            <div class="py-5 first:pt-0">
+              <dt class="type-h3 mb-2">{entry.question}</dt>
+              <dd class="type-body text-text-muted max-w-[70ch]">
+                {entry.answer}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
 
   <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-8 sm:pb-12">
     <RelatedIcons icons={related} />
