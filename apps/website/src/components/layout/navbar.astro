@@ -473,6 +473,10 @@ const navLinks = [
 <script>
   import { setupMobileMenu } from '../../lib/mobile-menu';
   document.addEventListener('astro:page-load', () => {
-    setupMobileMenu({ key: 'mobile-menu', breakpoint: '(min-width: 640px)' });
+    setupMobileMenu({
+      key: 'mobile-menu',
+      breakpoint: '(min-width: 640px)',
+      closeOnPanelLinkClick: true,
+    });
   });
 </script>
