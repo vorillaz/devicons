@@ -12,38 +12,39 @@ interface Props {
   emptyMessage?: string;
 }
 
-const { items, emptyMessage = "No icons found." } = Astro.props;
+const { items, emptyMessage = 'No icons found.' } = Astro.props;
 ---
 
-{items.length === 0 ? (
-  <p class="type-body text-text-muted">{emptyMessage}</p>
-) : (
-  <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-    {items.map((icon) => (
-      <li>
-        <a
-          href={`/icons/${icon.slug}`}
-          data-astro-prefetch
-          class:list={[
-            "icon-grid-card",
-            icon.badInDark && "icon-grid-card--bad-dark",
-            icon.badInLight && "icon-grid-card--bad-light",
-          ]}
-        >
-          <span class="icon-grid-card__frame">
-            <img
-              src={`/devicons/icons/${icon.iconFile}.svg`}
-              alt={`${icon.name} logo`}
-              width="48"
-              height="48"
-              loading="lazy"
-              decoding="async"
-              class="icon-grid-card__icon"
-            />
-          </span>
-          <span class="icon-grid-card__label">{icon.name}</span>
-        </a>
-      </li>
-    ))}
-  </ul>
-)}
+{
+  items.length === 0 ? (
+    <p class="type-body text-text-muted">{emptyMessage}</p>
+  ) : (
+    <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      {items.map(icon => (
+        <li>
+          <a
+            href={`/icons/${icon.slug}`}
+            data-astro-prefetch="viewport"
+            class:list={[
+              'icon-grid-card',
+              icon.badInDark && 'icon-grid-card--bad-dark',
+              icon.badInLight && 'icon-grid-card--bad-light',
+            ]}>
+            <span class="icon-grid-card__frame">
+              <img
+                src={`/devicons/icons/${icon.iconFile}.svg`}
+                alt={`${icon.name} logo`}
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                class="icon-grid-card__icon"
+              />
+            </span>
+            <span class="icon-grid-card__label">{icon.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

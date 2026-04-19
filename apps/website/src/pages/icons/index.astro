@@ -43,7 +43,11 @@ const jsonLd = [
 ];
 ---
 
-<PageLayout title={title} description={description} image="/og/icons.png" jsonLd={jsonLd}>
+<PageLayout
+  title={title}
+  description={description}
+  image="/og/icons.png"
+  jsonLd={jsonLd}>
   <div class="max-w-[1400px] mx-auto px-6 pt-10">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Icons' }]} />
 
@@ -88,6 +92,7 @@ const jsonLd = [
             <li>
               <a
                 href={`/icons/tag/${slugifyTag(tag)}`}
+                data-astro-prefetch="viewport"
                 class="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors">
                 {formatTagLabel(tag)}{' '}
                 <span class="text-text-muted">{count}</span>

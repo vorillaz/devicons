@@ -28,7 +28,7 @@ function DrawerBody({ icon }: { icon: IconEntry }) {
           <h2 className="type-h2 truncate">{icon.name}</h2>
           <a
             href={`/icons/${icon.id}`}
-            data-astro-prefetch
+            data-astro-prefetch="viewport"
             className="font-mono text-xs font-semibold uppercase tracking-[0.18em] leading-none text-accent hover:text-accent-hover transition-colors shrink-0">
             Full page
           </a>
@@ -68,7 +68,10 @@ function DrawerBody({ icon }: { icon: IconEntry }) {
         />
       </div>
 
-      <InstallTabs icons={icon.icons?.length ? icon.icons : [icon.id]} mono={variant === 'font'} />
+      <InstallTabs
+        icons={icon.icons?.length ? icon.icons : [icon.id]}
+        mono={variant === 'font'}
+      />
     </div>
   );
 }
@@ -97,8 +100,7 @@ export function SearchDrawer({ allIcons }: SearchDrawerProps) {
       onOpenChange={handleOpenChange}
       shouldScaleBackground={false}
       noBodyStyles
-      disablePreventScroll={false}
-    >
+      disablePreventScroll={false}>
       <DrawerContent className="bg-bg border-t border-border max-h-[95vh] sm:max-h-[85vh]">
         <div className="sr-only">
           <DrawerHeader>

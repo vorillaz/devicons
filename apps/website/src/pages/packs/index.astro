@@ -26,7 +26,11 @@ const jsonLd = [
 ];
 ---
 
-<PageLayout title={title} description={description} image="/og/packs.png" jsonLd={jsonLd}>
+<PageLayout
+  title={title}
+  description={description}
+  image="/og/packs.png"
+  jsonLd={jsonLd}>
   <div class="max-w-[1400px] mx-auto px-6 pt-10">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Packs' }]} />
     <header class="mt-6 mb-10 pb-8 border-b border-border">
@@ -48,7 +52,7 @@ const jsonLd = [
           <li>
             <a
               href={`/packs/${pack.id}`}
-              data-astro-prefetch
+              data-astro-prefetch="viewport"
               class="block p-6 border border-border hover:border-accent/60 transition-colors group">
               <h2 class="type-h3 group-hover:text-accent transition-colors">
                 {pack.data.title}
