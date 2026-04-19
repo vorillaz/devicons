@@ -44,7 +44,6 @@ const LOGOS = [
   { id: 'vue', label: 'Vue', svg: '/models/vue-logo.svg', dispScale: 38 },
 ];
 
-const INSTALL_CMD = 'npm i @dev.icons/react';
 const initial = LOGOS[0];
 
 const publicDir = path.join(process.cwd(), 'public');
@@ -78,12 +77,6 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
         <div
           class="hero-actions flex flex-wrap items-center gap-3 mt-5 sm:mt-6">
           <a href="#icons" class="btn btn--primary btn--mono"> Browse Icons </a>
-          <button
-            type="button"
-            data-copy={INSTALL_CMD}
-            class="btn btn--ghost btn--mono">
-            <span data-label>$ {INSTALL_CMD}</span>
-          </button>
         </div>
       </div>
 
@@ -402,24 +395,6 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
   type Logo = { id: string; label: string; svg: string; dispScale: number };
 
   function initHero() {
-    const copyBtn = document.querySelector<HTMLButtonElement>('[data-copy]');
-    if (copyBtn) {
-      const label = copyBtn.querySelector<HTMLSpanElement>('[data-label]');
-      const original = label?.textContent ?? '';
-      copyBtn.addEventListener('click', async () => {
-        const text = copyBtn.dataset.copy ?? '';
-        try {
-          await navigator.clipboard.writeText(text);
-          if (label) {
-            label.textContent = 'Copied!';
-            setTimeout(() => {
-              label.textContent = original;
-            }, 2000);
-          }
-        } catch {}
-      });
-    }
-
     const logoEl = document.querySelector<HTMLElement>('.hero-logo');
     const shapeEl = logoEl?.querySelector<HTMLElement>('[data-glass-shape]');
     const defsSvg = document.querySelector<SVGSVGElement>('.hero-glass-defs');
