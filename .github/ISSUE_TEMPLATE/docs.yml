@@ -1,0 +1,47 @@
+name: Documentation
+description: Report a problem with the docs or suggest an improvement
+labels: [docs]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the Devicons docs!
+
+        Before opening a new issue, please search [existing docs issues][docs-issues]
+        (including closed ones) to avoid duplicates.
+
+        [docs-issues]: https://github.com/vorillaz/devicons/labels/docs
+
+  - type: dropdown
+    attributes:
+      label: Kind of Issue
+      description: |
+        If your issue type is not here, select "Other" and explain in the
+        "Description" field below.
+      options:
+        - Improvement
+        - Mistake / inaccuracy
+        - Missing content
+        - Broken link or sample
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Docs Page
+      description: Permalink to the page in question.
+      placeholder: 'Example: https://devicons.io/docs/react'
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        Include as much detail as possible, for example:
+        - What is wrong, missing, or confusing
+        - What the docs should say or show instead
+        - Code samples or screenshots, if useful
+      placeholder: "Example: The React guide doesn't cover tree-shaken icon imports..."
+    validations:
+      required: true

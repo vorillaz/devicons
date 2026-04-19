@@ -1,0 +1,55 @@
+name: Icon removal
+description: Report an icon that should be removed
+labels: [remove icon, breaking change]
+title: 'Removal: <brand-name>'
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Removing an icon is a breaking change — it alters the public API for
+        anyone importing that icon by name.
+
+        Before opening a new issue, search [issues with the `remove icon`
+        label][remove-icon-issues] (including closed ones). If one already
+        exists for this brand, add a reaction or comment instead.
+
+        [remove-icon-issues]: https://github.com/vorillaz/devicons/labels/remove%20icon
+
+  - type: input
+    attributes:
+      label: Brand Name
+      placeholder: 'Example: Old Framework'
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Icon Slug
+      description: |
+        Kebab-case slug of the icon to remove (the filename in
+        `packages/core/export-files/icons/`).
+      placeholder: 'Example: old-framework'
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reason for Removal
+      description: |
+        - If the project/brand no longer exists, link a source supporting
+          that claim.
+        - If the brand should be removed for another reason, explain why.
+      placeholder: >-
+        Example: [this blogpost](https://example.com) announced the project
+        has been archived...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Suggested Replacement
+      description: |
+        If the brand was renamed or superseded, suggest the replacement icon
+        — either an existing slug or a link to a new-icon request.
+      placeholder: 'Example: Replaced by `new-framework` (#123).'

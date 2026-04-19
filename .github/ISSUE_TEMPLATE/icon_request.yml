@@ -1,0 +1,106 @@
+name: Icon request
+description: Request a new developer icon for Devicons
+labels: [new icon]
+title: 'Request: <brand-name>'
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Devicons covers brands, languages, frameworks, cloud services, and
+        developer tooling. For full details see the [Contributing Guidelines].
+
+        Before opening a new issue:
+
+        1. Search the [icon library](https://devicons.io/search) to confirm
+           the icon isn't already available.
+        2. Search [issues with the `new icon` label][new-icon-issues]
+           (including closed ones). If one already exists for this brand,
+           add a reaction or comment instead of opening a duplicate.
+
+        [Contributing Guidelines]: https://devicons.io/docs/contributing
+        [new-icon-issues]: https://github.com/vorillaz/devicons/issues?q=is%3Aissue+label%3A%22new+icon%22
+
+  - type: input
+    attributes:
+      label: Brand / Tool Name
+      placeholder: 'Example: Next.js'
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Suggested Slug
+      description: |
+        Kebab-case identifier used as the filename and public name
+        (see [Contributing Guidelines](https://devicons.io/docs/contributing)).
+        For variants, add a suffix (e.g. `react` and `react-icon`).
+      placeholder: 'Example: next-js'
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Website
+      description: |
+        Official website or repository. Put "None" if there is no public site.
+      placeholder: 'Example: https://nextjs.org'
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Category
+      description: Which kind of developer icon is this?
+      options:
+        - Language
+        - Framework / Library
+        - Frontend
+        - Backend
+        - Database
+        - Cloud / Infrastructure
+        - DevOps / CI
+        - Editor / IDE
+        - Design tool
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Official Brand Resources
+      description: |
+        Links to media kits, brand guidelines, or official SVGs and color
+        values we can use as a reference.
+      placeholder: |
+        Example:
+        - SVG / logo: https://nextjs.org/static/brand/...
+        - Primary color: `#000000`, from the official brand kit
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Brand Usage / License
+      description: |
+        If the brand publishes Terms of Service or brand guidelines that
+        govern use of its logo, link them here. Put "None" if you could not
+        find any.
+
+  - type: checkboxes
+    attributes:
+      label: Variants
+      description: Devicons ships a full-color and a monochrome version for every icon.
+      options:
+        - label: A monochrome version of this logo can be produced (or I'm happy to work with maintainers on one).
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Additional Comments
+      description: |
+        Anything else we should know? For example:
+        - Multiple logo or color variants
+        - Why this brand is relevant to developers
+        - Related icons already in the library
+      placeholder: 'Example: The logo has a dark and light variant...'

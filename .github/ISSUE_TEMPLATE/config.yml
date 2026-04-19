@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://devicons.io/docs/introduction
+    about: Read the docs before filing an issue.
+  - name: Contributing Guidelines
+    url: https://devicons.io/docs/contributing
+    about: How to add, update, and remove icons.
+  - name: Icon Library
+    url: https://devicons.io/search
+    about: Search existing icons before requesting a new one.

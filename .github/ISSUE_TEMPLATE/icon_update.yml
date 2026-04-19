@@ -1,0 +1,73 @@
+name: Icon update
+description: Report an outdated icon, logo, or color
+labels: [update icon]
+title: 'Update: <brand-name>'
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a new issue, search [issues with the `update icon`
+        label][update-icon-issues] (including closed ones). If one already
+        exists for this brand, add a reaction or comment instead.
+
+        [update-icon-issues]: https://github.com/vorillaz/devicons/labels/update%20icon
+
+  - type: input
+    attributes:
+      label: Brand Name
+      placeholder: 'Example: Next.js'
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Icon Slug
+      description: |
+        Kebab-case slug of the icon to update (the filename in
+        `packages/core/export-files/icons/`).
+      placeholder: 'Example: next-js'
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: What needs updating?
+      options:
+        - Icon (logo redesign)
+        - Colors
+        - Both icon and colors
+        - Metadata (tags, description, website)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Official Resources for Icon and Color
+      description: |
+        Media kits, brand guidelines, SVG files, etc. Put "None" if you are
+        unable to find any resources.
+      placeholder: |
+        Example:
+        - SVG: https://example.com/brand/logo.svg
+        - Color: `#111111`, from the website header
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Brand Usage / License
+      description: |
+        If the brand publishes Terms of Service or brand guidelines that
+        govern use of its logo, link them here.
+
+  - type: textarea
+    attributes:
+      label: Additional Comments
+      description: |
+        Anything else we should know? For example:
+        - Multiple variants of the new logo or color
+        - A specific date after which the old mark was retired
+        - Whether the monochrome variant also needs changes
+      placeholder: 'Example: The brand refreshed its logo on 2026-01-15...'
