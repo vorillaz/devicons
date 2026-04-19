@@ -1,8 +1,0 @@
-node_modules/
-.astro/
-dist/
-
-packages/core/dist/
-
-apps/website/assets/
-apps/website/publc/
