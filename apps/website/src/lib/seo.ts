@@ -9,8 +9,18 @@ import {
 
 type JsonLd = Record<string, unknown>;
 
-const abs = (path: string, base: string = SITE_URL) =>
-  new URL(path, base).toString();
+// Match the site's `trailingSlash: 'always'` so JSON-LD page URLs align with
+// canonicals and Astro's emitted routes. Skips fragments, query strings, and
+// asset paths (anything with a file extension) — those should stay as-is.
+const abs = (path: string, base: string = SITE_URL) => {
+  const u = new URL(path, base);
+  const lastSegment = u.pathname.split('/').pop() ?? '';
+  const isAsset = lastSegment.includes('.');
+  if (!isAsset && !u.pathname.endsWith('/')) {
+    u.pathname = `${u.pathname}/`;
+  }
+  return u.toString();
+};
 
 const twitterUrl = () =>
   TWITTER_HANDLE

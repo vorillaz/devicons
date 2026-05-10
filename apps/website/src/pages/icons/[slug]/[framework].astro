@@ -203,7 +203,7 @@ const renderSnippet = meta.buildRender(cmp);
           FRAMEWORKS.filter(f => f !== framework).map(f => (
             <li>
               <a
-                href={`/icons/${entry.id}/${f}`}
+                href={`/icons/${entry.id}/${f}/`}
                 data-astro-prefetch="viewport"
                 class="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors">
                 {FRAMEWORK_META[f].label}
@@ -213,7 +213,7 @@ const renderSnippet = meta.buildRender(cmp);
         }
         <li>
           <a
-            href={`/icons/${entry.id}`}
+            href={`/icons/${entry.id}/`}
             data-astro-prefetch
             class="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors">
             Full {name} page →
@@ -224,7 +224,7 @@ const renderSnippet = meta.buildRender(cmp);
 
     <nav class="mt-12 pt-6 border-t border-border">
       <a
-        href={`/docs/${framework === 'font' ? 'icon-font' : framework}`}
+        href={`/docs/${framework === 'font' ? 'icon-font' : framework}/`}
         data-astro-prefetch
         class="font-mono text-xs font-semibold uppercase tracking-caps text-text-muted hover:text-accent transition-colors">
         {meta.label} framework guide →

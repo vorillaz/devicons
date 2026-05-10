@@ -23,11 +23,11 @@ const { brand } = Astro.props;
       <div class="footer-col">
         <p class="footer-col__label">[ Browse ]</p>
         <ul class="footer-links">
-          <li><a href="/icons">All icons</a></li>
-          <li><a href="/icons/popular">Popular</a></li>
-          <li><a href="/packs">Packs</a></li>
-          <li><a href="/compare">Compare</a></li>
-          <li><a href="/search">Search</a></li>
+          <li><a href="/icons/">All icons</a></li>
+          <li><a href="/icons/popular/">Popular</a></li>
+          <li><a href="/packs/">Packs</a></li>
+          <li><a href="/compare/">Compare</a></li>
+          <li><a href="/search/">Search</a></li>
         </ul>
       </div>
 
@@ -37,7 +37,7 @@ const { brand } = Astro.props;
           {
             topTags.map(({ tag }) => (
               <li>
-                <a href={`/icons/tag/${slugifyTag(tag)}`}>
+                <a href={`/icons/tag/${slugifyTag(tag)}/`}>
                   {formatTagLabel(tag)}
                 </a>
               </li>
@@ -63,8 +63,8 @@ const { brand } = Astro.props;
               rel="noopener noreferrer">npm ↗</a
             >
           </li>
-          <li><a href="/docs">Documentation</a></li>
-          <li><a href="/legal">Legal</a></li>
+          <li><a href="/docs/">Documentation</a></li>
+          <li><a href="/legal/">Legal</a></li>
         </ul>
       </div>
 
