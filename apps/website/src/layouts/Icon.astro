@@ -32,6 +32,7 @@ const {
   version,
   website,
   license,
+  brandGuidelines,
   mainColor,
   otherColors,
   badInDark,
@@ -62,7 +63,7 @@ const jsonLd = [
     { name, url: `/icons/${slug}` },
   ]),
   iconBrandSchema({ name, description, slug, website, mainColor }),
-  iconImageSchema({ name, slug, license }),
+  iconImageSchema({ name, slug, license, brandGuidelines }),
 ];
 
 const colorChips = [
