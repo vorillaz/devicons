@@ -57,6 +57,7 @@ screens/
 .superpowers/
 .claude/
 .agents/
+.worktrees/
 skills-lock.json
 
 .astro/

@@ -139,6 +139,28 @@ const related = await getRelatedIcons(slug, tags, 8);
           )
         }
         {
+          license && (
+            <a
+              href={license}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs font-semibold uppercase tracking-caps leading-none text-accent hover:text-accent-hover transition-colors">
+              License
+            </a>
+          )
+        }
+        {
+          brandGuidelines && (
+            <a
+              href={brandGuidelines}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs font-semibold uppercase tracking-caps leading-none text-accent hover:text-accent-hover transition-colors">
+              Brand
+            </a>
+          )
+        }
+        {
           colorChips.map(({ hex, label }) => {
             const bucket = bucketForHex(hex);
             const chipClass =
