@@ -27,7 +27,7 @@ function DrawerBody({ icon }: { icon: IconEntry }) {
         <div className="flex items-center justify-between gap-3">
           <h2 className="type-h2 truncate">{icon.name}</h2>
           <a
-            href={`/icons/${icon.id}`}
+            href={`/icons/${icon.id}/`}
             data-astro-prefetch="viewport"
             className="font-mono text-xs font-semibold uppercase tracking-[0.18em] leading-none text-accent hover:text-accent-hover transition-colors shrink-0">
             Full page
