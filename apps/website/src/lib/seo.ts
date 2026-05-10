@@ -9,8 +9,18 @@ import {
 
 type JsonLd = Record<string, unknown>;
 
-const abs = (path: string, base: string = SITE_URL) =>
-  new URL(path, base).toString();
+// Match the site's `trailingSlash: 'always'` so JSON-LD page URLs align with
+// canonicals and Astro's emitted routes. Skips fragments, query strings, and
+// asset paths (anything with a file extension) — those should stay as-is.
+const abs = (path: string, base: string = SITE_URL) => {
+  const u = new URL(path, base);
+  const lastSegment = u.pathname.split('/').pop() ?? '';
+  const isAsset = lastSegment.includes('.');
+  if (!isAsset && !u.pathname.endsWith('/')) {
+    u.pathname = `${u.pathname}/`;
+  }
+  return u.toString();
+};
 
 const twitterUrl = () =>
   TWITTER_HANDLE
@@ -70,6 +80,7 @@ interface IconSchemaInput {
   website?: string;
   mainColor?: string;
   license?: string;
+  brandGuidelines?: string;
   site?: string;
 }
 
@@ -94,18 +105,24 @@ export const iconImageSchema = ({
   name,
   slug,
   license,
+  brandGuidelines,
   site = SITE_URL,
-}: IconSchemaInput): JsonLd => ({
-  '@context': 'https://schema.org',
-  '@type': 'ImageObject',
-  contentUrl: abs(`/devicons/icons/${slug}.svg`, site),
-  url: abs(`/icons/${slug}`, site),
-  name: `${name} logo`,
-  encodingFormat: 'image/svg+xml',
-  ...(license ? { license } : {}),
-  creditText: name,
-  creator: { '@id': abs('/#organization', site) },
-});
+}: IconSchemaInput): JsonLd => {
+  const pageUrl = abs(`/icons/${slug}`, site);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    contentUrl: abs(`/devicons/icons/${slug}.svg`, site),
+    url: pageUrl,
+    name: `${name} logo`,
+    encodingFormat: 'image/svg+xml',
+    license: license ?? `${GITHUB_URL}/blob/main/LICENSE`,
+    acquireLicensePage: brandGuidelines ?? pageUrl,
+    copyrightNotice: `${name} logo © ${name}. SVG distributed under MIT by ${SITE_TITLE}.`,
+    creditText: name,
+    creator: { '@id': abs('/#organization', site) },
+  };
+};
 
 interface TechArticleInput {
   title: string;

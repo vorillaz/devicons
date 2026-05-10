@@ -21,6 +21,7 @@ export default defineConfig({
     defaultStrategy: 'hover',
   },
   site: 'https://devicons.io',
+  trailingSlash: 'always',
   build: {
     format: 'directory',
     inlineStylesheets: 'always',

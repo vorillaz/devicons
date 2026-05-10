@@ -23,7 +23,7 @@ const { items, emptyMessage = 'No icons found.' } = Astro.props;
       {items.map(icon => (
         <li>
           <a
-            href={`/icons/${icon.slug}`}
+            href={`/icons/${icon.slug}/`}
             data-astro-prefetch="viewport"
             class:list={[
               'icon-grid-card',

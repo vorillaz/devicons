@@ -32,6 +32,7 @@ const {
   version,
   website,
   license,
+  brandGuidelines,
   mainColor,
   otherColors,
   badInDark,
@@ -62,7 +63,7 @@ const jsonLd = [
     { name, url: `/icons/${slug}` },
   ]),
   iconBrandSchema({ name, description, slug, website, mainColor }),
-  iconImageSchema({ name, slug, license }),
+  iconImageSchema({ name, slug, license, brandGuidelines }),
 ];
 
 const colorChips = [
@@ -118,7 +119,7 @@ const related = await getRelatedIcons(slug, tags, 8);
         {version && <Badge variant="neutral">v{version}</Badge>}
         {icons.length > 1 ? (
           <a
-            href={`/icons/${slug}/variants`}
+            href={`/icons/${slug}/variants/`}
             data-astro-prefetch
             class="inline-flex items-center px-1.5 py-0.5 border font-mono text-[10px] font-semibold uppercase tracking-[0.18em] leading-none bg-success/15 text-success border-success/20 hover:border-success transition-colors">
             {icons.length} variants →
@@ -152,7 +153,7 @@ const related = await getRelatedIcons(slug, tags, 8);
             const hexText = hex.toUpperCase();
             return bucket ? (
               <a
-                href={`/icons/color/${bucket}`}
+                href={`/icons/color/${bucket}/`}
                 aria-label={`${label} brand color ${hexText}`}
                 class={chipClass}>
                 {swatch}
@@ -174,7 +175,7 @@ const related = await getRelatedIcons(slug, tags, 8);
         tags.length > 0 && (
           <div class="flex gap-2 mt-3 sm:mt-4 flex-wrap">
             {tags.map((tag: string) => (
-              <Tag href={`/icons/tag/${slugifyTag(tag)}`}>{tag}</Tag>
+              <Tag href={`/icons/tag/${slugifyTag(tag)}/`}>{tag}</Tag>
             ))}
           </div>
         )
@@ -227,7 +228,7 @@ const related = await getRelatedIcons(slug, tags, 8);
             {comparisonPartners.map(c => (
               <li>
                 <a
-                  href={`/compare/${c.pairSlug}`}
+                  href={`/compare/${c.pairSlug}/`}
                   data-astro-prefetch
                   class="inline-flex items-center gap-2 px-3 py-2 border border-border text-sm hover:border-accent hover:text-accent transition-colors">
                   <span class="font-mono text-xs uppercase tracking-caps text-text-muted">
@@ -253,7 +254,7 @@ const related = await getRelatedIcons(slug, tags, 8);
           class="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border grid grid-cols-2 gap-3 sm:gap-4">
           {prev ? (
             <a
-              href={`/icons/${prev.slug}`}
+              href={`/icons/${prev.slug}/`}
               data-astro-prefetch
               class="group flex flex-col gap-2 p-4 border border-border hover:border-accent/60 transition-colors">
               <span class="type-meta group-hover:text-accent transition-colors">
@@ -266,7 +267,7 @@ const related = await getRelatedIcons(slug, tags, 8);
           )}
           {next ? (
             <a
-              href={`/icons/${next.slug}`}
+              href={`/icons/${next.slug}/`}
               data-astro-prefetch
               class="group flex flex-col gap-2 p-4 border border-border hover:border-accent/60 transition-colors text-right sm:col-start-2">
               <span class="type-meta group-hover:text-accent transition-colors">

@@ -14,7 +14,7 @@ const { prev, next } = Astro.props;
     <nav aria-label="Docs navigation" class="docs-pagination">
       {prev ? (
         <a
-          href={`/docs/${prev.id}`}
+          href={`/docs/${prev.id}/`}
           data-astro-prefetch
           class="docs-pagination__card group">
           <span class="type-meta group-hover:text-accent transition-colors">
@@ -27,7 +27,7 @@ const { prev, next } = Astro.props;
       )}
       {next ? (
         <a
-          href={`/docs/${next.id}`}
+          href={`/docs/${next.id}/`}
           data-astro-prefetch
           class="docs-pagination__card docs-pagination__card--next group">
           <span class="type-meta group-hover:text-accent transition-colors">
