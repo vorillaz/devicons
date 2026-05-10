@@ -96,7 +96,7 @@ const { entry, framework } = Astro.props as {
   entry: CollectionEntry<'icons'>;
   framework: Framework;
 };
-const { name, description, icons: iconFiles, website, mainColor, license } =
+const { name, description, icons: iconFiles, website, mainColor, license, brandGuidelines } =
   entry.data;
 const meta = FRAMEWORK_META[framework];
 const cmp =
@@ -125,7 +125,7 @@ const jsonLd = [
     website,
     mainColor,
   }),
-  iconImageSchema({ name, slug: entry.id, license }),
+  iconImageSchema({ name, slug: entry.id, license, brandGuidelines }),
 ];
 
 const importSnippet = meta.buildImport(cmp);

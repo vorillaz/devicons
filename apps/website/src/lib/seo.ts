@@ -70,6 +70,7 @@ interface IconSchemaInput {
   website?: string;
   mainColor?: string;
   license?: string;
+  brandGuidelines?: string;
   site?: string;
 }
 
@@ -94,18 +95,24 @@ export const iconImageSchema = ({
   name,
   slug,
   license,
+  brandGuidelines,
   site = SITE_URL,
-}: IconSchemaInput): JsonLd => ({
-  '@context': 'https://schema.org',
-  '@type': 'ImageObject',
-  contentUrl: abs(`/devicons/icons/${slug}.svg`, site),
-  url: abs(`/icons/${slug}`, site),
-  name: `${name} logo`,
-  encodingFormat: 'image/svg+xml',
-  ...(license ? { license } : {}),
-  creditText: name,
-  creator: { '@id': abs('/#organization', site) },
-});
+}: IconSchemaInput): JsonLd => {
+  const pageUrl = abs(`/icons/${slug}`, site);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    contentUrl: abs(`/devicons/icons/${slug}.svg`, site),
+    url: pageUrl,
+    name: `${name} logo`,
+    encodingFormat: 'image/svg+xml',
+    license: license ?? `${GITHUB_URL}/blob/main/LICENSE`,
+    acquireLicensePage: brandGuidelines ?? pageUrl,
+    copyrightNotice: `${name} logo © ${name}. SVG distributed under MIT by ${SITE_TITLE}.`,
+    creditText: name,
+    creator: { '@id': abs('/#organization', site) },
+  };
+};
 
 interface TechArticleInput {
   title: string;
