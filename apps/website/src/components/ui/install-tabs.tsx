@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { clsx } from 'clsx';
+import { toComponentName } from '../../lib/component-name';
 
 type TabId = 'react' | 'vue' | 'svelte' | 'astro' | 'font';
 
@@ -16,17 +17,6 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'astro', label: 'Astro' },
   { id: 'font', label: 'Font' },
 ];
-
-const RESERVED = new Set(['React', 'Vue', 'Svelte', 'Astro']);
-
-function toComponentName(slug: string): string {
-  const pascal = slug
-    .split(/[-_]/)
-    .filter(Boolean)
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
-  return RESERVED.has(pascal) ? `_${pascal}` : pascal;
-}
 
 interface Snippet {
   label: string;
