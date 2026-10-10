@@ -16,7 +16,7 @@ const { brand } = Astro.props;
 ---
 
 <footer class="footer-brutalist border-t-2 border-border">
-  <div class="footer-brand-mark" aria-hidden="true"></div>
+  <div class="footer-brand-mark" aria-hidden="true"><span>DEVICONS</span></div>
   <ExploreAiSummary brand={brand} />
   <div class="max-w-[1400px] mx-auto border-t-2 border-border">
     <div class="footer-grid">
@@ -120,16 +120,27 @@ const { brand } = Astro.props;
       var(--c-bg);
   }
 
+  /* Signal crop: a solid Signal Orange wordmark whose lower part is cut off
+     by the rule beneath it, so it reads as rising out of the footer. */
   .footer-brand-mark {
+    --brand-mark-size: clamp(4rem, 20vw, 22rem);
     position: relative;
-    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 3rem;
+    height: calc(3rem + var(--brand-mark-size) * 0.444);
     overflow: hidden;
     user-select: none;
+    border-bottom: 1px solid var(--c-border);
   }
-  @media (min-width: 768px) {
-    .footer-brand-mark {
-      padding: 4rem 0;
-    }
+  .footer-brand-mark > span {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--brand-mark-size);
+    line-height: 0.74;
+    letter-spacing: -0.06em;
+    color: var(--c-accent);
   }
 
   .footer-grid {
@@ -339,19 +350,6 @@ const { brand } = Astro.props;
     background: #fff;
   }
 
-  .footer-brand-mark::before {
-    content: 'DEVICONS';
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-family: var(--font-display);
-    font-weight: 900;
-    line-height: 1;
-    font-size: clamp(6rem, 20vw, 28rem);
-    letter-spacing: -0.06em;
-    color: var(--c-text);
-    opacity: 0.04;
-  }
 </style>
 
 <script>
