@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import PageLayout from '../components/layout/page-layout.astro';
 import { IconDetail } from '../components/icons/icon-detail';
 import Breadcrumbs from '../components/seo/breadcrumbs.astro';
@@ -12,7 +12,8 @@ import {
   iconImageSchema,
 } from '../lib/seo';
 import { getRelatedIcons } from '../lib/related-icons';
-import { slugifyTag } from '../lib/icons-query';
+import { getActiveIcons, getUniqueTags, slugifyTag } from '../lib/icons-query';
+import { fitDescription, fitTitle } from '../lib/meta';
 import { bucketForHex } from '../lib/colors';
 import { COMPARISONS, compareSlug } from '../data/comparisons';
 
@@ -26,6 +27,7 @@ type Props = CollectionEntry<'icons'>['data'] & {
 const {
   name,
   description,
+  aliases,
   icons,
   tags,
   deprecated,
@@ -50,11 +52,30 @@ const contrastHint = badInDark && badInLight
       ? 'Looks better on a dark background'
       : null;
 
-const title = `${name} Logo — Free SVG Icon & React Component | Devicons`;
-const metaDescription =
-  description
-    ? `${description} Download the ${name} logo as a free SVG, or use the React, Vue, and Svelte components.`
-    : `Download the ${name} logo as an optimized SVG. Free React, Vue, and Svelte components under the MIT license.`;
+const title = fitTitle(
+  `${name} Logo SVG — Free React, Vue & Svelte Icon | Devicons`,
+  `${name} Logo — Free SVG & React Icon | Devicons`,
+  `${name} Logo — Free SVG Icon | Devicons`,
+  `${name} Logo SVG | Devicons`,
+  `${name} Logo SVG`,
+);
+const metaDescription = fitDescription(
+  description,
+  `Download the ${name} logo as a free SVG or use the React, Vue, and Svelte components.`,
+  `Free ${name} logo SVG plus React, Vue & Svelte components.`,
+  `Free ${name} logo SVG download.`,
+  `Free SVG download.`,
+) || `Download the ${name} logo as an optimized SVG. Free React, Vue, and Svelte components under the MIT license.`;
+
+// Only link to pages that are actually generated: tag, variants and compare
+// pages are built from non-deprecated icons only.
+const activeIcons = await getActiveIcons();
+const activeIds = new Set(activeIcons.map(i => i.id));
+const tagsWithPages = new Set((await getUniqueTags()).map(t => t.tag));
+const hasVariantsPage = !deprecated && icons.length > 1;
+const altNames = (aliases ?? []).filter(
+  (a: string) => a.toLowerCase() !== name.toLowerCase(),
+);
 
 const jsonLd = [
   breadcrumbSchema([
@@ -71,16 +92,17 @@ const colorChips = [
   ...(otherColors ?? []).map((hex: string) => ({ hex, label: 'Secondary' })),
 ].filter((c): c is { hex: string; label: string } => c !== null);
 
-const comparisonPairs = COMPARISONS.flatMap(cmp => {
+const comparisonPairs = COMPARISONS.filter(
+  cmp => activeIds.has(cmp.a) && activeIds.has(cmp.b),
+).flatMap(cmp => {
   if (cmp.a === slug) return [{ otherSlug: cmp.b, pairSlug: compareSlug(cmp.a, cmp.b) }];
   if (cmp.b === slug) return [{ otherSlug: cmp.a, pairSlug: compareSlug(cmp.a, cmp.b) }];
   return [];
 });
 
 const comparisonPartners = comparisonPairs.length
-  ? await (async () => {
-      const all = await getCollection('icons');
-      const byId = new Map(all.map(i => [i.id, i.data.name]));
+  ? (() => {
+      const byId = new Map(activeIcons.map(i => [i.id, i.data.name]));
       return comparisonPairs.map(c => ({
         ...c,
         otherName: byId.get(c.otherSlug) ?? c.otherSlug,
@@ -113,11 +135,18 @@ const related = await getRelatedIcons(slug, tags, 8);
           <p class="type-body-lg mt-3 max-w-[64ch]">{description}</p>
         )
       }
+      {
+        altNames.length > 0 && (
+          <p class="type-body-sm mt-2 text-text-muted">
+            Also known as {altNames.join(', ')}
+          </p>
+        )
+      }
 
       <div class="flex items-center gap-2 mt-3 sm:mt-4 flex-wrap">
         {deprecated && <Badge variant="destructive">Deprecated</Badge>}
         {version && <Badge variant="neutral">v{version}</Badge>}
-        {icons.length > 1 ? (
+        {hasVariantsPage ? (
           <a
             href={`/icons/${slug}/variants/`}
             data-astro-prefetch
@@ -125,7 +154,9 @@ const related = await getRelatedIcons(slug, tags, 8);
             {icons.length} variants →
           </a>
         ) : (
-          <Badge variant="success">1 variant</Badge>
+          <Badge variant="success">
+            {icons.length} {icons.length === 1 ? 'variant' : 'variants'}
+          </Badge>
         )}
         {
           website && (
@@ -197,7 +228,14 @@ const related = await getRelatedIcons(slug, tags, 8);
         tags.length > 0 && (
           <div class="flex gap-2 mt-3 sm:mt-4 flex-wrap">
             {tags.map((tag: string) => (
-              <Tag href={`/icons/tag/${slugifyTag(tag)}/`}>{tag}</Tag>
+              <Tag
+                href={
+                  tagsWithPages.has(tag)
+                    ? `/icons/tag/${slugifyTag(tag)}/`
+                    : undefined
+                }>
+                {tag}
+              </Tag>
             ))}
           </div>
         )
