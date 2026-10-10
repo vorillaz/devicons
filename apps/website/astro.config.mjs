@@ -12,6 +12,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 import svelte from '@astrojs/svelte';
 import { deviconsDark, deviconsLight } from './src/lib/shiki-themes.ts';
+import { loadSitemapData } from './src/lib/sitemap-data.ts';
+
+const SITE = 'https://devicons.io';
+const sitemapData = loadSitemapData(SITE);
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +24,7 @@ export default defineConfig({
     prefetchAll: false,
     defaultStrategy: 'hover',
   },
-  site: 'https://devicons.io',
+  site: SITE,
   trailingSlash: 'always',
   build: {
     format: 'directory',
@@ -68,12 +72,14 @@ export default defineConfig({
         !page.includes('/og/') &&
         !page.includes('/search-index') &&
         !page.endsWith('/404') &&
-        !page.endsWith('/404/'),
+        !page.endsWith('/404/') &&
+        // Thin tag pages are noindex; keep the sitemap to indexable URLs.
+        !sitemapData.thinTagPaths.has(new URL(page).pathname),
       changefreq: 'weekly',
       serialize(item) {
         const url = item.url;
         const pathname = new URL(url).pathname;
-        const isRoot = /\/(?:$|index)?$/.test(pathname);
+        const isRoot = pathname === '/';
         const isIconListing =
           pathname === '/icons' ||
           pathname === '/icons/' ||
@@ -82,6 +88,14 @@ export default defineConfig({
           pathname.startsWith('/icons/tag/') ||
           pathname.startsWith('/icons/color/');
         const isIconDetail = pathname.startsWith('/icons/') && !isIconListing;
+
+        // Image sitemap entries let Google Images associate each logo SVG
+        // with its landing page. `img` is passed through to the `sitemap`
+        // package even though Astro's SitemapItem type omits it.
+        const images = sitemapData.images.get(pathname);
+        if (images) {
+          /** @type {any} */ (item).img = images.map(url => ({ url }));
+        }
 
         if (isRoot) {
           item.priority = 1.0;
