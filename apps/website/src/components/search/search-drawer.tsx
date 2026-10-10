@@ -8,7 +8,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '../drawer';
-import { Badge } from '../ui/badge';
 import { InstallTabs } from '../ui/install-tabs';
 import {
   IconPreviewGrid,
@@ -16,35 +15,50 @@ import {
   useIconPreviewState,
 } from '../icons/icon-preview-grid';
 import type { IconEntry } from '@/hooks/search';
+import { slugifyTag } from '@/lib/tags';
 
 function DrawerBody({ icon }: { icon: IconEntry }) {
   const { variant, setVariant, bg, setBg } = useIconPreviewState();
 
+  const styles = icon.icons?.length || 1;
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       {/* Header */}
-      <div className="mb-6 sm:mb-8">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="type-h2 truncate">{icon.name}</h2>
+      <div className="icon-drawer__head">
+        <div className="icon-drawer__titlerow">
+          <h2 className="icon-drawer__title">{icon.name}</h2>
           <a
             href={`/icons/${icon.id}/`}
             data-astro-prefetch="viewport"
-            className="font-mono text-xs font-semibold uppercase tracking-[0.18em] leading-none text-accent hover:text-accent-hover transition-colors shrink-0">
-            Full page
+            className="icon-drawer__full">
+            Full page <span aria-hidden="true">→</span>
           </a>
         </div>
+        <p className="icon-drawer__meta">
+          {styles} {styles === 1 ? 'style' : 'styles'}
+          {icon.version && <> · v{icon.version}</>}
+          {icon.deprecated && (
+            <>
+              {' · '}
+              <span className="icon-drawer__deprecated">Deprecated</span>
+            </>
+          )}
+        </p>
         {icon.description && (
-          <p className="type-body-sm mt-1">{icon.description}</p>
+          <p className="type-body-sm icon-drawer__desc">{icon.description}</p>
         )}
-        <div className="flex items-center gap-2 mt-3 flex-wrap">
-          {icon.deprecated && <Badge variant="destructive">Dead</Badge>}
-          {icon.version && <Badge variant="neutral">{icon.version}</Badge>}
-          {icon.tags?.map((tag: string) => (
-            <Badge key={tag} variant="neutral">
-              {tag}
-            </Badge>
-          ))}
-        </div>
+        {icon.tags?.length > 0 && (
+          <ul className="icon-drawer__tags" aria-label="Tags">
+            {icon.tags.map((tag: string) => (
+              <li key={tag}>
+                <a href={`/icons/tag/${slugifyTag(tag)}/`}>
+                  {tag.replace(/-/g, ' ')}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <PreviewControls

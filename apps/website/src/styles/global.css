@@ -872,6 +872,100 @@ body *:not(canvas):not(svg *) {
   gap: var(--space-4);
 }
 
+/* ============================================================
+   Icon drawer header — name, specimen meta line, tag links.
+   ============================================================ */
+.icon-drawer__head {
+  margin-bottom: var(--space-8);
+}
+.icon-drawer__titlerow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.icon-drawer__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-flat);
+  color: var(--c-text);
+}
+.icon-drawer__full {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid color-mix(in oklab, var(--c-accent) 40%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-accent);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.icon-drawer__full:hover {
+  border-color: var(--c-accent);
+}
+.icon-drawer__full:active {
+  background: var(--c-accent);
+  color: var(--c-accent-fg);
+}
+.icon-drawer__meta {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+}
+.icon-drawer__deprecated {
+  color: var(--c-destructive);
+}
+.icon-drawer__desc {
+  margin-top: var(--space-4);
+  max-width: 68ch;
+}
+.icon-drawer__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.icon-drawer__tags a {
+  display: inline-flex;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+.icon-drawer__tags a:hover {
+  color: var(--c-text);
+  border-color: var(--c-text-muted);
+}
+
 .install-tabs__bar {
   display: flex;
   align-items: center;

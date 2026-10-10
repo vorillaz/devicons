@@ -41,7 +41,7 @@ export function SvgActions({
   const buttonClass = clsx(
     'py-1 font-mono text-xs font-semibold uppercase tracking-[0.18em] leading-none',
     'text-text-muted hover:text-accent transition-colors duration-150',
-    'cursor-pointer select-none',
+    'cursor-pointer select-none whitespace-nowrap',
   );
 
   return (
