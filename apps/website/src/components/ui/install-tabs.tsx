@@ -18,6 +18,15 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'font', label: 'Font' },
 ];
 
+// Package each tab installs. Astro renders the React components.
+const INSTALL_PKG: Record<TabId, string> = {
+  react: '@dev.icons/react',
+  vue: '@dev.icons/vue',
+  svelte: '@dev.icons/svelte',
+  astro: '@dev.icons/react',
+  font: 'devicons',
+};
+
 interface Snippet {
   label: string;
   code: string;
@@ -99,32 +108,31 @@ function Snippet({ snippet }: { snippet: Snippet }) {
 export function InstallTabs({ icons, mono = false, className }: InstallTabsProps) {
   const [tab, setTab] = useState<TabId>('react');
   const snippets = snippetsFor(tab, icons, mono);
+  const withInstall: Snippet[] = [
+    { label: 'Install', code: `npm i ${INSTALL_PKG[tab]}` },
+    ...snippets,
+  ];
 
   return (
-    <div className={clsx('install-tabs', className)}>
-      <div
-        role="tablist"
-        aria-label="Framework installation"
-        className="install-tabs__bar"
-      >
+    <div className={clsx('install-rail', className)}>
+      <div className="install-rail__side">
         <span className="install-tabs__eyebrow">Usage</span>
-        <div className="tab-group">
+        <div className="install-rail__list" role="tablist" aria-label="Framework">
           {TABS.map(t => (
             <button
               key={t.id}
+              type="button"
               role="tab"
               aria-selected={tab === t.id}
               onClick={() => setTab(t.id)}
-              className="tab-item"
-            >
+              className="install-rail__item">
               {t.label}
             </button>
           ))}
         </div>
       </div>
-
-      <div className="install-tabs__body">
-        {snippets.map(s => (
+      <div className="install-rail__body" role="tabpanel">
+        {withInstall.map(s => (
           <Snippet key={s.label} snippet={s} />
         ))}
       </div>

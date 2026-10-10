@@ -4,7 +4,6 @@ import PageLayout from '../components/layout/page-layout.astro';
 import { IconDetail } from '../components/icons/icon-detail';
 import Breadcrumbs from '../components/seo/breadcrumbs.astro';
 import RelatedIcons from '../components/seo/related-icons.astro';
-import { Badge } from '../components/ui/badge';
 import { Tag } from '../components/ui/tag';
 import {
   breadcrumbSchema,
@@ -128,171 +127,96 @@ const related = await getRelatedIcons(slug, tags, 8);
       ]}
     />
 
-    <!-- impeccable-carbonize-start ef0e829b -->
-    <style data-impeccable-css="ef0e829b">
-    [data-impeccable-variant] > header.ih { margin-top: 1.5rem; margin-bottom: 2rem; }
-    [data-impeccable-variant] > header.ih .ih-mono {
-    font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 500;
-    letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; color: var(--c-text-muted);
-    }
-    [data-impeccable-variant] > header.ih .ih-link {
-    display: inline-flex; align-items: center; gap: 0.375rem;
-    font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600;
-    letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1;
-    color: var(--c-text-secondary); transition: color .15s ease, border-color .15s ease;
-    }
-    [data-impeccable-variant] > header.ih .ih-link:hover { color: var(--c-text); }
-    [data-impeccable-variant] > header.ih .ih-chip {
-    display: inline-flex; align-items: center; gap: 0.375rem;
-    font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600;
-    letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1;
-    color: var(--c-text-muted); transition: color .15s ease;
-    }
-    [data-impeccable-variant] > header.ih a.ih-chip:hover { color: var(--c-text); }
-    [data-impeccable-variant] > header.ih .ih-tag { padding: 0.375rem 0.625rem; }
-    
-    /* V1 — Hierarchy */
-    [data-impeccable-variant="1"] > header.ih .ih1-meta { margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
-    [data-impeccable-variant="1"] > header.ih .ih1-dep { color: var(--c-destructive); }
-    [data-impeccable-variant="1"] > header.ih .ih1-sep { color: var(--c-border); }
-    [data-impeccable-variant="1"] > header.ih .ih1-variants { color: var(--c-accent); }
-    [data-impeccable-variant="1"] > header.ih .ih1-variants:hover { color: var(--c-accent-hover); }
-    [data-impeccable-variant="1"] > header.ih .ih1-desc { margin-top: 1.25rem; max-width: 64ch; }
-    [data-impeccable-variant="1"] > header.ih .ih1-aka { margin-top: 0.5rem; }
-    [data-impeccable-variant="1"] > header.ih .ih1-facts {
-    margin-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
-    }
-    [data-impeccable-variant="1"] > header.ih .ih1-facts .ih-link {
-    padding: 0.5rem 0.75rem; border: 1px solid var(--c-border); background: var(--c-surface);
-    }
-    [data-impeccable-variant="1"] > header.ih .ih1-facts .ih-link:hover { border-color: var(--c-text-muted); }
-    [data-impeccable-variant="1"] > header.ih .ih1-facts .ih-link:active { background: var(--c-text); color: var(--c-bg); }
-    [data-impeccable-variant="1"] > header.ih .ih1-colors { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; margin-left: 0.5rem; }
-    [data-impeccable-variant="1"] > header.ih .ih1-tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    [data-impeccable-variant="1"][data-p-hide-tags] > header.ih .ih1-tags { display: none; }
-    
-    /* V2 — Rhythm: ruled spec sheet */
-    [data-impeccable-variant="2"] > header.ih { display: grid; gap: 2rem; }
-    @media (min-width: 1024px) {
-    [data-impeccable-variant="2"][data-p-layout="split"] > header.ih { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: 3rem; align-items: start; }
-    }
-    [data-impeccable-variant="2"] > header.ih .ih2-desc { margin-top: 0.75rem; max-width: 64ch; }
-    [data-impeccable-variant="2"] > header.ih .ih2-aka { margin-top: 0.5rem; }
-    [data-impeccable-variant="2"] > header.ih .ih2-sheet { border-top: 1px solid var(--c-border); }
-    [data-impeccable-variant="2"] > header.ih .ih2-row {
-    display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; align-items: center;
-    padding: 0.75rem 0; border-bottom: 1px solid var(--c-border);
-    }
-    [data-impeccable-variant="2"][data-p-compact] > header.ih .ih2-row { padding: 0.5rem 0; }
-    [data-impeccable-variant="2"] > header.ih .ih2-row dd { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; min-width: 0; }
-    [data-impeccable-variant="2"] > header.ih .ih2-value { color: var(--c-text); }
-    [data-impeccable-variant="2"] > header.ih .ih2-dep { color: var(--c-destructive); }
-    [data-impeccable-variant="2"] > header.ih .ih2-row a.ih2-value:hover { color: var(--c-accent); }
-    
-    /* V3 — Micro-details: incumbent layout, consistent details */
-    [data-impeccable-variant="3"] > header.ih .ih3-desc { margin-top: 0.75rem; max-width: 64ch; }
-    [data-impeccable-variant="3"] > header.ih .ih3-aka { margin-top: 0.5rem; }
-    [data-impeccable-variant="3"] > header.ih .ih3-row { margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
-    [data-impeccable-variant="3"] > header.ih .ih3-group { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
-    [data-impeccable-variant="3"] > header.ih .ih3-group + .ih3-group { padding-left: 1rem; border-left: 1px solid var(--c-border); }
-    [data-impeccable-variant="3"][data-p-accent-links] > header.ih .ih-link { color: var(--c-accent); }
-    [data-impeccable-variant="3"][data-p-accent-links] > header.ih .ih-link:hover { color: var(--c-accent-hover); }
-    [data-impeccable-variant="3"] > header.ih .ih3-tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    </style>
-    <!-- impeccable-param-values ef0e829b: {"hide-tags":false} -->
-    <!-- impeccable-carbonize-end ef0e829b -->
-    <div data-impeccable-variant="1" style="display: contents">
-      <header class="ih ih1">
-        <h1 class="type-display-sm">{name}</h1>
-        <p class="ih1-meta ih-mono">
-          {hasVariantsPage ? (
-            <a href={`/icons/${slug}/variants/`} data-astro-prefetch class="ih1-variants">
-              {icons.length} {icons.length === 1 ? 'style' : 'styles'} →
+    <header class="icon-header">
+      <h1 class="type-display-sm">{name}</h1>
+      <p class="icon-header__meta">
+        {hasVariantsPage ? (
+          <a href={`/icons/${slug}/variants/`} data-astro-prefetch class="icon-header__variants">
+            {icons.length} {icons.length === 1 ? 'style' : 'styles'} →
+          </a>
+        ) : (
+          <span>{icons.length} {icons.length === 1 ? 'style' : 'styles'}</span>
+        )}
+        {version && (<><span class="icon-header__sep" aria-hidden="true">/</span><span>v{version}</span></>)}
+        {deprecated && (<><span class="icon-header__sep" aria-hidden="true">/</span><span class="icon-header__deprecated">Deprecated</span></>)}
+      </p>
+      {description && <p class="type-body-lg icon-header__desc">{description}</p>}
+      {
+        altNames.length > 0 && (
+          <p class="type-body-sm text-text-muted icon-header__aka">
+            Also known as {altNames.join(', ')}
+          </p>
+        )
+      }
+      <div class="icon-header__facts">
+        {
+          website && (
+            <a href={website} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              {website.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
             </a>
-          ) : (
-            <span>{icons.length} {icons.length === 1 ? 'style' : 'styles'}</span>
-          )}
-          {version && (<><span class="ih1-sep" aria-hidden="true">/</span><span>v{version}</span></>)}
-          {deprecated && (<><span class="ih1-sep" aria-hidden="true">/</span><span class="ih1-dep">Deprecated</span></>)}
-        </p>
-        {description && <p class="type-body-lg ih1-desc">{description}</p>}
-        {
-          altNames.length > 0 && (
-            <p class="type-body-sm text-text-muted ih1-aka">
-              Also known as {altNames.join(', ')}
-            </p>
           )
         }
-        <div class="ih1-facts">
-          {
-            website && (
-              <a href={website} target="_blank" rel="noopener noreferrer" class="ih-link">
-                {website.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
-              </a>
-            )
-          }
-          {
-            license && (
-              <a href={license} target="_blank" rel="noopener noreferrer" class="ih-link">
-                License <span aria-hidden="true">↗</span>
-              </a>
-            )
-          }
-          {
-            brandGuidelines && (
-              <a href={brandGuidelines} target="_blank" rel="noopener noreferrer" class="ih-link">
-                Brand <span aria-hidden="true">↗</span>
-              </a>
-            )
-          }
-          {colorChips.length > 0 && (
-            <span class="ih1-colors">
-              {
-            colorChips.map(({ hex, label }) => {
-              const bucket = bucketForHex(hex);
-              const hexText = hex.toUpperCase();
-              const swatch = (
-                <span
-                  aria-hidden="true"
-                  class="inline-block w-3 h-3 border border-border shrink-0"
-                  style={`background-color: ${hex}`}
-                />
-              );
-              return bucket ? (
-                <a href={`/icons/color/${bucket}/`} aria-label={`${label} brand color ${hexText}`} class="ih-chip">
-                  {swatch}
-                  {hexText}
-                </a>
-              ) : (
-                <span aria-label={`${label} brand color ${hexText}`} class="ih-chip">
-                  {swatch}
-                  {hexText}
-                </span>
-              );
-            })
-          }
-            </span>
-          )}
-        </div>
         {
-          tags.length > 0 && (
-            <div class="ih1-tags">
-              {tags.map((tag: string) => (
-                <Tag
-                  className="ih-tag"
-                  href={
-                    tagsWithPages.has(tag)
-                      ? `/icons/tag/${slugifyTag(tag)}/`
-                      : undefined
-                  }>
-                  {tag.replace(/-/g, ' ')}
-                </Tag>
-              ))}
-            </div>
+          license && (
+            <a href={license} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              License <span aria-hidden="true">↗</span>
+            </a>
           )
         }
-      </header>
-    </div>
+        {
+          brandGuidelines && (
+            <a href={brandGuidelines} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              Brand <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
+        {colorChips.length > 0 && (
+          <span class="icon-header__colors">
+            {
+          colorChips.map(({ hex, label }) => {
+            const bucket = bucketForHex(hex);
+            const hexText = hex.toUpperCase();
+            const swatch = (
+              <span
+                aria-hidden="true"
+                class="inline-block w-3 h-3 border border-border shrink-0"
+                style={`background-color: ${hex}`}
+              />
+            );
+            return bucket ? (
+              <a href={`/icons/color/${bucket}/`} aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
+                {swatch}
+                {hexText}
+              </a>
+            ) : (
+              <span aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
+                {swatch}
+                {hexText}
+              </span>
+            );
+          })
+        }
+          </span>
+        )}
+      </div>
+      {
+        tags.length > 0 && (
+          <div class="icon-header__tags">
+            {tags.map((tag: string) => (
+              <Tag
+                className="icon-header__tag"
+                href={
+                  tagsWithPages.has(tag)
+                    ? `/icons/tag/${slugifyTag(tag)}/`
+                    : undefined
+                }>
+                {tag.replace(/-/g, ' ')}
+              </Tag>
+            ))}
+          </div>
+        )
+      }
+    </header>
   </div>
 
   {
