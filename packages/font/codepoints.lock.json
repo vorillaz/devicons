@@ -1752,5 +1752,7 @@
   "huawei-icon": 63458,
   "huawei": 63459,
   "tencent-icon": 63468,
-  "tencent": 63469
+  "tencent": 63469,
+  "vllm-icon": 63470,
+  "vllm": 63471
 }
