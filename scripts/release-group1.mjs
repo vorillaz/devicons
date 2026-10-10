@@ -19,22 +19,26 @@
 //   A new base (feat/fix on canary that bumps X.Y.Z) resets N to 1, which
 //   is required for strict semver ordering.
 //
+// Commit scope:
+//   Only commits touching GROUP1_PATHS (scripts/release-scopes.cjs) count
+//   towards the bump, the notes and the GitHub PR comments — website or font
+//   only commits never bump the @dev.icons packages.
+//
 // Lifecycle:
-//   1. commit-analyzer          → compute version bump
-//   2. release-notes-generator  → render release notes
-//   3. changelog (main only)    → write CHANGELOG.md
-//   4. npm-publish-plugin       → stamp package.json, npm publish all 4
-//   5. git (main only)          → commit CHANGELOG + 4 package.json files
-//   6. github                   → create GitHub release
+//   1. scoped-commits           → compute version bump + render release notes
+//   2. changelog (main only)    → write CHANGELOG.md
+//   3. npm-publish-plugin       → stamp package.json, verify entry points,
+//                                 npm publish all 4 (in parallel)
+//   4. git (main only)          → commit CHANGELOG + 4 package.json files
+//   5. scoped-github            → create GitHub release
 //
-//   The npm-publish-plugin lives at scripts/npm-publish-plugin.cjs and is
-//   loaded by path (a plain object plugin breaks semantic-release-monorepo;
-//   the font release uses the same plugin via the monorepo wrapper).
+//   The plugins live in scripts/ and are loaded by absolute path (shared with
+//   the font release in packages/font/release.config.cjs).
 //
-//   semantic-release creates the git tag BEFORE publish plugins run. If the
-//   npm publish step fails partway through, the logged error lists which
-//   packages already hit npm so manual recovery of the rest is straightforward;
-//   a retry of the workflow no-ops because the tag already exists.
+//   semantic-release creates the git tag BEFORE publish plugins run, so a
+//   plain workflow retry no-ops. The publish plugin skips versions npm
+//   already has, so a failed publish is recovered by re-running the Release
+//   workflow manually with `republish_tag` set (see release.yml).
 //
 // DRY_RUN=true makes the whole thing a no-op: semantic-release dryRun and
 // `npm publish --dry-run` for each package. Package.json edits are reverted
@@ -47,16 +51,16 @@ import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import semanticRelease from 'semantic-release';
+import scopes from './release-scopes.cjs';
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const PACKAGES = ['core', 'react', 'vue', 'svelte'];
-// Absolute path — matches the font config. semantic-release-plugin-decorators
-// (used by semantic-release-monorepo) resolves relative plugin paths from its
-// own node_modules location, not cwd, so anything ./-rooted is fragile.
-const PUBLISH_PLUGIN = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  './npm-publish-plugin.cjs',
-);
+// Absolute paths — matches the font config, which runs from packages/font.
+const SCRIPTS = path.dirname(fileURLToPath(import.meta.url));
+const PUBLISH_PLUGIN = path.join(SCRIPTS, 'npm-publish-plugin.cjs');
+const SCOPED_COMMITS = path.join(SCRIPTS, 'scoped-commits.mjs');
+const SCOPED_GITHUB = path.join(SCRIPTS, 'scoped-github.mjs');
+const paths = scopes.GROUP1_PATHS;
 
 const detectBranch = () => {
   if (process.env.GITHUB_REF_NAME) return process.env.GITHUB_REF_NAME;
@@ -71,11 +75,7 @@ const branch = detectBranch();
 const isCanary = branch === 'canary';
 
 const plugins = [
-  ['@semantic-release/commit-analyzer', { preset: 'conventionalcommits' }],
-  [
-    '@semantic-release/release-notes-generator',
-    { preset: 'conventionalcommits' },
-  ],
+  [SCOPED_COMMITS, { paths, preset: 'conventionalcommits' }],
   ...(isCanary
     ? []
     : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),
@@ -95,7 +95,7 @@ const plugins = [
           },
         ],
       ]),
-  '@semantic-release/github',
+  [SCOPED_GITHUB, { paths }],
 ];
 
 console.log(
