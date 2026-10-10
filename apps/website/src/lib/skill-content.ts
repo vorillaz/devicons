@@ -192,8 +192,8 @@ Four public mirrors serve every published file.
   href="https://unpkg.com/devicons@1.8.0/css/devicons.min.css"
 />
 
-<i class="devicon devicon-react"></i>
-<i class="devicon devicon-vue"></i>
+<i class="devicons devicons-react"></i>
+<i class="devicons devicons-vue"></i>
 \`\`\`
 
 ### SVG sprite (single request, many icons)

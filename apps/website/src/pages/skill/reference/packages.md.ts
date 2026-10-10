@@ -108,7 +108,7 @@ interface IconMeta {
 
 ## devicons (icon font)
 
-Legacy webfont package. One CSS file, every glyph available via \`<i class="devicon devicon-<slug>">\`.
+Legacy webfont package. One CSS file, every glyph available via \`<i class="devicons devicons-<slug>">\`.
 
 - Package: \`devicons\`
 - Install: \`npm install devicons\`
@@ -121,7 +121,7 @@ Legacy webfont package. One CSS file, every glyph available via \`<i class="devi
   rel="stylesheet"
   href="https://unpkg.com/devicons@1.8.0/css/devicons.min.css"
 />
-<i class="devicon devicon-react"></i>
+<i class="devicons devicons-react"></i>
 \`\`\`
 
 Class names use \`.devicon-<slug>\` where \`<slug>\` is the kebab-case icon id. Colors inherit \`color\`, sizes inherit \`font-size\`.
