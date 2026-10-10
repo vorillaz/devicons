@@ -20,11 +20,11 @@ const { items, emptyMessage = 'No icons found.' } = Astro.props;
     <p class="type-body text-text-muted">{emptyMessage}</p>
   ) : (
     <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-      {items.map(icon => (
+      {items.map((icon, i) => (
         <li>
           <a
             href={`/icons/${icon.slug}/`}
-            data-astro-prefetch="viewport"
+            data-astro-prefetch
             class:list={[
               'icon-grid-card',
               icon.badInDark && 'icon-grid-card--bad-dark',
@@ -36,7 +36,7 @@ const { items, emptyMessage = 'No icons found.' } = Astro.props;
                 alt={`${icon.name} logo`}
                 width="48"
                 height="48"
-                loading="lazy"
+                loading={i < 6 ? 'eager' : 'lazy'}
                 decoding="async"
                 class="icon-grid-card__icon"
               />

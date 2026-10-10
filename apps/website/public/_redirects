@@ -1,0 +1,3 @@
+# The introduction doc is served at /docs/.
+/docs/introduction   /docs/   301
+/docs/introduction/  /docs/   301

@@ -13,10 +13,10 @@ Each icon has two variants: a full-color brand mark and a monochrome glyph that 
 Set a text color on the parent element. Monochrome icons inherit it.
 
 ```tsx
-import { ReactIcon, GithubIcon } from "@dev.icons/react/mono";
+import { _React, GithubIcon } from "@dev.icons/react/mono";
 
 <div className="text-accent">
-  <ReactIcon size={48} />
+  <_React size={48} />
 </div>
 
 <button className="text-text-muted hover:text-accent transition-colors">
@@ -29,9 +29,9 @@ import { ReactIcon, GithubIcon } from "@dev.icons/react/mono";
 Pass a color directly for one-off use:
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react/mono";
+import { _React } from "@dev.icons/react/mono";
 
-<ReactIcon color="#ff4d00" size={48} />
+<_React color="#ff4d00" size={48} />
 ```
 
 ## CSS custom properties
@@ -49,28 +49,35 @@ Use design tokens to control icon color:
 ```
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react/mono";
+import { _React } from "@dev.icons/react/mono";
 
 <span className="icon">
-  <ReactIcon size={48} />
+  <_React size={48} />
 </span>
 ```
 
-## Dark mode brand colors
+## Dark mode
 
-Some brands have different marks for light and dark backgrounds. Devicons exposes suffix variants for these:
+Some full-color marks are mostly black or white and disappear on one theme (GitHub, Vercel, OpenAI). Icon pages flag these, and so does `search-index.json` with `badInDark` and `badInLight`. You have two options:
+
+- Switch to the monochrome variant, which follows the text color on either theme:
 
 ```tsx
-import { GithubIcon, GithubLightIcon } from "@dev.icons/react";
+import { GithubIcon } from "@dev.icons/react/mono";
 
-function ThemedLogo() {
-  return (
-    <>
-      <GithubIcon className="dark:hidden" size={32} />
-      <GithubLightIcon className="hidden dark:block" size={32} />
-    </>
-  );
-}
+<span className="text-text">
+  <GithubIcon size={32} />
+</span>
+```
+
+- Keep the color mark and give it a contrasting backdrop:
+
+```tsx
+import { GithubIcon } from "@dev.icons/react";
+
+<span className="inline-flex p-1 bg-white">
+  <GithubIcon size={32} />
+</span>
 ```
 
 ## Brand guidelines

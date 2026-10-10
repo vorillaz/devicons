@@ -6,16 +6,16 @@ import IconGrid from "../../components/icons/icon-grid.astro";
 import { getActiveIcons, toListItem } from "../../lib/icons-query";
 import { SITE_TITLE } from "../../consts";
 import { breadcrumbSchema, collectionPageSchema } from "../../lib/seo";
+import { assertIconIds } from "../../lib/assert-icon-ids";
 
 export async function getStaticPaths() {
   const packs = await getCollection("packs");
   const icons = await getActiveIcons();
   const byId = new Map(icons.map((i) => [i.id, i]));
+  const activeIds = new Set(byId.keys());
   return packs.map((pack) => {
-    const resolved = pack.data.iconIds
-      .map((id) => byId.get(id))
-      .filter((i): i is NonNullable<typeof i> => Boolean(i))
-      .map(toListItem);
+    assertIconIds(`pack ${pack.id}`, pack.data.iconIds, activeIds);
+    const resolved = pack.data.iconIds.map((id) => toListItem(byId.get(id)!));
     return {
       params: { slug: pack.id },
       props: { pack, icons: resolved },

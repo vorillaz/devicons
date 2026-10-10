@@ -83,11 +83,7 @@ export async function getFooterTags(): Promise<
   return topTags;
 }
 
-export const slugifyTag = (tag: string) =>
-  tag
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+export { slugifyTag, MIN_INDEXABLE_TAG_COUNT } from './tags';
 
 const TAG_LABEL_OVERRIDES: Record<string, string> = {
   ui: 'UI',

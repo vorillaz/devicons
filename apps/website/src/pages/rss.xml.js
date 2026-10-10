@@ -14,7 +14,8 @@ export async function GET(context) {
     items: sorted.map(entry => ({
       title: entry.data.title,
       description: entry.data.description ?? '',
-      link: `/docs/${entry.id}/`,
+      // The introduction doc is the docs index.
+      link: entry.id === 'introduction' ? '/docs/' : `/docs/${entry.id}/`,
     })),
   });
 }

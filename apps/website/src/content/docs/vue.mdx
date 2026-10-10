@@ -11,8 +11,8 @@ import Note from "../../components/docs/note.astro";
 
 `@dev.icons/vue` exports every icon as a Vue 3 component. Works with `<script setup>`, the Options API, Nuxt, and Vite SSR.
 
-<Note title="Why the underscore suffix?">
-Some icon names collide with reserved imports from major frameworks. When that happens, the export is suffixed with an underscore: `import { _Vue } from "@dev.icons/vue";`
+<Note title="Why the underscore prefix?">
+Export names come from the icon's file name, split on `-` and PascalCased (`css` becomes `Css`, `discord-icon` becomes `DiscordIcon`). Four names would collide with framework imports: React, Vue, Svelte, and Astro. Those get an underscore prefix (`_Vue`). Vue templates can't use a tag that starts with `_`, so alias these on import: `import { _Vue as VueLogo } from "@dev.icons/vue";`
 </Note>
 
 ## Install
@@ -25,11 +25,12 @@ npm install @dev.icons/vue
 
 ```vue
 <script setup lang="ts">
-import { VueIcon } from "@dev.icons/vue";
+import { _Vue as VueLogo, Nextjs } from "@dev.icons/vue";
 </script>
 
 <template>
-  <VueIcon :size="48" />
+  <VueLogo :size="48" />
+  <Nextjs :size="48" alt="Next.js" />
 </template>
 ```
 
@@ -39,11 +40,11 @@ Import from the `/mono` subpath:
 
 ```vue
 <script setup lang="ts">
-import { VueIcon } from "@dev.icons/vue/mono";
+import { _Vue as VueLogo } from "@dev.icons/vue/mono";
 </script>
 
 <template>
-  <VueIcon :size="48" />
+  <VueLogo :size="48" />
 </template>
 ```
 
@@ -53,25 +54,21 @@ Monochrome icons use `currentColor`, so they inherit the parent's text color.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `size` | `Number \| String` | `24` | Shortcut for `width` and `height` |
-| `title` | `String` | `undefined` | Adds an SVG `<title>` for accessibility |
-| `color` | `String` | `currentColor` | Fill override |
+| `size` | `string \| number` | `"1em"` | Sets both `width` and `height` |
+| `color` | `string` | `"currentColor"` | Sets the root `fill`. Visible on monochrome icons. |
+| `alt` | `string` | none | Accessible name, rendered as an SVG `<title>` |
+| `mirrored` | `boolean` | `false` | Flips the icon horizontally (`scale(-1, 1)`) |
+
+Other attributes (`class`, `style`, `aria-*`, listeners) fall through to the root `<svg>`.
 
 ## Nuxt
 
-Auto-import icons across your Nuxt app:
-
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  modules: ["@dev.icons/vue/nuxt"],
-});
-```
+There is no Nuxt module. Import icons in your components as usual. They render on the server without extra config.
 
 ## Tree-shaking
 
 Named imports are ESM-first and fully tree-shakeable.
 
 ```ts
-import { VueIcon } from "@dev.icons/vue";
+import { Nextjs } from "@dev.icons/vue";
 ```

@@ -1,6 +1,6 @@
 ---
 title: "Core"
-description: "Raw SVGs, metadata, and build utilities. The base package behind every Devicons wrapper."
+description: "The icon catalog, SVG sprite, and font files as one dependency-free package."
 order: 4
 category: "Packages"
 categoryOrder: 1
@@ -9,9 +9,15 @@ badge: "new"
 
 import Note from "../../components/docs/note.astro";
 
-`@dev.icons/core` contains every SVG source file, the icon metadata catalog, and the build tools that framework packages use at compile time.
+`@dev.icons/core` holds the catalog of icon files with their font codepoints, `icons.json`, a color SVG sprite, and the icon font files. It has no dependencies.
 
-You probably don't need to install it directly. The framework packages already depend on it. Use this when you want raw SVGs, are building custom tooling, or writing a plugin.
+The framework packages don't need it. Install it when you need the list of icon files, the sprite, or the font files for custom tooling or a plugin.
+
+<Note variant="info" title="No SVG strings">
+
+Core doesn't export SVG markup or ship per-icon SVG files. For individual SVGs, use `https://devicons.io/devicons/icons/{file}.svg` (color) or `https://devicons.io/devicons/font/{file}.svg` (monochrome). See the [CDN guide](/docs/cdn/).
+
+</Note>
 
 ## Install
 
@@ -23,30 +29,47 @@ npm install @dev.icons/core
 
 | Export | Type | Description |
 | --- | --- | --- |
-| `[iconSlug]` | `string` | Raw SVG markup for that icon |
-| `metadata` | `IconMeta[]` | Catalog with names, slugs, tags, and variants |
-| `slugs` | `string[]` | All available icon slugs |
+| `ICONS` | `readonly IconRecord[]` | Every icon file, sorted by codepoint |
+| `getIcon` | `(name: string) => IconRecord \| undefined` | O(1) lookup by file name |
+| `IconRecord` | type | `{ name, codepoint, unicode, isVariant }` |
+
+```ts
+interface IconRecord {
+  /** File name without `.svg`, e.g. "adonisjs" or "adonisjs-icon". */
+  name: string;
+  /** Private Use Area codepoint used by the icon font. */
+  codepoint: number;
+  /** String.fromCodePoint(codepoint). */
+  unicode: string;
+  /** True when name ends in "-icon" (glyph-only mark). */
+  isVariant: boolean;
+}
+```
 
 ## Usage
 
 ```ts
-import { react, vue, svelte } from "@dev.icons/core";
+import { ICONS, getIcon } from "@dev.icons/core";
 
-// Each export is a plain SVG string
-console.log(react);
-// '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">...</svg>'
+getIcon("nextjs-icon");
+// { name: "nextjs-icon", codepoint: ..., unicode: "...", isVariant: true }
+
+const fullLogos = ICONS.filter((icon) => !icon.isVariant).map((icon) => icon.name);
 ```
 
-```ts
-import { metadata } from "@dev.icons/core";
+## Files
 
-console.log(metadata[0]);
-// { name: "React", slug: "react", tags: ["frontend", "ui"], ... }
-```
+| Subpath export | File |
+| --- | --- |
+| `@dev.icons/core/icons.json` | `dist/icons.json` (same data as `ICONS`) |
+| `@dev.icons/core/sprite` | `dist/sprite/sprite-symbol.svg` (color sprite, `<symbol id="{file}">`) |
+| `@dev.icons/core/font/css` | `dist/font/devicons.css` |
+| `@dev.icons/core/font/woff2` | `dist/font/devicons.woff2` |
+| `@dev.icons/core/font/ttf` | `dist/font/devicons.ttf` |
 
 ## When to use core
 
-- You want SVGs without a framework dependency
+- You need the full list of icon files for search, filtering, or code generation
+- You want to self-host the SVG sprite
 - You're building a custom icon component for a framework we don't ship yet
-- You need programmatic access to the icon catalog for search, filtering, or code generation
 - You're writing a bundler plugin, Figma plugin, or CLI tool

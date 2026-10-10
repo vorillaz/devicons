@@ -6,7 +6,7 @@ category: "Getting Started"
 categoryOrder: 0
 ---
 
-Assumes you have a React, Vue, or Svelte project running. If not, start with [Installation](/docs/installation).
+Assumes you have a React, Vue, or Svelte project running. If not, start with [Installation](/docs/installation/).
 
 ## 1. Install
 
@@ -17,30 +17,30 @@ npm install @dev.icons/react
 ## 2. Import and render
 
 ```tsx
-import { ReactIcon, VueIcon, SvelteIcon } from "@dev.icons/react";
+import { _React, _Vue, Nextjs } from "@dev.icons/react";
 
 export default function Stack() {
   return (
     <div className="flex gap-4">
-      <ReactIcon size={48} />
-      <VueIcon size={48} />
-      <SvelteIcon size={48} />
+      <_React size={48} />
+      <_Vue size={48} />
+      <Nextjs size={48} alt="Next.js" />
     </div>
   );
 }
 ```
 
-Every icon is a named export. The component name is PascalCase + `Icon`, so `next-js` becomes `NextJsIcon`.
+Every icon file is a named export. The name is the file name split on `-` and PascalCased, so `nextjs` becomes `Nextjs` and `nextjs-icon` becomes `NextjsIcon`. The names React, Vue, Svelte, and Astro would clash with framework imports, so they get a `_` prefix: `_React`, `_Vue`. Each icon page lists its exact component names.
 
 ## 3. Switch to monochrome
 
 Full-color icons are the default. Import from the `/mono` subpath to get single-color variants that inherit `currentColor`.
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react/mono";
+import { _React } from "@dev.icons/react/mono";
 
 <div className="text-accent">
-  <ReactIcon size={48} />
+  <_React size={48} />
 </div>
 ```
 
@@ -62,4 +62,4 @@ import { GithubIcon } from "@dev.icons/react/mono";
 
 ## That's it
 
-Browse the [icon library](/search) for the full catalog, or read the [React guide](/docs/react) for props, tree-shaking, and SSR.
+Browse the [icon library](/search/) for the full catalog, or read the [React guide](/docs/react/) for props, tree-shaking, and SSR.

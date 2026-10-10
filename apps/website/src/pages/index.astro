@@ -7,54 +7,75 @@ import { SearchIsland } from '../components/search/search-island';
 import { SITE_TITLE } from '../consts';
 import {
   collectionPageSchema,
-  softwareApplicationSchema,
+  projectSourceSchema,
   faqSchema,
 } from '../lib/seo';
+import {
+  MIN_INDEXABLE_TAG_COUNT,
+  formatTagLabel,
+  getUniqueTags,
+  slugifyTag,
+} from '../lib/icons-query';
+import { USE_CASES } from '../data/use-cases';
 
 const icons = await getCollection('icons');
-const iconCount = icons.length;
+const activeIcons = icons.filter(icon => !icon.data.deprecated);
+const iconCount = activeIcons.length;
+const countLabel = iconCount.toLocaleString('en-US');
 
-const homeTitle = `Developer icons & logos — free SVG, React, Vue, Svelte | ${SITE_TITLE}`;
-const homeDescription = `${iconCount.toLocaleString()}+ free developer icons and logos — optimized SVGs plus React, Vue, Svelte, and Astro components. MIT licensed, CDN-ready, open source.`;
+const homeTitle = `Developer icons & logos — SVG, React, Vue, Svelte | ${SITE_TITLE}`;
+const homeDescription = `${countLabel} free developer icons and logos: optimized SVGs plus React, Vue and Svelte components. MIT licensed and open source.`;
 
-const popularIcons = icons
+// Server-rendered links so crawlers (and visitors without JS) reach icon,
+// category and collection pages straight from the homepage.
+const popularIcons = activeIcons
   .filter(icon => icon.data.popular)
-  .slice(0, 24)
-  .map(icon => ({
-    name: icon.data.name,
-    url: `/icons/${icon.id}`,
-  }));
+  .sort((a, b) =>
+    a.data.name.localeCompare(b.data.name, undefined, { sensitivity: 'base' }),
+  )
+  .slice(0, 24);
+const categories = (await getUniqueTags())
+  .filter(t => t.count >= MIN_INDEXABLE_TAG_COUNT)
+  .slice(0, 16);
+const packs = (await getCollection('packs')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const faqs = [
+  {
+    question: 'Are Devicons free to use?',
+    answer:
+      'Yes. The library is open source under the MIT license, so you can use it in personal and commercial projects. Each logo remains the trademark of its owner.',
+  },
+  {
+    question: 'What formats do Devicons come in?',
+    answer:
+      'Every icon is an optimized SVG you can download or hotlink from devicons.io, a React, Vue or Svelte component from npm, and a glyph in the devicons icon font.',
+  },
+  {
+    question: 'How do I install Devicons?',
+    answer:
+      'Run npm install @dev.icons/react (or @dev.icons/vue, @dev.icons/svelte), then import the icon by name, for example import { Css } from "@dev.icons/react". Astro projects use the React package.',
+  },
+  {
+    question: 'Can I request a new icon?',
+    answer:
+      'Yes. Open an issue or pull request on the Devicons GitHub repository and the maintainers will review it.',
+  },
+];
 
 const jsonLd = [
   collectionPageSchema({
     name: homeTitle,
     description: homeDescription,
     url: '/',
-    items: popularIcons,
+    items: popularIcons.map(icon => ({
+      name: icon.data.name,
+      url: `/icons/${icon.id}`,
+    })),
   }),
-  softwareApplicationSchema(),
-  faqSchema([
-    {
-      question: 'Are Devicons free to use?',
-      answer:
-        'Yes. Devicons is open source and free forever. Use them in personal and commercial projects under the MIT license.',
-    },
-    {
-      question: 'What formats do Devicons come in?',
-      answer:
-        'Every icon ships as an optimized SVG and is available as React, Vue, and Svelte components via the Devicons npm package.',
-    },
-    {
-      question: 'How do I install Devicons?',
-      answer:
-        'Install with your package manager: `npm install @dev.icons/react` (or the Vue/Svelte variant). See the docs for framework-specific guides.',
-    },
-    {
-      question: 'Can I request a new icon?',
-      answer:
-        'Yes. Open an issue or pull request on the Devicons GitHub repository and the maintainers will review it.',
-    },
-  ]),
+  projectSourceSchema(),
+  faqSchema(faqs),
 ];
 ---
 
@@ -66,7 +87,88 @@ const jsonLd = [
   <HeroSection iconCount={iconCount} />
   <IconMarquee />
   <div class="h-[120px]" aria-hidden="true"></div>
-  <SearchIsland client:visible maxResults={72} />
+  <SearchIsland client:visible maxResults={72} embedded />
+
+  <section
+    class="home-explore border-t border-border max-w-[1400px] mx-auto px-6 py-16 sm:py-20"
+    aria-labelledby="explore-heading">
+    <h2 id="explore-heading" class="type-h2 mb-10">Explore the catalog</h2>
+    <div class="grid gap-12 lg:grid-cols-[2fr_1fr_1fr]">
+      <div>
+        <h3 class="type-label mb-4">Popular logos</h3>
+        <ul class="flex flex-wrap gap-2">
+          {
+            popularIcons.map(icon => (
+              <li>
+                <a href={`/icons/${icon.id}/`} data-astro-prefetch class="home-explore__chip">
+                  <img
+                    src={`/devicons/icons/${icon.data.icons[0]}.svg`}
+                    alt=""
+                    width="20"
+                    height="20"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {icon.data.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/icons/" class="home-explore__more">All {countLabel} icons →</a>
+      </div>
+      <div>
+        <h3 class="type-label mb-4">Categories</h3>
+        <ul class="home-explore__list">
+          {
+            categories.map(({ tag, count }) => (
+              <li>
+                <a href={`/icons/tag/${slugifyTag(tag)}/`}>
+                  {formatTagLabel(tag)} icons <span>{count}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="type-label mb-4">Collections</h3>
+        <ul class="home-explore__list">
+          {
+            packs.map(pack => (
+              <li>
+                <a href={`/packs/${pack.id}/`}>{pack.data.title}</a>
+              </li>
+            ))
+          }
+          {
+            USE_CASES.map(useCase => (
+              <li>
+                <a href={`/use-cases/${useCase.slug}/`}>{useCase.title}</a>
+              </li>
+            ))
+          }
+          <li><a href="/compare/">Logo comparisons (A vs B)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="border-t border-border max-w-[1400px] mx-auto px-6 py-16 sm:py-20"
+    aria-labelledby="faq-heading">
+    <h2 id="faq-heading" class="type-h2 mb-8">Frequently asked questions</h2>
+    <div class="home-faq max-w-[72ch]">
+      {
+        faqs.map(faq => (
+          <details>
+            <summary>{faq.question}</summary>
+            <p class="type-body">{faq.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
   <div class="border-t border-border px-6 py-24 max-w-[1400px] mx-auto">
     <p class="type-label mb-4 flex items-center gap-3">
       <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
@@ -82,3 +184,78 @@ const jsonLd = [
     </a>
   </div>
 </PageLayout>
+
+<style>
+  .home-explore__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--c-border);
+    background: var(--c-surface);
+    font-size: var(--text-sm);
+    color: var(--c-text);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .home-explore__chip:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+  .home-explore__chip img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+  .home-explore__more {
+    display: inline-block;
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--c-accent);
+  }
+  .home-explore__more:hover {
+    color: var(--c-accent-hover);
+  }
+  .home-explore__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .home-explore__list a {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--c-border);
+    font-size: var(--text-sm);
+    color: var(--c-text-secondary);
+    transition: color 0.15s ease;
+  }
+  .home-explore__list a:hover {
+    color: var(--c-accent);
+  }
+  .home-explore__list span {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--c-text-muted);
+  }
+  .home-faq details {
+    border-bottom: 1px solid var(--c-border);
+  }
+  .home-faq summary {
+    cursor: pointer;
+    padding: var(--space-4) 0;
+    font-weight: 600;
+    color: var(--c-text);
+  }
+  .home-faq summary:hover {
+    color: var(--c-accent);
+  }
+  .home-faq p {
+    padding-bottom: var(--space-4);
+  }
+</style>

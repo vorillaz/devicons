@@ -1,6 +1,6 @@
 ---
 title: "CDN"
-description: "Use Devicons without npm — icon font, sprite, and raw SVGs straight from a CDN."
+description: "Use Devicons without npm: hotlink SVGs from devicons.io, or load the icon font, sprite, and catalog from jsDelivr."
 order: 6
 category: "Packages"
 categoryOrder: 1
@@ -15,17 +15,70 @@ import {
   CORE_PKG_VERSION,
 } from "../../lib/pkg-versions";
 
-Every Devicons package is on npm, so every file is reachable through public CDNs. Use this for prototypes, CodePen demos, zero-build stacks, or loading SVGs from static HTML.
+You don't need a build step to use Devicons. Individual SVGs are served from devicons.io, and the icon font, sprite, and catalog come from npm through public CDNs. This works for prototypes, CodePen demos, READMEs, and static HTML.
+
+## SVG files
+
+Every icon file is published as a standalone, CORS-enabled SVG:
+
+| Variant | URL |
+| --- | --- |
+| Color | `https://devicons.io/devicons/icons/{file}.svg` |
+| Monochrome (`currentColor`) | `https://devicons.io/devicons/font/{file}.svg` |
+
+`{file}` is one of the icon's file names, listed on each icon page (for example `react`, `nextjs`, `nextjs-icon`). Files ending in `-icon` are the glyph-only mark.
+
+### As `<img>`
+
+```html
+<img
+  src="https://devicons.io/devicons/icons/react.svg"
+  alt="React logo"
+  width="48"
+  height="48"
+/>
+```
+
+Markdown works too:
+
+```md
+![PostgreSQL](https://devicons.io/devicons/icons/postgresql.svg)
+```
+
+### Fetch and inline
+
+Inlining the monochrome SVG lets it follow CSS `color`:
+
+```html
+<span class="icon" data-icon="postgresql" aria-hidden="true"></span>
+
+<script type="module">
+  const BASE = "https://devicons.io/devicons/font";
+
+  for (const el of document.querySelectorAll("[data-icon]")) {
+    const file = el.getAttribute("data-icon");
+    const res = await fetch(`${BASE}/${file}.svg`);
+    el.innerHTML = await res.text();
+  }
+</script>
+```
+
+<Note variant="info" title="No per-icon SVGs on npm CDNs">
+
+The npm packages don't ship individual SVG files, so jsDelivr and UNPKG have no per-icon SVG URL. Use the devicons.io URLs above.
+
+</Note>
 
 ## Icon font
 
-One `<link>` tag is enough.
+One `<link>` tag is enough. Pin the version in production.
 
 <CdnTabs
   client:load
   pkg={FONT_PKG_NAME}
   version={FONT_PKG_VERSION}
   path="dist/devicons.css"
+  providers={["jsdelivr", "unpkg"]}
   template={`<link
   rel="stylesheet"
   href="{url}"
@@ -35,105 +88,64 @@ One `<link>` tag is enough.
 Then use it:
 
 ```html
-<i class="devicon devicon-react"></i>
+<i class="devicons devicons-react"></i>
 ```
 
-See the [icon font guide](/docs/icon-font) for sizing and color.
+See the [icon font guide](/docs/icon-font/) for sizing and color.
 
 ## SVG sprite
 
-A single `<svg>` containing every icon as a `<symbol>`. Reference with `<use>`. Good for pages with many icons.
+`@dev.icons/core` ships a color sprite at `dist/sprite/sprite-symbol.svg`: one `<svg>` with every icon file as a `<symbol>`. Symbol IDs are file names (`#react`, `#nextjs-icon`).
 
 <CdnTabs
   client:load
   pkg={CORE_PKG_NAME}
   version={CORE_PKG_VERSION}
-  path="export-files/sprite.svg"
-  fragment="#react"
-  template={`<svg class="icon" width="24" height="24" aria-label="React logo">
-  <use href="{url}"></use>
-</svg>`}
+  path="dist/sprite/sprite-symbol.svg"
+  providers={["jsdelivr"]}
 />
 
-<Note variant="info" title="Symbol IDs match icon slugs">
+<Note variant="info" title="Self-host the sprite">
 
-`<symbol>` IDs are the slugs from the [icon library](/icons): `#react`, `#vue`, `#nextjs-icon`, etc.
+Browsers don't follow `<use href>` across origins. Download the sprite (or copy it from `node_modules/@dev.icons/core/dist/sprite/sprite-symbol.svg`) into your static assets and reference it from your own domain. The file is large (about 3.5 MB), so this approach suits pages that need many icons.
 
 </Note>
 
-## Raw SVGs
-
-Every icon is available as an individual SVG under `export-files/icons/`.
-
-### As `<img>`
-
 ```html
-<img
-  src="https://cdn.jsdelivr.net/npm/@dev.icons/core@latest/export-files/icons/react.svg"
-  alt="React logo"
-  width="48"
-  height="48"
+<svg class="icon" width="24" height="24" role="img" aria-label="React logo">
+  <use href="/sprite-symbol.svg#react"></use>
+</svg>
+```
+
+## Icon catalog
+
+The list of icon files, with font codepoints, as JSON:
+
+<CdnTabs
+  client:load
+  pkg={CORE_PKG_NAME}
+  version={CORE_PKG_VERSION}
+  path="dist/icons.json"
+  providers={["jsdelivr"]}
 />
-```
 
-### Fetch and inject
-
-Fetching raw SVG markup lets you style it with CSS.
-
-```html
-<span class="icon" data-icon="postgresql" aria-hidden="true"></span>
-
-<script type="module">
-  const BASE =
-    "https://cdn.jsdelivr.net/npm/@dev.icons/core@latest/export-files/icons";
-
-  for (const el of document.querySelectorAll("[data-icon]")) {
-    const slug = el.getAttribute("data-icon");
-    const res = await fetch(`${BASE}/${slug}.svg`);
-    el.innerHTML = await res.text();
-  }
-</script>
-```
-
-### ES module via Skypack
-
-No install, no bundler:
-
-```html
-<script type="module">
-  import { react, vue, postgresql } from "https://cdn.skypack.dev/@dev.icons/core@latest";
-
-  document.getElementById("logo").innerHTML = react;
-</script>
-```
-
-### Icon variants
-
-Most brands have a full logo and a glyph-only mark:
-
-| Path | Example |
-| --- | --- |
-| `icons/<slug>.svg` | `icons/react.svg` |
-| `icons/<slug>-icon.svg` | `icons/nextjs-icon.svg` |
+For names, tags, and aliases, use [`https://devicons.io/search-index.json`](/search-index.json).
 
 ## Versioning and caching
 
-All CDNs honor semver ranges:
-
-```
-https://<cdn>/@dev.icons/core@1.2.3/export-files/icons/react.svg
-```
+npm CDNs honor exact versions and semver ranges:
 
 <Note variant="tip" title="Cache behavior">
 
-- **Pinned** (`@1.2.3`) -- cached forever at the edge. Use in production.
-- **Range** (`@^1`) -- revalidated periodically, picks up patches and minors.
-- **`@latest`** -- changes with every release. Fine for demos only.
+- **Pinned** (`@1.2.3`): cached at the edge indefinitely. Use this in production.
+- **Range** (`@^1`): revalidated periodically, so it picks up patches and minor releases.
+- **`@latest`**: changes with every release. Only use it for demos.
 
 </Note>
 
+The devicons.io SVG URLs aren't versioned. They always serve the current artwork.
+
 ## When CDN is not enough
 
-- Tree-shaken, typed components: [`@dev.icons/react`](/docs/react), [`@dev.icons/vue`](/docs/vue), [`@dev.icons/svelte`](/docs/svelte)
-- Programmatic metadata: install [`@dev.icons/core`](/docs/core) locally
-- SSR markup without a runtime: [`@dev.icons/core`](/docs/core) exports each icon as a plain SVG string
+- Tree-shaken, typed components: [`@dev.icons/react`](/docs/react/), [`@dev.icons/vue`](/docs/vue/), [`@dev.icons/svelte`](/docs/svelte/)
+- Programmatic access to the icon list: install [`@dev.icons/core`](/docs/core/) locally

@@ -9,10 +9,10 @@ badge: "new"
 
 import Note from "../../components/docs/note.astro";
 
-`@dev.icons/svelte` ships native Svelte components. SvelteKit, Vite, and Astro integrations all work without extra config.
+`@dev.icons/svelte` ships native Svelte 5 components. SvelteKit, Vite, and Astro integrations all work without extra config.
 
-<Note title="Why the underscore suffix?">
-Some icon names collide with reserved imports from major frameworks. When that happens, the export is suffixed with an underscore: `import { _Svelte } from "@dev.icons/svelte";`
+<Note title="Why the underscore prefix?">
+Export names come from the icon's file name, split on `-` and PascalCased (`css` becomes `Css`, `svelte-icon` becomes `SvelteIcon`). Four names would collide with framework imports: React, Vue, Svelte, and Astro. Those get an underscore prefix (`_Svelte`). Alias them on import so they work as component tags: `import { _Svelte as SvelteLogo } from "@dev.icons/svelte";`
 </Note>
 
 ## Install
@@ -25,10 +25,11 @@ npm install @dev.icons/svelte
 
 ```svelte
 <script lang="ts">
-  import { SvelteIcon } from "@dev.icons/svelte";
+  import { _Svelte as SvelteLogo, SvelteIcon } from "@dev.icons/svelte";
 </script>
 
-<SvelteIcon size={48} />
+<SvelteLogo size={48} />
+<SvelteIcon size={48} alt="Svelte" />
 ```
 
 ## Monochrome variants
@@ -49,9 +50,12 @@ Monochrome icons use `currentColor`, so they inherit the parent's text color.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `size` | `number \| string` | `24` | Width and height shortcut |
-| `title` | `string` | `undefined` | Accessible label |
-| `color` | `string` | `currentColor` | Fill override |
+| `size` | `string \| number` | `"1em"` | Sets both `width` and `height` |
+| `color` | `string` | `"currentColor"` | Sets the root `fill`. Visible on monochrome icons. |
+| `alt` | `string` | none | Accessible name, rendered as an SVG `<title>` |
+| `mirrored` | `boolean` | `false` | Flips the icon horizontally (`scale(-1, 1)`) |
+
+Other attributes (`class`, `style`, `aria-*`) are spread onto the root `<svg>`.
 
 ## SvelteKit
 

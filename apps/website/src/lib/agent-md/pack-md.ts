@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { mdxToMd } from './mdx-to-md';
 
 type PackEntry = CollectionEntry<'packs'>;
 
@@ -41,8 +42,11 @@ export function buildPackMarkdown({ pack, icons }: BuildArgs): string {
   lines.push('```');
   lines.push('');
   lines.push(
-    'Import each icon by its PascalCase name with `Icon` suffix (e.g. `LangChainIcon`).',
+    'Each component is named after the icon file: split on `-`, PascalCase each part, and prefix `_` for the reserved names React, Vue, Svelte, and Astro (e.g. `langchain` → `Langchain`, `discord-icon` → `DiscordIcon`, `react` → `_React`). Each icon page lists its exact file names and component names. Monochrome variants live under the `/mono` subpath (e.g. `@dev.icons/react/mono`).',
   );
+
+  const prose = mdxToMd(pack.body ?? '').trim();
+  if (prose) lines.push('', prose);
 
   lines.push('', '[← All packs](/packs.md)');
 

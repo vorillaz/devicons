@@ -872,6 +872,334 @@ body *:not(canvas):not(svg *) {
   gap: var(--space-4);
 }
 
+/* ============================================================
+   Icon page preview — a labelled PREVIEW bar that mirrors the
+   USAGE bar below, and 4:3 tiles whose logo scales with the tile.
+   ============================================================ */
+.icon-preview__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.icon-preview__bar > div:last-child {
+  flex: 0 1 auto;
+  gap: var(--space-3);
+  margin-bottom: 0;
+}
+.icon-preview__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  line-height: var(--leading-flat);
+}
+.icon-preview__grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.icon-preview__grid .aspect-square {
+  aspect-ratio: 4 / 3;
+}
+.icon-preview__logo {
+  width: 100%;
+  height: 100%;
+  max-width: 55%;
+  max-height: 55%;
+}
+.icon-preview__usage {
+  margin-top: 2.5rem;
+}
+@media (min-width: 640px) {
+  .icon-preview__usage .install-rail__body {
+    gap: var(--space-6);
+    padding: var(--space-6);
+  }
+}
+
+/* ============================================================
+   Icon page header — name, specimen meta line, quiet outbound
+   links, brand colour chips, tag links.
+   ============================================================ */
+.icon-header {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.icon-header__meta {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+}
+.icon-header__sep {
+  color: var(--c-border);
+}
+.icon-header__variants {
+  color: var(--c-accent);
+  transition: color 0.15s ease;
+}
+.icon-header__variants:hover {
+  color: var(--c-accent-hover);
+}
+.icon-header__deprecated {
+  color: var(--c-destructive);
+}
+.icon-header__desc {
+  margin-top: 1.25rem;
+  max-width: 64ch;
+}
+.icon-header__aka {
+  margin-top: var(--space-2);
+}
+.icon-header__facts {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.icon-header__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-secondary);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+.icon-header__link:hover {
+  color: var(--c-text);
+  border-color: var(--c-text-muted);
+}
+.icon-header__link:active {
+  background: var(--c-text);
+  color: var(--c-bg);
+}
+.icon-header__colors {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-left: var(--space-2);
+}
+.icon-header__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+  transition: color 0.15s ease;
+}
+a.icon-header__chip:hover {
+  color: var(--c-text);
+}
+.icon-header__tags {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.icon-header__tag {
+  padding: 0.375rem 0.625rem;
+}
+
+/* ============================================================
+   Icon drawer header — name, specimen meta line, tag links.
+   ============================================================ */
+.icon-drawer__head {
+  margin-bottom: var(--space-8);
+}
+.icon-drawer__titlerow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.icon-drawer__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-flat);
+  color: var(--c-text);
+}
+.icon-drawer__full {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid color-mix(in oklab, var(--c-accent) 40%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-accent);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.icon-drawer__full:hover {
+  border-color: var(--c-accent);
+}
+.icon-drawer__full:active {
+  background: var(--c-accent);
+  color: var(--c-accent-fg);
+}
+.icon-drawer__meta {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+}
+.icon-drawer__deprecated {
+  color: var(--c-destructive);
+}
+.icon-drawer__desc {
+  margin-top: var(--space-4);
+  max-width: 68ch;
+}
+.icon-drawer__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.icon-drawer__tags a {
+  display: inline-flex;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+.icon-drawer__tags a:hover {
+  color: var(--c-text);
+  border-color: var(--c-text-muted);
+}
+
+/* ============================================================
+   Install panel — one framed panel: a header strip with USAGE and
+   the framework tabs, install / import / render snippets inset on
+   the page background. Shared by icon pages and the search drawer.
+   ============================================================ */
+.install-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+}
+.install-rail__side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--c-border);
+}
+.install-rail__list {
+  display: flex;
+  gap: var(--space-1);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.install-rail__item {
+  flex-shrink: 0;
+  padding: 0.625rem var(--space-3);
+  background: transparent;
+  border: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: var(--leading-flat);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+.install-rail__item:hover {
+  color: var(--c-text);
+}
+.install-rail__item[aria-selected='true'] {
+  color: var(--c-accent);
+  background: color-mix(in oklab, var(--c-accent) 10%, transparent);
+  box-shadow: inset 0 -2px 0 var(--c-accent);
+}
+.install-rail__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--c-bg);
+}
+.install-rail .install-snippet__block {
+  border-left: 1px solid var(--c-border);
+  background: var(--c-surface);
+}
+.install-rail .install-snippet__code {
+  padding-right: 4.5rem;
+}
+.install-rail .copy-btn {
+  opacity: 1;
+}
+@media (max-width: 639px) {
+  .install-rail__body {
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+}
+
 .install-tabs__bar {
   display: flex;
   align-items: center;
