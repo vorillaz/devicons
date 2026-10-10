@@ -90,11 +90,15 @@ const pageJsonLd = jsonLd
     ? jsonLd
     : [jsonLd]
   : [];
-const jsonLdBlocks = [
-  organizationSchema(siteOrigin),
-  websiteSchema(siteOrigin),
-  ...pageJsonLd,
-];
+// One @graph instead of separate <script> blocks so `@id` references
+// (publisher, creator, isPartOf → #organization / #website) resolve within a
+// single document for every consumer, not just Google.
+const jsonLdGraph = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema(siteOrigin), websiteSchema(siteOrigin), ...pageJsonLd].map(
+    ({ "@context": _context, ...node }) => node,
+  ),
+};
 
 const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 ---
@@ -152,7 +156,12 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Robots -->
-<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, follow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -189,16 +198,14 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 )}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:site" content={TWITTER_HANDLE} />
-<meta property="twitter:creator" content={TWITTER_HANDLE} />
-<meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-{ogImage && <meta property="twitter:image" content={ogImage} />}
-{ogImage && <meta property="twitter:image:alt" content={title} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={TWITTER_HANDLE} />
+<meta name="twitter:creator" content={TWITTER_HANDLE} />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+{ogImage && <meta name="twitter:image:alt" content={title} />}
 
 <!-- Structured data -->
-{jsonLdBlocks.map((block) => (
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
-))}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />
