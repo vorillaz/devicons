@@ -101,7 +101,7 @@ export function IconPreviewGrid({
 
   return (
     <div className={gridClassName}>
-      {icons.map(iconFile => (
+      {icons.map((iconFile, index) => (
         <div key={iconFile} className="flex flex-col">
           <div
             className={clsx(
@@ -140,7 +140,15 @@ export function IconPreviewGrid({
             ) : (
               <img
                 src={`/devicons/icons/${iconFile}.svg`}
-                alt={`${name} logo (${iconFile})`}
+                alt={
+                  index === 0
+                    ? `${name} logo`
+                    : `${name} logo, ${iconFile} variant`
+                }
+                width={120}
+                height={120}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                decoding="async"
                 className={clsx(
                   'relative z-10 w-full h-full object-contain',
                   iconMaxClassName,
