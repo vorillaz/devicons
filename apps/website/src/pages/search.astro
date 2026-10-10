@@ -28,17 +28,17 @@ const jsonLd = [
 ---
 
 <PageLayout title={title} description={description} image="/og/search.png" jsonLd={jsonLd}>
-  <div class="max-w-[1400px] mx-auto px-6 pt-10">
+  <div class="max-w-[1400px] mx-auto px-6 pt-8">
     <Breadcrumbs
       items={[
         { name: "Home", url: "/" },
         { name: "Search" },
       ]}
     />
-    <header class="mt-6 mb-8 pb-8 border-b border-border">
+    <header class="mt-6 pb-6">
       <p class="type-label mb-4 flex items-center gap-3">
         <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"></span>
-        {icons.length} icons
+        {icons.length.toLocaleString("en-US")} icons
       </p>
       <h1 class="type-h1">Search developer icons</h1>
       <p class="type-body-lg mt-3 max-w-[64ch]">
