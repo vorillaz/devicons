@@ -19,6 +19,9 @@ export async function getRelatedIcons(
 ): Promise<RelatedIcon[]> {
   if (!tags || tags.length === 0) return [];
   const tagSet = new Set(tags);
+  // Brand family prefix: aws-s3 → aws, google-cloud → google.
+  const head = currentSlug.split('-')[0];
+  const family = head.length >= 3 ? head : null;
   const all = await getCollection('icons');
   const scored: RelatedIcon[] = [];
   for (const entry of all) {
@@ -30,17 +33,19 @@ export async function getRelatedIcons(
       slug: entry.id,
       name: entry.data.name,
       iconFile: entry.data.icons[0] ?? entry.id,
+      // Shared tags drive relevance; the same family (aws-s3 → aws-*) is a
+      // strong signal; popular/recommended only break ties.
       score:
         overlap +
-        (entry.data.popular ? 0.5 : 0) +
-        (entry.data.recommended ? 1 : 0),
+        (family && (entry.id === family || entry.id.startsWith(`${family}-`)) ? 2 : 0) +
+        (entry.data.recommended ? 0.2 : 0) +
+        (entry.data.popular ? 0.1 : 0),
       badInDark: entry.data.badInDark === true,
       badInLight: entry.data.badInLight === true,
       recommended: entry.data.recommended === true,
     });
   }
   scored.sort((a, b) => {
-    if (a.recommended !== b.recommended) return a.recommended ? -1 : 1;
     if (b.score !== a.score) return b.score - a.score;
     return a.name.localeCompare(b.name);
   });

@@ -1,7 +1,24 @@
+# Devicons — developer icons and logos (https://devicons.io)
+# Machine-readable overview for LLMs and agents: https://devicons.io/llms.txt
+# Full docs as plain text: https://devicons.io/llms-full.txt
+
 User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
-Disallow: /og/
-Disallow: /search-index.json
+
+# AI search and assistant crawlers are welcome; listed explicitly so the
+# intent survives any edge-level "block AI bots" defaults.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://devicons.io/sitemap-index.xml

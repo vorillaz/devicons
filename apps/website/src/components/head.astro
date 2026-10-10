@@ -10,7 +10,7 @@ import {
   THEME_COLOR_LIGHT,
   THEME_COLOR_DARK,
 } from "../consts";
-import { organizationSchema, websiteSchema } from "../lib/seo";
+import { organizationSchema, webPageSchema, websiteSchema } from "../lib/seo";
 
 interface Props {
   title: string;
@@ -18,6 +18,10 @@ interface Props {
   image?: string;
   ogType?: "website" | "article";
   noindex?: boolean;
+  /** Absolute or root-relative URL when the canonical differs from this page. */
+  canonical?: string;
+  /** Alt text for the social image; defaults to the page title. */
+  imageAlt?: string;
   keywords?: string[];
   publishedTime?: string;
   modifiedTime?: string;
@@ -31,6 +35,8 @@ const {
   image,
   ogType = "website",
   noindex = false,
+  canonical,
+  imageAlt,
   keywords,
   publishedTime,
   modifiedTime,
@@ -43,7 +49,7 @@ const {
 // and the sitemap (no dual-URL split).
 const rawPath = Astro.url.pathname.toLowerCase();
 const normalizedPath = rawPath.endsWith("/") ? rawPath : `${rawPath}/`;
-const canonicalURL = new URL(normalizedPath, Astro.site ?? SITE_URL);
+const canonicalURL = new URL(canonical ?? normalizedPath, Astro.site ?? SITE_URL);
 
 // Markdown alternate: emit <link rel="alternate" type="text/markdown"> for
 // pages that have a pre-rendered .md counterpart so agents can discover them
@@ -60,11 +66,14 @@ function resolveMarkdownAlternate(path: string): string | null {
     trimmed === "/compare"
   )
     return `${trimmed}.md`;
-  // Listing/utility pages under /icons do not have MD counterparts.
+  // Listing/utility pages under /icons do not have MD counterparts, and
+  // neither do icon sub-pages (/icons/<slug>/<framework|variants>/): only
+  // /icons/<slug>.md is generated.
   if (
     trimmed.startsWith("/icons/tag/") ||
     trimmed.startsWith("/icons/color/") ||
-    trimmed === "/icons/popular"
+    trimmed === "/icons/popular" ||
+    /^\/icons\/[^/]+\/.+/.test(trimmed)
   )
     return null;
   // Prerendered content pages.
@@ -78,7 +87,9 @@ function resolveMarkdownAlternate(path: string): string | null {
   return null;
 }
 
-const markdownAlternatePath = resolveMarkdownAlternate(normalizedPath);
+// Noindexed pages (deprecated icons, thin tags, secondary framework pages)
+// advertise neither a Markdown twin nor a canonical.
+const markdownAlternatePath = noindex ? null : resolveMarkdownAlternate(normalizedPath);
 const markdownAlternate = markdownAlternatePath
   ? new URL(markdownAlternatePath, Astro.site ?? SITE_URL).toString()
   : null;
@@ -90,11 +101,30 @@ const pageJsonLd = jsonLd
     ? jsonLd
     : [jsonLd]
   : [];
-const jsonLdBlocks = [
-  organizationSchema(siteOrigin),
-  websiteSchema(siteOrigin),
-  ...pageJsonLd,
-];
+// One @graph instead of separate <script> blocks so `@id` references
+// (publisher, creator, isPartOf → #organization / #website) resolve within a
+// single document for every consumer, not just Google.
+const jsonLdGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizationSchema(siteOrigin),
+    websiteSchema(siteOrigin),
+    ...(noindex
+      ? []
+      : [
+          webPageSchema({
+            url: canonicalURL.toString(),
+            name: title,
+            description,
+            image: ogImage,
+            site: siteOrigin,
+          }),
+        ]),
+    ...pageJsonLd,
+  ].map(
+    ({ "@context": _context, ...node }) => node,
+  ),
+};
 
 const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 ---
@@ -119,14 +149,14 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="apple-touch-icon" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <meta name="theme-color" content={THEME_COLOR_LIGHT} media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content={THEME_COLOR_DARK} media="(prefers-color-scheme: dark)" />
 
 <!-- Fonts via Astro font system (preloaded, locally cached) -->
 <Font cssVariable="--font-display" preload />
-<Font cssVariable="--font-mono" preload />
+<Font cssVariable="--font-mono" preload={[{ weight: 600 }]} />
 
 <!-- View transitions for smooth page navigation -->
 <ClientRouter fallback="swap" />
@@ -149,10 +179,15 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+{!noindex && <link rel="canonical" href={canonicalURL} />}
 
 <!-- Robots -->
-<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, follow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -174,7 +209,7 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 {ogImage && <meta property="og:image" content={ogImage} />}
-{ogImage && <meta property="og:image:alt" content={title} />}
+{ogImage && <meta property="og:image:alt" content={imageAlt ?? title} />}
 {ogImage && <meta property="og:image:width" content="1200" />}
 {ogImage && <meta property="og:image:height" content="630" />}
 {ogImage && <meta property="og:image:type" content="image/png" />}
@@ -189,16 +224,14 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 )}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:site" content={TWITTER_HANDLE} />
-<meta property="twitter:creator" content={TWITTER_HANDLE} />
-<meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-{ogImage && <meta property="twitter:image" content={ogImage} />}
-{ogImage && <meta property="twitter:image:alt" content={title} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={TWITTER_HANDLE} />
+<meta name="twitter:creator" content={TWITTER_HANDLE} />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+{ogImage && <meta name="twitter:image:alt" content={title} />}
 
 <!-- Structured data -->
-{jsonLdBlocks.map((block) => (
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
-))}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />

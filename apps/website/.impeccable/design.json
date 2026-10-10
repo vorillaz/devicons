@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-10T12:00:00Z",
+  "title": "Design System: Devicons",
+  "extensions": {
+    "colorMeta": {
+      "signal-orange": { "role": "primary", "displayName": "Signal Orange", "canonical": "#ff4d00", "tonalRamp": ["#4d1700", "#802600", "#b33300", "#ff4d00", "#ff6b2b", "#ff9b66", "#ffb380", "#ffd9c2"] },
+      "ink-black": { "role": "neutral", "displayName": "Ink Black", "canonical": "#000000", "tonalRamp": ["#000000", "#0a0a0a", "#1a1a1a", "#262626", "#525252", "#8a8a8a", "#b5b5b5", "#e6e6e6"] },
+      "drawer-black": { "role": "neutral", "displayName": "Drawer Black", "canonical": "#0a0a0a" },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#1a1a1a" },
+      "string-tan": { "role": "tertiary", "displayName": "String Tan", "canonical": "#c9a876" },
+      "status-green": { "role": "status", "displayName": "Status Green", "canonical": "#00c951" },
+      "status-red": { "role": "status", "displayName": "Status Red", "canonical": "#ff4d4d" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home hero only." },
+      "headline": { "displayName": "Headline", "purpose": "Page titles (H1)." },
+      "title": { "displayName": "Title", "purpose": "Section headings (H2)." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs in secondary text; measure 64ch or less." },
+      "label": { "displayName": "Label", "purpose": "Uppercase mono eyebrows, tabs, chips, badges, action links." },
+      "mono": { "displayName": "Mono", "purpose": "Inputs, counts, result summaries, code." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state", "value": "150ms ease", "purpose": "Colour and border changes on controls." },
+      { "name": "drawer", "value": "500ms cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Bottom drawer enter and exit." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action on a surface.",
+      "html": "<button class=\"ds-btn-primary\">Copy SVG</button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-family:var(--font-display); font-size:14px; font-weight:600; letter-spacing:-0.015em; line-height:1; background:var(--c-accent,#ff4d00); color:var(--c-accent-fg,#000); border:1px solid var(--c-accent,#ff4d00); border-radius:0; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; } .ds-btn-primary:hover { background:var(--c-accent-hover,#ff6b2b); border-color:var(--c-accent-hover,#ff6b2b); } .ds-btn-primary:active { background:var(--c-text,#e6e6e6); border-color:var(--c-text,#e6e6e6); } .ds-btn-primary:focus-visible { outline:2px solid var(--c-accent,#ff4d00); outline-offset:2px; }"
+    },
+    {
+      "name": "Action Button",
+      "kind": "button",
+      "refersTo": "button-action",
+      "description": "Secondary hairline-bordered mono action.",
+      "html": "<button class=\"ds-btn-action\">Clear search</button>",
+      "css": ".ds-btn-action { display:inline-flex; align-items:center; padding:8px 12px; font-family:var(--font-mono); font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; line-height:1; background:transparent; color:var(--c-text-secondary,#b5b5b5); border:1px solid var(--c-border,#1a1a1a); border-radius:0; cursor:pointer; transition:color .15s ease, border-color .15s ease; } .ds-btn-action:hover { color:var(--c-text,#e6e6e6); border-color:var(--c-text-muted,#8a8a8a); } .ds-btn-action:active { background:var(--c-text,#e6e6e6); color:var(--c-bg,#000); } .ds-btn-action:focus-visible { outline:2px solid var(--c-accent,#ff4d00); outline-offset:2px; }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Drawer-black mono field with inset glyph and / hint.",
+      "html": "<label class=\"ds-search\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input placeholder=\"Search icons…\" aria-label=\"Search icons\"/><kbd>/</kbd></label>",
+      "css": ".ds-search { position:relative; display:flex; align-items:center; width:320px; background:var(--c-surface,#0a0a0a); border:1px solid var(--c-border,#1a1a1a); color:var(--c-text-muted,#8a8a8a); transition:border-color .15s ease; } .ds-search:focus-within { border-color:var(--c-text-muted,#8a8a8a); } .ds-search svg { margin-left:16px; flex-shrink:0; } .ds-search input { flex:1; padding:12px 16px 12px 12px; background:transparent; border:0; outline:none; font-family:var(--font-mono); font-size:14px; color:var(--c-text,#e6e6e6); } .ds-search input::placeholder { color:var(--c-text-muted,#8a8a8a); } .ds-search kbd { margin-right:12px; min-width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--c-border,#1a1a1a); background:var(--c-bg,#000); font-family:var(--font-mono); font-size:12px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Mono uppercase toggle chip; selected takes the orange tint.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">All</button><button class=\"ds-chip\" aria-pressed=\"false\">Database</button><button class=\"ds-chip\" aria-pressed=\"false\">AI</button></div>",
+      "css": ".ds-chips { display:flex; gap:8px; } .ds-chip { padding:6px 12px; font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; line-height:1; background:var(--c-surface,#0a0a0a); color:var(--c-text-muted,#8a8a8a); border:1px solid var(--c-border,#1a1a1a); border-radius:0; cursor:pointer; transition:color .15s ease, border-color .15s ease; } .ds-chip:hover { color:var(--c-text,#e6e6e6); border-color:var(--c-text-muted,#8a8a8a); } .ds-chip[aria-pressed=\"true\"] { background:color-mix(in oklab, var(--c-accent,#ff4d00) 15%, transparent); color:var(--c-accent,#ff4d00); border-color:color-mix(in oklab, var(--c-accent,#ff4d00) 30%, transparent); } .ds-chip:focus-visible { outline:2px solid var(--c-accent,#ff4d00); outline-offset:2px; }"
+    },
+    {
+      "name": "Segmented Tabs",
+      "kind": "nav",
+      "refersTo": "tab-item-active",
+      "description": "Framed tab-group shell with mono items.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">React</button><button role=\"tab\" aria-selected=\"false\">Vue</button><button role=\"tab\" aria-selected=\"false\">Svelte</button></div>",
+      "css": ".ds-tabs { display:inline-flex; gap:4px; padding:4px; background:var(--c-surface,#0a0a0a); border:1px solid var(--c-border,#1a1a1a); } .ds-tabs button { padding:8px 12px; background:transparent; border:0; border-radius:0; font-family:var(--font-mono); font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; line-height:1; color:var(--c-text-muted,#8a8a8a); cursor:pointer; transition:background-color .15s ease, color .15s ease; } .ds-tabs button:hover { color:var(--c-text,#e6e6e6); background:var(--c-surface-2,#1a1a1a); } .ds-tabs button[aria-selected=\"true\"] { color:var(--c-accent,#ff4d00); background:color-mix(in oklab, var(--c-accent,#ff4d00) 15%, transparent); }"
+    },
+    {
+      "name": "Icon Cell",
+      "kind": "card",
+      "refersTo": "icon-cell",
+      "description": "Collapsed-border grid cell: logo tile, name, one meta line.",
+      "html": "<button class=\"ds-cell\"><span class=\"ds-cell-dot\"></span><span class=\"ds-cell-tile\"><svg width=\"36\" height=\"36\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#61dafb\" stroke-width=\"1.2\"><ellipse cx=\"12\" cy=\"12\" rx=\"10\" ry=\"4\"/><ellipse cx=\"12\" cy=\"12\" rx=\"10\" ry=\"4\" transform=\"rotate(60 12 12)\"/><ellipse cx=\"12\" cy=\"12\" rx=\"10\" ry=\"4\" transform=\"rotate(120 12 12)\"/><circle cx=\"12\" cy=\"12\" r=\"1.8\" fill=\"#61dafb\"/></svg></span><span class=\"ds-cell-name\">React</span><span class=\"ds-cell-meta\">2 styles</span></button>",
+      "css": ".ds-cell { position:relative; width:168px; height:144px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:var(--c-bg,#000); border:1px solid var(--c-border,#1a1a1a); border-radius:0; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; } .ds-cell:hover { background:var(--c-surface,#0a0a0a); border-color:var(--c-accent,#ff4d00); } .ds-cell:focus-visible { outline:2px solid var(--c-accent,#ff4d00); outline-offset:-2px; } .ds-cell-dot { position:absolute; top:8px; right:8px; width:4px; height:4px; background:var(--c-accent,#ff4d00); } .ds-cell-tile { width:48px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--c-surface,#0a0a0a); } .ds-cell-name { font-family:var(--font-display); font-size:14px; font-weight:600; letter-spacing:-0.015em; color:var(--c-text,#e6e6e6); } .ds-cell-meta { font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--c-text-muted,#8a8a8a); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Specimen Drawer",
+    "overview": "Devicons is shown like a type foundry's specimen cabinet. Every mark is filed on the same grid, labelled in mono, and set into a black drawer that has no colour of its own. The logos are the only saturated things on the page, and the interface is the frame and the index card around them. One hot orange signal marks where you are and what is selected.\n\nThe world is brutalist in construction: no rounded corners anywhere, 1px hairline rules for structure, and tonal layering instead of shadows. Controls are hard-edged but tactile: they answer a press with solid fills and inverted active states, not lifts or glows. The density is that of a catalogue. Collapsed borders tile cells into one continuous grid, and uppercase mono captions carry the metadata.",
+    "keyCharacteristics": [
+      "No border radius on any element, anywhere (a global `border-radius: 0`).",
+      "Black drawer surfaces. Colour comes from the logos, with a single Signal Orange accent.",
+      "Two voices: a geometric grotesque for names and headings, a mono for labels, code and data.",
+      "1px hairlines and tonal steps do all the structural work. There are no drop shadows.",
+      "Dark is the default; a full light (\"paper\") theme mirrors every token."
+    ],
+    "rules": [
+      { "name": "The Signal Rule", "body": "Signal Orange is a marker, not a paint. It covers 10% of a screen at most and always means \"current, selected, focused, or the one primary action.\"", "section": "colors" },
+      { "name": "The Logos Own Colour Rule", "body": "Interface surfaces stay neutral, so that any brand mark can sit on them without clashing. Never tint a surface to match a logo.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Names and headings speak in the grotesque; metadata, controls and code speak in mono. Never set a body paragraph in mono, or a label in the grotesque.", "section": "typography" },
+      { "name": "The Locked Scale Rule", "body": "Sizes, line-heights and tracking come only from the `--text-*`, `--leading-*` and `--tracking-*` tokens. Don't add one-off rem values.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "There is no `box-shadow` for elevation. If something needs to read as on top, give it an opaque surface step and a hairline.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep every corner square. The global zero-radius rule is the identity.",
+      "Do let logos carry the colour. Present them on Ink Black, Drawer Black, white or a checker background, and add a contrast backdrop when an icon is flagged `badInDark` or `badInLight`.",
+      "Do reserve Signal Orange for current, selected, focused, or the one primary action.",
+      "Do answer presses with solid, tactile state changes (fills and inverted active states) rather than motion or shadow.",
+      "Do keep transitions short (150ms ease on colour and border). Drawers use `cubic-bezier(0.32, 0.72, 0, 1)`.",
+      "Do theme the browser surfaces: orange selection, a 6px hairline scrollbar, and an orange focus ring."
+    ],
+    "donts": [
+      "Don't round anything, or add drop shadows, glows, or glass blur.",
+      "Don't restyle, recolour, crop, or reinterpret a brand mark beyond its official colour and monochrome variants.",
+      "Don't introduce a second accent hue. Status green and red are for status only.",
+      "Don't set body copy in mono or labels in the grotesque.",
+      "Don't add metadata badges that are true of nearly every item (such as ACTIVE or a default version). Show exceptions only."
+    ]
+  }
+}

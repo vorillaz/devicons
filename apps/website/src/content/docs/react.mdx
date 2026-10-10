@@ -11,8 +11,8 @@ import Note from "../../components/docs/note.astro";
 
 `@dev.icons/react` ships every icon as a named export. Components are typed, tree-shakeable, and have no runtime dependencies.
 
-<Note title="Why the underscore suffix?">
-Some icon names collide with reserved imports from major frameworks. When that happens, the export is suffixed with an underscore: `import { _React } from "@dev.icons/react";`
+<Note title="Why the underscore prefix?">
+Export names come from the icon's file name, split on `-` and PascalCased (`css` becomes `Css`, `discord-icon` becomes `DiscordIcon`). Four names would collide with framework imports: React, Vue, Svelte, and Astro. Those get an underscore prefix: `import { _React } from "@dev.icons/react";`
 </Note>
 
 ## Install
@@ -24,10 +24,10 @@ npm install @dev.icons/react
 ## Usage
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react";
+import { _React } from "@dev.icons/react";
 
 export function Logo() {
-  return <ReactIcon size={32} />;
+  return <_React size={32} />;
 }
 ```
 
@@ -36,10 +36,10 @@ export function Logo() {
 Import from the `/mono` subpath:
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react/mono";
+import { _React } from "@dev.icons/react/mono";
 
 export function MonoLogo() {
-  return <ReactIcon size={32} />;
+  return <_React size={32} />;
 }
 ```
 
@@ -51,19 +51,28 @@ Every icon accepts standard SVG props plus these:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `size` | `number \| string` | `24` | Sets both `width` and `height` |
-| `title` | `string` | `undefined` | Accessible name rendered as `<title>` |
-| `color` | `string` | `currentColor` | Override fill color |
+| `size` | `string \| number` | `"1em"` | Sets both `width` and `height` |
+| `color` | `string` | `"currentColor"` | Sets the root `fill`. Visible on monochrome icons. |
+| `alt` | `string` | none | Accessible name, rendered as an SVG `<title>` |
+| `mirrored` | `boolean` | `false` | Flips the icon horizontally (`scale(-1, 1)`) |
 
-Anything else (`className`, `onClick`, `aria-*`, `data-*`) is forwarded to the root `<svg>`.
+Anything else (`className`, `style`, `onClick`, `aria-*`, `data-*`) is forwarded to the root `<svg>`. To set defaults for a subtree, wrap it in `IconContext.Provider`:
+
+```tsx
+import { IconContext, _React } from "@dev.icons/react";
+
+<IconContext.Provider value={{ size: 24 }}>
+  <_React />
+</IconContext.Provider>
+```
 
 ## Tree-shaking
 
 Use named imports. Wildcard imports pull in the entire catalog and defeat tree-shaking in most bundlers.
 
 ```tsx
-// Good: only ReactIcon lands in your bundle
-import { ReactIcon } from "@dev.icons/react";
+// Good: only _React lands in your bundle
+import { _React } from "@dev.icons/react";
 
 // Bad: pulls everything
 import * as Devicons from "@dev.icons/react";
@@ -71,31 +80,37 @@ import * as Devicons from "@dev.icons/react";
 
 ## SSR and React Server Components
 
-All icons are pure components with no `useState` or `useEffect`. They work in React Server Components, Next.js `app/` routes, Remix loaders, and any SSR setup without extra config.
+Icons are pure components with no `useState` or `useEffect`. They work in React Server Components, Next.js `app/` routes, Remix, and any SSR setup without extra config. In Astro, they render to static SVG without a `client:*` directive.
 
 ```tsx
 // app/page.tsx
-import { ReactIcon } from "@dev.icons/react";
+import { _React } from "@dev.icons/react";
 
 export default function Page() {
-  return <ReactIcon size={64} />;
+  return <_React size={64} />;
 }
 ```
 
 ## Accessibility
 
-Icons are decorative by default (`aria-hidden="true"`). When an icon carries meaning, pass a `title`:
+When an icon carries meaning, pass `alt`. It renders as the SVG's `<title>`:
 
 ```tsx
-<ReactIcon title="React" size={24} />
+<_React alt="React" size={24} />
+```
+
+For purely decorative icons, hide them from assistive tech:
+
+```tsx
+<_React aria-hidden="true" size={24} />
 ```
 
 For icon-only buttons, put the label on the button instead:
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react/mono";
+import { _React } from "@dev.icons/react/mono";
 
 <button aria-label="Open React docs">
-  <ReactIcon size={20} />
+  <_React size={20} aria-hidden="true" />
 </button>
 ```

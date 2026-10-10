@@ -24,20 +24,27 @@ const abs = (path: string, base: string = SITE_URL) => {
 
 const twitterUrl = () =>
   TWITTER_HANDLE
-    ? `https://twitter.com/${TWITTER_HANDLE.replace(/^@/, '')}`
+    ? `https://x.com/${TWITTER_HANDLE.replace(/^@/, '')}`
     : undefined;
+
+const NPM_URL = 'https://www.npmjs.com/package/@dev.icons/react';
 
 export const organizationSchema = (site: string = SITE_URL): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': abs('/#organization', site),
   name: SITE_TITLE,
-  url: site,
+  // "Devicons" alone collides with the unrelated devicon/devicon project.
+  alternateName: 'Devicons.io',
+  url: abs('/', site),
+  // Google requires a raster logo (≥112px); SVG isn't eligible.
   logo: {
     '@type': 'ImageObject',
-    url: abs('/favicon.svg', site),
+    url: abs('/brand/logo-512.png', site),
+    width: 512,
+    height: 512,
   },
-  sameAs: [GITHUB_URL, twitterUrl()].filter(Boolean) as string[],
+  sameAs: [GITHUB_URL, NPM_URL, twitterUrl()].filter(Boolean) as string[],
 });
 
 export const websiteSchema = (site: string = SITE_URL): JsonLd => ({
@@ -191,22 +198,48 @@ export const collectionPageSchema = ({
   },
 });
 
-export const softwareApplicationSchema = (site: string = SITE_URL): JsonLd => ({
+// The project itself: an open-source icon library, not an installable app
+// (SoftwareApplication would need ratings to be eligible for rich results).
+export const projectSourceSchema = (site: string = SITE_URL): JsonLd => ({
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
+  '@type': 'SoftwareSourceCode',
+  '@id': abs('/#source', site),
   name: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  url: site,
-  applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Any',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
+  url: abs('/', site),
+  codeRepository: GITHUB_URL,
+  license: 'https://opensource.org/licenses/MIT',
+  programmingLanguage: ['TypeScript', 'SVG'],
+  runtimePlatform: ['React', 'Vue', 'Svelte', 'Web browsers'],
   author: { '@id': abs('/#organization', site) },
-  downloadUrl: GITHUB_URL,
+  sameAs: [GITHUB_URL, NPM_URL],
 });
+
+// Per-page node so every URL is an explicit entity that the Organization,
+// WebSite and page-specific nodes hang off.
+export const webPageSchema = (opts: {
+  url: string;
+  name: string;
+  description: string;
+  image?: string;
+  site?: string;
+}): JsonLd => {
+  const site = opts.site ?? SITE_URL;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${opts.url}#webpage`,
+    url: opts.url,
+    name: opts.name,
+    description: opts.description,
+    inLanguage: 'en-US',
+    isPartOf: { '@id': abs('/#website', site) },
+    publisher: { '@id': abs('/#organization', site) },
+    ...(opts.image
+      ? { primaryImageOfPage: { '@type': 'ImageObject', url: opts.image } }
+      : {}),
+  };
+};
 
 export const faqSchema = (
   faqs: Array<{ question: string; answer: string }>,

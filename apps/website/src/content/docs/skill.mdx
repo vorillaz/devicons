@@ -9,7 +9,7 @@ badge: "new"
 
 import Note from "../../components/docs/note.astro";
 
-Devicons has a ready-to-install agent skill. Point Claude, Cursor, or any tool that reads a [Claude-style skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) at a single URL, and the agent gets the full icon catalog, component usage, CDN URLs, and metadata.
+Devicons has a ready-to-install agent skill. Point Claude, Cursor, or any tool that reads a [Claude-style skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) at a single URL. The agent then gets the package list, component naming rules, SVG URLs, and catalog metadata.
 
 ## One-line prompt
 
@@ -19,7 +19,7 @@ In any agent conversation:
 Read https://devicons.io/skill.md and follow the instructions to use @dev.icons.
 ```
 
-The agent fetches the skill and can then generate icon code, pick packages, build CDN URLs, and resolve slugs from free-text queries.
+The agent fetches the skill. It can then generate icon code, pick packages, build SVG URLs, and resolve slugs from free-text queries.
 
 ## Discovery endpoint
 
@@ -29,7 +29,7 @@ Devicons implements the [Cloudflare Agent Skills Discovery](https://github.com/c
 https://devicons.io/.well-known/agent-skills/index.json
 ```
 
-The index lists each skill with its type, description, artifact URL, and SHA-256 digest. CORS is open.
+The index lists each skill with its type, description, artifact URL, and SHA-256 digest.
 
 ## Skill files
 
@@ -41,7 +41,7 @@ The index lists each skill with its type, description, artifact URL, and SHA-256
 | **reference/icons.md** | [`/skill/reference/icons.md`](/skill/reference/icons.md) |
 | **reference/packages.md** | [`/skill/reference/packages.md`](/skill/reference/packages.md) |
 
-All endpoints have permissive CORS and correct content-types. `/skill.md` returns the same bytes as the canonical path.
+`/skill.md` returns the same bytes as the canonical path. For a site-wide overview, see [`/llms.txt`](/llms.txt) and [`/llms-full.txt`](/llms-full.txt).
 
 ## Install locally
 
@@ -59,7 +59,7 @@ Change `SKILL_DIR` to match your tool: `~/.claude/skills/` for Claude Code, `~/.
 
 <Note variant="tip" title="Dynamic content">
 
-`icons.md` is generated at request time from the live catalog. Re-downloading always gives you the current icon list and component names.
+The skill files are regenerated from the catalog on every deploy. Download them again to get the current icon list and component names.
 
 </Note>
 
@@ -70,8 +70,8 @@ Once loaded, the agent can:
 - Pick the right package for a framework
 - Resolve free-text queries ("the Postgres logo") to canonical slugs
 - Generate component imports for React, Vue, or Svelte
-- Build pinned CDN URLs for UNPKG, jsDelivr, npmmirror, or Skypack
-- Emit `<link>`, `<img>`, sprite `<use>`, or inline-SVG markup
+- Build SVG URLs (`https://devicons.io/devicons/icons/{file}.svg`) and pinned font and sprite URLs
+- Emit `<img>`, icon-font, sprite `<use>`, or inline-SVG markup
 - Read icon metadata: brand colors, tags, aliases, and contrast hints
 
 ## When the skill triggers
@@ -87,15 +87,15 @@ To force activation, use the one-line prompt above.
 
 ## Updating
 
-The skill tracks the same data as this website. New icons and CDN routes update the endpoints automatically.
+The skill tracks the same data as this website. New icons show up in the endpoints with the next deploy.
 
 For local installs, re-run the `curl` commands for a fresh copy.
 
 ## Under the hood
 
-Generated from the same content collection that drives the [icon library](/icons):
+Generated from the same content collection that drives the [icon library](/icons/):
 
 1. Every icon MDX file carries metadata (`tags`, `popular`, `recommended`, `aliases`, `mainColor`, etc.)
 2. A [script](https://github.com/vorillaz/devicons/blob/canary/apps/website/scripts/compute-recommended.ts) promotes flagship icons per tag to `recommended: true`
-3. Astro endpoints at `/skill.md` and `/skill/reference/*` render the collection as markdown
+3. Astro endpoints at `/skill.md` and `/skill/reference/*` render the collection as Markdown at build time
 4. Agents consume the markdown directly

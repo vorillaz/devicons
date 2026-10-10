@@ -1,153 +1,182 @@
 import type { APIRoute } from 'astro';
+import {
+  CDN_FILES,
+  CORE_PKG,
+  FONT_PKG,
+  MONO_SVG_URL_PATTERN,
+  REACT_PKG,
+  SVELTE_PKG,
+  SVG_URL_PATTERN,
+  VUE_PKG,
+} from '../../../lib/package-facts';
 
 export const prerender = true;
 
 const BODY = `# Devicons packages reference
 
-Detailed map of every package in the Devicons ecosystem, what it exports, and when to reach for it.
+Detailed map of every package in the Devicons ecosystem, what it exports, and when to reach for it. Versions below are the ones published with this build of devicons.io.
 
-## @dev.icons/react
+| Package | Version | Purpose |
+| --- | --- | --- |
+| \`${REACT_PKG.name}\` | ${REACT_PKG.version} | ${REACT_PKG.purpose} |
+| \`${VUE_PKG.name}\` | ${VUE_PKG.version} | ${VUE_PKG.purpose} |
+| \`${SVELTE_PKG.name}\` | ${SVELTE_PKG.version} | ${SVELTE_PKG.purpose} |
+| \`${CORE_PKG.name}\` | ${CORE_PKG.version} | ${CORE_PKG.purpose} |
+| \`${FONT_PKG.name}\` | ${FONT_PKG.version} | Icon web font |
 
-React components. Every icon is a named PascalCase export ending in \`Icon\`.
+There is no Astro-specific package. Astro projects use \`@dev.icons/react\`, \`@dev.icons/vue\`, or \`@dev.icons/svelte\` components, which render to static SVG without a \`client:*\` directive.
 
-- Package: \`@dev.icons/react\`
-- Install: \`npm install @dev.icons/react\`
-- Peer deps: \`react >= 18\`
-- Exports: ESM + CJS + \`.d.ts\`
-- Runtime: tree-shakeable — only the icons you import land in the bundle
+## Component naming (all framework packages)
 
-\`\`\`tsx
-import { ReactIcon, NextJsIcon, PostgresqlIcon } from "@dev.icons/react";
+Export names come from the **icon file** name (an entry of the icon's \`icons\` array, e.g. \`react\`, \`nextjs-icon\`):
 
-<ReactIcon size={32} />
-<NextJsIcon size={32} mono />
-<PostgresqlIcon size={32} className="text-blue-500" />
-\`\`\`
+1. Split the file name on \`-\`.
+2. Capitalize the first letter of each part and join.
+3. If the result is \`React\`, \`Vue\`, \`Svelte\`, or \`Astro\`, prefix it with \`_\`.
 
-Props:
+| File | Export |
+| --- | --- |
+| \`react\` | \`_React\` |
+| \`css\` | \`Css\` |
+| \`nextjs\` | \`Nextjs\` |
+| \`nextjs-icon\` | \`NextjsIcon\` |
+| \`discord-icon\` | \`DiscordIcon\` |
+
+There is no automatic \`Icon\` suffix.
+
+## Shared props (React, Vue, Svelte)
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| \`size\` | \`number \\| string\` | \`24\` | Width / height in pixels or any CSS size |
-| \`mono\` | \`boolean\` | \`false\` | Render the monochrome variant (inherits \`currentColor\`) |
-| \`className\` | \`string\` | — | Passed through to the root \`<svg>\` |
-| \`...rest\` | \`SVGProps<SVGSVGElement>\` | — | Any SVG attribute: \`onClick\`, \`aria-label\`, \`role\`, etc. |
+| \`size\` | \`string \\| number\` | \`"1em"\` | Sets \`width\` and \`height\` |
+| \`color\` | \`string\` | \`"currentColor"\` | Root \`fill\`; visible on monochrome icons |
+| \`alt\` | \`string\` | — | Rendered as an SVG \`<title>\` (accessible name) |
+| \`mirrored\` | \`boolean\` | \`false\` | Flips horizontally with \`scale(-1, 1)\` |
+
+Any other SVG attribute (\`className\`/\`class\`, \`style\`, \`aria-*\`, event handlers) is forwarded to the root \`<svg>\`. There is no \`mono\` or \`title\` prop — monochrome icons come from the \`/mono\` subpath.
+
+## @dev.icons/react
+
+- Install: \`npm install @dev.icons/react\`
+- Peer deps: \`react >= 16.8\`
+- Entry points: \`@dev.icons/react\` (color), \`@dev.icons/react/mono\` (monochrome)
+- Also exports: \`IconContext\` (default \`size\`/\`color\`/\`mirrored\`), \`Base\`, \`SSRBase\`, and the \`Icon\` / \`IconProps\` types
+- ESM + CJS + \`.d.ts\`; tree-shakeable named exports
+
+\`\`\`tsx
+import { _React, Nextjs, Postgresql } from "@dev.icons/react";
+import { GithubIcon } from "@dev.icons/react/mono";
+
+<_React size={32} />
+<Nextjs size={32} alt="Next.js" />
+<Postgresql size={32} className="logo" />
+<GithubIcon size={24} color="#ff4d00" />
+\`\`\`
 
 ## @dev.icons/vue
 
-Vue 3 components with the same API shape as the React package.
+- Install: \`npm install @dev.icons/vue\`
+- Peer deps: \`vue >= 3.3\`
+- Entry points: \`@dev.icons/vue\`, \`@dev.icons/vue/mono\`
+
+Vue templates can't use tags starting with \`_\`, so alias reserved names:
 
 \`\`\`vue
 <script setup>
-import { ReactIcon, VueIcon } from "@dev.icons/vue";
+import { _Vue as VueLogo, Nextjs } from "@dev.icons/vue";
+import { GithubIcon } from "@dev.icons/vue/mono";
 </script>
 
 <template>
-  <ReactIcon :size="32" />
-  <VueIcon :size="32" mono />
+  <VueLogo :size="32" />
+  <Nextjs :size="32" alt="Next.js" />
+  <GithubIcon :size="24" />
 </template>
 \`\`\`
 
 ## @dev.icons/svelte
 
-Svelte components.
+- Install: \`npm install @dev.icons/svelte\`
+- Peer deps: \`svelte >= 5\`
+- Entry points: \`@dev.icons/svelte\`, \`@dev.icons/svelte/mono\`
 
 \`\`\`svelte
 <script>
-  import { ReactIcon, SvelteIcon } from "@dev.icons/svelte";
+  import { _Svelte as SvelteLogo, Nextjs } from "@dev.icons/svelte";
+  import { GithubIcon } from "@dev.icons/svelte/mono";
 </script>
 
-<ReactIcon size={32} />
-<SvelteIcon size={32} mono />
+<SvelteLogo size={32} />
+<Nextjs size={32} alt="Next.js" />
+<GithubIcon size={24} />
 \`\`\`
 
 ## @dev.icons/core
 
-Raw SVG strings, the metadata catalog, and build utilities. Depended on by every framework wrapper.
+The catalog of icon files plus the build artifacts the other packages are made from. It does **not** export SVG strings and does not contain per-icon SVG files.
 
-- Package: \`@dev.icons/core\`
 - Install: \`npm install @dev.icons/core\`
 - Exports:
-  - Every icon slug as a plain SVG string
-  - \`metadata\`: array of catalog entries
-  - \`slugs\`: flat list of every available slug
-- File layout inside the package:
-  - \`export-files/icons/<slug>.svg\` — full brand logo
-  - \`export-files/icons/<slug>-icon.svg\` — glyph-only variant (when available)
-  - \`export-files/font/<slug>.svg\` — monochrome font glyph source
-  - \`export-files/sprite.svg\` — single-file SVG sprite with every icon as a \`<symbol id="slug">\`
+  - \`ICONS: readonly IconRecord[]\` — every icon file, sorted by codepoint
+  - \`getIcon(name: string): IconRecord | undefined\` — O(1) lookup by file name
+  - \`type IconRecord\`
+- Subpath exports:
+  - \`@dev.icons/core/icons.json\` → \`dist/icons.json\` (same data as \`ICONS\`)
+  - \`@dev.icons/core/sprite\` → \`dist/sprite/sprite-symbol.svg\` (color sprite, one \`<symbol id="<file>">\` per icon)
+  - \`@dev.icons/core/font/css\`, \`/font/woff2\`, \`/font/ttf\` → \`dist/font/devicons.*\`
 
 \`\`\`ts
-import { react, nodejs, metadata } from "@dev.icons/core";
+import { ICONS, getIcon, type IconRecord } from "@dev.icons/core";
 
-console.log(react);
-// '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">...</svg>'
-
-console.log(metadata[0]);
-// { name: "Adonis", slug: "adonisjs", tags: [...], variants: [...] }
-\`\`\`
-
-### Metadata entry shape
-
-\`\`\`ts
-interface IconMeta {
-  slug: string;
-  name: string;
-  description?: string;
-  tags: string[];
-  aliases?: string[];
-  popular: boolean;
-  recommended: boolean;
-  mainColor?: string;
-  otherColors?: string[];
-  badInDark: boolean;
-  badInLight: boolean;
-  variants: string[]; // ["react", "react-icon", ...]
+interface IconRecord {
+  name: string;       // file name, e.g. "adonisjs" or "adonisjs-icon"
+  codepoint: number;  // Private Use Area codepoint used by the font
+  unicode: string;    // String.fromCodePoint(codepoint)
+  isVariant: boolean; // true when name ends in "-icon"
 }
+
+getIcon("nextjs-icon")?.isVariant; // true
 \`\`\`
 
 ## devicons (icon font)
 
-Legacy webfont package. One CSS file, every glyph available via \`<i class="devicon devicon-<slug>">\`.
+The original web font. Not prefixed with \`@dev.icons/\` because it predates the component packages.
 
-- Package: \`devicons\`
 - Install: \`npm install devicons\`
-- File layout:
-  - \`css/devicons.css\` / \`devicons.min.css\`
-  - \`fonts/devicons.woff2\` (+ \`.woff\`, \`.ttf\`, \`.eot\`)
+- CSS: \`@import "devicons/css";\` (\`dist/devicons.css\`)
+- Other exports: \`devicons/woff2\`, \`devicons/ttf\`, \`devicons/sprite\`, \`devicons/codepoints\`
+- Class names: \`devicons devicons-<file>\` (e.g. \`devicons devicons-react\`, \`devicons devicons-nextjs-icon\`)
+- Glyphs are monochrome; they inherit \`color\` and \`font-size\`
 
 \`\`\`html
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/devicons@1.8.0/css/devicons.min.css"
-/>
-<i class="devicon devicon-react"></i>
+<link rel="stylesheet" href="${CDN_FILES.fontCss}" />
+<i class="devicons devicons-react"></i>
 \`\`\`
 
-Class names use \`.devicon-<slug>\` where \`<slug>\` is the kebab-case icon id. Colors inherit \`color\`, sizes inherit \`font-size\`.
+## URL cheatsheet
 
-## CDN routing cheatsheet
-
-| Need | URL pattern |
+| Need | URL |
 | --- | --- |
-| Specific icon SVG | \`https://cdn.jsdelivr.net/npm/@dev.icons/core@<v>/export-files/icons/<slug>.svg\` |
-| Glyph-only variant | \`.../icons/<slug>-icon.svg\` |
-| Full sprite | \`.../export-files/sprite.svg\` — reference via \`<use href="...#<slug>">\` |
-| Font stylesheet | \`https://unpkg.com/devicons@<v>/css/devicons.min.css\` |
-| ESM import | \`import { react } from "https://cdn.skypack.dev/@dev.icons/core@<v>"\` |
+| Color SVG for one icon | \`${SVG_URL_PATTERN}\` |
+| Monochrome SVG for one icon | \`${MONO_SVG_URL_PATTERN}\` |
+| Font stylesheet | \`${CDN_FILES.fontCss}\` |
+| Color sprite (self-host it; \`<use>\` does not work cross-origin) | \`${CDN_FILES.coreSprite}\` |
+| Catalog of icon files | \`${CDN_FILES.coreIconsJson}\` |
+| Catalog with names, tags, aliases | \`https://devicons.io/search-index.json\` |
 
-## Version compatibility
+There is no per-icon SVG URL on jsDelivr/UNPKG — the npm packages don't ship individual SVG files.
 
-- All \`@dev.icons/*\` packages share a single version number and release together.
-- The legacy \`devicons\` font package versions independently (current: \`1.x\`).
-- Pin a semver in any production CDN URL — unpinned URLs drift when we publish.
+## Versioning
+
+- \`@dev.icons/react\`, \`/vue\`, \`/svelte\`, and \`/core\` are released together.
+- The \`devicons\` font package versions independently (currently ${FONT_PKG.version}).
+- Pin an exact version in production CDN URLs.
 
 ## Choosing a package
 
-- User already has a React/Vue/Svelte build → the matching \`@dev.icons/<framework>\` package.
-- User writes plain HTML or ships into a CMS (WordPress, Rails) → \`devicons\` icon font via CDN.
-- User builds email templates, SSR-only markup, or code generators → \`@dev.icons/core\` for plain SVG strings.
-- User is building their own framework wrapper or tooling → \`@dev.icons/core\` for metadata + SVGs.
+- React/Vue/Svelte (or Astro) app → the matching \`@dev.icons/<framework>\` package.
+- Plain HTML, Markdown, CMS → \`<img>\` with the devicons.io SVG URL, or the \`devicons\` font for monochrome glyphs.
+- Tooling that needs the list of icon files or font codepoints → \`@dev.icons/core\`.
 `;
 
 export const GET: APIRoute = async () =>

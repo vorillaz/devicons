@@ -1,10 +1,9 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import PageLayout from '../components/layout/page-layout.astro';
 import { IconDetail } from '../components/icons/icon-detail';
 import Breadcrumbs from '../components/seo/breadcrumbs.astro';
 import RelatedIcons from '../components/seo/related-icons.astro';
-import { Badge } from '../components/ui/badge';
 import { Tag } from '../components/ui/tag';
 import {
   breadcrumbSchema,
@@ -12,7 +11,9 @@ import {
   iconImageSchema,
 } from '../lib/seo';
 import { getRelatedIcons } from '../lib/related-icons';
-import { slugifyTag } from '../lib/icons-query';
+import { getActiveIcons, getUniqueTags, slugifyTag } from '../lib/icons-query';
+import { MIN_INDEXABLE_TAG_COUNT } from '../lib/tags';
+import { fitDescription, fitTitle } from '../lib/meta';
 import { bucketForHex } from '../lib/colors';
 import { COMPARISONS, compareSlug } from '../data/comparisons';
 
@@ -25,10 +26,14 @@ type Props = CollectionEntry<'icons'>['data'] & {
 
 const {
   name,
+  seoName,
   description,
+  aliases,
   icons,
   tags,
   deprecated,
+  popular,
+  recommended,
   version,
   website,
   license,
@@ -50,11 +55,36 @@ const contrastHint = badInDark && badInLight
       ? 'Looks better on a dark background'
       : null;
 
-const title = `${name} Logo — Free SVG Icon & React Component | Devicons`;
-const metaDescription =
-  description
-    ? `${description} Download the ${name} logo as a free SVG, or use the React, Vue, and Svelte components.`
-    : `Download the ${name} logo as an optimized SVG. Free React, Vue, and Svelte components under the MIT license.`;
+const titleName = seoName ?? name;
+const title = fitTitle(
+  `${titleName} Logo SVG — Free React, Vue & Svelte Icon | Devicons`,
+  `${titleName} Logo — Free SVG & React Icon | Devicons`,
+  `${titleName} Logo — Free SVG Icon | Devicons`,
+  `${titleName} Logo SVG | Devicons`,
+  `${titleName} Logo SVG`,
+);
+// Lead with the download intent ("<brand> logo svg"), then the definition.
+const metaDescription = fitDescription(
+  `Download the ${name} logo as SVG or a React, Vue & Svelte component. ${description ?? ''}`,
+);
+
+// Only link to pages that are actually generated: tag, variants and compare
+// pages are built from non-deprecated icons only.
+const activeIcons = await getActiveIcons();
+const activeIds = new Set(activeIcons.map(i => i.id));
+// Link only tags whose page is indexable; thin tag pages are noindex.
+const tagsWithPages = new Set(
+  (await getUniqueTags())
+    .filter(t => t.count >= MIN_INDEXABLE_TAG_COUNT)
+    .map(t => t.tag),
+);
+const hasVariantsPage = !deprecated && icons.length > 1;
+// Matches the gating in src/pages/icons/[slug]/[framework].astro.
+const hasReactPage = !deprecated && (popular || recommended);
+const primaryFile = icons[0] ?? slug;
+const altNames = (aliases ?? []).filter(
+  (a: string) => a.toLowerCase() !== name.toLowerCase(),
+);
 
 const jsonLd = [
   breadcrumbSchema([
@@ -71,16 +101,17 @@ const colorChips = [
   ...(otherColors ?? []).map((hex: string) => ({ hex, label: 'Secondary' })),
 ].filter((c): c is { hex: string; label: string } => c !== null);
 
-const comparisonPairs = COMPARISONS.flatMap(cmp => {
+const comparisonPairs = COMPARISONS.filter(
+  cmp => activeIds.has(cmp.a) && activeIds.has(cmp.b),
+).flatMap(cmp => {
   if (cmp.a === slug) return [{ otherSlug: cmp.b, pairSlug: compareSlug(cmp.a, cmp.b) }];
   if (cmp.b === slug) return [{ otherSlug: cmp.a, pairSlug: compareSlug(cmp.a, cmp.b) }];
   return [];
 });
 
 const comparisonPartners = comparisonPairs.length
-  ? await (async () => {
-      const all = await getCollection('icons');
-      const byId = new Map(all.map(i => [i.id, i.data.name]));
+  ? (() => {
+      const byId = new Map(activeIcons.map(i => [i.id, i.data.name]));
       return comparisonPairs.map(c => ({
         ...c,
         otherName: byId.get(c.otherSlug) ?? c.otherSlug,
@@ -95,6 +126,8 @@ const related = await getRelatedIcons(slug, tags, 8);
   title={title}
   description={metaDescription}
   image={`/og/icons/${slug}.png`}
+  imageAlt={`${name} logo`}
+  noindex={deprecated}
   jsonLd={jsonLd}
   brand={name}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
@@ -106,65 +139,68 @@ const related = await getRelatedIcons(slug, tags, 8);
       ]}
     />
 
-    <header class="mt-6 mb-6 sm:mb-8">
-      <h1 class="type-display-sm">{name}</h1>
-      {
-        description && (
-          <p class="type-body-lg mt-3 max-w-[64ch]">{description}</p>
-        )
-      }
-
-      <div class="flex items-center gap-2 mt-3 sm:mt-4 flex-wrap">
-        {deprecated && <Badge variant="destructive">Deprecated</Badge>}
-        {version && <Badge variant="neutral">v{version}</Badge>}
-        {icons.length > 1 ? (
-          <a
-            href={`/icons/${slug}/variants/`}
-            data-astro-prefetch
-            class="inline-flex items-center px-1.5 py-0.5 border font-mono text-[10px] font-semibold uppercase tracking-[0.18em] leading-none bg-success/15 text-success border-success/20 hover:border-success transition-colors">
-            {icons.length} variants →
+    <header class="icon-header">
+      <h1 class="type-display-sm">{name} logo</h1>
+      <p class="icon-header__meta">
+        {hasVariantsPage ? (
+          <a href={`/icons/${slug}/variants/`} data-astro-prefetch class="icon-header__variants">
+            {icons.length} {icons.length === 1 ? 'style' : 'styles'} →
           </a>
         ) : (
-          <Badge variant="success">1 variant</Badge>
+          <span>{icons.length} {icons.length === 1 ? 'style' : 'styles'}</span>
         )}
+        {version && (<><span class="icon-header__sep" aria-hidden="true">/</span><span>v{version}</span></>)}
+        {deprecated && (<><span class="icon-header__sep" aria-hidden="true">/</span><span class="icon-header__deprecated">Deprecated</span></>)}
+      </p>
+      {description && <p class="type-body-lg icon-header__desc">{description}</p>}
+      {
+        altNames.length > 0 && (
+          <p class="type-body-sm text-text-muted icon-header__aka">
+            Also known as {altNames.join(', ')}
+          </p>
+        )
+      }
+      <div class="icon-header__facts">
+        <a
+          href={`/devicons/icons/${primaryFile}.svg`}
+          download={`${primaryFile}.svg`}
+          class="icon-header__link">
+          Download SVG <span aria-hidden="true">↓</span>
+        </a>
+        {
+          hasReactPage && (
+            <a href={`/icons/${slug}/react/`} data-astro-prefetch class="icon-header__link">
+              React component <span aria-hidden="true">→</span>
+            </a>
+          )
+        }
         {
           website && (
-            <a
-              href={website}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-mono text-xs font-semibold uppercase tracking-caps leading-none text-accent hover:text-accent-hover transition-colors break-all">
-              {website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+            <a href={website} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              {website.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
             </a>
           )
         }
         {
           license && (
-            <a
-              href={license}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-mono text-xs font-semibold uppercase tracking-caps leading-none text-accent hover:text-accent-hover transition-colors">
-              License
+            <a href={license} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              License <span aria-hidden="true">↗</span>
             </a>
           )
         }
         {
           brandGuidelines && (
-            <a
-              href={brandGuidelines}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-mono text-xs font-semibold uppercase tracking-caps leading-none text-accent hover:text-accent-hover transition-colors">
-              Brand
+            <a href={brandGuidelines} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+              Brand <span aria-hidden="true">↗</span>
             </a>
           )
         }
-        {
+        {colorChips.length > 0 && (
+          <span class="icon-header__colors">
+            {
           colorChips.map(({ hex, label }) => {
             const bucket = bucketForHex(hex);
-            const chipClass =
-              'inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-caps leading-none text-text-muted hover:text-accent transition-colors';
+            const hexText = hex.toUpperCase();
             const swatch = (
               <span
                 aria-hidden="true"
@@ -172,32 +208,35 @@ const related = await getRelatedIcons(slug, tags, 8);
                 style={`background-color: ${hex}`}
               />
             );
-            const hexText = hex.toUpperCase();
             return bucket ? (
-              <a
-                href={`/icons/color/${bucket}/`}
-                aria-label={`${label} brand color ${hexText}`}
-                class={chipClass}>
+              <a href={`/icons/color/${bucket}/`} aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
                 {swatch}
                 {hexText}
               </a>
             ) : (
-              <span
-                aria-label={`${label} brand color ${hexText}`}
-                class={chipClass}>
+              <span aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
                 {swatch}
                 {hexText}
               </span>
             );
           })
         }
+          </span>
+        )}
       </div>
-
       {
         tags.length > 0 && (
-          <div class="flex gap-2 mt-3 sm:mt-4 flex-wrap">
+          <div class="icon-header__tags">
             {tags.map((tag: string) => (
-              <Tag href={`/icons/tag/${slugifyTag(tag)}/`}>{tag}</Tag>
+              <Tag
+                className="icon-header__tag"
+                href={
+                  tagsWithPages.has(tag)
+                    ? `/icons/tag/${slugifyTag(tag)}/`
+                    : undefined
+                }>
+                {tag.replace(/-/g, ' ')}
+              </Tag>
             ))}
           </div>
         )
@@ -239,13 +278,13 @@ const related = await getRelatedIcons(slug, tags, 8);
     comparisonPartners.length > 0 && (
       <section class="max-w-4xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16">
         <div class="border-t border-border pt-6 sm:pt-8">
-          <p class="type-label mb-3 flex items-center gap-3">
+          <h2 class="type-label mb-3 flex items-center gap-3">
             <span
               aria-hidden="true"
               class="inline-block w-3 h-[2px] bg-accent"
             />
-            Compare
-          </p>
+            Compare {name}
+          </h2>
           <ul class="flex flex-wrap gap-2">
             {comparisonPartners.map(c => (
               <li>

@@ -18,6 +18,20 @@ export async function getStaticPaths() {
 const { entry } = Astro.props as { entry: CollectionEntry<'icons'> };
 const { name, icons: variants, description } = entry.data;
 
+// File naming convention: `<slug>-icon` is the mark alone, `<slug>` the full
+// logo (mark + wordmark, or the wordmark). Anything else is a named variant.
+const variantLabel = (file: string): string => {
+  if (/-icon$/.test(file)) return 'Icon (mark only)';
+  if (/wordmark|-text$/.test(file)) return 'Wordmark';
+  if (file === entry.id || `${file}-icon` === variants.find(v => v.endsWith('-icon')))
+    return 'Logo with wordmark';
+  const suffix = file.startsWith(`${entry.id}-`) ? file.slice(entry.id.length + 1) : file;
+  const words = suffix.replace(/-icon$/, '').split('-').filter(Boolean);
+  const label = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return label ? `${label} variant` : 'Variant';
+};
+const labeled = variants.map(file => ({ file, label: variantLabel(file) }));
+
 const title = `${name} logo variants — ${variants.length} SVG files | ${SITE_TITLE}`;
 const pageDescription = `All ${variants.length} ${name} logo variants: download each as a free, optimized SVG or copy for your React, Vue, or Svelte project.`;
 
@@ -32,9 +46,9 @@ const jsonLd = [
     name: `${name} logo variants`,
     description: pageDescription,
     url: `/icons/${entry.id}/variants`,
-    items: variants.map(v => ({
-      name: v,
-      url: `/devicons/icons/${v}.svg`,
+    items: labeled.map(v => ({
+      name: `${name} ${v.label.toLowerCase()}`,
+      url: `/devicons/icons/${v.file}.svg`,
     })),
   }),
 ];
@@ -63,12 +77,13 @@ const jsonLd = [
     </header>
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {variants.map(file => (
+      {labeled.map(({ file, label }) => (
         <li class="p-6 border border-border flex flex-col gap-4">
+          <h2 class="type-h3">{name} {label.toLowerCase()}</h2>
           <div class="aspect-square flex items-center justify-center p-6 sm:p-8 bg-surface border border-border">
             <img
               src={`/devicons/icons/${file}.svg`}
-              alt={`${name} ${file} variant`}
+              alt={`${name} ${label.toLowerCase().replace(' (mark only)', '')}`}
               loading="lazy"
               decoding="async"
               class="w-full h-full object-contain max-w-[120px] max-h-[120px]"
@@ -78,7 +93,7 @@ const jsonLd = [
             <code class="font-mono text-xs">{file}.svg</code>
             <a
               href={`/devicons/icons/${file}.svg`}
-              download
+              download={`${file}.svg`}
               class="font-mono text-xs font-semibold uppercase tracking-caps text-accent hover:text-accent-hover transition-colors">
               Download
             </a>

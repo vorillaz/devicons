@@ -5,27 +5,30 @@ import IconRender from '../../components/icons/icon-render.astro';
 import { getActiveIcons } from '../../lib/icons-query';
 import { COMPARISONS, compareSlug } from '../../data/comparisons';
 import { SITE_TITLE } from '../../consts';
+import { fitTitle } from '../../lib/meta';
 import { breadcrumbSchema } from '../../lib/seo';
+import { assertIconIds } from '../../lib/assert-icon-ids';
 
 export async function getStaticPaths() {
   const icons = await getActiveIcons();
   const byId = new Map(icons.map(i => [i.id, i]));
-  return COMPARISONS.flatMap(cmp => {
-    const a = byId.get(cmp.a);
-    const b = byId.get(cmp.b);
-    if (!a || !b) return [];
-    return [
-      {
-        params: { slug: compareSlug(cmp.a, cmp.b) },
-        props: { a, b, category: cmp.category },
-      },
-    ];
+  const activeIds = new Set(byId.keys());
+  return COMPARISONS.map(cmp => {
+    assertIconIds(`comparison ${compareSlug(cmp.a, cmp.b)}`, [cmp.a, cmp.b], activeIds);
+    return {
+      params: { slug: compareSlug(cmp.a, cmp.b) },
+      props: { a: byId.get(cmp.a)!, b: byId.get(cmp.b)!, category: cmp.category },
+    };
   });
 }
 
 const { a, b, category } = Astro.props;
 
-const title = `${a.data.name} vs ${b.data.name} — logos & ${category} comparison | ${SITE_TITLE}`;
+const title = fitTitle(
+  `${a.data.name} vs ${b.data.name} — logos & ${category} comparison | ${SITE_TITLE}`,
+  `${a.data.name} vs ${b.data.name} — ${category} logos | ${SITE_TITLE}`,
+  `${a.data.name} vs ${b.data.name} logos | ${SITE_TITLE}`,
+);
 const description = `Compare ${a.data.name} and ${b.data.name} — two popular ${category} options. Download both logos as free SVGs, or use them as React, Vue, or Svelte components.`;
 
 const jsonLd = [
@@ -56,7 +59,7 @@ const cards = [
     <Breadcrumbs
       items={[
         { name: 'Home', url: '/' },
-        { name: 'Compare' },
+        { name: 'Compare', url: '/compare/' },
         { name: `${a.data.name} vs ${b.data.name}` },
       ]}
     />
