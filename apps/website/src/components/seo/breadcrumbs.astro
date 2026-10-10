@@ -10,6 +10,9 @@ interface Props {
 }
 
 const { items, class: className } = Astro.props;
+
+// Match `trailingSlash: 'always'` so crumbs don't link through a redirect.
+const withSlash = (url: string) => (url.endsWith('/') ? url : `${url}/`);
 ---
 
 <nav aria-label="Breadcrumb" class:list={["breadcrumbs", className]}>
@@ -20,7 +23,7 @@ const { items, class: className } = Astro.props;
         <li class="flex items-center gap-2">
           {item.url && !isLast ? (
             <a
-              href={item.url}
+              href={withSlash(item.url)}
               class="hover:text-accent transition-colors"
             >
               {item.name}

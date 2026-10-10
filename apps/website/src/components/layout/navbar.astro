@@ -51,7 +51,7 @@ const navLinks = [
       {
         navLinks.map(link => (
           <a
-            href={link.href}
+            href={`${link.href}/`}
             data-nav-link
             data-match={link.href}
             class:list={[
@@ -166,7 +166,7 @@ const navLinks = [
         {
           navLinks.map(link => (
             <a
-              href={link.href}
+              href={`${link.href}/`}
               data-nav-link-mobile
               data-match={link.href}
               class:list={[
