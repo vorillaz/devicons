@@ -1,6 +1,7 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
+import { getEntry } from 'astro:content';
 import GeometricGrid from '../layout/geometric-grid.astro';
 
 interface Props {
@@ -9,42 +10,32 @@ interface Props {
 
 const { iconCount } = Astro.props;
 
-const LOGOS = [
-  { id: 'react', label: 'React', svg: '/models/react-logo.svg', dispScale: 22 },
-  {
-    id: 'claude',
-    label: 'Claude',
-    svg: '/models/claude-logo.svg',
-    dispScale: 38,
-  },
-  {
-    id: 'svelte',
-    label: 'Svelte',
-    svg: '/models/svelte-logo.svg',
-    dispScale: 42,
-  },
-  {
-    id: 'tailwind',
-    label: 'Tailwind',
-    svg: '/models/tailwind-logo.svg',
-    dispScale: 40,
-  },
-  {
-    id: 'vscode',
-    label: 'VS Code',
-    svg: '/models/vscode-logo.svg',
-    dispScale: 38,
-  },
-  {
-    id: 'vercel',
-    label: 'Vercel',
-    svg: '/models/vercel-logo.svg',
-    dispScale: 42,
-  },
-  { id: 'vue', label: 'Vue', svg: '/models/vue-logo.svg', dispScale: 38 },
+// `icon` is the collection entry the caption links to; `brand` tints the
+// glass so each mark reads in its own official colour.
+const SHOWCASE = [
+  { id: 'react', icon: 'react', label: 'React', svg: '/models/react-logo.svg', dispScale: 22, brand: '#61dafb' },
+  { id: 'claude', icon: 'claude', label: 'Claude', svg: '/models/claude-logo.svg', dispScale: 38, brand: '#d97757' },
+  { id: 'svelte', icon: 'svelte', label: 'Svelte', svg: '/models/svelte-logo.svg', dispScale: 42, brand: '#ff3e00' },
+  { id: 'tailwind', icon: 'tailwind', label: 'Tailwind', svg: '/models/tailwind-logo.svg', dispScale: 40, brand: '#06b6d4' },
+  { id: 'vscode', icon: 'visual-studio-code', label: 'VS Code', svg: '/models/vscode-logo.svg', dispScale: 38, brand: '#0098ff' },
+  { id: 'vercel', icon: 'vercel', label: 'Vercel', svg: '/models/vercel-logo.svg', dispScale: 42, brand: '#ededed' },
+  { id: 'vue', icon: 'vue', label: 'Vue', svg: '/models/vue-logo.svg', dispScale: 38, brand: '#42b883' },
 ];
 
+const LOGOS = await Promise.all(
+  SHOWCASE.map(async logo => {
+    const entry = await getEntry('icons', logo.icon);
+    return {
+      ...logo,
+      href: `/icons/${logo.icon}/`,
+      styles: entry?.data.icons.length ?? 1,
+    };
+  }),
+);
+
 const initial = LOGOS[0];
+const pad = (n: number) => String(n).padStart(2, '0');
+const stylesLabel = (n: number) => `${n} ${n === 1 ? 'style' : 'styles'}`;
 
 const publicDir = path.join(process.cwd(), 'public');
 const initialRaw = fs.readFileSync(
@@ -69,13 +60,17 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
         <p class="hero-eyebrow type-label mb-4 sm:mb-5 flex items-center gap-3">
           <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
           ></span>
-          {iconCount.toLocaleString()} Icons / MIT / Open Source
+          {iconCount.toLocaleString('en-US')} Icons / MIT / Open Source
         </p>
-        <h1 class="hero-title type-display">
-          Developer icons & logos<br />for people who ship.
+        <h1 class="hero-title">
+          Developer icons & logos for people who ship.
         </h1>
+        <p class="hero-lead type-body-lg mt-5 sm:mt-6">
+          Free SVGs plus React, Vue, Svelte, and Astro components — MIT
+          licensed.
+        </p>
         <div
-          class="hero-actions flex flex-wrap items-center gap-3 mt-5 sm:mt-10">
+          class="hero-actions flex flex-wrap items-center gap-3 mt-6 sm:mt-8">
           <a href="#icons" class="btn btn--primary btn--mono"> Browse Icons </a>
           <a
             href="/icons/popular/"
@@ -87,11 +82,14 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
       </div>
 
       <div
-        class="hero-logo hidden md:flex self-end cursor-pointer items-center justify-center"
+        class="hero-visual hidden md:flex flex-col items-center"
+        style={`--brand: ${initial.brand}`}>
+      <div
+        class="hero-logo flex cursor-pointer items-center justify-center"
         data-logos={JSON.stringify(LOGOS)}
         role="button"
         tabindex="0"
-        aria-label="Cycle through showcase logo">
+        aria-label="Show the next showcase logo">
         <div
           class="hero-glass-shape"
           data-glass-shape
@@ -102,6 +100,18 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
           <div class="hero-glass-highlight" aria-hidden="true"></div>
           <div class="hero-glass-specular" aria-hidden="true"></div>
         </div>
+      </div>
+      <a class="hero-caption" href={initial.href} data-hero-caption>
+        <span class="hero-caption__index" data-caption-index
+          >{pad(1)} / {pad(LOGOS.length)}</span
+        >
+        <span class="hero-caption__swatch" aria-hidden="true"></span>
+        <span class="hero-caption__name" data-caption-name>{initial.label}</span>
+        <span class="hero-caption__meta" data-caption-meta
+          >{stylesLabel(initial.styles)}</span
+        >
+        <span class="hero-caption__arrow" aria-hidden="true">→</span>
+      </a>
       </div>
 
       <svg
@@ -148,6 +158,65 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
     }
   }
 
+  /* Headline sized to the half-width column so it sets in 2-3 even lines
+     instead of five ragged ones. */
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 5.4vw, 4.75rem);
+    font-weight: 900;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.95;
+    color: var(--c-text);
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .hero-lead {
+    max-width: 44ch;
+    animation: heroFadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+  }
+
+  .hero-visual {
+    align-self: center;
+    gap: var(--space-4);
+  }
+
+  /* Specimen label under the showcase mark. */
+  .hero-caption {
+    margin-top: calc(var(--space-8) * -1);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    line-height: var(--leading-flat);
+    color: var(--c-text-muted);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .hero-caption:hover {
+    border-color: var(--c-text-muted);
+    color: var(--c-text);
+  }
+  .hero-caption__swatch {
+    width: 8px;
+    height: 8px;
+    background: var(--brand);
+    transition: background-color 0.4s ease;
+  }
+  .hero-caption__name {
+    color: var(--c-text);
+  }
+  .hero-caption__arrow {
+    color: var(--c-accent);
+  }
+
   .hero-logo {
     position: relative;
     width: 420px;
@@ -157,8 +226,8 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
   }
   @media (min-width: 1024px) {
     .hero-logo {
-      width: 540px;
-      height: 540px;
+      width: 460px;
+      height: 460px;
     }
   }
   @media (min-width: 1280px) {
@@ -202,7 +271,9 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
     width: 78%;
     height: 78%;
     --liquid-filter-id: url(#heroLiquid-fallback);
-    filter: drop-shadow(0 0 32px rgba(170, 205, 255, 0.18))
+    filter: drop-shadow(
+        0 0 36px color-mix(in srgb, var(--brand) 32%, transparent)
+      )
       drop-shadow(0 2px 2px rgba(255, 255, 255, 0.08))
       drop-shadow(0 18px 28px rgba(0, 0, 0, 0.45))
       drop-shadow(0 42px 80px rgba(0, 0, 0, 0.65));
@@ -225,9 +296,11 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
       158deg,
       var(--glass-hi, rgba(255, 255, 255, 0.32)) 0%,
       var(--glass-mid, rgba(255, 255, 255, 0.16)) 28%,
-      var(--glass-lo, rgba(255, 255, 255, 0.06)) 55%,
-      var(--glass-tint-a, rgba(190, 210, 240, 0.14)) 80%,
-      var(--glass-tint-b, rgba(150, 175, 215, 0.22)) 100%
+      var(--glass-lo, color-mix(in srgb, var(--brand) 22%, transparent)) 55%,
+      var(--glass-tint-a, color-mix(in srgb, var(--brand) 48%, transparent))
+        80%,
+      var(--glass-tint-b, color-mix(in srgb, var(--brand) 62%, transparent))
+        100%
     );
     backdrop-filter: var(--liquid-filter-id) blur(16px) saturate(1.9)
       brightness(1.1);
@@ -330,7 +403,9 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
         centre stays neutral. Highlights stay bright-white (they still
         read because plus-lighter clamps). */
   :global([data-theme='light']) .hero-glass-shape {
-    filter: drop-shadow(0 0 32px rgba(70, 110, 160, 0.15))
+    filter: drop-shadow(
+        0 0 32px color-mix(in srgb, var(--brand) 28%, transparent)
+      )
       drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06))
       drop-shadow(0 18px 28px rgba(0, 0, 0, 0.18))
       drop-shadow(0 42px 80px rgba(0, 0, 0, 0.25));
@@ -339,9 +414,9 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
   :global([data-theme='light']) .hero-glass-refract {
     --glass-hi: rgba(35, 45, 60, 0.28);
     --glass-mid: rgba(50, 65, 85, 0.16);
-    --glass-lo: rgba(70, 85, 110, 0.08);
-    --glass-tint-a: rgba(70, 95, 135, 0.14);
-    --glass-tint-b: rgba(40, 65, 105, 0.22);
+    --glass-lo: color-mix(in srgb, var(--brand) 18%, transparent);
+    --glass-tint-a: color-mix(in srgb, var(--brand) 40%, rgba(40, 55, 80, 0.1));
+    --glass-tint-b: color-mix(in srgb, var(--brand) 55%, rgba(30, 45, 70, 0.15));
     backdrop-filter: var(--liquid-filter-id) blur(18px) saturate(1.25)
       brightness(0.94);
     -webkit-backdrop-filter: blur(18px) saturate(1.25) brightness(0.94);
@@ -380,6 +455,7 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
 
   @media (prefers-reduced-motion: reduce) {
     .hero-eyebrow,
+    .hero-lead,
     .hero-actions,
     .hero-logo {
       animation: none;
@@ -398,7 +474,15 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
     scheduleIdle,
   } from '../effects/logo-glass';
 
-  type Logo = { id: string; label: string; svg: string; dispScale: number };
+  type Logo = {
+    id: string;
+    label: string;
+    svg: string;
+    dispScale: number;
+    brand: string;
+    href: string;
+    styles: number;
+  };
 
   function initHero() {
     const logoEl = document.querySelector<HTMLElement>('.hero-logo');
@@ -462,11 +546,34 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
           scheduleIdle(() => void ensureMap(logo));
         });
 
+        const visualEl = logoEl.closest<HTMLElement>('.hero-visual');
+        const captionEl = visualEl?.querySelector<HTMLAnchorElement>(
+          '[data-hero-caption]',
+        );
+        const pad = (n: number) => String(n).padStart(2, '0');
+
+        const setCaption = (logo: Logo, i: number) => {
+          visualEl?.style.setProperty('--brand', logo.brand);
+          if (!captionEl) return;
+          captionEl.href = logo.href;
+          const set = (sel: string, text: string) => {
+            const el = captionEl.querySelector(sel);
+            if (el) el.textContent = text;
+          };
+          set('[data-caption-index]', `${pad(i + 1)} / ${pad(logos.length)}`);
+          set('[data-caption-name]', logo.label);
+          set(
+            '[data-caption-meta]',
+            `${logo.styles} ${logo.styles === 1 ? 'style' : 'styles'}`,
+          );
+        };
+
         const next = () => {
           idx = (idx + 1) % logos.length;
           const logo = logos[idx];
           if (!logo) return;
           setLogoMask(logo);
+          setCaption(logo, idx);
           void ensureMap(logo).then(() => pointToFilter(logo));
         };
 

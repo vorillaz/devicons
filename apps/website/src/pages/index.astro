@@ -12,7 +12,7 @@ import {
 } from '../lib/seo';
 
 const icons = await getCollection('icons');
-const iconCount = icons.length;
+const iconCount = icons.filter(icon => !icon.data.deprecated).length;
 
 const homeTitle = `Developer icons & logos — free SVG, React, Vue, Svelte | ${SITE_TITLE}`;
 const homeDescription = `${iconCount.toLocaleString()}+ free developer icons and logos — optimized SVGs plus React, Vue, Svelte, and Astro components. MIT licensed, CDN-ready, open source.`;
