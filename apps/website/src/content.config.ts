@@ -6,6 +6,9 @@ const icons = defineCollection({
   loader: glob({ base: './src/content/icons', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     name: z.string(),
+    // Shorter or better-known name for titles when `name` is the formal one
+    // (e.g. "AWS" for Amazon Web Services).
+    seoName: z.string().optional(),
     description: z.string().optional(),
     icons: z.array(z.string()),
     //

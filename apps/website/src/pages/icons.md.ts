@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { markdownResponse } from '../lib/agent-md/response';
 import { formatTagLabel, slugifyTag } from '../lib/icons-query';
+import { formatCount } from '../lib/package-facts';
 
 export const prerender = true;
 
@@ -35,13 +36,13 @@ export const GET: APIRoute = async () => {
   md.push('# Icons catalog');
   md.push('');
   md.push(
-    `The Devicons catalog has ${active.length.toLocaleString()} developer, brand, framework, and tooling logos. Every icon has a stable slug and a matching Markdown page at \`/icons/<slug>.md\`.`,
+    `The Devicons catalog has ${formatCount(active.length)} developer, brand, framework, and tooling logos. Every icon has a stable slug and a matching Markdown page at \`/icons/<slug>.md\`.`,
   );
   md.push('');
   md.push('## Full list as JSON');
   md.push('');
   md.push(
-    '- [/search-index.json](/search-index.json) — one record per icon: `{ slug, name, description?, tags, aliases?, popular }`. Fetch once, search locally.',
+    '- [/search-index.json](/search-index.json) — one record per icon entry: `{ id, name, description, icons, tags, deprecated, popular, badInDark, badInLight, version?, aliases? }`. `id` is the slug; `icons` lists the file names used for components and SVG URLs. Includes deprecated entries (`deprecated: true`). Fetch once, search locally.',
   );
 
   md.push('', '## Popular', '');
@@ -62,7 +63,7 @@ export const GET: APIRoute = async () => {
   md.push('', '## Browse by tag', '');
   for (const [tag, count] of topTags) {
     md.push(
-      `- [${formatTagLabel(tag)}](/icons/tag/${slugifyTag(tag)}) — ${count} icon${count === 1 ? '' : 's'}`,
+      `- [${formatTagLabel(tag)}](/icons/tag/${slugifyTag(tag)}/) — ${count} icon${count === 1 ? '' : 's'}`,
     );
   }
 

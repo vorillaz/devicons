@@ -4,30 +4,25 @@ import Breadcrumbs from "../components/seo/breadcrumbs.astro";
 import { SearchIsland } from "../components/search/search-island";
 import { getActiveIcons } from "../lib/icons-query";
 import { SITE_TITLE } from "../consts";
-import { breadcrumbSchema, collectionPageSchema } from "../lib/seo";
+import { breadcrumbSchema } from "../lib/seo";
 
 const icons = await getActiveIcons();
 
-const title = `Search ${icons.length}+ developer icons — SVG, React, Vue, Svelte | ${SITE_TITLE}`;
-const description = `Search the Devicons library of ${icons.length} developer logos. Find any brand, framework, database, or cloud provider — download as SVG or use as a React, Vue, Svelte, or Astro component.`;
+const count = icons.length.toLocaleString("en-US");
+const title = `Search ${count} developer icons | ${SITE_TITLE}`;
+const description = `Search ${count} developer logos by brand, framework, database or cloud provider. Download the SVG or use the React, Vue or Svelte component.`;
 
+// /search/ renders its results in the browser, so it is noindex (the crawlable
+// catalog is /icons/) and carries no ItemList of links it doesn't render.
 const jsonLd = [
   breadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Search", url: "/search" },
   ]),
-  collectionPageSchema({
-    name: "Search developer icons",
-    description,
-    url: "/search",
-    items: icons
-      .slice(0, 100)
-      .map((i) => ({ name: i.data.name, url: `/icons/${i.id}` })),
-  }),
 ];
 ---
 
-<PageLayout title={title} description={description} image="/og/search.png" jsonLd={jsonLd}>
+<PageLayout title={title} description={description} image="/og/search.png" jsonLd={jsonLd} noindex>
   <div class="max-w-[1400px] mx-auto px-6 pt-8">
     <Breadcrumbs
       items={[
@@ -43,8 +38,8 @@ const jsonLd = [
       <h1 class="type-h1">Search developer icons</h1>
       <p class="type-body-lg mt-3 max-w-[64ch]">
         Find any brand, framework, database, or cloud provider in the Devicons
-        library. Free SVGs plus React, Vue, Svelte, and Astro components — MIT
-        licensed.
+        library. Free SVGs plus React, Vue, and Svelte components — MIT
+        licensed. Prefer to browse? See <a href="/icons/" class="text-accent hover:text-accent-hover">all icons A–Z</a>.
       </p>
     </header>
   </div>

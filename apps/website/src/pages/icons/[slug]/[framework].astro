@@ -99,13 +99,28 @@ const { name, description, icons: iconFiles, website, mainColor, license, brandG
 const meta = FRAMEWORK_META[framework];
 const iconFile = iconFiles[0] ?? entry.id;
 const cmp = toComponentName(iconFile);
-const heading = meta.heading(name);
+// "React React icon component" reads badly; drop the label when the brand
+// and the framework share a name.
+const heading =
+  name.toLowerCase() === meta.label.toLowerCase()
+    ? `${name} icon component`
+    : meta.heading(name);
+// Only the React page is indexable: it carries unique usage content. The
+// other frameworks are thin snippet pages that point back to the icon page.
+const indexable = framework === 'react';
+const monoImport = `import { ${cmp} } from "@dev.icons/react/mono";`;
 
-const title = fitTitle(
-  `${heading} — copy-ready snippet | ${SITE_TITLE}`,
-  `${heading} | ${SITE_TITLE}`,
-  heading,
-);
+const title = indexable
+  ? fitTitle(
+      `${heading} — props & usage | ${SITE_TITLE}`,
+      `${heading} | ${SITE_TITLE}`,
+      heading,
+    )
+  : fitTitle(
+      `${heading} — copy-ready snippet | ${SITE_TITLE}`,
+      `${heading} | ${SITE_TITLE}`,
+      heading,
+    );
 const pageDescription = fitDescription(
   description,
   `Add the ${name} logo to your ${meta.runtime} project with one import from ${meta.pkg}. Copy the snippet or grab the SVG.`,
@@ -141,6 +156,8 @@ const renderSnippet = meta.buildRender(cmp, iconFile);
   title={title}
   description={pageDescription}
   image={`/og/icons/${entry.id}.png`}
+  imageAlt={`${name} logo`}
+  noindex={!indexable}
   jsonLd={jsonLd}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
     <Breadcrumbs
@@ -197,6 +214,75 @@ const renderSnippet = meta.buildRender(cmp, iconFile);
       <pre class="p-4 border border-border bg-surface overflow-x-auto"><code class="type-mono text-sm whitespace-pre">{renderSnippet}</code></pre>
     </section>
 
+    {
+      indexable && (
+        <>
+          <section class="mb-10">
+            <h2 class="type-label mb-3 flex items-center gap-3">
+              <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+              Props
+            </h2>
+            <p class="type-body-sm mb-4 max-w-[64ch]">
+              <code>{`<${cmp} />`}</code> renders an inline <code>&lt;svg&gt;</code>. It
+              accepts every SVG attribute plus these props:
+            </p>
+            <div class="overflow-x-auto border border-border">
+              <table class="w-full text-left text-sm">
+                <thead class="bg-surface">
+                  <tr>
+                    <th class="p-3 font-mono text-xs uppercase tracking-caps text-text-muted">Prop</th>
+                    <th class="p-3 font-mono text-xs uppercase tracking-caps text-text-muted">Type</th>
+                    <th class="p-3 font-mono text-xs uppercase tracking-caps text-text-muted">Default</th>
+                    <th class="p-3 font-mono text-xs uppercase tracking-caps text-text-muted">What it does</th>
+                  </tr>
+                </thead>
+                <tbody class="type-body-sm">
+                  <tr class="border-t border-border"><td class="p-3"><code>size</code></td><td class="p-3"><code>number | string</code></td><td class="p-3"><code>"1em"</code></td><td class="p-3">Sets width and height, so the icon scales with the surrounding text by default.</td></tr>
+                  <tr class="border-t border-border"><td class="p-3"><code>color</code></td><td class="p-3"><code>string</code></td><td class="p-3"><code>"currentColor"</code></td><td class="p-3">Fill for monochrome icons. Color icons keep their brand colors.</td></tr>
+                  <tr class="border-t border-border"><td class="p-3"><code>alt</code></td><td class="p-3"><code>string</code></td><td class="p-3">none</td><td class="p-3">Accessible name, rendered as an SVG <code>&lt;title&gt;</code>.</td></tr>
+                  <tr class="border-t border-border"><td class="p-3"><code>mirrored</code></td><td class="p-3"><code>boolean</code></td><td class="p-3"><code>false</code></td><td class="p-3">Flips the icon horizontally.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="type-label mb-3 flex items-center gap-3">
+              <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+              Size, color and accessibility
+            </h2>
+            <pre class="p-4 border border-border bg-surface overflow-x-auto"><code class="type-mono text-sm whitespace-pre">{`<${cmp} size={48} alt="${name} logo" className="shrink-0" />`}</code></pre>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="type-label mb-3 flex items-center gap-3">
+              <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+              Monochrome {name} icon
+            </h2>
+            <p class="type-body-sm mb-3 max-w-[64ch]">
+              The <code>/mono</code> entry point exports a single-color version that
+              follows <code>currentColor</code>, so it inherits your text color in
+              light and dark themes.
+            </p>
+            <pre class="p-4 border border-border bg-surface overflow-x-auto"><code class="type-mono text-sm whitespace-pre">{`${monoImport}\n\n<${cmp} color="var(--text-muted)" />`}</code></pre>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="type-label mb-3 flex items-center gap-3">
+              <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+              TypeScript and Server Components
+            </h2>
+            <p class="type-body-sm mb-3 max-w-[64ch]">
+              Components are typed and have no hooks, so they render in React Server
+              Components, the Next.js app router and any SSR setup. Named imports keep
+              the bundle to the icons you use.
+            </p>
+            <pre class="p-4 border border-border bg-surface overflow-x-auto"><code class="type-mono text-sm whitespace-pre">{`import type { ComponentProps } from "react";\nimport { ${cmp} } from "@dev.icons/react";\n\ntype LogoProps = ComponentProps<typeof ${cmp}>;\n\nexport function StackLogo(props: LogoProps) {\n  return <${cmp} size={24} alt="${name}" {...props} />;\n}`}</code></pre>
+          </section>
+        </>
+      )
+    }
+
     <section class="mt-12 pt-6 border-t border-border">
       <h2 class="type-label mb-3 flex items-center gap-3">
         <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
@@ -209,7 +295,7 @@ const renderSnippet = meta.buildRender(cmp, iconFile);
             <li>
               <a
                 href={`/icons/${entry.id}/${f}/`}
-                data-astro-prefetch="viewport"
+                data-astro-prefetch
                 class="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors">
                 {FRAMEWORK_META[f].label}
               </a>

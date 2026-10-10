@@ -142,6 +142,7 @@ function renderCdnTabs(tagBody: string): string {
   const providersProp = props.providers;
   const providers = providersProp
     ? (providersProp
+        .replace(/^\s*\[|\]\s*$/g, '')
         .split(',')
         .map(s => s.trim().replace(/^["']|["']$/g, ''))
         .filter(Boolean) as CdnProvider[])

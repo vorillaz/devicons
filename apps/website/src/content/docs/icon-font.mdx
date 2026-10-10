@@ -8,7 +8,7 @@ categoryOrder: 1
 
 import Note from "../../components/docs/note.astro";
 
-`devicons` is the no-framework option. One CSS file, 1,600+ glyphs. Works in legacy stacks, email templates, or plain HTML.
+`devicons` is the no-framework option: one CSS file with a glyph for every icon file. It works in legacy stacks and plain HTML.
 
 <Note variant="info" title="Version numbering & naming">
 The font package has a higher version number (`>2.x`) than the framework packages since it has been around for almost 12 years. That's why it's also not prefixed with `@dev.icons/` like the others.
@@ -24,13 +24,21 @@ For a no-build workflow, see the [CDN guide](/docs/cdn/).
 
 ## Usage
 
+Import the stylesheet once. With a bundler:
+
+```css
+@import "devicons/css";
+```
+
+Then add glyphs with the `devicons` base class plus `devicons-{file}`:
+
 ```html
 <i class="devicons devicons-react"></i>
 <i class="devicons devicons-vue"></i>
 <i class="devicons devicons-svelte"></i>
 ```
 
-Slugs match the icon IDs in the [icon library](/search/).
+`{file}` is one of the icon's file names, which each icon page lists (for example `react`, `nextjs`, `nextjs-icon`). Glyphs are monochrome.
 
 ## Sizing and color
 
@@ -43,6 +51,14 @@ The font inherits `font-size` and `color`.
 ></i>
 ```
 
-## Ligatures
+## Other exports
 
-Ligatures are disabled to keep the bundle small. Use the [React](/docs/react/) or [Vue](/docs/vue/) packages if you need component-based rendering.
+| Import | File |
+| --- | --- |
+| `devicons/css` | `dist/devicons.css` |
+| `devicons/woff2` | `dist/devicons.woff2` |
+| `devicons/ttf` | `dist/devicons.ttf` |
+| `devicons/sprite` | `dist/sprite-symbol.svg` |
+| `devicons/codepoints` | `dist/codepoints.json` (file name → codepoint) |
+
+For full-color logos, use the [React](/docs/react/), [Vue](/docs/vue/), or [Svelte](/docs/svelte/) packages, or the [SVG URLs](/docs/cdn/).

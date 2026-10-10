@@ -25,49 +25,65 @@ const DOC_FAQS: Record<string, Array<{ question: string; answer: string }>> = {
     {
       question: 'How do I install Devicons in a React project?',
       answer:
-        "Run `npm install @dev.icons/react`. Then import an icon component, e.g. `import { React } from '@dev.icons/react'`.",
+        "Run `npm install @dev.icons/react`, then import an icon component by its file name in PascalCase, e.g. `import { Css } from '@dev.icons/react'`. The React logo itself is exported as `_React`.",
     },
     {
       question: 'Does Devicons work with Vue and Svelte?',
       answer:
-        'Yes. Install the matching package — `@dev.icons/vue` or `@dev.icons/svelte` — and import components the same way.',
+        'Yes. Install `@dev.icons/vue` or `@dev.icons/svelte` and import components the same way. Monochrome variants come from the `/mono` subpath of each package.',
+    },
+    {
+      question: 'Is there an Astro package?',
+      answer:
+        'No. In Astro, use `@dev.icons/react`, `@dev.icons/vue`, or `@dev.icons/svelte`. The components render to static SVG without a `client:*` directive.',
     },
     {
       question: 'Can I use raw SVG files instead of components?',
       answer:
-        'Yes. Every icon is available as an optimized SVG; download directly from the icon page or the Devicons GitHub repository.',
+        'Yes. Every icon file is served as an SVG at `https://devicons.io/devicons/icons/{file}.svg` (color) and `https://devicons.io/devicons/font/{file}.svg` (monochrome). You can also download it from the icon page.',
     },
     {
       question: 'What license are Devicons released under?',
       answer:
-        'Devicons is released under the MIT license. Brand assets remain the property of their respective owners.',
+        'Devicons is released under the MIT license. Brand logos remain the property of their respective owners.',
     },
   ],
 };
 
+const faqs = DOC_FAQS[entry.id];
+const stripTicks = (text: string) => text.replace(/`/g, '');
+// Split on backticks: odd segments are inline code.
+const segments = (text: string) =>
+  text.split('`').map((part, i) => ({ part, code: i % 2 === 1 }));
+
 const extraBlocks: Array<Record<string, unknown>> = [];
 
-if (DOC_FAQS[entry.id]) extraBlocks.push(faqSchema(DOC_FAQS[entry.id]));
+if (faqs)
+  extraBlocks.push(
+    faqSchema(
+      faqs.map(f => ({ question: f.question, answer: stripTicks(f.answer) })),
+    ),
+  );
 
 if (entry.id === 'installation') {
   extraBlocks.push(
     howToSchema({
       name: 'Install Devicons',
       description: 'Install the Devicons package for your framework of choice.',
-      url: '/docs/installation',
+      url: '/docs/installation/',
       totalTime: 'PT2M',
       steps: [
         {
           name: 'Pick your package',
-          text: 'Choose the Devicons package matching your framework: @dev.icons/react, @dev.icons/vue, @dev.icons/svelte, or @dev.icons/astro. For plain SVG or a web font, you can also use @dev.icons/core.',
+          text: 'Choose the Devicons package matching your framework: @dev.icons/react, @dev.icons/vue, or @dev.icons/svelte (Astro projects use one of these). For an icon font, use the devicons package.',
         },
         {
           name: 'Install with your package manager',
-          text: 'Run `npm install @dev.icons/react` (or the Vue/Svelte/Astro variant) inside your project. pnpm and yarn work identically.',
+          text: 'Run npm install @dev.icons/react (or @dev.icons/vue, @dev.icons/svelte) inside your project. pnpm, yarn, and bun work identically.',
         },
         {
           name: 'Import and render an icon',
-          text: 'Import any named icon component and render it with a `size` prop: `import { ReactIcon } from "@dev.icons/react"; <ReactIcon size={32} />`.',
+          text: 'Import a named icon component and render it with a size prop: import { Css } from "@dev.icons/react"; <Css size={32} />.',
         },
       ],
     }),
@@ -80,20 +96,20 @@ if (entry.id === 'quick-start') {
       name: 'Quick start with Devicons',
       description:
         'Drop a first Devicons icon into your app end-to-end in under two minutes.',
-      url: '/docs/quick-start',
+      url: '/docs/quick-start/',
       totalTime: 'PT2M',
       steps: [
         {
           name: 'Install the package for your framework',
-          text: 'Run `npm install @dev.icons/react` (substitute vue/svelte/astro as needed).',
+          text: 'Run npm install @dev.icons/react (or @dev.icons/vue, @dev.icons/svelte).',
         },
         {
           name: 'Import an icon by name',
-          text: 'Components use PascalCase: `react` → `ReactIcon`, `next-js` → `NextJsIcon`.',
+          text: 'Component names are the icon file name split on "-" and PascalCased, with a "_" prefix for React, Vue, Svelte, and Astro: css → Css, nextjs-icon → NextjsIcon, react → _React.',
         },
         {
           name: 'Render with a size prop',
-          text: '`<ReactIcon size={32} />` renders a 32×32 SVG that inherits `currentColor` in the monochrome variant.',
+          text: '<Css size={32} /> renders a 32×32 SVG. Import from @dev.icons/react/mono for a monochrome variant that inherits currentColor.',
         },
       ],
     }),
@@ -107,8 +123,8 @@ const FRAMEWORK_PACKAGES: Record<
   react: { packageName: '@dev.icons/react', runtime: 'React' },
   vue: { packageName: '@dev.icons/vue', runtime: 'Vue' },
   svelte: { packageName: '@dev.icons/svelte', runtime: 'Svelte' },
-  astro: { packageName: '@dev.icons/astro', runtime: 'Astro' },
-  'icon-font': { packageName: '@dev.icons/core', runtime: 'Web Font' },
+  core: { packageName: '@dev.icons/core', runtime: 'JavaScript' },
+  'icon-font': { packageName: 'devicons', runtime: 'Web Font' },
 };
 
 const fwPkg = FRAMEWORK_PACKAGES[entry.id];
@@ -117,7 +133,7 @@ if (fwPkg) {
     softwarePackageSchema({
       name: `${fwPkg.packageName} — Devicons for ${fwPkg.runtime}`,
       description: entry.data.description,
-      url: `/docs/${entry.id}`,
+      url: `/docs/${entry.id}/`,
       packageName: fwPkg.packageName,
       runtime: fwPkg.runtime,
     }),
@@ -137,4 +153,49 @@ const extraJsonLd = extraBlocks.length > 0 ? extraBlocks : undefined;
   isIndex={isIndex}
   extraJsonLd={extraJsonLd}>
   <Content />
+  {
+    faqs && (
+      <>
+        <h2 id="faq">FAQ</h2>
+        <div class="doc-faq">
+          {faqs.map(f => (
+            <details class="doc-faq__item">
+              <summary class="doc-faq__q">{f.question}</summary>
+              <p class="doc-faq__a">
+                {segments(f.answer).map(s =>
+                  s.code ? <code>{s.part}</code> : s.part,
+                )}
+              </p>
+            </details>
+          ))}
+        </div>
+      </>
+    )
+  }
 </Docs>
+
+<style>
+  .doc-faq {
+    border: 1px solid var(--c-border);
+    border-radius: 0;
+  }
+  .doc-faq__item + .doc-faq__item {
+    border-top: 1px solid var(--c-border);
+  }
+  .doc-faq__q {
+    cursor: pointer;
+    padding: 14px 16px;
+    font-weight: 600;
+    color: var(--c-text);
+    list-style-position: inside;
+  }
+  .doc-faq__q:hover,
+  .doc-faq__q:focus-visible {
+    color: var(--c-accent);
+  }
+  .doc-faq__a {
+    margin: 0;
+    padding: 0 16px 16px;
+    color: var(--c-text-secondary);
+  }
+</style>

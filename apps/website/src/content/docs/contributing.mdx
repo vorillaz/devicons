@@ -24,7 +24,7 @@ All changes land through pull requests [on GitHub](https://github.com/vorillaz/d
 1. Add the optimized SVG to `packages/core/export-files/icons/<slug>.svg`
 2. Add the monochrome version to `packages/core/export-files/font/<slug>.svg`
 
-Use kebab-case slugs: `next-js`, `visual-studio-code`. For multiple variants, add a suffix (`react` and `react-icon`).
+Use kebab-case file names (`visual-studio-code`). For a glyph-only variant, add the `-icon` suffix (`nextjs` and `nextjs-icon`). The file name becomes the component name (`nextjs-icon` becomes `NextjsIcon`), the public SVG URL (`https://devicons.io/devicons/icons/nextjs-icon.svg`), and the font class (`devicons-nextjs-icon`).
 
 3. Commit: `feat: add next-js icon`
 4. Generate the docs page:

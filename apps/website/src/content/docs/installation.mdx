@@ -20,42 +20,43 @@ npm install @dev.icons/vue
 # Svelte
 npm install @dev.icons/svelte
 
-# Source SVGs and sprite
+# Icon catalog, sprite, and font files
 npm install @dev.icons/core
 
-# Icon font, CSS files and sprites
+# Icon font (CSS + webfont files)
 npm install devicons
 ```
 
 `pnpm`, `yarn`, and `bun` work the same way.
 
-## CDN
+There is no Astro-specific package. In Astro, use the React, Vue, or Svelte package. Components render to static SVG without a `client:*` directive.
 
-No build step needed:
+## No build step
+
+Link any SVG straight from devicons.io:
 
 ```html
-<link
-  rel="stylesheet"
-  href="https://cdn.devicons.dev/font/devicons.css"
-/>
-
-<i class="devicons devicons-react"></i>
+<img src="https://devicons.io/devicons/icons/react.svg" alt="React logo" width="48" height="48" />
 ```
+
+Or load the icon font from a CDN. The [CDN guide](/docs/cdn/) has pinned URLs for the font, sprite, and catalog.
 
 ## Requirements
 
 - Node.js 18.17+ (20.x LTS recommended)
-- React 18+ / Vue 3.3+ / Svelte 4+
+- React 16.8+ / Vue 3.3+ / Svelte 5+
 - Any ESM bundler: Vite, Webpack, Rollup, esbuild, Turbopack
 
 ## Verify
 
 ```tsx
-import { ReactIcon } from "@dev.icons/react";
+import { Css } from "@dev.icons/react";
 
 export default function Logo() {
-  return <ReactIcon size={32} />;
+  return <Css size={32} alt="CSS" />;
 }
 ```
+
+Component names come from the icon's file name. The name is split on `-` and PascalCased: `css` becomes `Css` and `discord-icon` becomes `DiscordIcon`. The reserved names React, Vue, Svelte, and Astro get a `_` prefix, so the React logo is `_React`.
 
 If the icon renders, you're set. See the [React guide](/docs/react/) for props, tree-shaking, and SSR.

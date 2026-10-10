@@ -12,6 +12,7 @@ import {
 } from '../lib/seo';
 import { getRelatedIcons } from '../lib/related-icons';
 import { getActiveIcons, getUniqueTags, slugifyTag } from '../lib/icons-query';
+import { MIN_INDEXABLE_TAG_COUNT } from '../lib/tags';
 import { fitDescription, fitTitle } from '../lib/meta';
 import { bucketForHex } from '../lib/colors';
 import { COMPARISONS, compareSlug } from '../data/comparisons';
@@ -25,11 +26,14 @@ type Props = CollectionEntry<'icons'>['data'] & {
 
 const {
   name,
+  seoName,
   description,
   aliases,
   icons,
   tags,
   deprecated,
+  popular,
+  recommended,
   version,
   website,
   license,
@@ -51,27 +55,33 @@ const contrastHint = badInDark && badInLight
       ? 'Looks better on a dark background'
       : null;
 
+const titleName = seoName ?? name;
 const title = fitTitle(
-  `${name} Logo SVG — Free React, Vue & Svelte Icon | Devicons`,
-  `${name} Logo — Free SVG & React Icon | Devicons`,
-  `${name} Logo — Free SVG Icon | Devicons`,
-  `${name} Logo SVG | Devicons`,
-  `${name} Logo SVG`,
+  `${titleName} Logo SVG — Free React, Vue & Svelte Icon | Devicons`,
+  `${titleName} Logo — Free SVG & React Icon | Devicons`,
+  `${titleName} Logo — Free SVG Icon | Devicons`,
+  `${titleName} Logo SVG | Devicons`,
+  `${titleName} Logo SVG`,
 );
+// Lead with the download intent ("<brand> logo svg"), then the definition.
 const metaDescription = fitDescription(
-  description,
-  `Download the ${name} logo as a free SVG or use the React, Vue, and Svelte components.`,
-  `Free ${name} logo SVG plus React, Vue & Svelte components.`,
-  `Free ${name} logo SVG download.`,
-  `Free SVG download.`,
-) || `Download the ${name} logo as an optimized SVG. Free React, Vue, and Svelte components under the MIT license.`;
+  `Download the ${name} logo as SVG or a React, Vue & Svelte component. ${description ?? ''}`,
+);
 
 // Only link to pages that are actually generated: tag, variants and compare
 // pages are built from non-deprecated icons only.
 const activeIcons = await getActiveIcons();
 const activeIds = new Set(activeIcons.map(i => i.id));
-const tagsWithPages = new Set((await getUniqueTags()).map(t => t.tag));
+// Link only tags whose page is indexable; thin tag pages are noindex.
+const tagsWithPages = new Set(
+  (await getUniqueTags())
+    .filter(t => t.count >= MIN_INDEXABLE_TAG_COUNT)
+    .map(t => t.tag),
+);
 const hasVariantsPage = !deprecated && icons.length > 1;
+// Matches the gating in src/pages/icons/[slug]/[framework].astro.
+const hasReactPage = !deprecated && (popular || recommended);
+const primaryFile = icons[0] ?? slug;
 const altNames = (aliases ?? []).filter(
   (a: string) => a.toLowerCase() !== name.toLowerCase(),
 );
@@ -116,6 +126,8 @@ const related = await getRelatedIcons(slug, tags, 8);
   title={title}
   description={metaDescription}
   image={`/og/icons/${slug}.png`}
+  imageAlt={`${name} logo`}
+  noindex={deprecated}
   jsonLd={jsonLd}
   brand={name}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
@@ -128,7 +140,7 @@ const related = await getRelatedIcons(slug, tags, 8);
     />
 
     <header class="icon-header">
-      <h1 class="type-display-sm">{name}</h1>
+      <h1 class="type-display-sm">{name} logo</h1>
       <p class="icon-header__meta">
         {hasVariantsPage ? (
           <a href={`/icons/${slug}/variants/`} data-astro-prefetch class="icon-header__variants">
@@ -149,6 +161,19 @@ const related = await getRelatedIcons(slug, tags, 8);
         )
       }
       <div class="icon-header__facts">
+        <a
+          href={`/devicons/icons/${primaryFile}.svg`}
+          download={`${primaryFile}.svg`}
+          class="icon-header__link">
+          Download SVG <span aria-hidden="true">↓</span>
+        </a>
+        {
+          hasReactPage && (
+            <a href={`/icons/${slug}/react/`} data-astro-prefetch class="icon-header__link">
+              React component <span aria-hidden="true">→</span>
+            </a>
+          )
+        }
         {
           website && (
             <a href={website} target="_blank" rel="noopener noreferrer" class="icon-header__link">
@@ -253,13 +278,13 @@ const related = await getRelatedIcons(slug, tags, 8);
     comparisonPartners.length > 0 && (
       <section class="max-w-4xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16">
         <div class="border-t border-border pt-6 sm:pt-8">
-          <p class="type-label mb-3 flex items-center gap-3">
+          <h2 class="type-label mb-3 flex items-center gap-3">
             <span
               aria-hidden="true"
               class="inline-block w-3 h-[2px] bg-accent"
             />
-            Compare
-          </p>
+            Compare {name}
+          </h2>
           <ul class="flex flex-wrap gap-2">
             {comparisonPartners.map(c => (
               <li>

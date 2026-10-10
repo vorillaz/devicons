@@ -28,7 +28,7 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory',
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
     // Parallelize page rendering. OG image generation (satori + sharp) is
     // CPU-bound and independent per page, so a small amount of concurrency
     // shortens cold-cache builds. Keep this low — JS is single-threaded
@@ -73,8 +73,9 @@ export default defineConfig({
         !page.includes('/search-index') &&
         !page.endsWith('/404') &&
         !page.endsWith('/404/') &&
-        // Thin tag pages are noindex; keep the sitemap to indexable URLs.
-        !sitemapData.thinTagPaths.has(new URL(page).pathname),
+        // Noindexed pages (thin tags, deprecated icons, secondary framework
+        // pages, /search/) stay out; the sitemap lists indexable URLs only.
+        !sitemapData.excludedPaths.has(new URL(page).pathname),
       changefreq: 'weekly',
       serialize(item) {
         const url = item.url;
@@ -96,6 +97,8 @@ export default defineConfig({
         if (images) {
           /** @type {any} */ (item).img = images.map(url => ({ url }));
         }
+        const lastmod = sitemapData.lastmodFor(pathname);
+        if (lastmod) item.lastmod = lastmod;
 
         if (isRoot) {
           item.priority = 1.0;

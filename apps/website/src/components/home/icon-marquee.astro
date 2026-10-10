@@ -18,7 +18,7 @@ interface MarqueeIcon {
 
 const SEED: Array<{ file: string; label: string; slug?: string }> = [
   { file: 'vite', label: 'Vite' },
-  { file: 'cursor-icon', label: 'Cursor' },
+  { file: 'cursor-icon', label: 'Cursor', slug: 'cursor' },
   { file: 'typescript-icon', label: 'TypeScript', slug: 'typescript' },
   { file: 'nodejs-icon', label: 'Node.js', slug: 'nodejs' },
   { file: 'python', label: 'Python' },
@@ -63,9 +63,12 @@ const TRACK = [...ICONS, ...ICONS];
     <div class="marquee__track" data-marquee-track>
       {
         TRACK.map((icon, i) => (
-          <div
+          <a
+            href={`/icons/${icon.slug ?? icon.file}/`}
+            data-astro-prefetch
             class="marquee__tile"
-            aria-hidden={i >= ICONS.length ? 'true' : undefined}>
+            aria-hidden={i >= ICONS.length ? 'true' : undefined}
+            tabindex={i >= ICONS.length ? -1 : undefined}>
             <span class="marquee__index">
               {String((i % ICONS.length) + 1).padStart(2, '0')}
             </span>
@@ -79,7 +82,7 @@ const TRACK = [...ICONS, ...ICONS];
               imgClassName="w-full h-full object-contain"
             />
             <span class="marquee__label">{icon.label}</span>
-          </div>
+          </a>
         ))
       }
     </div>
@@ -167,6 +170,7 @@ const TRACK = [...ICONS, ...ICONS];
     border-right: 1px solid var(--c-border);
     background: var(--c-bg);
     color: var(--c-text);
+    text-decoration: none;
     transition:
       background 0.15s ease,
       color 0.15s ease;

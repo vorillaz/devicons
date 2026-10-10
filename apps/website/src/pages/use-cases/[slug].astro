@@ -10,7 +10,14 @@ import { USE_CASES, type UseCase } from '../../data/use-cases';
 
 export async function getStaticPaths() {
   const icons = await getActiveIcons();
+  const useCaseSlugs = new Set(USE_CASES.map(u => u.slug));
   return USE_CASES.map(uc => {
+    const unknownRelated = (uc.related ?? []).filter(s => !useCaseSlugs.has(s));
+    if (unknownRelated.length > 0) {
+      throw new Error(
+        `[use case ${uc.slug}] unknown related use case(s): ${unknownRelated.join(', ')}`,
+      );
+    }
     const matched = icons
       .filter(i => i.data.tags.some(t => uc.tagMatches.includes(t)))
       .map(toListItem)
@@ -22,11 +29,16 @@ export async function getStaticPaths() {
         if (diff !== 0) return diff;
         return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
       });
+    if (matched.length === 0) {
+      throw new Error(
+        `[use case ${uc.slug}] no active icons match tags: ${uc.tagMatches.join(', ')}`,
+      );
+    }
     return {
       params: { slug: uc.slug },
       props: { useCase: uc, icons: matched },
     };
-  }).filter(p => p.props.icons.length > 0);
+  });
 }
 
 const { useCase, icons } = Astro.props as {
@@ -42,6 +54,36 @@ const title = fitTitle(
 const description = fitDescription(
   `${icons.length} curated developer icons for ${useCase.keyword}. ${useCase.intro}`,
 );
+
+// Body copy is authored with a small inline-Markdown subset: [text](/url),
+// `code` and **bold**. Escape first so the data can never inject raw HTML.
+const escapeHtml = (s: string) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const inlineMarkdown = (text: string) =>
+  escapeHtml(text)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(
+      /\[([^\]]+)\]\(((?:\/|https?:\/\/)[^)\s]*)\)/g,
+      (_m, label: string, href: string) => {
+        const external = /^https?:/.test(href);
+        return external
+          ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`
+          : `<a href="${href}">${label}</a>`;
+      },
+    );
+
+const bodyParagraphs = useCase.body
+  .split(/\n\s*\n/)
+  .map(p => p.trim())
+  .filter(Boolean)
+  .map(inlineMarkdown);
 
 const related = (useCase.related ?? [])
   .map(slug => USE_CASES.find(u => u.slug === slug))
@@ -89,7 +131,7 @@ const jsonLd = [
     <IconGrid items={icons} />
 
     <section class="prose max-w-[70ch] mt-12 pt-8 border-t border-border">
-      <p class="type-body">{useCase.body}</p>
+      {bodyParagraphs.map(html => <p class="type-body" set:html={html} />)}
     </section>
 
     {

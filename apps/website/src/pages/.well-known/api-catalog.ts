@@ -9,15 +9,22 @@ export const GET: APIRoute = async () => {
       {
         anchor: `${SITE_URL}/search-index.json`,
         'service-doc': [
-          { href: `${SITE_URL}/docs`, type: 'text/html' },
+          { href: `${SITE_URL}/docs/`, type: 'text/html' },
           { href: `${SITE_URL}/docs.md`, type: 'text/markdown' },
         ],
         describedby: [{ href: GITHUB_URL, type: 'text/html' }],
       },
       {
-        anchor: `${SITE_URL}/.well-known/agent-skills/`,
+        anchor: `${SITE_URL}/llms.txt`,
         'service-doc': [
-          { href: `${SITE_URL}/skill`, type: 'text/html' },
+          { href: `${SITE_URL}/docs/`, type: 'text/html' },
+          { href: `${SITE_URL}/llms-full.txt`, type: 'text/plain' },
+        ],
+      },
+      {
+        anchor: `${SITE_URL}/.well-known/agent-skills/index.json`,
+        'service-doc': [
+          { href: `${SITE_URL}/docs/skill/`, type: 'text/html' },
           {
             href: `${SITE_URL}/.well-known/agent-skills/devicons/SKILL.md`,
             type: 'text/markdown',

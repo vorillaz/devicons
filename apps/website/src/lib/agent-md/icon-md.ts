@@ -1,6 +1,13 @@
 import type { CollectionEntry } from 'astro:content';
 import { formatTagLabel, slugifyTag } from '../icons-query';
 import { getRelatedIcons } from '../related-icons';
+import {
+  FONT_PKG,
+  monoSvgUrl,
+  svgUrl,
+  toComponentName,
+} from '../package-facts';
+import { mdxToMd } from './mdx-to-md';
 
 type IconEntry = CollectionEntry<'icons'>;
 
@@ -16,19 +23,6 @@ interface BuildArgs {
   next?: { slug: string; name: string } | null;
 }
 
-function pascal(slug: string): string {
-  return slug
-    .split(/[-_]/)
-    .filter(Boolean)
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
-}
-
-function importName(slug: string): string {
-  // React/Vue/Svelte component names are `<Pascal>Icon`.
-  return `${pascal(slug)}Icon`;
-}
-
 export async function buildIconMarkdown({
   entry,
   packs,
@@ -37,10 +31,15 @@ export async function buildIconMarkdown({
 }: BuildArgs): Promise<string> {
   const { id: slug, data } = entry;
   const name = data.name;
-  const primaryFile = data.icons[0] ?? slug;
+  const files = data.icons.length ? data.icons : [slug];
+  const primaryFile = files[0];
   const tags = data.tags ?? [];
   const related = await getRelatedIcons(slug, tags, 8);
-  const cmpName = importName(primaryFile);
+  const cmpName = toComponentName(primaryFile);
+  // Vue/Svelte templates can't parse tags starting with `_`; alias on import.
+  const tplName = cmpName.startsWith('_') ? `${cmpName.slice(1)}Logo` : cmpName;
+  const tplImport =
+    tplName === cmpName ? cmpName : `${cmpName} as ${tplName}`;
 
   const lines: string[] = [];
 
@@ -54,6 +53,7 @@ export async function buildIconMarkdown({
 
   // At-a-glance metadata
   const meta: string[] = [];
+  meta.push(`- **Page**: https://devicons.io/icons/${slug}/`);
   if (data.website) meta.push(`- **Website**: ${data.website}`);
   if (data.license) meta.push(`- **License**: ${data.license}`);
   if (data.brandGuidelines)
@@ -62,17 +62,33 @@ export async function buildIconMarkdown({
     meta.push(`- **Also known as**: ${data.aliases.join(', ')}`);
   if (tags.length) {
     const tagLinks = tags
-      .map(t => `[${formatTagLabel(t)}](/icons/tag/${slugifyTag(t)})`)
+      .map(t => `[${formatTagLabel(t)}](/icons/tag/${slugifyTag(t)}/)`)
       .join(', ');
     meta.push(`- **Tags**: ${tagLinks}`);
   }
   if (data.mainColor) meta.push(`- **Primary color**: \`${data.mainColor}\``);
   if (data.version) meta.push(`- **Version added**: ${data.version}`);
-  if (data.icons.length > 1) {
-    meta.push(`- **Variants**: ${data.icons.map(f => `\`${f}\``).join(', ')}`);
-  }
+  if (data.badInDark)
+    meta.push('- **Contrast**: needs a light backdrop on dark backgrounds');
+  if (data.badInLight)
+    meta.push('- **Contrast**: needs a dark backdrop on light backgrounds');
   if (meta.length) {
     lines.push('', '## At a glance', '', ...meta);
+  }
+
+  // Variants / files
+  lines.push('', '## Files');
+  lines.push('');
+  lines.push(
+    'Each file is one variant of this logo. The component name is derived from the file name.',
+  );
+  lines.push('');
+  lines.push('| File | Component | Color SVG | Monochrome SVG | Font class |');
+  lines.push('| --- | --- | --- | --- | --- |');
+  for (const file of files) {
+    lines.push(
+      `| \`${file}\` | \`${toComponentName(file)}\` | ${svgUrl(file)} | ${monoSvgUrl(file)} | \`devicons devicons-${file}\` |`,
+    );
   }
 
   // Use it
@@ -83,36 +99,47 @@ export async function buildIconMarkdown({
   lines.push('```');
   lines.push('', '### React', '', '```tsx');
   lines.push(`import { ${cmpName} } from "@dev.icons/react";`);
+  lines.push(`// Monochrome (inherits currentColor):`);
+  lines.push(`// import { ${cmpName} } from "@dev.icons/react/mono";`);
   lines.push('');
-  lines.push(`<${cmpName} size={32} />`);
+  lines.push(`<${cmpName} size={32} alt="${name} logo" />`);
   lines.push('```');
   lines.push('', '### Vue', '', '```vue');
   lines.push('<script setup>');
-  lines.push(`import { ${cmpName} } from "@dev.icons/vue";`);
+  lines.push(`import { ${tplImport} } from "@dev.icons/vue";`);
   lines.push('</script>');
   lines.push('');
   lines.push('<template>');
-  lines.push(`  <${cmpName} :size="32" />`);
+  lines.push(`  <${tplName} :size="32" alt="${name} logo" />`);
   lines.push('</template>');
   lines.push('```');
   lines.push('', '### Svelte', '', '```svelte');
   lines.push('<script>');
-  lines.push(`  import { ${cmpName} } from "@dev.icons/svelte";`);
+  lines.push(`  import { ${tplImport} } from "@dev.icons/svelte";`);
   lines.push('</script>');
   lines.push('');
-  lines.push(`<${cmpName} size={32} />`);
+  lines.push(`<${tplName} size={32} alt="${name} logo" />`);
   lines.push('```');
 
   // Raw SVG
   lines.push('', '### Raw SVG', '', '```html');
   lines.push(
-    `<img src="https://cdn.jsdelivr.net/npm/@dev.icons/core@latest/export-files/icons/${primaryFile}.svg" alt="${name} logo" width="48" height="48" />`,
+    `<img src="${svgUrl(primaryFile)}" alt="${name} logo" width="48" height="48" />`,
   );
   lines.push('```');
-  lines.push(
-    '',
-    `Direct link: https://cdn.jsdelivr.net/npm/@dev.icons/core@latest/export-files/icons/${primaryFile}.svg`,
-  );
+
+  // Icon font
+  lines.push('', '### Icon font', '', '```css');
+  lines.push(`@import "${FONT_PKG.name}/css"; /* npm install ${FONT_PKG.name} */`);
+  lines.push('```', '', '```html');
+  lines.push(`<i class="devicons devicons-${primaryFile}"></i>`);
+  lines.push('```');
+
+  // Long-form prose from the icon's MDX body
+  const prose = mdxToMd(entry.body ?? '').trim();
+  if (prose) {
+    lines.push('', prose);
+  }
 
   // Packs that include this icon
   if (packs.length) {

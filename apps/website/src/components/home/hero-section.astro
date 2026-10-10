@@ -66,7 +66,7 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
           Developer icons & logos for people who ship.
         </h1>
         <p class="hero-lead type-body-lg mt-5 sm:mt-6">
-          Free SVGs plus React, Vue, Svelte, and Astro components — MIT
+          Free SVGs plus React, Vue, and Svelte components — MIT
           licensed.
         </p>
         <div
@@ -305,7 +305,6 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
     backdrop-filter: var(--liquid-filter-id) blur(16px) saturate(1.9)
       brightness(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(1.9) brightness(1.1);
-    will-change: backdrop-filter;
   }
 
   /* 2. Inner light — very subtle top lift + bottom counter-glow.
@@ -540,7 +539,9 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
         let idx = 0;
         const first = logos[0];
         if (first) {
-          void ensureMap(first).then(() => pointToFilter(first));
+          // The displacement map is decoration: build it once the main thread
+          // is idle so it never competes with first paint or input.
+          scheduleIdle(() => void ensureMap(first).then(() => pointToFilter(first)));
         }
         logos.slice(1).forEach(logo => {
           scheduleIdle(() => void ensureMap(logo));

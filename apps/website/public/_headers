@@ -1,2 +1,41 @@
 /
-  Link: </docs>; rel="service-doc", </.well-known/agent-skills>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml"
+  Link: </docs/>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="alternate"; type="text/plain"
+
+# Hashed build assets never change.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Icon SVGs are the public download / hotlink URLs.
+/devicons/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Access-Control-Allow-Origin: *
+
+# Markdown twins exist for agents; the HTML page is the indexable copy.
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+  Access-Control-Allow-Origin: *
+  Vary: Accept
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/search-index.json
+  X-Robots-Tag: noindex
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/og/*
+  X-Robots-Tag: noindex
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/*
+  Access-Control-Allow-Origin: *

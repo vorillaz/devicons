@@ -1,7 +1,7 @@
 {
   "name": "Devicons",
   "short_name": "Devicons",
-  "description": "Premium developer icons & logos. Open source. Free forever.",
+  "description": "Developer icons and logos as SVG plus React, Vue and Svelte components. MIT licensed.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -12,7 +12,19 @@
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
