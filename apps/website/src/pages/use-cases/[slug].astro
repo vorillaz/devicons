@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/seo/breadcrumbs.astro';
 import IconGrid from '../../components/icons/icon-grid.astro';
 import { getActiveIcons, toListItem } from '../../lib/icons-query';
 import { SITE_TITLE } from '../../consts';
+import { fitDescription, fitTitle } from '../../lib/meta';
 import { breadcrumbSchema, collectionPageSchema } from '../../lib/seo';
 import { USE_CASES, type UseCase } from '../../data/use-cases';
 
@@ -33,8 +34,14 @@ const { useCase, icons } = Astro.props as {
   icons: ReturnType<typeof toListItem>[];
 };
 
-const title = `${useCase.title} — ${icons.length} developer logos | ${SITE_TITLE}`;
-const description = `${icons.length} curated developer icons for ${useCase.keyword}. ${useCase.intro}`;
+const title = fitTitle(
+  `${useCase.title} — ${icons.length} developer logos | ${SITE_TITLE}`,
+  `${useCase.title} — ${icons.length} logos | ${SITE_TITLE}`,
+  `${useCase.title} | ${SITE_TITLE}`,
+);
+const description = fitDescription(
+  `${icons.length} curated developer icons for ${useCase.keyword}. ${useCase.intro}`,
+);
 
 const related = (useCase.related ?? [])
   .map(slug => USE_CASES.find(u => u.slug === slug))

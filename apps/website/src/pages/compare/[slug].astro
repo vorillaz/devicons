@@ -5,6 +5,7 @@ import IconRender from '../../components/icons/icon-render.astro';
 import { getActiveIcons } from '../../lib/icons-query';
 import { COMPARISONS, compareSlug } from '../../data/comparisons';
 import { SITE_TITLE } from '../../consts';
+import { fitTitle } from '../../lib/meta';
 import { breadcrumbSchema } from '../../lib/seo';
 
 export async function getStaticPaths() {
@@ -25,7 +26,11 @@ export async function getStaticPaths() {
 
 const { a, b, category } = Astro.props;
 
-const title = `${a.data.name} vs ${b.data.name} — logos & ${category} comparison | ${SITE_TITLE}`;
+const title = fitTitle(
+  `${a.data.name} vs ${b.data.name} — logos & ${category} comparison | ${SITE_TITLE}`,
+  `${a.data.name} vs ${b.data.name} — ${category} logos | ${SITE_TITLE}`,
+  `${a.data.name} vs ${b.data.name} logos | ${SITE_TITLE}`,
+);
 const description = `Compare ${a.data.name} and ${b.data.name} — two popular ${category} options. Download both logos as free SVGs, or use them as React, Vue, or Svelte components.`;
 
 const jsonLd = [
