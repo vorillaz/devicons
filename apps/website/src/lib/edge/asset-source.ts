@@ -8,11 +8,17 @@ import type {
   IconDetail,
   SearchIndexEntry,
 } from '@dev.icons/agent/schema';
-import { buildSearchIndex, searchIcons } from '@dev.icons/agent/search';
+import {
+  loadSearchIndex,
+  searchIcons,
+  type IndexedEntry,
+  type PrebuiltSearchIndex,
+} from '@dev.icons/agent/search';
 import {
   ApiRequestError,
   DEFAULT_BASE_URL,
   isValidSlug,
+  normalizeSlug,
   type DataSource,
 } from '@dev.icons/agent/source';
 
@@ -22,15 +28,19 @@ export interface AssetFetcher {
 
 interface SearchState {
   index: MiniSearch<SearchIndexEntry>;
-  byId: Map<string, SearchIndexEntry>;
+  byId: Map<string, IndexedEntry>;
 }
 
 // One index per isolate: built on first search, reused until the isolate is
 // recycled (a new deploy always gets a new isolate).
 let searchState: Promise<SearchState> | undefined;
 
-export function createAssetSource(assets: AssetFetcher, origin: string): DataSource {
-  const get = (pathname: string) => assets.fetch(new Request(new URL(pathname, origin)));
+// ASSETS ignores the hostname, so every request uses the canonical origin:
+// nothing depends on which hostname (preview or production) served the call.
+const ORIGIN = DEFAULT_BASE_URL;
+
+export function createAssetSource(assets: AssetFetcher): DataSource {
+  const get = (pathname: string) => assets.fetch(new Request(new URL(pathname, ORIGIN)));
 
   async function getJson<T>(pathname: string): Promise<T | null> {
     const res = await get(pathname);
@@ -41,9 +51,9 @@ export function createAssetSource(assets: AssetFetcher, origin: string): DataSou
 
   function loadSearch(): Promise<SearchState> {
     searchState ??= (async () => {
-      const entries = await getJson<SearchIndexEntry[]>('/search-index.json');
-      if (!entries) throw new ApiRequestError('http', 'search index missing', 500);
-      return { index: buildSearchIndex(entries), byId: new Map(entries.map(e => [e.id, e])) };
+      const prebuilt = await getJson<PrebuiltSearchIndex>('/api/v1/search-index.json');
+      if (!prebuilt) throw new ApiRequestError('http', 'search index missing', 500);
+      return loadSearchIndex(prebuilt);
     })();
     // Don't cache a failure: the next request retries.
     searchState.catch(() => {
@@ -55,17 +65,23 @@ export function createAssetSource(assets: AssetFetcher, origin: string): DataSou
   return {
     async search(q, { limit = 20, category } = {}) {
       const { index, byId } = await loadSearch();
-      const results = searchIcons(index, byId, q, { limit, category, site: DEFAULT_BASE_URL });
-      return { query: q, count: results.length, results };
+      const { results, total } = searchIcons(index, byId, q, {
+        limit,
+        category,
+        site: DEFAULT_BASE_URL,
+      });
+      return { query: q, count: results.length, total, results };
     },
-    async icon(slug) {
+    async icon(raw) {
+      const slug = normalizeSlug(raw);
       if (!isValidSlug(slug)) return null;
       return getJson<IconDetail>(`/api/v1/icons/${slug}.json`);
     },
     async categories() {
       return (await getJson<Category[]>('/api/v1/categories.json')) ?? [];
     },
-    async category(slug, limit) {
+    async category(raw, limit) {
+      const slug = normalizeSlug(raw);
       if (!isValidSlug(slug)) return null;
       const detail = await getJson<CategoryDetail>(`/api/v1/categories/${slug}.json`);
       if (!detail || limit === undefined) return detail;
@@ -74,8 +90,8 @@ export function createAssetSource(assets: AssetFetcher, origin: string): DataSou
     async svg(href) {
       // Payload URLs are absolute production URLs; serve them from this
       // deployment's assets so previews and local dev stay self-contained.
-      const url = new URL(href, origin);
-      const allowed = url.origin === origin || url.origin === DEFAULT_BASE_URL;
+      const url = new URL(href, ORIGIN);
+      const allowed = url.origin === ORIGIN;
       if (!allowed || !url.pathname.startsWith('/devicons/')) {
         throw new ApiRequestError('invalid', `Refusing to fetch SVG from ${url.href}`);
       }

@@ -1,8 +1,8 @@
 /**
  * GET /api/v1/search?q=<query>&limit=<1-100>&category=<slug>
  *
- * Same ranking as the site search and the MCP `search_icons` tool. The index
- * is built once per isolate from /search-index.json.
+ * Same ranking as the site search and the MCP `search_icons` tool. The
+ * prebuilt index (/api/v1/search-index.json) is loaded once per isolate.
  */
 import { parseSearchParams } from '@dev.icons/agent/search';
 import { createAssetSource, type AssetFetcher } from '../../../src/lib/edge/asset-source';
@@ -19,7 +19,7 @@ export const onRequestGet = async ({ request, env }: Context): Promise<Response>
   if (!params.ok) return apiError(400, 'invalid_param', params.message);
 
   try {
-    const source = createAssetSource(env.ASSETS, url.origin);
+    const source = createAssetSource(env.ASSETS);
     const result = await source.search(params.q, {
       limit: params.limit,
       category: params.category,

@@ -20,6 +20,8 @@
     "/api/v1/icons/*",
     "/api/v1/categories.json",
     "/api/v1/categories/*",
-    "/api/v1/openapi.json"
+    "/api/v1/openapi.json",
+    "/api/v1/search-index.json",
+    "/api/v1/"
   ]
 }
