@@ -1,6 +1,8 @@
 {
   "version": 1,
-  "include": ["/*"],
+  "include": [
+    "/*"
+  ],
   "exclude": [
     "/_astro/*",
     "/devicons/*",
@@ -13,6 +15,11 @@
     "/robots.txt",
     "/sitemap-index.xml",
     "/sitemap-0.xml",
-    "/search-index.json"
+    "/search-index.json",
+    "/api/v1/icons.json",
+    "/api/v1/icons/*",
+    "/api/v1/categories.json",
+    "/api/v1/categories/*",
+    "/api/v1/openapi.json"
   ]
 }
