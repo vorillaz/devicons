@@ -65,7 +65,12 @@ module.exports = {
   plugins: [
     [
       SCOPED_COMMITS_PLUGIN,
-      { paths: SCOPED_PATHS, preset: 'conventionalcommits' },
+      {
+        paths: SCOPED_PATHS,
+        preset: 'conventionalcommits',
+        // Keeps CHANGELOG.md headings as `## [devicons-vX.Y.Z](...)`.
+        tagVersionInNotes: true,
+      },
     ],
     ...(isCanary
       ? []

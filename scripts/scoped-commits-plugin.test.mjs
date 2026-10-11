@@ -71,3 +71,19 @@ test('in-scope features drive the release type and notes', async () => {
   assert.match(notes, /new tool/);
   assert.doesNotMatch(notes, /page/);
 });
+
+test('tagVersionInNotes titles the notes with the git tag', async () => {
+  const { cwd, commits } = repoWith([['packages/font/a.txt', 'feat(cli): thing']]);
+  const notes = await generateNotes(
+    { paths: ['packages/font/'], preset: 'conventionalcommits', tagVersionInNotes: true },
+    {
+      cwd,
+      commits,
+      logger,
+      options: { repositoryUrl: 'https://github.com/example/repo' },
+      lastRelease: { gitTag: 'devicons-v2.1.0', version: '2.1.0' },
+      nextRelease: { gitTag: 'devicons-v2.2.0', version: '2.2.0' },
+    },
+  );
+  assert.match(notes, /^## \[devicons-v2\.2\.0\]/);
+});

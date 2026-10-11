@@ -13,6 +13,9 @@
 // Config:
 //   paths:  ['packages/font/', 'packages/agent/']   repo-root-relative prefixes
 //   preset: 'conventionalcommits'                   passed to both delegates
+//   tagVersionInNotes: true                         title notes with the git
+//                                                   tag (devicons-v2.2.0), as
+//                                                   semantic-release-monorepo did
 //
 // Load it by absolute path (see release-group1.mjs / packages/font/release.config.cjs).
 
@@ -40,7 +43,7 @@ export function filterCommits(commits, paths, cwd) {
 }
 
 function scoped(pluginConfig, context) {
-  const { paths, ...delegateConfig } = pluginConfig;
+  const { paths, tagVersionInNotes: _notesOnly, ...delegateConfig } = pluginConfig;
   if (!Array.isArray(paths) || paths.length === 0) {
     throw new Error('scoped-commits-plugin: `paths` (non-empty string[]) is required');
   }
@@ -59,7 +62,14 @@ export async function analyzeCommits(pluginConfig, context) {
   return analyze(config, scopedContext);
 }
 
+const withTagAsVersion = release =>
+  release?.gitTag ? { ...release, version: release.gitTag } : release;
+
 export async function generateNotes(pluginConfig, context) {
   const [config, scopedContext] = scoped(pluginConfig, context);
+  if (pluginConfig.tagVersionInNotes) {
+    scopedContext.lastRelease = withTagAsVersion(scopedContext.lastRelease);
+    scopedContext.nextRelease = withTagAsVersion(scopedContext.nextRelease);
+  }
   return notes(config, scopedContext);
 }
