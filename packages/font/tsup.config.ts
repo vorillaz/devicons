@@ -26,6 +26,9 @@ export default defineConfig([
     clean: false,
     outDir: 'dist',
     noExternal: [/.*/],
+    // One file: package.json `files` ships dist/cli.mjs only, so the
+    // dynamic imports in src/cli.ts must not become separate chunks.
+    splitting: false,
     minify: true,
     banner: {
       // Bundled CommonJS dependencies may call require(); give ESM one.

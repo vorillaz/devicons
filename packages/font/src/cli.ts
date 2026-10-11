@@ -3,8 +3,19 @@
 // dependencies.
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { serveStdio } from '@modelcontextprotocol/server/stdio';
-import { run } from '@dev.icons/agent/cli';
+import { nodeVersionError } from './node-version';
+
+// Check before loading the SDK, which may not even parse on old Node.
+const tooOld = nodeVersionError(process.versions.node);
+if (tooOld) {
+  process.stderr.write(tooOld);
+  process.exit(1);
+}
+
+const [{ serveStdio }, { run }] = await Promise.all([
+  import('@modelcontextprotocol/server/stdio'),
+  import('@dev.icons/agent/cli'),
+]);
 
 // Read at runtime: the release workflow builds before semantic-release stamps
 // the new version into package.json, so a build-time constant would be stale.
