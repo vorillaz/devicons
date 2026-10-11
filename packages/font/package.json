@@ -16,7 +16,7 @@
     "logos"
   ],
   "bin": {
-    "devicons": "./dist/cli.mjs"
+    "devicons": "dist/cli.mjs"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
