@@ -37,6 +37,8 @@ const docs = defineCollection({
   loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
+    // Full <title> for search results when the sidebar title is too terse.
+    seoTitle: z.string().optional(),
     description: z.string().optional(),
     order: z.number().default(0),
     category: z.string().default('Getting Started'),

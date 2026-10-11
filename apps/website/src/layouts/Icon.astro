@@ -5,11 +5,7 @@ import { IconDetail } from '../components/icons/icon-detail';
 import Breadcrumbs from '../components/seo/breadcrumbs.astro';
 import RelatedIcons from '../components/seo/related-icons.astro';
 import { Tag } from '../components/ui/tag';
-import {
-  breadcrumbSchema,
-  iconBrandSchema,
-  iconImageSchema,
-} from '../lib/seo';
+import { breadcrumbSchema, iconBrandSchema, iconImageSchema } from '../lib/seo';
 import { getRelatedIcons } from '../lib/related-icons';
 import { getActiveIcons, getUniqueTags, slugifyTag } from '../lib/icons-query';
 import { MIN_INDEXABLE_TAG_COUNT } from '../lib/tags';
@@ -47,13 +43,14 @@ const {
   next,
 } = Astro.props;
 
-const contrastHint = badInDark && badInLight
-  ? 'Low contrast — preview on a patterned background'
-  : badInDark
-    ? 'Looks better on a light background'
-    : badInLight
-      ? 'Looks better on a dark background'
-      : null;
+const contrastHint =
+  badInDark && badInLight
+    ? 'Low contrast — preview on a patterned background'
+    : badInDark
+      ? 'Looks better on a light background'
+      : badInLight
+        ? 'Looks better on a dark background'
+        : null;
 
 const titleName = seoName ?? name;
 const title = fitTitle(
@@ -104,8 +101,10 @@ const colorChips = [
 const comparisonPairs = COMPARISONS.filter(
   cmp => activeIds.has(cmp.a) && activeIds.has(cmp.b),
 ).flatMap(cmp => {
-  if (cmp.a === slug) return [{ otherSlug: cmp.b, pairSlug: compareSlug(cmp.a, cmp.b) }];
-  if (cmp.b === slug) return [{ otherSlug: cmp.a, pairSlug: compareSlug(cmp.a, cmp.b) }];
+  if (cmp.a === slug)
+    return [{ otherSlug: cmp.b, pairSlug: compareSlug(cmp.a, cmp.b) }];
+  if (cmp.b === slug)
+    return [{ otherSlug: cmp.a, pairSlug: compareSlug(cmp.a, cmp.b) }];
   return [];
 });
 
@@ -142,17 +141,50 @@ const related = await getRelatedIcons(slug, tags, 8);
     <header class="icon-header">
       <h1 class="type-display-sm">{name} logo</h1>
       <p class="icon-header__meta">
-        {hasVariantsPage ? (
-          <a href={`/icons/${slug}/variants/`} data-astro-prefetch class="icon-header__variants">
-            {icons.length} {icons.length === 1 ? 'style' : 'styles'} →
-          </a>
-        ) : (
-          <span>{icons.length} {icons.length === 1 ? 'style' : 'styles'}</span>
-        )}
-        {version && (<><span class="icon-header__sep" aria-hidden="true">/</span><span>v{version}</span></>)}
-        {deprecated && (<><span class="icon-header__sep" aria-hidden="true">/</span><span class="icon-header__deprecated">Deprecated</span></>)}
+        {
+          hasVariantsPage ? (
+            <a
+              href={`/icons/${slug}/variants/`}
+              data-astro-prefetch
+              class="icon-header__variants">
+              {icons.length} {icons.length === 1 ? 'style' : 'styles'} →
+            </a>
+          ) : (
+            <span>
+              {icons.length} {icons.length === 1 ? 'style' : 'styles'}
+            </span>
+          )
+        }
+        {
+          version && (
+            <>
+              <>
+                <span class="icon-header__sep" aria-hidden="true">
+                  /
+                </span>
+                <span>v{version}</span>
+              </>
+            </>
+          )
+        }
+        {
+          deprecated && (
+            <>
+              <>
+                <span class="icon-header__sep" aria-hidden="true">
+                  /
+                </span>
+                <span class="icon-header__deprecated">Deprecated</span>
+              </>
+            </>
+          )
+        }
       </p>
-      {description && <p class="type-body-lg icon-header__desc">{description}</p>}
+      {
+        description && (
+          <p class="type-body-lg icon-header__desc">{description}</p>
+        )
+      }
       {
         altNames.length > 0 && (
           <p class="type-body-sm text-text-muted icon-header__aka">
@@ -169,60 +201,81 @@ const related = await getRelatedIcons(slug, tags, 8);
         </a>
         {
           hasReactPage && (
-            <a href={`/icons/${slug}/react/`} data-astro-prefetch class="icon-header__link">
-              React component <span aria-hidden="true">→</span>
+            <a
+              href={`/icons/${slug}/react/`}
+              data-astro-prefetch
+              class="icon-header__link">
+              React component
             </a>
           )
         }
         {
           website && (
-            <a href={website} target="_blank" rel="noopener noreferrer" class="icon-header__link">
-              {website.replace(/^https?:\/\//, '').replace(/\/$/, '')} <span aria-hidden="true">↗</span>
+            <a
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-header__link">
+              {website.replace(/^https?:\/\//, '').replace(/\/$/, '')}{' '}
+              <span aria-hidden="true">↗</span>
             </a>
           )
         }
         {
           license && (
-            <a href={license} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+            <a
+              href={license}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-header__link">
               License <span aria-hidden="true">↗</span>
             </a>
           )
         }
         {
           brandGuidelines && (
-            <a href={brandGuidelines} target="_blank" rel="noopener noreferrer" class="icon-header__link">
+            <a
+              href={brandGuidelines}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-header__link">
               Brand <span aria-hidden="true">↗</span>
             </a>
           )
         }
-        {colorChips.length > 0 && (
-          <span class="icon-header__colors">
-            {
-          colorChips.map(({ hex, label }) => {
-            const bucket = bucketForHex(hex);
-            const hexText = hex.toUpperCase();
-            const swatch = (
-              <span
-                aria-hidden="true"
-                class="inline-block w-3 h-3 border border-border shrink-0"
-                style={`background-color: ${hex}`}
-              />
-            );
-            return bucket ? (
-              <a href={`/icons/color/${bucket}/`} aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
-                {swatch}
-                {hexText}
-              </a>
-            ) : (
-              <span aria-label={`${label} brand color ${hexText}`} class="icon-header__chip">
-                {swatch}
-                {hexText}
-              </span>
-            );
-          })
+        {
+          colorChips.length > 0 && (
+            <span class="icon-header__colors">
+              {colorChips.map(({ hex, label }) => {
+                const bucket = bucketForHex(hex);
+                const hexText = hex.toUpperCase();
+                const swatch = (
+                  <span
+                    aria-hidden="true"
+                    class="inline-block w-3 h-3 border border-border shrink-0"
+                    style={`background-color: ${hex}`}
+                  />
+                );
+                return bucket ? (
+                  <a
+                    href={`/icons/color/${bucket}/`}
+                    aria-label={`${label} brand color ${hexText}`}
+                    class="icon-header__chip">
+                    {swatch}
+                    {hexText}
+                  </a>
+                ) : (
+                  <span
+                    aria-label={`${label} brand color ${hexText}`}
+                    class="icon-header__chip">
+                    {swatch}
+                    {hexText}
+                  </span>
+                );
+              })}
+            </span>
+          )
         }
-          </span>
-        )}
       </div>
       {
         tags.length > 0 && (
@@ -261,6 +314,19 @@ const related = await getRelatedIcons(slug, tags, 8);
     badInDark={badInDark}
     badInLight={badInLight}
   />
+
+  <p class="max-w-4xl mx-auto px-4 sm:px-6 mt-6 type-body text-text-muted">
+    Using an AI agent? Ask the <a
+      href="/docs/mcp/"
+      class="underline underline-offset-4 hover:text-accent">Devicons MCP server</a
+    > for <code>{slug}</code>, or fetch <a
+      href={`/api/v1/icons/${slug}.json`}
+      class="underline underline-offset-4 hover:text-accent">its JSON</a
+    > from the <a
+      href="/docs/api/"
+      class="underline underline-offset-4 hover:text-accent">Icons API</a
+    >.
+  </p>
 
   {
     Astro.slots.has('default') && (

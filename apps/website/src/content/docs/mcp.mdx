@@ -1,0 +1,118 @@
+---
+title: "MCP server"
+seoTitle: "Devicons MCP server: developer icons for AI agents"
+description: "Hosted MCP server for developer icons and SVG logos. Search, fetch SVGs, and get React, Vue, or Svelte code from any MCP client."
+order: 1
+category: "AI & Agents"
+categoryOrder: 2
+badge: "new"
+---
+
+import Note from "../../components/docs/note.astro";
+
+The Devicons MCP server gives AI agents direct access to 1,300+ developer, brand, framework, and tooling logos. Agents search by name or tag, fetch the SVG markup, and get the exact import for your framework, so they stop guessing slugs and inventing file paths.
+
+| | |
+| --- | --- |
+| **URL** | `https://devicons.io/api/mcp` |
+| **Transport** | Streamable HTTP (stateless) |
+| **Authentication** | None |
+| **Access** | Read-only |
+| **Discovery** | [`/.well-known/mcp.json`](/.well-known/mcp.json) |
+
+## Connect your client
+
+### Claude Code
+
+```bash
+claude mcp add --transport http devicons https://devicons.io/api/mcp
+```
+
+Add `--scope user` to make it available in every project.
+
+### Cursor
+
+Add to `.cursor/mcp.json` in your project, or to the global Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "devicons": {
+      "url": "https://devicons.io/api/mcp"
+    }
+  }
+}
+```
+
+### VS Code
+
+Add to `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "devicons": {
+      "type": "http",
+      "url": "https://devicons.io/api/mcp"
+    }
+  }
+}
+```
+
+### Windsurf and Claude Desktop
+
+Use the same `mcpServers` entry as Cursor. In Windsurf it goes in `~/.codeium/windsurf/mcp_config.json`; in Claude Desktop, add it as a custom connector with the URL above.
+
+### Codex CLI
+
+```bash
+codex mcp add devicons --url https://devicons.io/api/mcp
+```
+
+### Any other client
+
+Name `devicons`, URL `https://devicons.io/api/mcp`, transport Streamable HTTP, no authentication.
+
+## Run it locally
+
+The same tools are available over stdio from the [`devicons`](/docs/cli/) package (Node 20+). The local server reads from the public API:
+
+```json
+{
+  "mcpServers": {
+    "devicons": {
+      "command": "npx",
+      "args": ["-y", "devicons", "mcp"]
+    }
+  }
+}
+```
+
+Set `DEVICONS_API` to point it at another deployment.
+
+## Tools
+
+| Tool | Inputs | Returns |
+| --- | --- | --- |
+| `search_icons` | `query`, optional `category`, `limit` (1–50, default 10) | Ranked icons with slug, name, tags, page URL, and SVG URL |
+| `get_icon` | `slug`, optional `framework` (`react`, `vue`, `svelte`, `html`; default `react`), `include_svg` (default `true`) | Metadata, every variant's color and monochrome SVG URL, the primary SVG markup, and an install command plus code |
+| `list_categories` | none | Categories with slug and icon count |
+| `get_category` | `slug`, optional `limit` (1–200, default 50) | The category's icons, most recognizable first |
+
+Every tool is read-only and returns structured content plus a short text summary. Unknown slugs come back as tool errors that tell the model which tool to call instead.
+
+## Example prompts
+
+- "Find the logos for our stack (Next.js, Postgres, Redis, Vercel) and add them to `components/stack.tsx` with `@dev.icons/react`."
+- "Put the monochrome GitHub, Discord, and X logos in the footer as inline SVG."
+- "List every LLM provider logo Devicons has."
+
+## Troubleshooting
+
+- **Opening the URL in a browser shows "method not allowed".** That's expected: MCP clients POST JSON-RPC to the endpoint. Use one of the setups above.
+- **Your client only supports stdio.** Use the [local server](#run-it-locally).
+- **Behind a firewall.** Both the hosted and the local server need outbound HTTPS access to `devicons.io`.
+
+<Note variant="tip" title="No MCP support?">
+The same data is available from the [Icons API](/docs/api/) and the [CLI](/docs/cli/), and agents that read instructions from a URL can use [skill.md](/docs/skill/).
+</Note>

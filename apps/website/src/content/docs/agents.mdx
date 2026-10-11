@@ -1,0 +1,60 @@
+---
+title: "AI agents"
+seoTitle: "Devicons for AI agents: MCP, API, CLI & skill"
+description: "Connect Claude, Cursor, VS Code, and other AI agents to Devicons over MCP, a free JSON API, a CLI, or a skill. No API key needed."
+order: 0
+category: "AI & Agents"
+categoryOrder: 2
+badge: "new"
+---
+
+import Note from "../../components/docs/note.astro";
+
+Devicons is built for AI coding agents as well as people. An agent can search 1,300+ developer logos, fetch the SVG, and write the React, Vue, or Svelte import for you, without guessing file names or URLs. Every surface is free, read-only, and needs no API key.
+
+## Pick a surface
+
+| You're using | Use | Setup |
+| --- | --- | --- |
+| Claude Code, Cursor, VS Code, Windsurf, Codex, Claude Desktop | **[MCP server](/docs/mcp/)** | One command or one JSON entry |
+| Your own code, a plugin, or a no-code tool | **[Icons API](/docs/api/)** | Plain HTTPS + JSON |
+| A terminal, a script, or CI | **[CLI](/docs/cli/)** | `npx devicons` |
+| An agent that reads skills or instructions from a URL | **[skill.md](/docs/skill/)** | One prompt |
+
+The MCP server is the best fit for chat and coding agents: the agent calls `search_icons`, then `get_icon` for the SVG and ready-to-paste code. The API and CLI expose the same data for everything else.
+
+## Quick start
+
+Claude Code:
+
+```bash
+claude mcp add --transport http devicons https://devicons.io/api/mcp
+```
+
+Then ask: *"Add the PostgreSQL and Redis logos to the architecture diagram"* or *"Use the Devicons React component for the Vercel logo in the footer."*
+
+Any other tool:
+
+```bash
+curl "https://devicons.io/api/v1/search?q=postgres&limit=3"
+npx devicons add react vue --out ./src/icons
+```
+
+## Discovery files
+
+Agents and crawlers can find every surface from the domain alone:
+
+| File | What it describes |
+| --- | --- |
+| [`/agents.md`](/agents.md) | Every agent surface on one page |
+| [`/llms.txt`](/llms.txt) | Site overview for LLMs, with an "Agent integrations" section |
+| [`/.well-known/mcp.json`](/.well-known/mcp.json) | The hosted MCP server: URL, transport, tools |
+| [`/.well-known/api-catalog`](/.well-known/api-catalog) | API catalog (RFC 9727) linking the OpenAPI spec and docs |
+| [`/api/v1/openapi.json`](/api/v1/openapi.json) | OpenAPI 3.1 description of the JSON API |
+| [`/.well-known/agent-skills/index.json`](/.well-known/agent-skills/index.json) | Agent Skills discovery index |
+
+Every docs and icon page also has a Markdown twin (for example [`/icons/react.md`](/icons/react.md)), and HTML pages answer `Accept: text/markdown` with Markdown.
+
+<Note variant="tip" title="Licensing">
+The SVG files and packages are MIT licensed. The logos themselves are trademarks of their owners, so follow each brand's guidelines when an agent places them in your product.
+</Note>

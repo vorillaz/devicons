@@ -1,0 +1,93 @@
+---
+title: "CLI"
+seoTitle: "Devicons CLI: search & download SVG logos (npx)"
+description: "Search, inspect, and download SVG logos from your terminal with npx devicons. Scriptable JSON output and a local MCP server."
+order: 3
+category: "AI & Agents"
+categoryOrder: 2
+badge: "new"
+---
+
+import Note from "../../components/docs/note.astro";
+
+The `devicons` CLI finds developer logos and saves them as SVG files without leaving your terminal. It reads from the [Icons API](/docs/api/), prints readable tables or JSON, and also runs the Devicons [MCP server](/docs/mcp/) locally. It requires Node 20 or newer, and there's nothing to configure.
+
+```bash
+npx devicons search react
+```
+
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `devicons search <query>` | Search icons by name, alias, or tag |
+| `devicons info <slug>` | Show an icon's description, tags, variants, and component names |
+| `devicons svg <slug>` | Print an icon's SVG to stdout |
+| `devicons add <slug...>` | Save icons as SVG files |
+| `devicons categories` | List icon categories |
+| `devicons category <slug>` | List the icons in a category |
+| `devicons mcp` | Run the MCP server over stdio |
+
+## Options
+
+| Option | Applies to | Description |
+| --- | --- | --- |
+| `--json` | search, info, categories, category | Print the API response as JSON |
+| `--category <slug>` | search | Only return icons in a category |
+| `--limit <n>` | search (1–100), category (1–200) | Maximum results |
+| `--variant <file>` | svg | Pick a specific variant file, such as `nextjs-icon` |
+| `--mono` | svg, add | Use the monochrome (`currentColor`) variant |
+| `--out <dir>` | add | Output directory, default `./icons` |
+| `--force` | add | Overwrite files that already exist |
+| `--api <url>` | all | API base URL (default `https://devicons.io`, or `DEVICONS_API`) |
+| `-h`, `--help` / `-v`, `--version` | — | Help and version |
+
+## Examples
+
+Download the logos for your stack:
+
+```bash
+npx devicons add nextjs postgresql redis vercel --out ./public/logos
+```
+
+Inline a monochrome SVG that follows your text color:
+
+```bash
+npx devicons svg github --mono > src/icons/github.svg
+```
+
+Find every vector database logo, as JSON:
+
+```bash
+npx devicons search "vector database" --json
+```
+
+List the LLM provider logos:
+
+```bash
+npx devicons category llm --limit 20
+```
+
+## Use in scripts and CI
+
+`--json` prints exactly what the [API](/docs/api/) returns, so you can pipe it into `jq`:
+
+```bash
+npx devicons search docker --json | jq -r '.results[].svg'
+```
+
+Exit codes:
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success |
+| `1` | Usage error: unknown command or flag, missing or invalid slug |
+| `2` | Icon, variant, or category not found |
+| `3` | Network or API error |
+| `4` | Could not write a file |
+
+`add` only writes inside `--out`, skips files that already exist unless you pass `--force`, and prints every file it writes.
+
+<Note variant="tip" title="Install it">
+`npx` downloads the CLI on first use. For repeat use, install it with `npm install -g devicons`. The CLI ships in the same package as the [icon font](/docs/icon-font/), with no extra dependencies.
+</Note>

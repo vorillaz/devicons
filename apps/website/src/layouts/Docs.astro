@@ -12,6 +12,7 @@ import { breadcrumbSchema, techArticleSchema } from '../lib/seo';
 interface Props {
   id: string;
   title: string;
+  seoTitle?: string;
   description?: string;
   badge?: 'new' | 'updated' | 'beta';
   headings: MarkdownHeading[];
@@ -23,6 +24,7 @@ interface Props {
 const {
   id,
   title,
+  seoTitle,
   description,
   badge,
   headings,
@@ -52,7 +54,7 @@ const jsonLd = [
 ---
 
 <PageLayout
-  title={`${title} — Devicons Docs`}
+  title={seoTitle ?? `${title} — Devicons Docs`}
   description={description ?? `${title} — Devicons documentation.`}
   image={`/og/docs/${isIndex ? 'index' : id}.png`}
   ogType="article"

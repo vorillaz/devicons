@@ -1,0 +1,165 @@
+---
+title: "Icons API"
+seoTitle: "Free icons API: 1,300+ SVG developer logos | Devicons"
+description: "Free JSON API for 1,300+ developer icons and SVG logos: search, icon details, categories, and an OpenAPI spec. No API key required."
+order: 2
+category: "AI & Agents"
+categoryOrder: 2
+badge: "new"
+---
+
+import Note from "../../components/docs/note.astro";
+
+The Devicons API is a free, read-only JSON API for developer, brand, framework, and tooling logos. Search icons, read metadata and SVG URLs, and browse categories from any language or tool. It needs no key and allows cross-origin requests from the browser.
+
+**Base URL:** `https://devicons.io/api/v1`
+
+**OpenAPI 3.1 spec:** [`/api/v1/openapi.json`](/api/v1/openapi.json)
+
+## Endpoints
+
+| Method | Path | Returns |
+| --- | --- | --- |
+| GET | `/search?q={query}` | Ranked icons matching a name, alias, tag, or description |
+| GET | `/icons.json` | Every active icon |
+| GET | `/icons/{slug}.json` | One icon with variants and component names |
+| GET | `/categories.json` | Categories with icon counts |
+| GET | `/categories/{slug}.json` | One category and its icons |
+
+Icon SVGs are plain files: `https://devicons.io/devicons/icons/{file}.svg` (color) and `https://devicons.io/devicons/font/{file}.svg` (monochrome, `currentColor`). The API returns these URLs for you.
+
+## Search icons
+
+```bash
+curl "https://devicons.io/api/v1/search?q=postgres&limit=2"
+```
+
+```json
+{
+  "query": "postgres",
+  "count": 2,
+  "results": [
+    {
+      "slug": "postgresql",
+      "name": "PostgreSQL",
+      "tags": ["database", "sql", "rdbms", "open-source"],
+      "popular": true,
+      "url": "https://devicons.io/icons/postgresql/",
+      "svg": "https://devicons.io/devicons/icons/postgresql.svg"
+    },
+    {
+      "slug": "supabase",
+      "name": "Supabase",
+      "tags": ["database", "backend", "postgresql", "open-source", "baas"],
+      "popular": true,
+      "url": "https://devicons.io/icons/supabase/",
+      "svg": "https://devicons.io/devicons/icons/supabase-icon.svg"
+    }
+  ]
+}
+```
+
+| Parameter | Required | Description |
+| --- | --- | --- |
+| `q` | yes | 1–100 characters. Matches names, aliases, tags, and descriptions, with typo tolerance. |
+| `limit` | no | 1–100, default 20. |
+| `category` | no | Only return icons in this category slug, for example `database`. |
+
+Ranking matches the search on devicons.io: exact name, then exact alias, then name prefix, then the closest fuzzy matches.
+
+## Get one icon
+
+```bash
+curl https://devicons.io/api/v1/icons/react.json
+```
+
+```json
+{
+  "slug": "react",
+  "name": "React",
+  "tags": ["javascript", "frontend", "ui-library", "meta"],
+  "popular": true,
+  "url": "https://devicons.io/icons/react/",
+  "svg": "https://devicons.io/devicons/icons/react.svg",
+  "description": "React is a declarative JavaScript library by Meta…",
+  "aliases": ["React.js", "ReactJS"],
+  "website": "https://react.dev/",
+  "license": null,
+  "brandGuidelines": null,
+  "mainColor": null,
+  "badInDark": false,
+  "badInLight": false,
+  "deprecated": false,
+  "recommended": true,
+  "variants": [
+    {
+      "file": "react",
+      "label": "Logo with wordmark",
+      "svg": "https://devicons.io/devicons/icons/react.svg",
+      "mono": "https://devicons.io/devicons/font/react.svg"
+    }
+  ],
+  "components": {
+    "react": { "package": "@dev.icons/react", "mono": "@dev.icons/react/mono", "name": "_React" },
+    "vue": { "package": "@dev.icons/vue", "mono": "@dev.icons/vue/mono", "name": "_React" },
+    "svelte": { "package": "@dev.icons/svelte", "mono": "@dev.icons/svelte/mono", "name": "_React" }
+  }
+}
+```
+
+`badInDark` / `badInLight` flag marks that need a backdrop on dark or light backgrounds. Deprecated icons keep their detail file so old links work, but they're left out of lists and search.
+
+## List and browse categories
+
+```bash
+curl https://devicons.io/api/v1/categories.json
+curl https://devicons.io/api/v1/categories/database.json
+```
+
+Categories are returned largest first. A category's icons are ordered most recognizable first, the same as its [category page](/icons/tag/).
+
+## Use it from code
+
+```ts
+const res = await fetch('https://devicons.io/api/v1/search?q=vercel&limit=1');
+const { results } = await res.json();
+const svg = await fetch(results[0].svg).then(r => r.text());
+```
+
+TypeScript types for every response are in the [OpenAPI spec](/api/v1/openapi.json).
+
+## Errors
+
+Errors use HTTP status codes and a JSON body:
+
+```json
+{ "error": { "code": "not_found", "message": "No such resource. See https://devicons.io/docs/api/" } }
+```
+
+| Status | `code` | When |
+| --- | --- | --- |
+| 400 | `invalid_param` | Missing or invalid `q` or `limit` |
+| 404 | `not_found` | Unknown icon or category slug |
+| 429 | `rate_limited` | Too many requests from one IP; back off and retry |
+
+## Caching and limits
+
+- Icon, category, and OpenAPI files are static and cached at the edge for an hour. Search responses are cached for five minutes.
+- Responses send `Access-Control-Allow-Origin: *`, so you can call the API from a browser.
+- Cache responses on your side, and prefer `icons.json` over thousands of per-icon requests.
+- Requests may be rate limited per IP.
+
+## Fair use
+
+The API is free for tools, plugins, extensions, and agents that help people use these logos. Please don't use it to rebuild a competing icon catalog. The SVG files are MIT licensed; the logos are trademarks of their owners.
+
+<Note variant="tip" title="Building an AI agent?">
+The [MCP server](/docs/mcp/) wraps this API as tools, including SVG markup and framework code, so agents don't need to call it themselves.
+</Note>
+
+## Self-hosting on Cloudflare
+
+The API runs on Cloudflare Pages. The JSON files are prebuilt at deploy time and served as static assets, and only search and MCP run as Pages Functions. If you deploy your own copy, two optional dashboard settings help under load:
+
+- **Rate limiting:** a WAF rate-limiting rule on `/api/*`, for example 60 requests per 10 seconds per IP. This is available on the free plan.
+- **Edge caching for search:** a Cache Rule that marks `/api/v1/search*` as eligible for cache. This lets Cloudflare answer repeat searches without running the Function.
