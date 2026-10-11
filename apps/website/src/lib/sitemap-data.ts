@@ -5,7 +5,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { MIN_INDEXABLE_TAG_COUNT, slugifyTag } from './tags';
+import { MIN_INDEXABLE_TAG_COUNT, canonicalTags, slugifyTag } from './tags';
 
 const SRC_DIR = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const ICONS_DIR = path.join(SRC_DIR, 'content/icons');
@@ -85,7 +85,7 @@ export function loadSitemapData(site: string) {
     if (gated) {
       for (const fw of NOINDEX_FRAMEWORKS) excludedPaths.add(`/icons/${id}/${fw}/`);
     }
-    for (const tag of list(frontmatter, 'tags')) {
+    for (const tag of canonicalTags(list(frontmatter, 'tags'))) {
       tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
     }
   }

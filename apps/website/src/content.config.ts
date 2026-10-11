@@ -1,6 +1,7 @@
 import { glob } from 'astro/loaders';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
+import { canonicalTags } from './lib/tags';
 
 const icons = defineCollection({
   loader: glob({ base: './src/content/icons', pattern: '**/*.{md,mdx}' }),
@@ -19,7 +20,8 @@ const icons = defineCollection({
     //
     popular: z.boolean().optional().default(false),
     recommended: z.boolean().optional().default(false),
-    tags: z.array(z.string()),
+    // Aliases fold into one canonical tag; see TAG_ALIASES.
+    tags: z.array(z.string()).transform(canonicalTags),
     license: z.string().optional(),
     website: z.url().optional(),
     brandGuidelines: z.url().optional(),

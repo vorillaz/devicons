@@ -14,6 +14,8 @@
  * HTML. Paths without a `.md` counterpart fall back to HTML.
  */
 
+import { TAG_ALIASES, slugifyTag } from '../src/lib/tags';
+
 interface MiddlewareContext {
   request: Request;
   next: (input?: Request | string, init?: RequestInit) => Promise<Response>;
@@ -98,16 +100,27 @@ function appendVary(existing: string | null, value: string): string {
  * after a 404, so it never shadows a page that exists:
  *
  *   /icons/<slug>/variants/  →  /icons/<slug>/  (icon is down to one variant)
+ *   /icons/tag/<alias>/      →  /icons/tag/<canonical>/  (see TAG_ALIASES)
  *   /icons/tag/<tag>/        →  /icons/<tag>/   (tag dropped, icon of that name)
  *
  * Generic rules instead of `_redirects` entries because the set changes
  * whenever icon variants or tags are edited.
  */
+const TAG_ALIAS_SLUGS = new Map(
+  Object.entries(TAG_ALIASES).map(([alias, tag]) => [
+    slugifyTag(alias),
+    slugifyTag(tag),
+  ]),
+);
+
 function removedPageFallback(pathname: string): string | null {
   const variants = pathname.match(/^\/icons\/([^/]+)\/variants\/?$/);
   if (variants) return `/icons/${variants[1]}/`;
   const tag = pathname.match(/^\/icons\/tag\/([^/]+)\/?$/);
-  if (tag) return `/icons/${tag[1]}/`;
+  if (tag) {
+    const canonical = TAG_ALIAS_SLUGS.get(tag[1]);
+    return canonical ? `/icons/tag/${canonical}/` : `/icons/${tag[1]}/`;
+  }
   return null;
 }
 
