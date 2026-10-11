@@ -107,7 +107,16 @@ export function registerDeviconsTools(server: McpServer, source: DataSource): vo
           `SVG: ${detail.svg}`,
         ];
         if (usage.install) header.push(`Install: ${usage.install}`);
-        const text = `${header.join('\n')}\n\n${usage.code}`;
+        const variants = detail.variants.map(
+          v => `- ${v.file} (${v.label}): color ${v.svg} | mono ${v.mono}`,
+        );
+        const sections = [
+          header.join('\n'),
+          `Variants:\n${variants.join('\n')}`,
+          usage.code,
+          ...(svg_markup !== undefined ? [`SVG markup:\n${svg_markup}`] : []),
+        ];
+        const text = sections.join('\n\n');
         return ok(text, {
           ...detail,
           usage,
