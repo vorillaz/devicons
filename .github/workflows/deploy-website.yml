@@ -105,10 +105,6 @@ jobs:
       - name: Check agent surfaces
         run: pnpm -F @dev.icons/website check:api
 
-      # The smoke test runs the bundled `devicons` CLI against the deployment.
-      - name: Build devicons CLI
-        run: pnpm -F devicons build:lib
-
       - name: Deploy to Cloudflare Pages
         id: deploy
         uses: cloudflare/wrangler-action@v3
@@ -126,6 +122,10 @@ jobs:
           packageManager: pnpm
           wranglerVersion: '4.83.0'
           command: pages deploy dist --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=${{ steps.target.outputs.branch }}
+
+      # Built after deploy so a CLI build problem can't block the website.
+      - name: Build devicons CLI
+        run: pnpm -F devicons build:lib
 
       # End-to-end check of the deployed API, search, MCP server, and CLI.
       - name: Smoke test agent surfaces
