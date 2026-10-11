@@ -1,5 +1,6 @@
 export default [
   "packages/utils",
+  "packages/agent",
   "packages/codegen",
   "packages/core",
   "packages/font",
