@@ -38,6 +38,7 @@ curl "https://devicons.io/api/v1/search?q=postgres&limit=2"
 {
   "query": "postgres",
   "count": 2,
+  "total": 10,
   "results": [
     {
       "slug": "postgresql",
@@ -62,7 +63,7 @@ curl "https://devicons.io/api/v1/search?q=postgres&limit=2"
 | Parameter | Required | Description |
 | --- | --- | --- |
 | `q` | yes | 1–100 characters. Matches names, aliases, tags, and descriptions, with typo tolerance. |
-| `limit` | no | 1–100, default 20. |
+| `limit` | no | 1–100, default 20. `count` is how many results came back; `total` is how many icons matched before the limit. |
 | `category` | no | Only return icons in this category slug, for example `database`. |
 
 Ranking matches the search on devicons.io: exact name, then exact alias, then name prefix, then the closest fuzzy matches.
@@ -126,7 +127,7 @@ const { results } = await res.json();
 const svg = await fetch(results[0].svg).then(r => r.text());
 ```
 
-TypeScript types for every response are in the [OpenAPI spec](/api/v1/openapi.json).
+Every response is described with JSON Schema in the [OpenAPI spec](/api/v1/openapi.json). Generate TypeScript types from it with a tool such as `openapi-typescript`.
 
 ## Errors
 
@@ -140,11 +141,13 @@ Errors use HTTP status codes and a JSON body:
 | --- | --- | --- |
 | 400 | `invalid_param` | Missing or invalid `q` or `limit` |
 | 404 | `not_found` | Unknown icon or category slug |
-| 429 | `rate_limited` | Too many requests from one IP; back off and retry |
+| 500 | `internal` | Unexpected server error; retry later |
+
+A `429 Too Many Requests` can also come from Cloudflare's rate limiting, without a JSON body. Back off and retry.
 
 ## Caching and limits
 
-- Icon, category, and OpenAPI files are static and cached at the edge for an hour. Search responses are cached for five minutes.
+- Icon, category, and OpenAPI files are static, served from Cloudflare's edge, and cacheable for five minutes (revalidation is cheap). Search responses are cacheable for five minutes too.
 - Responses send `Access-Control-Allow-Origin: *`, so you can call the API from a browser.
 - Cache responses on your side, and prefer `icons.json` over thousands of per-icon requests.
 - Requests may be rate limited per IP.
@@ -157,9 +160,9 @@ The API is free for tools, plugins, extensions, and agents that help people use 
 The [MCP server](/docs/mcp/) wraps this API as tools, including SVG markup and framework code, so agents don't need to call it themselves.
 </Note>
 
-## Self-hosting on Cloudflare
+## How it runs
 
-The API runs on Cloudflare Pages. The JSON files are prebuilt at deploy time and served as static assets, and only search and MCP run as Pages Functions. If you deploy your own copy, two optional dashboard settings help under load:
+The API runs on Cloudflare Pages. The JSON files are prebuilt at deploy time and served as static assets; only search and MCP run as Pages Functions, and search loads a prebuilt index. If you run your own deployment of this site, two optional Cloudflare dashboard settings help under load:
 
 - **Rate limiting:** a WAF rate-limiting rule on `/api/*`, for example 60 requests per 10 seconds per IP. This is available on the free plan.
 - **Edge caching for search:** a Cache Rule that marks `/api/v1/search*` as eligible for cache. This lets Cloudflare answer repeat searches without running the Function.

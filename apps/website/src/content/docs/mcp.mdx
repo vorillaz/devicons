@@ -59,9 +59,13 @@ Add to `.vscode/mcp.json`:
 }
 ```
 
-### Windsurf and Claude Desktop
+### Windsurf
 
-Use the same `mcpServers` entry as Cursor. In Windsurf it goes in `~/.codeium/windsurf/mcp_config.json`; in Claude Desktop, add it as a custom connector with the URL above.
+Open Windsurf's MCP settings, view the raw config, and add the same `mcpServers` entry as Cursor.
+
+### Claude Desktop
+
+Open **Settings → Connectors → Add custom connector** and paste `https://devicons.io/api/mcp`. Claude Desktop's JSON config file only runs local servers; to use it, add the [local server](#run-it-locally) entry there instead.
 
 ### Codex CLI
 
@@ -94,12 +98,12 @@ Set `DEVICONS_API` to point it at another deployment.
 
 | Tool | Inputs | Returns |
 | --- | --- | --- |
-| `search_icons` | `query`, optional `category`, `limit` (1–50, default 10) | Ranked icons with slug, name, tags, page URL, and SVG URL |
+| `search_icons` | `query`, optional `category`, `limit` (1–50, default 10) | Ranked icons with slug, name, tags, page URL, and SVG URL, plus the total match count |
 | `get_icon` | `slug`, optional `framework` (`react`, `vue`, `svelte`, `html`; default `react`), `include_svg` (default `true`) | Metadata, every variant's color and monochrome SVG URL, the primary SVG markup, and an install command plus code |
 | `list_categories` | none | Categories with slug and icon count |
 | `get_category` | `slug`, optional `limit` (1–200, default 50) | The category's icons, most recognizable first |
 
-Every tool is read-only and returns structured content plus a short text summary. Unknown slugs come back as tool errors that tell the model which tool to call instead.
+Every tool is read-only and returns structured content plus the same information as text, so clients that only show text still get the SVG markup and URLs. Slugs are case-insensitive. Unknown slugs come back as tool errors that tell the model which tool to call instead.
 
 ## Example prompts
 

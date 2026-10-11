@@ -81,12 +81,12 @@ Exit codes:
 | Code | Meaning |
 | --- | --- |
 | `0` | Success |
-| `1` | Usage error: unknown command or flag, missing or invalid slug |
+| `1` | Usage error: unknown command or flag, missing or invalid slug, invalid `--api` URL, or Node older than 20 |
 | `2` | Icon, variant, or category not found |
 | `3` | Network or API error |
 | `4` | Could not write a file |
 
-`add` only writes inside `--out`, skips files that already exist unless you pass `--force`, and prints every file it writes.
+Slugs are case-insensitive. `add` only writes inside `--out`, skips files that already exist unless you pass `--force`, and prints every file it writes.
 
 <Note variant="tip" title="Install it">
 `npx` downloads the CLI on first use. For repeat use, install it with `npm install -g devicons`. The CLI ships in the same package as the [icon font](/docs/icon-font/), with no extra dependencies.
