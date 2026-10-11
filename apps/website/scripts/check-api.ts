@@ -161,7 +161,14 @@ function checkDocs() {
 
 function checkHomepage() {
   const html = readText('index.html');
-  for (const needle of [MCP_URL, 'href="/docs/mcp/"', 'href="/docs/api/"', 'href="/docs/cli/"']) {
+  for (const needle of [
+    MCP_URL,
+    'href="/docs/mcp/"',
+    'href="/docs/api/"',
+    'href="/docs/cli/"',
+    'href="/docs/skill/"',
+    'npx skills add https://devicons.io',
+  ]) {
     if (!html.includes(needle)) fail(`index.html: missing ${needle}`);
   }
 }
