@@ -172,15 +172,16 @@ await step('OPTIONS /api/mcp (CORS preflight) → 204', async () => {
     headers: {
       Origin: 'https://example.com',
       'Access-Control-Request-Method': 'POST',
-      'Access-Control-Request-Headers': 'content-type, mcp-protocol-version',
+      // 2026-07-28 clients send mcp-method on every request and mcp-name on tools/call.
+      'Access-Control-Request-Headers': 'content-type, mcp-protocol-version, mcp-method, mcp-name',
     },
   });
   assert(res.status === 204, `expected 204, got ${res.status}`);
   assert(res.headers.get('access-control-allow-origin') === '*', 'missing CORS origin');
-  assert(
-    res.headers.get('access-control-allow-headers')?.toLowerCase().includes('mcp-protocol-version'),
-    'mcp-protocol-version not allowed',
-  );
+  const allowed = res.headers.get('access-control-allow-headers')?.toLowerCase() ?? '';
+  for (const header of ['mcp-protocol-version', 'mcp-method', 'mcp-name']) {
+    assert(allowed.includes(header), `${header} not allowed`);
+  }
 });
 
 await step('CLI: devicons search react --json', async () => {
@@ -191,6 +192,15 @@ await step('CLI: devicons search react --json', async () => {
   );
   const parsed = SearchResultSchema.parse(JSON.parse(stdout));
   assert(parsed.results[0]?.slug === 'react', 'CLI search did not rank react first');
+});
+
+await step('CLI: devicons svg react --mono against this deployment', async () => {
+  const { stdout } = await promisify(execFile)(
+    process.execPath,
+    [CLI, 'svg', 'react', '--mono', '--api', base],
+    { timeout: 30_000 },
+  );
+  assert(stdout.trimStart().startsWith('<svg'), 'CLI svg did not print SVG markup');
 });
 
 const width = Math.max(...results.map(r => r.name.length));

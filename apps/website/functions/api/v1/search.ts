@@ -31,4 +31,5 @@ export const onRequestGet = async ({ request, env }: Context): Promise<Response>
   }
 };
 
-export const onRequestOptions = async (): Promise<Response> => preflight();
+export const onRequestOptions = async ({ request }: Context): Promise<Response> =>
+  preflight(request);

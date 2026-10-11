@@ -28,7 +28,7 @@ const getHandler = (env: Context['env'], origin: string) =>
   ));
 
 export const onRequest = async ({ request, env }: Context): Promise<Response> => {
-  if (request.method === 'OPTIONS') return preflight();
+  if (request.method === 'OPTIONS') return preflight(request);
 
   // People opening the URL in a browser get a pointer to the setup docs
   // instead of a protocol error.

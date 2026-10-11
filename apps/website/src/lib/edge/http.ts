@@ -6,7 +6,7 @@ export const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers':
-    'content-type, accept, authorization, mcp-protocol-version, mcp-session-id, last-event-id',
+    'content-type, accept, authorization, mcp-protocol-version, mcp-session-id, mcp-method, mcp-name, last-event-id',
   'Access-Control-Expose-Headers': 'mcp-session-id, mcp-protocol-version',
   'Access-Control-Max-Age': '86400',
 } as const;
@@ -29,7 +29,17 @@ export const json = (data: unknown, init: { status?: number; headers?: HeadersIn
 export const apiError = (status: number, code: ApiErrorCode, message: string) =>
   json({ error: { code, message } }, { status, headers: { 'Cache-Control': 'no-store' } });
 
-export const preflight = () => new Response(null, { status: 204, headers: CORS_HEADERS });
+// Echo the requested headers so newer MCP clients (e.g. Mcp-Param-* headers)
+// pass preflight without this list having to track the spec.
+export const preflight = (request?: Request) => {
+  const requested = request?.headers.get('access-control-request-headers');
+  return new Response(null, {
+    status: 204,
+    headers: requested
+      ? { ...CORS_HEADERS, 'Access-Control-Allow-Headers': requested }
+      : CORS_HEADERS,
+  });
+};
 
 /** Returns `res` with the API headers added (streaming bodies pass through). */
 export function withApiHeaders(res: Response): Response {
