@@ -6,7 +6,13 @@ import { parseArgs } from 'node:util';
 import type { McpServer } from '@modelcontextprotocol/server';
 import type { Category, IconSummary } from './schema.ts';
 import { createDeviconsServer } from './server.ts';
-import { ApiRequestError, createHttpSource, isValidSlug, type DataSource } from './source.ts';
+import {
+  ApiRequestError,
+  createHttpSource,
+  isValidSlug,
+  normalizeSlug,
+  type DataSource,
+} from './source.ts';
 
 export interface CliIO {
   stdout(s: string): void;
@@ -14,6 +20,8 @@ export interface CliIO {
   /** Overrides the HTTP source (tests). */
   source?: DataSource;
   cwd: string;
+  /** Environment for DEVICONS_API (defaults to process.env). */
+  env?: Record<string, string | undefined>;
   version: string;
   writeFile(p: string, data: string): Promise<void>;
   exists(p: string): Promise<boolean>;
@@ -86,10 +94,11 @@ const parseLimit = (raw: string | undefined, max: number): number | undefined =>
   return n;
 };
 
-const requireSlug = (slug: string | undefined, what = 'slug'): string => {
+const requireSlug = (raw: string | undefined, what = 'slug'): string => {
+  const slug = raw === undefined ? '' : normalizeSlug(raw);
   if (!slug) throw new UsageError(`Missing ${what}`);
   if (!isValidSlug(slug)) {
-    throw new UsageError(`Invalid ${what} "${slug}": use lowercase letters, digits, ".", "_" or "-"`);
+    throw new UsageError(`Invalid ${what} "${raw}": use letters, digits, ".", "_" or "-"`);
   }
   return slug;
 };
@@ -180,7 +189,8 @@ async function runCommand(
         }
         const variant = detail.variants[0];
         const file = path.resolve(outDir, `${slug}.svg`);
-        if (!file.startsWith(outDir + path.sep)) {
+        const inside = path.relative(outDir, file);
+        if (!inside || inside.startsWith('..') || path.isAbsolute(inside)) {
           throw new UsageError(`Refusing to write outside ${outDir}`);
         }
         const rel = path.relative(io.cwd, file) || file;
@@ -255,7 +265,16 @@ export async function run(argv: string[], io: CliIO): Promise<number> {
     return EXIT.usage;
   }
 
-  const source = io.source ?? createHttpSource({ baseUrl: values.api });
+  let source: DataSource;
+  try {
+    const env = io.env ?? (typeof process !== 'undefined' ? process.env : {});
+    source = io.source ?? createHttpSource({ baseUrl: values.api ?? env.DEVICONS_API });
+  } catch (err) {
+    if (!(err instanceof ApiRequestError)) throw err;
+    io.stderr(`devicons: ${err.message}\n`);
+    return EXIT.usage;
+  }
+
   try {
     return await runCommand(command, args, values, io, source);
   } catch (err) {

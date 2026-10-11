@@ -95,6 +95,31 @@ describe('devicons CLI', () => {
     expect(t.files.get(file)).toBe(SVG_MARKUP);
   });
 
+  it('add --out / writes at the filesystem root', async () => {
+    const t = makeIo();
+    expect(await run(['add', 'react', '--out', '/'], t.io)).toBe(0);
+    expect(t.files.get(path.join('/', 'react.svg'))).toBe(SVG_MARKUP);
+  });
+
+  it('info accepts a slug in any case', async () => {
+    const t = makeIo();
+    expect(await run(['info', 'React'], t.io)).toBe(0);
+    expect(t.stdout()).toContain('React (react)');
+  });
+
+  it('an invalid --api URL is a usage error without a stack trace', async () => {
+    const t = makeIo({ source: undefined });
+    expect(await run(['search', 'react', '--api', 'devicons.io'], t.io)).toBe(1);
+    expect(t.stderr()).toContain('Invalid API base URL');
+    expect(t.stderr()).not.toMatch(/\n\s+at /);
+  });
+
+  it('an invalid DEVICONS_API is a usage error', async () => {
+    const t = makeIo({ source: undefined, env: { DEVICONS_API: 'localhost:8799' } });
+    expect(await run(['search', 'react'], t.io)).toBe(1);
+    expect(t.stderr()).toContain('Invalid API base URL');
+  });
+
   it('add rejects path traversal and writes nothing', async () => {
     const t = makeIo();
     expect(await run(['add', '../evil'], t.io)).toBe(1);

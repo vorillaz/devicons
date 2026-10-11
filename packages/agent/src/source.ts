@@ -51,6 +51,34 @@ export const isValidSlug = (slug: string) =>
 const envBaseUrl = () =>
   typeof process !== 'undefined' ? process.env?.DEVICONS_API : undefined;
 
+/** Trims and lowercases a slug as typed by a person or a model. */
+export const normalizeSlug = (slug: string) => slug.trim().toLowerCase();
+
+/** Parses an API base URL, rejecting anything but absolute http(s) URLs. */
+export function parseBaseUrl(raw: string): URL {
+  let url: URL | undefined;
+  try {
+    url = new URL(raw);
+  } catch {
+    // Reported below.
+  }
+  if (!url || (url.protocol !== 'https:' && url.protocol !== 'http:')) {
+    throw new ApiRequestError(
+      'invalid',
+      `Invalid API base URL "${raw}": use an absolute http(s) URL such as ${DEFAULT_BASE_URL}`,
+    );
+  }
+  return url;
+}
+
+// "fetch failed" alone doesn't say why; surface the system error code
+// (ENOTFOUND, ECONNREFUSED, ...) when Node provides one.
+const describeError = (err: unknown) => {
+  if (!(err instanceof Error)) return String(err);
+  const code = (err.cause as { code?: unknown } | undefined)?.code;
+  return typeof code === 'string' ? `${err.message} (${code})` : err.message;
+};
+
 export interface HttpSourceOptions {
   baseUrl?: string;
   fetch?: typeof globalThis.fetch;
@@ -58,11 +86,20 @@ export interface HttpSourceOptions {
 }
 
 export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
-  const base = new URL(opts.baseUrl ?? envBaseUrl() ?? DEFAULT_BASE_URL);
+  const base = parseBaseUrl(opts.baseUrl ?? envBaseUrl() ?? DEFAULT_BASE_URL);
   const doFetch = opts.fetch ?? globalThis.fetch;
   const timeoutMs = opts.timeoutMs ?? DEFAULT_TIMEOUT_MS;
 
-  async function request(url: URL): Promise<Response> {
+  /**
+   * Runs one request, response body included, under a single timeout.
+   * Transport and body-stream failures become `network` errors; errors the
+   * handler throws itself (http, invalid) pass through unchanged.
+   */
+  async function exchange<T>(
+    url: URL,
+    accept: string,
+    handle: (res: Response) => Promise<T>,
+  ): Promise<T> {
     const controller = new AbortController();
     let timer: ReturnType<typeof setTimeout> | undefined;
     const timeout = new Promise<never>((_, reject) => {
@@ -73,15 +110,13 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
         );
       }, timeoutMs);
     });
+    const run = async () =>
+      handle(await doFetch(url, { signal: controller.signal, headers: { Accept: accept } }));
     try {
-      return await Promise.race([
-        doFetch(url, { signal: controller.signal, headers: { Accept: 'application/json' } }),
-        timeout,
-      ]);
+      return await Promise.race([run(), timeout]);
     } catch (err) {
       if (err instanceof ApiRequestError) throw err;
-      const reason = err instanceof Error ? err.message : String(err);
-      throw new ApiRequestError('network', `Could not reach ${url.origin}: ${reason}`);
+      throw new ApiRequestError('network', `Could not reach ${url.origin}: ${describeError(err)}`);
     } finally {
       clearTimeout(timer);
     }
@@ -89,7 +124,7 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
 
   async function errorMessage(res: Response, url: URL): Promise<string> {
     try {
-      const body = ApiErrorSchema.safeParse(await res.json());
+      const body = ApiErrorSchema.safeParse(JSON.parse(await res.text()));
       if (body.success) return body.data.error.message;
     } catch {
       // Not a JSON error body; fall through to the generic message.
@@ -97,24 +132,26 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
     return `${url.pathname} returned HTTP ${res.status}`;
   }
 
-  async function getJson<T>(path: string, schema: z.ZodType<T>): Promise<T | null> {
+  function getJson<T>(path: string, schema: z.ZodType<T>): Promise<T | null> {
     const url = new URL(path, base);
-    const res = await request(url);
-    if (res.status === 404) return null;
-    if (!res.ok) {
-      throw new ApiRequestError('http', await errorMessage(res, url), res.status);
-    }
-    let body: unknown;
-    try {
-      body = await res.json();
-    } catch {
-      throw new ApiRequestError('invalid', `${url.pathname} did not return JSON`);
-    }
-    const parsed = schema.safeParse(body);
-    if (!parsed.success) {
-      throw new ApiRequestError('invalid', `${url.pathname} returned an unexpected shape`);
-    }
-    return parsed.data;
+    return exchange(url, 'application/json', async res => {
+      if (res.status === 404) return null;
+      if (!res.ok) {
+        throw new ApiRequestError('http', await errorMessage(res, url), res.status);
+      }
+      const text = await res.text();
+      let body: unknown;
+      try {
+        body = JSON.parse(text);
+      } catch {
+        throw new ApiRequestError('invalid', `${url.pathname} did not return JSON`);
+      }
+      const parsed = schema.safeParse(body);
+      if (!parsed.success) {
+        throw new ApiRequestError('invalid', `${url.pathname} returned an unexpected shape`);
+      }
+      return parsed.data;
+    });
   }
 
   const required = <T>(value: T | null, path: string): T => {
@@ -130,7 +167,8 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
       const path = `/api/v1/search?${params}`;
       return required(await getJson(path, SearchResultSchema), path);
     },
-    async icon(slug) {
+    async icon(raw) {
+      const slug = normalizeSlug(raw);
       if (!isValidSlug(slug)) return null;
       return getJson(`/api/v1/icons/${slug}.json`, IconDetailSchema);
     },
@@ -138,7 +176,8 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
       const path = '/api/v1/categories.json';
       return required(await getJson(path, CategorySchema.array()), path);
     },
-    async category(slug, limit) {
+    async category(raw, limit) {
+      const slug = normalizeSlug(raw);
       if (!isValidSlug(slug)) return null;
       const detail = await getJson(`/api/v1/categories/${slug}.json`, CategoryDetailSchema);
       if (!detail || limit === undefined) return detail;
@@ -152,11 +191,12 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
       if (!known || !url.pathname.startsWith('/devicons/')) {
         throw new ApiRequestError('invalid', `Refusing to fetch SVG from ${url.href}`);
       }
-      const res = await request(new URL(url.pathname, base));
-      if (!res.ok) {
-        throw new ApiRequestError('http', `${url.pathname} returned HTTP ${res.status}`, res.status);
-      }
-      return res.text();
+      return exchange(new URL(url.pathname, base), 'image/svg+xml', async res => {
+        if (!res.ok) {
+          throw new ApiRequestError('http', `${url.pathname} returned HTTP ${res.status}`, res.status);
+        }
+        return res.text();
+      });
     },
   };
 }
