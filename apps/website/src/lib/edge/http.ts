@@ -26,8 +26,16 @@ export const json = (data: unknown, init: { status?: number; headers?: HeadersIn
     },
   });
 
-export const apiError = (status: number, code: ApiErrorCode, message: string) =>
-  json({ error: { code, message } }, { status, headers: { 'Cache-Control': 'no-store' } });
+export const apiError = (
+  status: number,
+  code: ApiErrorCode,
+  message: string,
+  headers: Record<string, string> = {},
+) =>
+  json(
+    { error: { code, message } },
+    { status, headers: { 'Cache-Control': 'no-store', ...headers } },
+  );
 
 // Echo the requested headers so newer MCP clients (e.g. Mcp-Param-* headers)
 // pass preflight without this list having to track the spec.

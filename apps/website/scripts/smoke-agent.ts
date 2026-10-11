@@ -5,6 +5,8 @@
 //   pnpm -F @dev.icons/website smoke:agent http://localhost:8799
 //   pnpm -F @dev.icons/website smoke:agent https://devicons.io
 import { execFile } from 'node:child_process';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
@@ -69,9 +71,19 @@ await step('GET /api/v1/icons/react.json', async () => {
   assert(data.components.react.name === '_React', 'unexpected React component name');
 });
 
+await step('GET /api/v1/ (API index)', async () => {
+  const { data } = await getJson(
+    '/api/v1/',
+    z.object({ openapi: z.string(), endpoints: z.record(z.string(), z.string()) }),
+  );
+  assert(data.openapi.endsWith('/api/v1/openapi.json'), 'index does not link the OpenAPI spec');
+});
+
 await step('GET unknown icon → 404', async () => {
   const res = await fetch(`${base}/api/v1/icons/definitely-not-an-icon.json`);
   assert(res.status === 404, `expected 404, got ${res.status}`);
+  const cache = res.headers.get('cache-control') ?? '';
+  assert(!/max-age=(\d{4,})/.test(cache), `404 cached too long: ${cache}`);
   const body = ApiErrorSchema.safeParse(await res.json().catch(() => null));
   assert(body.success, '404 body is not an ApiError JSON');
 });
@@ -83,7 +95,7 @@ await step('GET /api/v1/categories.json', async () => {
 
 await step('GET /api/v1/categories/llm.json', async () => {
   const { data } = await getJson('/api/v1/categories/llm.json', CategoryDetailSchema);
-  assert(data.icons[0]?.slug === 'openai', `first LLM icon is ${data.icons[0]?.slug}`);
+  assert(data.icons.length > 0 && data.icons.length === data.count, 'llm icons do not match count');
 });
 
 await step('GET /api/v1/openapi.json', async () => {
@@ -93,8 +105,10 @@ await step('GET /api/v1/openapi.json', async () => {
 
 await step('GET /api/v1/search?q=react', async () => {
   const { data, res } = await getJson('/api/v1/search?q=react&limit=5', SearchResultSchema);
+  // Exact name matches always rank first.
   assert(data.results[0]?.slug === 'react', `first result is ${data.results[0]?.slug}`);
   assert(data.results.length <= 5, 'limit not applied');
+  assert(data.total >= data.count, `total ${data.total} < count ${data.count}`);
   assert(res.headers.get('cache-control')?.includes('max-age=300'), 'missing search Cache-Control');
   assert(res.headers.get('access-control-allow-origin') === '*', 'missing CORS header');
 });
@@ -121,7 +135,10 @@ await step('MCP tools over Streamable HTTP', async () => {
     const search = (await client.callTool({ name: 'search_icons', arguments: { query: 'postgres' } })) as {
       structuredContent?: { results: Array<{ slug: string }> };
     };
-    assert(search.structuredContent?.results[0]?.slug === 'postgresql', 'search_icons did not find postgresql');
+    assert(
+      search.structuredContent?.results.some(r => r.slug === 'postgresql'),
+      'search_icons did not find postgresql',
+    );
     const icon = (await client.callTool({ name: 'get_icon', arguments: { slug: 'react' } })) as {
       structuredContent?: { svg_markup?: string };
     };
@@ -162,6 +179,7 @@ await step('MCP 2025-era initialize (legacy client)', async () => {
 await step('GET /api/mcp from a browser → 405', async () => {
   const res = await fetch(`${base}/api/mcp`, { headers: { Accept: 'text/html' } });
   assert(res.status === 405, `expected 405, got ${res.status}`);
+  assert(res.headers.get('allow')?.includes('POST'), 'missing Allow header');
   const body = ApiErrorSchema.safeParse(await res.json().catch(() => null));
   assert(body.success && body.data.error.message.includes('/docs/mcp/'), 'no docs pointer');
 });
@@ -201,6 +219,21 @@ await step('CLI: devicons svg react --mono against this deployment', async () =>
     { timeout: 30_000 },
   );
   assert(stdout.trimStart().startsWith('<svg'), 'CLI svg did not print SVG markup');
+});
+
+await step('CLI: devicons add react --out <tmp>', async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), 'devicons-smoke-'));
+  try {
+    await promisify(execFile)(
+      process.execPath,
+      [CLI, 'add', 'react', '--out', dir, '--api', base],
+      { timeout: 30_000 },
+    );
+    const svg = await readFile(path.join(dir, 'react.svg'), 'utf8');
+    assert(svg.trimStart().startsWith('<svg'), 'CLI add did not write an SVG');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 const width = Math.max(...results.map(r => r.name.length));

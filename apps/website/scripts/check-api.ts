@@ -72,6 +72,27 @@ function checkStaticApi() {
   const openapi = readJson(path.join(API, 'openapi.json')) as { openapi?: string } | undefined;
   if (openapi && openapi.openapi !== '3.1.0') fail('openapi.json: openapi must be "3.1.0"');
 
+  const react = readJson(path.join(API, 'icons/react.json')) as
+    | { variants?: Array<{ label: string }> }
+    | undefined;
+  if (react?.variants?.length === 1 && react.variants[0].label !== 'Logo') {
+    fail(`icons/react.json: single variant labelled "${react.variants[0].label}", expected "Logo"`);
+  }
+
+  const index = readJson(path.join(API, 'index.html')) as
+    | { openapi?: string; docs?: string; endpoints?: Record<string, string> }
+    | undefined;
+  if (index && (index.openapi !== 'https://devicons.io/api/v1/openapi.json' || !index.endpoints?.search)) {
+    fail('api/v1/index.html: expected an API index with openapi and endpoints');
+  }
+
+  const prebuilt = readJson(path.join(API, 'search-index.json')) as
+    | { version?: number; entries?: unknown[]; index?: unknown }
+    | undefined;
+  if (prebuilt && (prebuilt.version !== 1 || !prebuilt.entries?.length || !prebuilt.index)) {
+    fail('api/v1/search-index.json: expected { version: 1, entries, index }');
+  }
+
   const notFound = path.join(API, '404.html');
   if (!fs.existsSync(notFound)) fail('api/v1/404.html is missing');
   else check(z.object({ error: z.object({ code: z.literal('not_found') }) }), notFound);

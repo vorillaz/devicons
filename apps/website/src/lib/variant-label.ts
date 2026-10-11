@@ -2,6 +2,7 @@
 // logo (mark + wordmark, or the wordmark). Anything else is a named variant.
 // Shared by the variants page and the /api/v1 icon detail.
 export function variantLabel(slug: string, file: string, files: string[]): string {
+  if (files.length === 1) return 'Logo';
   if (/-icon$/.test(file)) return 'Icon (mark only)';
   if (/wordmark|-text$/.test(file)) return 'Wordmark';
   if (file === slug || `${file}-icon` === files.find(v => v.endsWith('-icon'))) {
