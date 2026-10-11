@@ -1,6 +1,6 @@
 // Icon search shared by the website search UI, the /api/v1/search Function,
 // and the hosted MCP server, so every surface ranks results the same way.
-import MiniSearch, { type Options } from 'minisearch';
+import MiniSearch, { type AsPlainObject, type Options } from 'minisearch';
 import type { IconSummary, SearchIndexEntry } from './schema.ts';
 
 export const MAX_QUERY_LENGTH = 100;
@@ -34,7 +34,10 @@ export function buildSearchIndex(
   return index;
 }
 
-export function toSummary(entry: SearchIndexEntry, site: string): IconSummary {
+/** What search needs per icon once the index is built (no description). */
+export type IndexedEntry = Omit<SearchIndexEntry, 'description'>;
+
+export function toSummary(entry: IndexedEntry, site: string): IconSummary {
   return {
     slug: entry.id,
     name: entry.name,
@@ -78,11 +81,11 @@ export function rankByMatch<T extends Pick<SearchIndexEntry, 'id' | 'name' | 'al
 
 export function searchIcons(
   index: MiniSearch<SearchIndexEntry>,
-  entries: Map<string, SearchIndexEntry>,
+  entries: Map<string, IndexedEntry>,
   q: string,
   opts: { limit: number; category?: string; site: string },
-): IconSummary[] {
-  const matches: SearchIndexEntry[] = [];
+): { results: IconSummary[]; total: number } {
+  const matches: IndexedEntry[] = [];
   for (const hit of index.search(q)) {
     const entry = entries.get(String(hit.id));
     if (!entry || entry.deprecated) continue;
@@ -91,9 +94,39 @@ export function searchIcons(
     }
     matches.push(entry);
   }
-  return rankByMatch(matches, q)
+  const results = rankByMatch(matches, q)
     .slice(0, opts.limit)
     .map(entry => toSummary(entry, opts.site));
+  return { results, total: matches.length };
+}
+
+/**
+ * Index built at deploy time and loaded by the search Function. Loading is
+ * ~3x cheaper than re-indexing on every cold start, and ranking is identical
+ * because the same documents and options produce it.
+ */
+export interface PrebuiltSearchIndex {
+  version: 1;
+  entries: IndexedEntry[];
+  index: AsPlainObject;
+}
+
+export function serializeSearchIndex(entries: SearchIndexEntry[]): PrebuiltSearchIndex {
+  return {
+    version: 1,
+    entries: entries.map(({ description: _drop, ...rest }) => rest),
+    index: buildSearchIndex(entries).toJSON(),
+  };
+}
+
+export function loadSearchIndex(prebuilt: PrebuiltSearchIndex): {
+  index: MiniSearch<SearchIndexEntry>;
+  byId: Map<string, IndexedEntry>;
+} {
+  return {
+    index: MiniSearch.loadJS<SearchIndexEntry>(prebuilt.index, SEARCH_OPTIONS),
+    byId: new Map(prebuilt.entries.map(e => [e.id, e])),
+  };
 }
 
 export type ParsedSearchParams =
@@ -126,6 +159,6 @@ export function parseSearchParams(
     }
   }
 
-  const category = params.get('category')?.trim();
+  const category = params.get('category')?.trim().toLowerCase();
   return category ? { ok: true, q, limit, category } : { ok: true, q, limit };
 }

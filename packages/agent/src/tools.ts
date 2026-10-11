@@ -61,6 +61,8 @@ export function registerDeviconsTools(server: McpServer, source: DataSource): vo
           .describe('What to look for, e.g. "react", "postgres", "vector database".'),
         category: z
           .string()
+          .trim()
+          .toLowerCase()
           .optional()
           .describe('Only return icons in this category slug (see list_categories).'),
         limit: z.number().int().min(1).max(50).default(10),
@@ -72,8 +74,12 @@ export function registerDeviconsTools(server: McpServer, source: DataSource): vo
       guarded(async () => {
         const result = await source.search(query, { limit, category });
         const lines = result.results.map(r => `- ${r.name} (${r.slug}): ${r.svg}`);
+        const found =
+          result.total > result.count
+            ? `Showing ${result.count} of ${result.total} icons for "${query}" (raise limit for more):`
+            : `Found ${result.count} icon${result.count === 1 ? '' : 's'} for "${query}":`;
         const text = result.count
-          ? `Found ${result.count} icon${result.count === 1 ? '' : 's'} for "${query}":\n${lines.join('\n')}`
+          ? `${found}\n${lines.join('\n')}`
           : `No icons match "${query}". Try a shorter or broader query.`;
         return ok(text, result);
       }),
@@ -86,7 +92,12 @@ export function registerDeviconsTools(server: McpServer, source: DataSource): vo
       description:
         'Get one icon by slug: metadata, every variant (color and monochrome SVG URLs), the SVG markup of the primary variant, and an install command plus code for React, Vue, Svelte, or plain HTML.',
       inputSchema: z.object({
-        slug: z.string().min(1).describe('Icon slug from search_icons, e.g. "react".'),
+        slug: z
+          .string()
+          .trim()
+          .toLowerCase()
+          .min(1)
+          .describe('Icon slug from search_icons, e.g. "react".'),
         framework: z.enum(FRAMEWORKS).default('react'),
         include_svg: z.boolean().default(true),
       }),
@@ -150,7 +161,12 @@ export function registerDeviconsTools(server: McpServer, source: DataSource): vo
       description:
         'Get the icons in one category, most recognizable first. Use a slug from list_categories.',
       inputSchema: z.object({
-        slug: z.string().min(1).describe('Category slug, e.g. "database" or "llm".'),
+        slug: z
+          .string()
+          .trim()
+          .toLowerCase()
+          .min(1)
+          .describe('Category slug, e.g. "database" or "llm".'),
         limit: z.number().int().min(1).max(200).default(50),
       }),
       outputSchema: CategoryDetailSchema,

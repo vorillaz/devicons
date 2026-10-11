@@ -69,7 +69,10 @@ export const CategoryDetailSchema = CategorySchema.extend({
 
 export const SearchResultSchema = z.object({
   query: z.string(),
+  /** Number of results returned (at most `limit`). */
   count: z.number().int(),
+  /** Number of icons that matched before `limit` was applied. */
+  total: z.number().int(),
   results: z.array(IconSummarySchema),
 });
 

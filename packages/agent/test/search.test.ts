@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildSearchIndex,
+  loadSearchIndex,
   parseSearchParams,
   searchIcons,
+  serializeSearchIndex,
   toSummary,
 } from '../src/search.ts';
 import { ENTRIES, SITE } from './fixtures/data.ts';
@@ -10,7 +12,7 @@ import { ENTRIES, SITE } from './fixtures/data.ts';
 const index = buildSearchIndex(ENTRIES);
 const byId = new Map(ENTRIES.map(e => [e.id, e]));
 const search = (q: string, opts: { limit?: number; category?: string } = {}) =>
-  searchIcons(index, byId, q, { limit: 10, site: SITE, ...opts });
+  searchIcons(index, byId, q, { limit: 10, site: SITE, ...opts }).results;
 
 describe('searchIcons', () => {
   it('ranks the exact name match first', () => {
@@ -29,6 +31,12 @@ describe('searchIcons', () => {
 
   it('respects the limit', () => {
     expect(search('javascript', { limit: 2 })).toHaveLength(2);
+  });
+
+  it('reports the total number of matches beyond the limit', () => {
+    const { results, total } = searchIcons(index, byId, 'javascript', { limit: 2, site: SITE });
+    expect(results).toHaveLength(2);
+    expect(total).toBe(4);
   });
 
   it('matches aliases', () => {
@@ -80,6 +88,15 @@ describe('parseSearchParams', () => {
     expect(parse('q=c%2B%2B')).toEqual({ ok: true, q: 'c++', limit: 20 });
   });
 
+  it('normalizes the category slug', () => {
+    expect(parse('q=react&category=%20Frontend%20')).toEqual({
+      ok: true,
+      q: 'react',
+      limit: 20,
+      category: 'frontend',
+    });
+  });
+
   it('passes through a category slug', () => {
     expect(parse('q=react&category=frontend&limit=5')).toEqual({
       ok: true,
@@ -87,5 +104,22 @@ describe('parseSearchParams', () => {
       limit: 5,
       category: 'frontend',
     });
+  });
+});
+
+describe('prebuilt search index', () => {
+  it('searches exactly like a freshly built index after a JSON round trip', () => {
+    const prebuilt = JSON.parse(JSON.stringify(serializeSearchIndex(ENTRIES)));
+    const loaded = loadSearchIndex(prebuilt);
+    for (const q of ['react', 'javascript', 'preactjs', 'mobile', 'raect']) {
+      expect(searchIcons(loaded.index, loaded.byId, q, { limit: 10, site: SITE })).toEqual(
+        searchIcons(index, byId, q, { limit: 10, site: SITE }),
+      );
+    }
+  });
+
+  it('drops descriptions from the stored entries', () => {
+    const prebuilt = serializeSearchIndex(ENTRIES);
+    expect(prebuilt.entries.every(e => !('description' in e))).toBe(true);
   });
 });

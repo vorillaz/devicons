@@ -56,6 +56,18 @@ describe('devicons MCP server', () => {
     expect(text).toContain('https://devicons.io/devicons/font/react.svg');
   });
 
+  it('get_icon accepts a slug in any case', async () => {
+    const res = await call('get_icon', { slug: ' React ', include_svg: false });
+    expect(res.isError).toBeFalsy();
+    expect(res.structuredContent?.slug).toBe('react');
+  });
+
+  it('search_icons says how many matched when the limit cuts results', async () => {
+    const res = await call('search_icons', { query: 'javascript', limit: 1 });
+    expect(res.structuredContent?.total).toBe(4);
+    expect(res.content[0].text).toContain('1 of 4');
+  });
+
   it('get_icon omits SVG markup when include_svg is false', async () => {
     const res = await call('get_icon', { slug: 'react', include_svg: false });
     expect(res.structuredContent?.svg_markup).toBeUndefined();

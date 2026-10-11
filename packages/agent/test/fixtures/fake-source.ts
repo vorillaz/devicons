@@ -27,15 +27,15 @@ export function fakeSource(): DataSource {
   const byId = new Map(ENTRIES.map(e => [e.id, e]));
   return {
     async search(q, opts = {}) {
-      const results = searchIcons(index, byId, q, {
+      const { results, total } = searchIcons(index, byId, q, {
         limit: opts.limit ?? 20,
         category: opts.category,
         site: SITE,
       });
-      return { query: q, count: results.length, results };
+      return { query: q, count: results.length, total, results };
     },
     async icon(slug) {
-      return DETAILS.get(slug) ?? null;
+      return DETAILS.get(slug.trim().toLowerCase()) ?? null;
     },
     async categories() {
       return CATEGORIES;
