@@ -18,7 +18,8 @@
     "check": "pnpm -F @dev.icons/core check",
     "clean:generated": "node scripts/clean-generated.mjs",
     "release:dry": "DRY_RUN=true node scripts/release-group1.mjs",
-    "release:font:dry": "DRY_RUN=true pnpm exec semantic-release --dry-run --no-ci -e ./packages/font/release.config.cjs"
+    "release:font:dry": "DRY_RUN=true pnpm exec semantic-release --dry-run --no-ci -e ./packages/font/release.config.cjs",
+    "test:release": "node --test scripts/scoped-commits-plugin.test.mjs"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
@@ -28,7 +29,6 @@
     "@semantic-release/release-notes-generator": "^14.0.3",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "semantic-release": "^24.2.0",
-    "semantic-release-monorepo": "^8.0.2",
     "typescript": "^5.7.3",
     "vitest": "3.1.3"
   }

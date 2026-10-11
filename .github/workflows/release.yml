@@ -5,6 +5,10 @@ on:
     branches: [main, canary]
     paths:
       - 'packages/core/export-files/**'
+      # devicons CLI (bundles packages/agent). Each job only releases when
+      # commits touch its own paths (scripts/scoped-commits-plugin.mjs).
+      - 'packages/font/**'
+      - 'packages/agent/**'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -131,11 +135,9 @@ jobs:
       - name: Build devicons font package
         run: pnpm -F devicons build
       - name: Release devicons
-        # IMPORTANT: semantic-release-monorepo reads cwd's package.json to
-        # determine which package to scope commits to. Running from the
-        # repo root scopes to the root `@dev.icons/repo` package which
-        # never matches commitPaths, so no canary releases ever fire.
-        # Running from packages/font scopes correctly to `devicons`.
+        # Run from packages/font: release.config.cjs resolves pkgRoot and
+        # CHANGELOG.md relative to it. Commit scoping is path-based and
+        # independent of cwd (scripts/scoped-commits-plugin.mjs).
         working-directory: packages/font
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
