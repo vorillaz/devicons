@@ -1,226 +1,317 @@
 ---
-// Hero strip: one-line setup for each agent surface (MCP, CLI, API, Skill).
-// CSS-only tabs (radio inputs) so it adds no client island; one small script
-// handles the copy buttons. Every command and docs link is in the HTML.
+// Hero agent setup: mono tab labels in the eyebrow's " / " rhythm, a
+// hairline, and one command line that copies on click. Every command and
+// docs link is in the HTML (inactive ones are visibility: hidden); the
+// script below only switches tabs and copies.
 const TABS = [
+  {
+    id: 'prompt',
+    label: 'Prompt',
+    prefix: '>',
+    command: 'Use devicons.io/skill.md to add the React logo',
+    href: '/docs/skill/',
+    docs: 'Skill',
+  },
   {
     id: 'mcp',
     label: 'MCP',
-    command: 'claude mcp add --transport http devicons https://devicons.io/api/mcp',
+    prefix: '$',
+    command: 'npx add-mcp https://devicons.io/api/mcp -g',
     href: '/docs/mcp/',
-    docs: 'MCP setup',
-  },
-  {
-    id: 'cli',
-    label: 'CLI',
-    command: 'npx devicons search react',
-    href: '/docs/cli/',
-    docs: 'CLI docs',
-  },
-  {
-    id: 'api',
-    label: 'API',
-    command: 'curl "https://devicons.io/api/v1/search?q=react"',
-    href: '/docs/api/',
-    docs: 'API docs',
+    docs: 'MCP',
   },
   {
     id: 'skill',
     label: 'Skill',
-    command: 'Read https://devicons.io/skill.md and follow it to add icons.',
+    prefix: '$',
+    command: 'npx skills add https://devicons.io',
     href: '/docs/skill/',
-    docs: 'Skill docs',
+    docs: 'Skill',
+  },
+  {
+    id: 'cli',
+    label: 'CLI',
+    prefix: '$',
+    command: 'npx devicons add react vue',
+    href: '/docs/cli/',
+    docs: 'CLI',
+  },
+  {
+    id: 'api',
+    label: 'API',
+    prefix: '$',
+    command: 'curl "https://devicons.io/api/v1/search?q=react"',
+    href: '/docs/api/',
+    docs: 'API',
   },
 ] as const;
+
+const state = (i: number) => (i === 0 ? 'true' : 'false');
 ---
 
-<fieldset class="agent-strip">
-  <legend class="agent-strip__legend type-label">
-    <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"></span>
-    Agent-ready
-    <a href="/docs/agents/" class="agent-strip__all">Use with AI agents →</a>
-  </legend>
-
-  {
-    TABS.map((tab, i) => (
-      <input
-        type="radio"
-        name="agent-strip"
-        id={`agent-tab-${tab.id}`}
-        class="agent-strip__radio sr-only"
-        checked={i === 0}
-      />
-    ))
-  }
-
-  <div class="agent-strip__tabs">
-    {TABS.map(tab => <label for={`agent-tab-${tab.id}`}>{tab.label}</label>)}
+<div class="agent-tabs" data-agent-tabs>
+  <div class="agent-tabs__bar">
+    <div
+      class="agent-tabs__list"
+      role="tablist"
+      aria-label="Use Devicons from your coding agent">
+      {
+        TABS.map((tab, i) => (
+          <>
+            {i > 0 && (
+              <span class="agent-tabs__sep" aria-hidden="true">
+                /
+              </span>
+            )}
+            <button
+              type="button"
+              role="tab"
+              id={`agent-tab-${tab.id}`}
+              class="agent-tabs__tab"
+              aria-selected={state(i)}
+              aria-controls={`agent-panel-${tab.id}`}
+              tabindex={i === 0 ? 0 : -1}>
+              {tab.label}
+            </button>
+          </>
+        ))
+      }
+    </div>
   </div>
 
-  <div class="agent-strip__panels">
+  <div class="agent-tabs__stack">
     {
-      TABS.map(tab => (
-        <div class={`agent-strip__panel agent-strip__panel--${tab.id}`}>
-          <code class="agent-strip__command">{tab.command}</code>
-          <button type="button" class="agent-strip__copy" data-copy={tab.command}>
-            Copy
+      TABS.map((tab, i) => (
+        <div
+          role="tabpanel"
+          id={`agent-panel-${tab.id}`}
+          aria-labelledby={`agent-tab-${tab.id}`}
+          data-tab={tab.id}
+          data-active={state(i)}>
+          <button
+            type="button"
+            class="agent-tabs__copy"
+            data-copy={tab.command}
+            aria-label={`Copy ${tab.command}`}>
+            <span class="agent-tabs__prefix" aria-hidden="true">
+              {tab.prefix}
+            </span>
+            <code class="agent-tabs__command">{tab.command}</code>
+            <span class="agent-tabs__copy-label" data-copy-label>
+              Copy
+            </span>
           </button>
-          <a href={tab.href} class="agent-strip__docs" aria-label={tab.docs}>
-            Docs →
-          </a>
         </div>
       ))
     }
   </div>
-</fieldset>
+  <span class="sr-only" aria-live="polite" data-copy-status></span>
+</div>
 
 <style>
-  .agent-strip {
+  .agent-tabs {
     margin-top: var(--space-8);
-    max-width: 38rem;
-    min-width: 0;
-    border: 0;
-    padding: 0;
+    max-width: 34rem;
   }
 
-  .agent-strip__legend {
+  .agent-tabs__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .agent-tabs__list {
     display: flex;
     align-items: center;
+  }
+
+  .agent-tabs__tab,
+  .agent-tabs__docs {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    line-height: var(--leading-flat);
+    color: var(--c-text-muted);
+    transition: color 0.15s ease;
+  }
+
+  .agent-tabs__tab {
+    padding: var(--space-1) 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .agent-tabs__tab:hover {
+    color: var(--c-text);
+  }
+  .agent-tabs__tab[aria-selected='true'] {
+    color: var(--c-accent);
+  }
+
+  .agent-tabs__sep {
+    padding: 0 var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--c-text-muted);
+    opacity: 0.5;
+  }
+
+  /* Keeps the tabs and the docs link on one line on phones. */
+  @media (max-width: 479px) {
+    .agent-tabs__sep {
+      padding: 0 var(--space-1);
+    }
+  }
+
+  .agent-tabs__docs:hover {
+    color: var(--c-accent);
+  }
+
+  /* Docs links and panels each share one grid cell: the box keeps its
+     largest size, so nothing shifts between tabs. Inactive items are
+     visibility: hidden (the `hidden` attribute is display: none under
+     Tailwind), which also drops them from the tab order and the
+     accessibility tree. */
+  .agent-tabs__stack {
+    display: grid;
+  }
+  .agent-tabs__stack > * {
+    grid-area: 1 / 1;
+  }
+  .agent-tabs__stack > [data-active='false'] {
+    visibility: hidden;
+  }
+  .agent-tabs__stack > .agent-tabs__docs {
+    justify-self: end;
+  }
+
+  .agent-tabs__copy {
+    display: flex;
+    align-items: baseline;
     gap: var(--space-3);
     width: 100%;
-    margin-bottom: var(--space-3);
+    padding: var(--space-3) 0;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: var(--leading-snug);
   }
-  .agent-strip__all {
-    margin-left: auto;
-    color: var(--c-text-muted);
-    text-transform: none;
-    letter-spacing: normal;
-  }
-  .agent-strip__all:hover {
+
+  .agent-tabs__prefix {
     color: var(--c-accent);
   }
 
-  .agent-strip__tabs {
-    display: flex;
-    border: 1px solid var(--c-border);
-    border-bottom: 0;
-    width: fit-content;
-  }
-  .agent-strip__tabs label {
-    padding: var(--space-2) var(--space-4);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--c-text-muted);
-    cursor: pointer;
-    border-right: 1px solid var(--c-border);
-    transition:
-      color 120ms ease,
-      background-color 120ms ease;
-  }
-  .agent-strip__tabs label:last-child {
-    border-right: 0;
-  }
-  .agent-strip__tabs label:hover {
-    color: var(--c-text);
-  }
-
-  .agent-strip__panel {
-    display: none;
-    align-items: stretch;
-    border: 1px solid var(--c-border);
-    background: var(--c-surface);
-    min-width: 0;
-  }
-
-  .agent-strip__command {
+  .agent-tabs__command {
     flex: 1;
     min-width: 0;
-    padding: var(--space-3) var(--space-4);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    line-height: 1.6;
-    white-space: nowrap;
-    overflow-x: auto;
-    scrollbar-width: thin;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    color: var(--c-text-secondary);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    transition: color 0.15s ease;
+  }
+
+  .agent-tabs__copy-label {
+    flex-shrink: 0;
+    font-size: var(--text-micro);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    transition: color 0.15s ease;
+  }
+
+  .agent-tabs__copy:hover .agent-tabs__command,
+  .agent-tabs__copy:focus-visible .agent-tabs__command {
     color: var(--c-text);
   }
-  .agent-strip__command::before {
-    content: '$ ';
+  .agent-tabs__copy:hover .agent-tabs__copy-label,
+  .agent-tabs__copy[data-state='copied'] .agent-tabs__copy-label {
     color: var(--c-accent);
-  }
-  .agent-strip__panel--skill .agent-strip__command::before {
-    content: '> ';
-  }
-
-  .agent-strip__copy,
-  .agent-strip__docs {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 var(--space-3);
-    border-left: 1px solid var(--c-border);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--c-text-muted);
-    transition: color 120ms ease;
-  }
-  .agent-strip__copy:hover,
-  .agent-strip__docs:hover {
-    color: var(--c-accent);
-  }
-  .agent-strip__copy[data-copied] {
-    color: var(--c-accent);
-  }
-
-  /* Tab state: the checked radio shows its panel and highlights its label. */
-  #agent-tab-mcp:checked ~ .agent-strip__panels .agent-strip__panel--mcp,
-  #agent-tab-cli:checked ~ .agent-strip__panels .agent-strip__panel--cli,
-  #agent-tab-api:checked ~ .agent-strip__panels .agent-strip__panel--api,
-  #agent-tab-skill:checked ~ .agent-strip__panels .agent-strip__panel--skill {
-    display: flex;
-  }
-  #agent-tab-mcp:checked ~ .agent-strip__tabs label[for='agent-tab-mcp'],
-  #agent-tab-cli:checked ~ .agent-strip__tabs label[for='agent-tab-cli'],
-  #agent-tab-api:checked ~ .agent-strip__tabs label[for='agent-tab-api'],
-  #agent-tab-skill:checked ~ .agent-strip__tabs label[for='agent-tab-skill'] {
-    color: var(--c-accent-fg);
-    background: var(--c-accent);
-  }
-  #agent-tab-mcp:focus-visible ~ .agent-strip__tabs label[for='agent-tab-mcp'],
-  #agent-tab-cli:focus-visible ~ .agent-strip__tabs label[for='agent-tab-cli'],
-  #agent-tab-api:focus-visible ~ .agent-strip__tabs label[for='agent-tab-api'],
-  #agent-tab-skill:focus-visible ~ .agent-strip__tabs label[for='agent-tab-skill'] {
-    outline: 2px solid var(--c-accent);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: 480px) {
-    .agent-strip__docs {
-      display: none;
-    }
   }
 </style>
 
 <script>
+  // Delegated on document so it survives Astro view transitions without
+  // re-binding. Tabs follow the WAI-ARIA tabs pattern (arrows, Home, End).
+  const select = (tab: HTMLElement, focus = false) => {
+    const root = tab.closest<HTMLElement>('[data-agent-tabs]');
+    if (!root) return;
+    const id = tab.getAttribute('aria-controls')?.replace('agent-panel-', '');
+    for (const t of root.querySelectorAll<HTMLElement>('[role="tab"]')) {
+      const active = t === tab;
+      t.setAttribute('aria-selected', String(active));
+      t.tabIndex = active ? 0 : -1;
+    }
+    for (const el of root.querySelectorAll<HTMLElement>('[data-tab]')) {
+      el.dataset.active = String(el.dataset.tab === id);
+    }
+    if (focus) tab.focus();
+  };
+
   document.addEventListener('click', async event => {
-    const button = (event.target as Element | null)?.closest<HTMLButtonElement>('[data-copy]');
-    if (!button?.closest('.agent-strip')) return;
+    const target = event.target as Element | null;
+    const tab = target?.closest<HTMLElement>('[data-agent-tabs] [role="tab"]');
+    if (tab) {
+      select(tab);
+      return;
+    }
+
+    const button = target?.closest<HTMLButtonElement>(
+      '[data-agent-tabs] [data-copy]',
+    );
+    if (!button) return;
+    const label = button.querySelector<HTMLElement>('[data-copy-label]');
+    const status = button
+      .closest('[data-agent-tabs]')
+      ?.querySelector<HTMLElement>('[data-copy-status]');
     try {
       await navigator.clipboard.writeText(button.dataset.copy ?? '');
-      button.textContent = 'Copied';
-      button.dataset.copied = '';
+      button.dataset.state = 'copied';
+      if (label) label.textContent = 'Copied';
+      if (status) status.textContent = 'Copied to clipboard';
       setTimeout(() => {
-        button.textContent = 'Copy';
-        delete button.dataset.copied;
+        delete button.dataset.state;
+        if (label) label.textContent = 'Copy';
+        if (status) status.textContent = '';
       }, 1500);
     } catch {
-      // Clipboard unavailable (insecure context or denied): leave the button as is.
+      // Clipboard unavailable (insecure context or denied): the text is
+      // still on screen to select by hand.
     }
+  });
+
+  document.addEventListener('keydown', event => {
+    const tab = (event.target as Element | null)?.closest<HTMLElement>(
+      '[data-agent-tabs] [role="tab"]',
+    );
+    if (!tab) return;
+    const tabs = [
+      ...(tab.parentElement?.querySelectorAll<HTMLElement>('[role="tab"]') ??
+        []),
+    ];
+    const i = tabs.indexOf(tab);
+    const next = {
+      ArrowRight: tabs[(i + 1) % tabs.length],
+      ArrowLeft: tabs[(i - 1 + tabs.length) % tabs.length],
+      Home: tabs[0],
+      End: tabs[tabs.length - 1],
+    }[event.key];
+    if (!next) return;
+    event.preventDefault();
+    select(next, true);
   });
 </script>

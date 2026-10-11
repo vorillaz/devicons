@@ -103,7 +103,7 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
   <GeometricGrid />
 
   <div
-    class="hero-content relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-6 max-w-[1400px] mx-auto w-full">
+    class="hero-content relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-6 py-10 sm:py-12 max-w-[1400px] mx-auto w-full">
     <div
       class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12">
       <div class="flex-1 min-w-0">
@@ -112,14 +112,17 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
           ></span>
           {iconCount.toLocaleString('en-US')} Icons / MIT / Open Source
         </p>
-        <h1 class="hero-title">Developer icons & logos for people who ship.</h1>
+        <h1 class="hero-title">
+          Developer icons & logos for you and your agents.
+        </h1>
         <p class="hero-lead type-body-lg mt-5 sm:mt-6">
-          Free SVGs plus React, Vue, and Svelte components — MIT licensed.
-          Agent-ready with an MCP server, CLI, and API.
+          Grab any logo as a free SVG or a React, Vue, or Svelte component. Or
+          let your coding agent find it and add it for you.
         </p>
+        <AgentStrip />
         <div
           class="hero-actions flex flex-wrap items-center gap-3 mt-6 sm:mt-8">
-          <a href="#icons" class="btn btn--primary btn--mono"> Browse Icons </a>
+          <a href="#icons" class="btn btn--primary btn--mono">Browse</a>
           <a
             href="/icons/popular/"
             class="btn btn--mono"
@@ -127,7 +130,6 @@ const initialDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(initialSvgD
             Popular
           </a>
         </div>
-        <AgentStrip />
       </div>
 
       <div
