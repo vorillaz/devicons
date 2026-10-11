@@ -145,11 +145,14 @@ export function createHttpSource(opts: HttpSourceOptions = {}): DataSource {
       return { ...detail, icons: detail.icons.slice(0, limit) };
     },
     async svg(href) {
+      // Payloads always carry production URLs; fetch the same path from the
+      // configured base so --api / DEVICONS_API work end to end.
       const url = new URL(href, base);
-      if (url.origin !== base.origin) {
-        throw new ApiRequestError('invalid', `Refusing to fetch SVG from ${url.origin}`);
+      const known = url.origin === base.origin || url.origin === new URL(DEFAULT_BASE_URL).origin;
+      if (!known || !url.pathname.startsWith('/devicons/')) {
+        throw new ApiRequestError('invalid', `Refusing to fetch SVG from ${url.href}`);
       }
-      const res = await request(url);
+      const res = await request(new URL(url.pathname, base));
       if (!res.ok) {
         throw new ApiRequestError('http', `${url.pathname} returned HTTP ${res.status}`, res.status);
       }

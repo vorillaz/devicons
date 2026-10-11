@@ -105,6 +105,26 @@ describe('createHttpSource', () => {
     ).resolves.toBe('<svg></svg>');
   });
 
+  it('serves production SVG URLs from a custom API base', async () => {
+    const fetch = vi.fn(async (_input: RequestInfo | URL) => new Response('<svg></svg>'));
+    const source = createHttpSource({
+      baseUrl: 'http://localhost:8799',
+      fetch: fetch as unknown as typeof globalThis.fetch,
+    });
+    await expect(
+      source.svg('https://devicons.io/devicons/icons/react.svg'),
+    ).resolves.toBe('<svg></svg>');
+    expect(String(fetch.mock.calls[0][0])).toBe('http://localhost:8799/devicons/icons/react.svg');
+  });
+
+  it('refuses non-SVG paths even on the production origin', async () => {
+    const { source, fetch } = sourceWith(async () => new Response('secret'));
+    const err = await source.svg('https://devicons.io/api/v1/icons.json').catch(e => e);
+    expect(err).toBeInstanceOf(ApiRequestError);
+    expect(err.kind).toBe('invalid');
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
   it('refuses SVG URLs on another origin', async () => {
     const { source, fetch } = sourceWith(async () => new Response('<svg></svg>'));
     const err = await source.svg('https://evil.test/x.svg').catch(e => e);
