@@ -22,6 +22,16 @@ The Devicons MCP server gives AI agents direct access to 1,300+ developer, brand
 
 ## Connect your client
 
+### Any agent, one command
+
+[add-mcp](https://github.com/neon-solutions/add-mcp) detects the coding agents on your machine (Claude Code, Cursor, VS Code, Codex, and more) and adds the server to each one you pick:
+
+```bash
+npx add-mcp https://devicons.io/api/mcp -g
+```
+
+`-g` installs it for every project. Leave it off to write the config into the current project instead. To set up one client by hand, use its section below.
+
 ### Claude Code
 
 ```bash

@@ -45,9 +45,19 @@ The index lists each skill with its type, description, artifact URL, and SHA-256
 
 `/skill.md` returns the same bytes as the canonical path. For a site-wide overview, see [`/llms.txt`](/llms.txt) and [`/llms-full.txt`](/llms-full.txt).
 
+## Install with the skills CLI
+
+The [skills](https://github.com/vercel-labs/skills) CLI finds the skill through the discovery endpoint and installs it for the agents you pick:
+
+```bash
+npx skills add https://devicons.io
+```
+
+Add `-g` to install it for every project.
+
 ## Install locally
 
-If your agent loads skills from a local directory:
+To copy the files by hand, for an agent that loads skills from a local directory:
 
 ```bash
 SKILL_DIR=~/.claude/skills/devicons
