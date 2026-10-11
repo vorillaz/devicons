@@ -93,6 +93,37 @@ function appendVary(existing: string | null, value: string): string {
   return `${existing}, ${value}`;
 }
 
+/**
+ * Removed pages whose content still lives on a parent page. Only consulted
+ * after a 404, so it never shadows a page that exists:
+ *
+ *   /icons/<slug>/variants/  →  /icons/<slug>/  (icon is down to one variant)
+ *   /icons/tag/<tag>/        →  /icons/<tag>/   (tag dropped, icon of that name)
+ *
+ * Generic rules instead of `_redirects` entries because the set changes
+ * whenever icon variants or tags are edited.
+ */
+function removedPageFallback(pathname: string): string | null {
+  const variants = pathname.match(/^\/icons\/([^/]+)\/variants\/?$/);
+  if (variants) return `/icons/${variants[1]}/`;
+  const tag = pathname.match(/^\/icons\/tag\/([^/]+)\/?$/);
+  if (tag) return `/icons/${tag[1]}/`;
+  return null;
+}
+
+async function redirectRemovedPage(
+  request: Request,
+  next: MiddlewareContext['next'],
+): Promise<Response | null> {
+  const target = removedPageFallback(new URL(request.url).pathname);
+  if (!target) return null;
+  const targetUrl = new URL(target, request.url).toString();
+  const check = await next(
+    new Request(targetUrl, { method: 'HEAD', headers: request.headers }),
+  );
+  return check.ok ? Response.redirect(targetUrl, 301) : null;
+}
+
 export const onRequest = async (
   context: MiddlewareContext,
 ): Promise<Response> => {
@@ -109,6 +140,10 @@ export const onRequest = async (
     // Still advertise that we can vary on Accept so intermediaries cache
     // HTML and MD separately once we do flip.
     const res = await next();
+    if (res.status === 404) {
+      const redirect = await redirectRemovedPage(request, next);
+      if (redirect) return redirect;
+    }
     const headers = new Headers(res.headers);
     headers.set('Vary', appendVary(headers.get('Vary'), 'Accept'));
     return new Response(res.body, {
