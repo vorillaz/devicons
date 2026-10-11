@@ -142,6 +142,9 @@ export const onRequest = async (
 ): Promise<Response> => {
   const { request, next } = context;
 
+  // The JSON API and MCP endpoint handle their own content types and errors.
+  if (new URL(request.url).pathname.startsWith('/api/')) return next();
+
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     return next();
   }
