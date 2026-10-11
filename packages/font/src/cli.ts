@@ -2,16 +2,21 @@
 // @dev.icons/agent, the MCP SDK, and zod, so the package gains no runtime
 // dependencies.
 import fs from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
 import { run } from '@dev.icons/agent/cli';
 
-declare const __DEVICONS_VERSION__: string;
+// Read at runtime: the release workflow builds before semantic-release stamps
+// the new version into package.json, so a build-time constant would be stale.
+const { version } = createRequire(import.meta.url)('../package.json') as {
+  version: string;
+};
 
 const code = await run(process.argv.slice(2), {
   stdout: s => process.stdout.write(s),
   stderr: s => process.stderr.write(s),
   cwd: process.cwd(),
-  version: __DEVICONS_VERSION__,
+  version,
   writeFile: (p, data) => fs.writeFile(p, data, 'utf8'),
   exists: p =>
     fs.access(p).then(
