@@ -43,7 +43,7 @@ const docs = defineCollection({
     order: z.number().default(0),
     category: z.string().default('Getting Started'),
     categoryOrder: z.number().default(0),
-    badge: z.enum(['new', 'updated', 'beta']).optional(),
+    badge: z.enum(['new', 'updated', 'beta', 'deprecated', 'hot']).optional(),
   }),
 });
 
