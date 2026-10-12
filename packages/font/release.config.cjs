@@ -48,7 +48,15 @@ module.exports = {
   tagFormat: 'devicons-v${version}',
   branches: ['main', { name: 'canary', prerelease: 'canary' }],
   plugins: [
-    [SCOPED_COMMITS, { paths, preset: 'conventionalcommits' }],
+    [
+      SCOPED_COMMITS,
+      {
+        paths,
+        preset: 'conventionalcommits',
+        // Keeps CHANGELOG.md headings as `## [devicons-vX.Y.Z](...)`.
+        tagVersionInNotes: true,
+      },
+    ],
     ...(isCanary
       ? []
       : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),
