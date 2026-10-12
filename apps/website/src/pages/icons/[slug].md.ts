@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { getIcons } from '../../lib/icons-query';
 import { markdownResponse } from '../../lib/agent-md/response';
 import { buildIconMarkdown } from '../../lib/agent-md/icon-md';
 
@@ -16,7 +17,7 @@ interface PageProps {
 }
 
 export async function getStaticPaths() {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const active: IconEntry[] = icons.filter(i => !i.data.deprecated);
   const sorted: IconEntry[] = [...active].sort((a, b) =>
     a.data.name.localeCompare(b.data.name, undefined, { sensitivity: 'base' }),

@@ -1,9 +1,10 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
+import { getIcons } from "../../lib/icons-query";
 import Icon from "../../layouts/Icon.astro";
 
 export async function getStaticPaths() {
-  const icons = await getCollection("icons");
+  const icons = await getIcons();
   const sorted = [...icons].sort((a, b) =>
     a.data.name.localeCompare(b.data.name, undefined, { sensitivity: "base" }),
   );

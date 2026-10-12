@@ -19,22 +19,27 @@
 //   A new base (feat/fix on canary that bumps X.Y.Z) resets N to 1, which
 //   is required for strict semver ordering.
 //
+// Commit scope:
+//   Only commits touching GROUP1_PATHS (scripts/release-scopes.cjs) count
+//   towards the bump, the notes and the GitHub PR comments — website or font
+//   only commits never bump the @dev.icons packages.
+//
 // Lifecycle:
-//   1. scoped-commits-plugin    → keep commits touching SCOPED_PATHS, then
-//                                 compute the bump (commit-analyzer) and
-//   2.                            render release notes (release-notes-generator)
-//   3. changelog (main only)    → write CHANGELOG.md
-//   4. npm-publish-plugin       → stamp package.json, npm publish all 4
-//   5. git (main only)          → commit CHANGELOG + 4 package.json files
-//   6. github                   → create GitHub release
+//   1. scoped-commits           → compute version bump + render release notes
+//      release-plan             → record the version for the workflow's plan step
+//   2. changelog (main only)    → write CHANGELOG.md
+//   3. npm-publish-plugin       → stamp package.json, verify entry points,
+//                                 npm publish all 4 (in parallel)
+//   4. git (main only)          → commit CHANGELOG + 4 package.json files
+//   5. scoped-github            → create GitHub release
 //
-//   The npm-publish-plugin lives at scripts/npm-publish-plugin.cjs and is
-//   loaded by path; the font release uses the same plugin.
+//   The plugins live in scripts/ and are loaded by absolute path (shared with
+//   the font release in packages/font/release.config.cjs).
 //
-//   semantic-release creates the git tag BEFORE publish plugins run. If the
-//   npm publish step fails partway through, the logged error lists which
-//   packages already hit npm so manual recovery of the rest is straightforward;
-//   a retry of the workflow no-ops because the tag already exists.
+//   semantic-release creates the git tag BEFORE publish plugins run, so a
+//   plain workflow retry no-ops. The publish plugin skips versions npm
+//   already has, so a failed publish is recovered by re-running the Release
+//   workflow manually with `republish_tag` set (see release.yml).
 //
 // DRY_RUN=true makes the whole thing a no-op: semantic-release dryRun and
 // `npm publish --dry-run` for each package. Package.json edits are reverted
@@ -47,27 +52,17 @@ import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import semanticRelease from 'semantic-release';
+import scopes from './release-scopes.cjs';
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const PACKAGES = ['core', 'react', 'vue', 'svelte'];
-// Absolute paths — matches the font config, so plugins resolve the same way
-// regardless of cwd.
-const PUBLISH_PLUGIN = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  './npm-publish-plugin.cjs',
-);
-// Only commits touching the four packages (or the codegen/utils that
-// generate react/vue/svelte) count toward this release. Website, CLI, and
-// agent commits are released elsewhere or not at all.
-const SCOPED_COMMITS_PLUGIN = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  './scoped-commits-plugin.mjs',
-);
-const SCOPED_PATHS = [
-  ...PACKAGES.map((p) => `packages/${p}/`),
-  'packages/codegen/',
-  'packages/utils/',
-];
+// Absolute paths — matches the font config, which runs from packages/font.
+const SCRIPTS = path.dirname(fileURLToPath(import.meta.url));
+const PUBLISH_PLUGIN = path.join(SCRIPTS, 'npm-publish-plugin.cjs');
+const SCOPED_COMMITS = path.join(SCRIPTS, 'scoped-commits.mjs');
+const SCOPED_GITHUB = path.join(SCRIPTS, 'scoped-github.mjs');
+const RELEASE_PLAN = path.join(SCRIPTS, 'release-plan-plugin.cjs');
+const paths = scopes.GROUP1_PATHS;
 
 const detectBranch = () => {
   if (process.env.GITHUB_REF_NAME) return process.env.GITHUB_REF_NAME;
@@ -82,7 +77,8 @@ const branch = detectBranch();
 const isCanary = branch === 'canary';
 
 const plugins = [
-  [SCOPED_COMMITS_PLUGIN, { paths: SCOPED_PATHS, preset: 'conventionalcommits' }],
+  [SCOPED_COMMITS, { paths, preset: 'conventionalcommits' }],
+  [RELEASE_PLAN, { key: 'group1' }],
   ...(isCanary
     ? []
     : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),
@@ -102,7 +98,7 @@ const plugins = [
           },
         ],
       ]),
-  '@semantic-release/github',
+  [SCOPED_GITHUB, { paths }],
 ];
 
 console.log(

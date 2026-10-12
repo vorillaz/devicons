@@ -3,24 +3,26 @@ name: Release
 on:
   push:
     branches: [main, canary]
+    # Anything that can change a published package. Each release group only
+    # counts commits inside its own paths (scripts/release-scopes.cjs), so a
+    # run with nothing relevant is a cheap no-op.
     paths:
-      - 'packages/core/export-files/**'
-      # devicons CLI (bundles packages/agent). Each job only releases when
-      # commits touch its own paths (scripts/scoped-commits-plugin.mjs).
-      - 'packages/font/**'
-      - 'packages/agent/**'
+      - 'packages/**'
   workflow_dispatch:
     inputs:
       dry_run:
         description: 'Dry-run mode (no publish, no tags)'
         type: boolean
         default: false
+      republish_tag:
+        description: >-
+          Recovery: publish whatever is missing on npm for an existing tag
+          (e.g. v1.3.0 or devicons-v2.2.0-canary.1). Leave empty for a normal release.
+        type: string
+        default: ''
 
 permissions:
-  contents: write       # commit CHANGELOG, push tags, create releases
-  issues: write         # semantic-release issue comments
-  pull-requests: write  # semantic-release PR comments
-  id-token: write       # npm provenance via OIDC
+  contents: read
 
 # Serialize release runs per-branch. If two PRs merge to main back-to-back,
 # we queue rather than race — two parallel runs would both try to commit the
@@ -30,18 +32,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  group1:
-    name: Release Group 1 (core/react/vue/svelte)
+  release:
+    name: Release @dev.icons/* and devicons
+    if: ${{ !inputs.republish_tag }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write       # commit CHANGELOG, push tags, create releases
+      issues: write         # semantic-release issue comments
+      pull-requests: write  # semantic-release PR comments
+      id-token: write       # npm Trusted Publisher (OIDC) + provenance
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           persist-credentials: true
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.10.0
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: pnpm
@@ -50,94 +57,71 @@ jobs:
           # NODE_AUTH_TOKEN that expands to an empty token, which npm
           # treats as explicit auth and short-circuits the Trusted
           # Publisher OIDC handshake — producing a 404 on publish.
-      - name: Verify Trusted Publisher prerequisites
-        # The publish plugin uses `npx -y npm@^11.5.1` so we don't depend
-        # on the ambient npm version. This step logs what we actually
-        # have, and whether GitHub injected the OIDC env vars (required
-        # by `permissions: id-token: write`).
-        run: |
-          echo "node: $(node --version)"
-          echo "system npm: $(npm --version)"
-          echo "publish-time npm (via npx): $(npx -y 'npm@^11.5.1' --version)"
-          echo -n "ACTIONS_ID_TOKEN_REQUEST_URL present: "
-          [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] && echo yes || echo NO
-          echo -n "ACTIONS_ID_TOKEN_REQUEST_TOKEN present: "
-          [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] && echo yes || echo NO
-          if [ -f "$HOME/.npmrc" ]; then
-            echo "--- ~/.npmrc (tokens redacted) ---"
-            sed 's/\(_authToken=\).*/\1<redacted>/' "$HOME/.npmrc"
-          else
-            echo "~/.npmrc does not exist (expected — TP OIDC handles auth)"
-          fi
       - run: pnpm install --frozen-lockfile
-      - name: Build core (sprite + font assets + library)
-        run: pnpm -F @dev.icons/core build
-      - name: Build react/vue/svelte
+
+      # Dry-run both groups first: semantic-release needs no build for that.
+      # scripts/release-plan-plugin.cjs writes `group1=<version>` and
+      # `font=<version>` (empty = nothing to release), so a push that
+      # releases nothing skips the build, and a devicons-only release skips
+      # the react/vue/svelte bundles.
+      - name: Plan releases
+        id: plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: 'true'
         run: |
-          pnpm -F @dev.icons/react build
-          pnpm -F @dev.icons/vue build
-          pnpm -F @dev.icons/svelte build
-      - name: Release Group 1
+          RELEASE_PLAN_FILE="$GITHUB_OUTPUT" node scripts/release-group1.mjs
+          cd packages/font && RELEASE_PLAN_FILE="$GITHUB_OUTPUT" pnpm exec semantic-release --dry-run
+
+      - name: Install npm for Trusted Publisher
+        # OIDC publishing needs npm ≥ 11.5.1; Node 22 bundles 10.x. Installed
+        # once here so the publish plugin can run all packages in parallel.
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        run: |
+          npm install -g 'npm@^11.5.1'
+          echo "node $(node --version), npm $(npm --version)"
+          [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] || { echo "::error::OIDC token env missing — is id-token: write granted?"; exit 1; }
+
+      # One build feeds both release groups: build-all emits the sprite, font
+      # assets, framework sources, the devicons font package and core's lib.
+      # A devicons-only release skips the framework sources and bundles.
+      - name: Build core + devicons font package
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        run: pnpm -F @dev.icons/core build ${{ !steps.plan.outputs.group1 && '-- --no-frameworks' || '' }}
+      - name: Bundle react/vue/svelte
+        if: steps.plan.outputs.group1
+        run: pnpm --parallel -F @dev.icons/react -F @dev.icons/vue -F @dev.icons/svelte bundle
+      - name: Check codepoints lock is committed
+        # The font build pins codepoints for new glyphs. If that changed the
+        # lock here, the release would ship glyph codepoints that aren't in git.
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        run: |
+          git diff --exit-code packages/font/codepoints.lock.json || {
+            echo "::error file=packages/font/codepoints.lock.json::codepoints.lock.json is out of date — run 'pnpm build:font' and commit the lock."
+            exit 1
+          }
+      - name: Test
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        env:
+          GROUP1: ${{ steps.plan.outputs.group1 }}
+        run: |
+          if [ -n "$GROUP1" ]; then
+            pnpm test
+          else
+            pnpm -F @dev.icons/core -F devicons -F @dev.icons/agent test
+          fi
+
+      - name: Release @dev.icons/{core,react,vue,svelte}
+        if: steps.plan.outputs.group1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/release-group1.mjs
-
-  font:
-    name: Release devicons (font)
-    # Serialize after group1 so both jobs don't race on `@semantic-release/git`
-    # pushing to main. Without this, whichever finishes second sees
-    # "local branch main is behind the remote" and bails.
-    needs: group1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: true
-          # group1 just pushed its release commit to main; make sure we
-          # check out the latest tip so semantic-release sees it.
-          ref: ${{ github.ref }}
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.10.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-          # registry-url intentionally omitted. setup-node's generated
-          # ~/.npmrc pins `_authToken=${NODE_AUTH_TOKEN}` and with no
-          # NODE_AUTH_TOKEN that expands to an empty token, which npm
-          # treats as explicit auth and short-circuits the Trusted
-          # Publisher OIDC handshake — producing a 404 on publish.
-      - name: Verify Trusted Publisher prerequisites
-        # The publish plugin uses `npx -y npm@^11.5.1` so we don't depend
-        # on the ambient npm version. This step logs what we actually
-        # have, and whether GitHub injected the OIDC env vars (required
-        # by `permissions: id-token: write`).
-        run: |
-          echo "node: $(node --version)"
-          echo "system npm: $(npm --version)"
-          echo "publish-time npm (via npx): $(npx -y 'npm@^11.5.1' --version)"
-          echo -n "ACTIONS_ID_TOKEN_REQUEST_URL present: "
-          [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] && echo yes || echo NO
-          echo -n "ACTIONS_ID_TOKEN_REQUEST_TOKEN present: "
-          [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] && echo yes || echo NO
-          if [ -f "$HOME/.npmrc" ]; then
-            echo "--- ~/.npmrc (tokens redacted) ---"
-            sed 's/\(_authToken=\).*/\1<redacted>/' "$HOME/.npmrc"
-          else
-            echo "~/.npmrc does not exist (expected — TP OIDC handles auth)"
-          fi
-      - run: pnpm install --frozen-lockfile
-      - name: Build core (produces font assets in packages/core/dist/font)
-        run: pnpm -F @dev.icons/core build
-      - name: Build devicons font package
-        run: pnpm -F devicons build
       - name: Release devicons
-        # Run from packages/font: release.config.cjs resolves pkgRoot and
-        # CHANGELOG.md relative to it. Commit scoping is path-based and
-        # independent of cwd (scripts/scoped-commits-plugin.mjs).
+        # Runs after group1 in the same job, so it already sits on group1's
+        # release commit — no race on pushing to main.
+        # cwd = packages/font so semantic-release picks up its release.config.cjs.
+        if: steps.plan.outputs.font
         working-directory: packages/font
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -147,10 +131,44 @@ jobs:
           if [ "$DRY_RUN" = "true" ]; then ARGS="--dry-run"; fi
           pnpm exec semantic-release $ARGS
 
+  republish:
+    name: Republish ${{ inputs.republish_tag }}
+    if: ${{ inputs.republish_tag }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write       # npm Trusted Publisher (OIDC) + provenance
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: refs/tags/${{ inputs.republish_tag }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install npm for Trusted Publisher
+        run: |
+          npm install -g 'npm@^11.5.1'
+          echo "node $(node --version), npm $(npm --version)"
+      - run: pnpm install --frozen-lockfile
+      - name: Build core + devicons font package
+        run: pnpm -F @dev.icons/core build
+      - name: Bundle react/vue/svelte
+        run: pnpm --parallel -F @dev.icons/react -F @dev.icons/vue -F @dev.icons/svelte bundle
+      - name: Publish missing packages
+        env:
+          TAG: ${{ inputs.republish_tag }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: node scripts/republish.mjs "$TAG"
+
   sync-canary:
     name: Sync main → canary
-    needs: [group1, font]
+    needs: release
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     # Only after a real release on main. Skip on canary pushes, dry-runs,
     # and any workflow_dispatch (manual runs are for testing).
     if: >-
@@ -160,7 +178,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           ref: canary

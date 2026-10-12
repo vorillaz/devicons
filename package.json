@@ -18,8 +18,9 @@
     "check": "pnpm -F @dev.icons/core check",
     "clean:generated": "node scripts/clean-generated.mjs",
     "release:dry": "DRY_RUN=true node scripts/release-group1.mjs",
+    "release:next": "node scripts/next-version.mjs",
     "release:font:dry": "DRY_RUN=true pnpm exec semantic-release --dry-run --no-ci -e ./packages/font/release.config.cjs",
-    "test:release": "node --test scripts/scoped-commits-plugin.test.mjs"
+    "test:release": "node --test scripts/scoped-commits.test.mjs scripts/release-plan-plugin.test.mjs"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

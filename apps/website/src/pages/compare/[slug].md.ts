@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getIcons } from '../../lib/icons-query';
 import { COMPARISONS, compareSlug } from '../../data/comparisons';
 import { markdownResponse } from '../../lib/agent-md/response';
 
@@ -14,7 +15,7 @@ interface PageProps {
 }
 
 export async function getStaticPaths() {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const byId = new Map(icons.map(i => [i.id, i]));
   return COMPARISONS.flatMap(cmp => {
     const a = byId.get(cmp.a);

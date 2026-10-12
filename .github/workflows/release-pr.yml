@@ -16,11 +16,13 @@ jobs:
   open-release-pr:
     name: Open canary → main release PR
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           ref: canary
+          persist-credentials: false
 
       - name: Verify canary is ahead of main
         id: diff
@@ -34,31 +36,36 @@ jobs:
           fi
           echo "canary is $AHEAD commit(s) ahead of main."
 
-      - name: Compute next version (dry-run semantic-release)
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Compute next versions
+        # Same commit scopes and preset as the Release workflow, so the title
+        # matches what merging will actually publish.
         id: next
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION=$(npx -y -p semantic-release -p conventional-changelog-conventionalcommits -p @semantic-release/commit-analyzer semantic-release \
-            --dry-run \
-            --branches main \
-            --plugins @semantic-release/commit-analyzer \
-            2>&1 | awk '/The next release version is/ {print $NF}' | tail -n 1 || true)
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Computed next version: ${VERSION:-<none>}"
+        run: node scripts/next-version.mjs origin/main origin/canary | tee -a "$GITHUB_OUTPUT"
 
       - name: Build PR body
         id: body
+        env:
+          GROUP1_NEXT: ${{ steps.next.outputs.group1 }}
+          FONT_NEXT: ${{ steps.next.outputs.font }}
         run: |
+          next() { if [ -n "$1" ]; then echo "**v$1**"; else echo 'no release'; fi; }
           {
             echo 'body<<EOF'
             echo "## Release PR"
             echo ''
-            if [ -n "${{ steps.next.outputs.version }}" ]; then
-              echo "Promoting **canary** to **main** for release **v${{ steps.next.outputs.version }}**."
-            else
-              echo "Promoting **canary** to **main**."
-            fi
+            echo "Promoting **canary** to **main**."
+            echo ''
+            echo '| Packages | Next version |'
+            echo '| --- | --- |'
+            echo "| \`@dev.icons/{core,react,vue,svelte}\` | $(next "$GROUP1_NEXT") |"
+            echo "| \`devicons\` (font) | $(next "$FONT_NEXT") |"
             echo ''
             echo "- Commits ahead of main: **${{ steps.diff.outputs.ahead }}**"
             echo "- Merging this PR triggers the [Release workflow](../actions/workflows/release.yml) to publish packages to npm."
@@ -74,13 +81,18 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CUSTOM_TITLE: ${{ github.event.inputs.title }}
-          NEXT_VERSION: ${{ steps.next.outputs.version }}
+          GROUP1_NEXT: ${{ steps.next.outputs.group1 }}
+          FONT_NEXT: ${{ steps.next.outputs.font }}
           PR_BODY: ${{ steps.body.outputs.body }}
         run: |
           if [ -n "$CUSTOM_TITLE" ]; then
             TITLE="$CUSTOM_TITLE"
-          elif [ -n "$NEXT_VERSION" ]; then
-            TITLE="chore(release): v${NEXT_VERSION}"
+          elif [ -n "$GROUP1_NEXT" ] && [ -n "$FONT_NEXT" ]; then
+            TITLE="chore(release): v${GROUP1_NEXT} + devicons v${FONT_NEXT}"
+          elif [ -n "$GROUP1_NEXT" ]; then
+            TITLE="chore(release): v${GROUP1_NEXT}"
+          elif [ -n "$FONT_NEXT" ]; then
+            TITLE="chore(release): devicons v${FONT_NEXT}"
           else
             TITLE="chore(release): promote canary to main"
           fi

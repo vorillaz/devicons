@@ -1,11 +1,14 @@
-// node --test scripts/scoped-commits-plugin.test.mjs
+// node --test scripts/scoped-commits.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { analyzeCommits, filterCommits, generateNotes } from './scoped-commits-plugin.mjs';
+import { analyzeCommits, filterCommitsByPaths, generateNotes } from './scoped-commits.mjs';
+
+const { FONT_PATHS, GROUP1_PATHS } = createRequire(import.meta.url)('./release-scopes.cjs');
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
 
@@ -28,19 +31,25 @@ function repoWith(commits) {
 
 const logger = { log() {}, error() {} };
 
-test('keeps only commits that touch a scoped path', () => {
+test('keeps only commits that touch a scoped path', async () => {
   const { cwd, commits } = repoWith([
     ['packages/font/a.txt', 'feat(cli): one'],
     ['apps/website/b.txt', 'feat(website): two'],
     ['packages/agent/c.txt', 'fix(agent): three'],
   ]);
-  const kept = filterCommits(commits, ['packages/font/', 'packages/agent/'], cwd);
+  const kept = await filterCommitsByPaths(commits, ['packages/font/', 'packages/agent/'], cwd);
   assert.deepEqual(kept.map(c => c.subject), ['feat(cli): one', 'fix(agent): three']);
 });
 
-test('does not match a path that only shares a prefix string', () => {
+test('does not match a path that only shares a prefix string', async () => {
   const { cwd, commits } = repoWith([['packages/fontish/a.txt', 'feat: lookalike']]);
-  assert.equal(filterCommits(commits, ['packages/font/'], cwd).length, 0);
+  assert.equal((await filterCommitsByPaths(commits, ['packages/font/'], cwd)).length, 0);
+});
+
+test('agent commits release devicons (the CLI bundles it), not @dev.icons/*', async () => {
+  const { cwd, commits } = repoWith([['packages/agent/src/cli.ts', 'fix(agent): x']]);
+  assert.equal((await filterCommitsByPaths(commits, FONT_PATHS, cwd)).length, 1);
+  assert.equal((await filterCommitsByPaths(commits, GROUP1_PATHS, cwd)).length, 0);
 });
 
 test('no release when only out-of-scope commits are features', async () => {

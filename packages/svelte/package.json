@@ -58,7 +58,8 @@
   ],
   "scripts": {
     "generate": "tsx scripts/build.ts",
-    "build": "tsx scripts/build.ts && vite build && tsx scripts/post-build.ts",
+    "build": "tsx scripts/build.ts && pnpm run bundle",
+    "bundle": "vite build && tsx scripts/post-build.ts",
     "test": "vitest run"
   },
   "peerDependencies": {
