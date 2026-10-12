@@ -5,7 +5,7 @@
   hover inverts the entire tile to the accent color. No gradients, no
   rounded corners, no decoration.
 */
-import { getCollection } from 'astro:content';
+import { getIcons } from '../../lib/icons-query';
 import IconRender from '../icons/icon-render.astro';
 
 interface MarqueeIcon {
@@ -31,7 +31,7 @@ const SEED: Array<{ file: string; label: string; slug?: string }> = [
   { file: 'chrome', label: 'Chrome' },
 ];
 
-const allIcons = await getCollection('icons');
+const allIcons = await getIcons();
 const flagsBySlug = new Map(
   allIcons.map(i => [
     i.id,

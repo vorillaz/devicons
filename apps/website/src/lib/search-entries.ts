@@ -1,10 +1,10 @@
 // Records for the site's client-side search index and the prebuilt index the
 // /api/v1/search Function loads. Both come from here so they never drift.
-import { getCollection } from 'astro:content';
+import { getIcons } from './icons-query';
 import type { SearchIndexEntry } from '@dev.icons/agent/schema';
 
 export async function getSearchIndexEntries(): Promise<SearchIndexEntry[]> {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const entries = icons.map(entry => ({
     id: entry.id,
     name: entry.data.name,

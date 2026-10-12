@@ -1,13 +1,13 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { markdownResponse } from '../lib/agent-md/response';
-import { formatTagLabel, slugifyTag } from '../lib/icons-query';
+import { formatTagLabel, getIcons, slugifyTag } from '../lib/icons-query';
 import { formatCount } from '../lib/package-facts';
 
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const active = icons.filter(i => !i.data.deprecated);
 
   const popular = active

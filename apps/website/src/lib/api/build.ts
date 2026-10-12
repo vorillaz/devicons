@@ -1,7 +1,8 @@
 // Builds the /api/v1 payloads from the content collections. Shapes are the
 // zod schemas in @dev.icons/agent/schema; scripts/check-api.ts validates the
 // built files against them.
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getIcons } from '../icons-query';
 import type {
   Category,
   CategoryDetail,
@@ -87,7 +88,7 @@ const byName = (a: IconEntry, b: IconEntry) =>
 
 /** All icons, deprecated included: their detail files keep old links working. */
 export async function getAllIcons(): Promise<IconEntry[]> {
-  return (await getCollection('icons')).sort(byName);
+  return (await getIcons()).sort(byName);
 }
 
 export async function getIconList(): Promise<IconList> {

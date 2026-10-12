@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getIcons } from '../lib/icons-query';
 import { COMPARISONS, compareSlug } from '../data/comparisons';
 import { markdownResponse } from '../lib/agent-md/response';
 
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const byId = new Map(icons.map(i => [i.id, i]));
 
   const resolved = COMPARISONS.flatMap(cmp => {

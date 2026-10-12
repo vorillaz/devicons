@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { getCollection } from 'astro:content';
+import { getIcons } from './icons-query';
 import {
   CDN_FILES,
   CORE_PKG,
@@ -24,7 +24,7 @@ export function skillDescription(totalIcons: number): string {
  * Cloudflare agent-skills-discovery spec.
  */
 export async function getSkillMarkdown(): Promise<string> {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const active = icons.filter((i) => !i.data.deprecated);
   const recommended = active.filter((i) => i.data.recommended);
   const totalIcons = active.length;

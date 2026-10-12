@@ -13,12 +13,13 @@ import {
 import {
   MIN_INDEXABLE_TAG_COUNT,
   formatTagLabel,
+  getIcons,
   getUniqueTags,
   slugifyTag,
 } from '../lib/icons-query';
 import { USE_CASES } from '../data/use-cases';
 
-const icons = await getCollection('icons');
+const icons = await getIcons();
 const activeIcons = icons.filter(icon => !icon.data.deprecated);
 const iconCount = activeIcons.length;
 const countLabel = iconCount.toLocaleString('en-US');

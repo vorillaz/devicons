@@ -1,0 +1,64 @@
+name: CI
+
+# Builds and tests every package on PRs, with the same steps the Release
+# workflow runs before publishing — so a release never discovers a broken
+# build or a stale codepoints lock after merge.
+on:
+  pull_request:
+    branches: [main, canary]
+    paths:
+      - 'packages/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build and test packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build core + devicons font package
+        run: pnpm -F @dev.icons/core build
+      # The bundles (the slowest step) depend only on the sources core just
+      # generated, the bundler config and the lockfile. Reuse them when none
+      # of that changed, which is most PRs.
+      - name: Restore react/vue/svelte bundles
+        id: bundles
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            packages/react/dist
+            packages/vue/dist
+            packages/svelte/dist
+          key: bundles-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'packages/react/src/**', 'packages/react/scripts/**', 'packages/react/*.json', 'packages/react/*.config.*', 'packages/vue/src/**', 'packages/vue/scripts/**', 'packages/vue/*.json', 'packages/vue/*.config.*', 'packages/svelte/src/**', 'packages/svelte/scripts/**', 'packages/svelte/*.json', 'packages/svelte/*.config.*') }}
+      - name: Bundle react/vue/svelte
+        if: steps.bundles.outputs.cache-hit != 'true'
+        run: pnpm --parallel -F @dev.icons/react -F @dev.icons/vue -F @dev.icons/svelte bundle
+      - name: Check codepoints lock is committed
+        run: |
+          git diff --exit-code packages/font/codepoints.lock.json || {
+            echo "::error file=packages/font/codepoints.lock.json::codepoints.lock.json is out of date — run 'pnpm build:font' and commit the lock."
+            exit 1
+          }
+      - run: pnpm test
+      - name: Test release scoping
+        run: pnpm test:release

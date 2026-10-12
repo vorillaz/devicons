@@ -1,5 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getIcons } from '../../../lib/icons-query';
 import PageLayout from '../../../components/layout/page-layout.astro';
 import Breadcrumbs from '../../../components/seo/breadcrumbs.astro';
 import IconRender from '../../../components/icons/icon-render.astro';
@@ -78,7 +79,7 @@ const FRAMEWORK_META: Record<
 
 export async function getStaticPaths() {
   const fws = ['react', 'vue', 'svelte', 'astro', 'font'] as const;
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const gated = icons.filter(
     i => !i.data.deprecated && (i.data.popular || i.data.recommended),
   );
