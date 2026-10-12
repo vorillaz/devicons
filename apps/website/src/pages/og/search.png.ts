@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getIcons } from '../../lib/icons-query';
 import { renderOgImage } from '../../lib/og/render';
 import { ogShell } from '../../lib/og/layout';
 
 export const GET: APIRoute = async () => {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const count = icons.filter(i => !i.data.deprecated).length;
 
   const png = await renderOgImage(

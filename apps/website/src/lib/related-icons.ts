@@ -1,4 +1,5 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getIcons } from './icons-query';
 
 type IconEntry = CollectionEntry<'icons'>;
 
@@ -22,7 +23,7 @@ export async function getRelatedIcons(
   // Brand family prefix: aws-s3 → aws, google-cloud → google.
   const head = currentSlug.split('-')[0];
   const family = head.length >= 3 ? head : null;
-  const all = await getCollection('icons');
+  const all = await getIcons();
   const scored: RelatedIcon[] = [];
   for (const entry of all) {
     if (entry.id === currentSlug) continue;

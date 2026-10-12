@@ -28,8 +28,22 @@ export const toListItem = (entry: IconEntry): IconListItem => ({
   badInLight: entry.data.badInLight === true,
 });
 
+// getCollection() walks every entry's data on each call (to resolve image
+// references), and pages call it several times each. Across ~3,600 static
+// pages that was most of the build, so a production build reads the icons
+// once. Dev keeps calling through so content edits show up without a restart.
+// Callers get a fresh array but shared entries: treat entries as read-only.
+let iconsCache: Promise<IconEntry[]> | undefined;
+
+/** Every icon entry, deprecated ones included. */
+export async function getIcons(): Promise<IconEntry[]> {
+  if (!import.meta.env.PROD) return getCollection('icons');
+  iconsCache ??= getCollection('icons');
+  return [...(await iconsCache)];
+}
+
 export async function getActiveIcons(): Promise<IconEntry[]> {
-  const all = await getCollection('icons');
+  const all = await getIcons();
   return all.filter(icon => !icon.data.deprecated);
 }
 
@@ -52,9 +66,17 @@ export async function getPopularIcons(): Promise<IconListItem[]> {
     );
 }
 
-export async function getUniqueTags(): Promise<
-  Array<{ tag: string; count: number }>
-> {
+type TagCount = { tag: string; count: number };
+let uniqueTagsCache: Promise<TagCount[]> | undefined;
+
+// Rendered in the footer of every page, so cached like getIcons().
+export async function getUniqueTags(): Promise<TagCount[]> {
+  if (!import.meta.env.PROD) return countTags();
+  uniqueTagsCache ??= countTags();
+  return [...(await uniqueTagsCache)];
+}
+
+async function countTags(): Promise<TagCount[]> {
   const active = await getActiveIcons();
   const counts = new Map<string, number>();
   for (const icon of active) {

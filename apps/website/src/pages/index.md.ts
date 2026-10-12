@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getIcons } from '../lib/icons-query';
 import { SITE_TITLE, SITE_DESCRIPTION, GITHUB_URL } from '../consts';
 import { markdownResponse } from '../lib/agent-md/response';
 import { SVG_URL_PATTERN, formatCount } from '../lib/package-facts';
@@ -7,7 +7,7 @@ import { SVG_URL_PATTERN, formatCount } from '../lib/package-facts';
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   const active = icons.filter(i => !i.data.deprecated);
   const popular = active.filter(i => i.data.popular).slice(0, 10);
 

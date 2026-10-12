@@ -1,5 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getIcons } from '../../../lib/icons-query';
 import PageLayout from '../../../components/layout/page-layout.astro';
 import Breadcrumbs from '../../../components/seo/breadcrumbs.astro';
 import { SITE_TITLE } from '../../../consts';
@@ -7,7 +8,7 @@ import { breadcrumbSchema, collectionPageSchema } from '../../../lib/seo';
 import { variantLabel } from '../../../lib/variant-label';
 
 export async function getStaticPaths() {
-  const icons = await getCollection('icons');
+  const icons = await getIcons();
   return icons
     .filter(i => !i.data.deprecated && i.data.icons.length > 1)
     .map(icon => ({
