@@ -161,13 +161,13 @@ function checkDocs() {
 
 function checkHomepage() {
   const html = readText('index.html');
+  // One command per hero agent tab (Prompt, MCP, Skill, CLI, API).
   for (const needle of [
-    MCP_URL,
-    'href="/docs/mcp/"',
-    'href="/docs/api/"',
-    'href="/docs/cli/"',
-    'href="/docs/skill/"',
+    'devicons.io/skill.md',
+    `npx add-mcp ${MCP_URL}`,
     'npx skills add https://devicons.io',
+    'npx devicons add',
+    '/api/v1/search?q=',
   ]) {
     if (!html.includes(needle)) fail(`index.html: missing ${needle}`);
   }
