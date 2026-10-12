@@ -1,3 +1,20 @@
+## [devicons-v2.2.0](https://github.com/vorillaz/devicons/compare/devicons-v2.1.0...devicons-v2.2.0) (2026-10-12)
+
+### Features
+
+* **agent:** add shared schemas, search, MCP tools and CLI ([1cff9f1](https://github.com/vorillaz/devicons/commit/1cff9f1c679db69f7f44159e18aabf27222519de))
+* **agent:** report total matches and support prebuilt search index ([f4fecb5](https://github.com/vorillaz/devicons/commit/f4fecb5dc6bd3ec29b25ffe1ae8e394338573d68))
+* **cli:** ship devicons CLI and local MCP server ([24877ec](https://github.com/vorillaz/devicons/commit/24877ecfdf07b381669ce0bfdd75559bbbae2226))
+
+### Bug Fixes
+
+* **agent:** fetch SVGs from the configured API base ([56db555](https://github.com/vorillaz/devicons/commit/56db555e32a1dc2f5f6d4626e5fe8d2e7ee33013))
+* **agent:** harden API client and CLI input handling ([1ae107c](https://github.com/vorillaz/devicons/commit/1ae107cf2dc08f7dbdeb044daee9a9214f4fd34b))
+* **agent:** include SVG markup and variants in get_icon text ([36a7300](https://github.com/vorillaz/devicons/commit/36a7300ccc1b4d5dca66f169c03c1d2bebdd3531))
+* **cli:** check Node version at runtime instead of engines ([42663a1](https://github.com/vorillaz/devicons/commit/42663a1a9a2edde249eff2760ce61235cb294c1d))
+* **cli:** read version from package.json at runtime ([baaf5e7](https://github.com/vorillaz/devicons/commit/baaf5e71cb099eb06d22e81cbbdd060b7725de97))
+* **cli:** use npm-compatible bin path ([174b433](https://github.com/vorillaz/devicons/commit/174b4330dad42c069f643820017c3935e1619227))
+
 ## [devicons-v2.1.0](https://github.com/vorillaz/devicons/compare/devicons-v2.0.1...devicons-v2.1.0) (2026-10-10)
 
 ### Features
