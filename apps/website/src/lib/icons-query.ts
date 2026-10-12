@@ -83,32 +83,4 @@ export async function getFooterTags(): Promise<
   return topTags;
 }
 
-export { slugifyTag, MIN_INDEXABLE_TAG_COUNT } from './tags';
-
-const TAG_LABEL_OVERRIDES: Record<string, string> = {
-  ui: 'UI',
-  ai: 'AI',
-  ml: 'ML',
-  api: 'API',
-  ios: 'iOS',
-  macos: 'macOS',
-  aws: 'AWS',
-  gcp: 'GCP',
-  cicd: 'CI/CD',
-  devops: 'DevOps',
-  jamstack: 'JAMstack',
-  cms: 'CMS',
-  css: 'CSS',
-  html: 'HTML',
-  sql: 'SQL',
-  nosql: 'NoSQL',
-};
-
-export const formatTagLabel = (tag: string) => {
-  const lower = tag.toLowerCase();
-  if (TAG_LABEL_OVERRIDES[lower]) return TAG_LABEL_OVERRIDES[lower];
-  return lower
-    .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-};
+export { slugifyTag, formatTagLabel, MIN_INDEXABLE_TAG_COUNT } from './tags';

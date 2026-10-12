@@ -59,6 +59,23 @@ The skill is published per the [Agent Skills Discovery](https://github.com/cloud
 https://devicons.io/.well-known/agent-skills/index.json
 \`\`\`
 
+## Use the MCP server or API when available
+
+If your environment supports MCP, prefer the hosted Devicons MCP server over guessing slugs or URLs. It is read-only and needs no key:
+
+\`\`\`bash
+claude mcp add --transport http devicons https://devicons.io/api/mcp
+\`\`\`
+
+Tools: \`search_icons\` (find slugs), \`get_icon\` (SVG markup, variant URLs, React/Vue/Svelte code), \`list_categories\`, \`get_category\`. Local stdio alternative: \`npx -y devicons mcp\`. Setup for other clients: https://devicons.io/docs/mcp/
+
+Without MCP, use the JSON API (no key, CORS-enabled):
+
+- Search: \`https://devicons.io/api/v1/search?q=postgres&limit=5\`
+- Icon detail: \`https://devicons.io/api/v1/icons/{slug}.json\`
+- Categories: \`https://devicons.io/api/v1/categories.json\`
+- OpenAPI: \`https://devicons.io/api/v1/openapi.json\`
+
 ## Skill files
 
 | File | URL |

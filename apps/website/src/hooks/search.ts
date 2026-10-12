@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import MiniSearch from "minisearch";
+import { SEARCH_OPTIONS, rankByMatch } from "@dev.icons/agent/search";
 
 export interface IconEntry {
   id: string;
@@ -25,17 +26,9 @@ export interface IconEntry {
 let cachedIcons: IconEntry[] | null = null;
 let cachedIndex: MiniSearch<IconEntry> | null = null;
 
+// Same fields, boosts, and ranking as /api/v1/search and the MCP server.
 function buildIndex(icons: IconEntry[]): MiniSearch<IconEntry> {
-  const ms = new MiniSearch<IconEntry>({
-    idField: "id",
-    fields: ["name", "tags", "aliases", "description"],
-    storeFields: [],
-    searchOptions: {
-      boost: { name: 10, aliases: 8, tags: 5, description: 1 },
-      fuzzy: 0.2,
-      prefix: true,
-    },
-  });
+  const ms = new MiniSearch<IconEntry>(SEARCH_OPTIONS);
   ms.addAll(icons);
   return ms;
 }
@@ -89,30 +82,7 @@ export function useSearch(query: string | null) {
       .map((r) => idToIcon.get(r.id))
       .filter((icon): icon is IconEntry => !!icon);
 
-    const needle = query.trim().toLowerCase();
-    const exact: IconEntry[] = [];
-    const aliasExact: IconEntry[] = [];
-    const startsWith: IconEntry[] = [];
-    const rest: IconEntry[] = [];
-    for (const icon of ranked) {
-      const name = icon.name.toLowerCase();
-      const id = icon.id.toLowerCase();
-      if (name === needle || id === needle) {
-        exact.push(icon);
-      } else if (icon.aliases?.some((a) => a.toLowerCase() === needle)) {
-        aliasExact.push(icon);
-      } else if (name.startsWith(needle) || id.startsWith(needle)) {
-        startsWith.push(icon);
-      } else {
-        rest.push(icon);
-      }
-    }
-    const byName = (a: IconEntry, b: IconEntry) =>
-      a.name.localeCompare(b.name);
-    exact.sort(byName);
-    aliasExact.sort(byName);
-    startsWith.sort(byName);
-    return [...exact, ...aliasExact, ...startsWith, ...rest];
+    return rankByMatch(ranked, query);
   })();
 
   return { results, allIcons, isLoading, isError };

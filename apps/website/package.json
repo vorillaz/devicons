@@ -11,7 +11,9 @@
     "copy:mdx": "tsx scripts/copy-mdx.ts",
     "copy:move-partial": "tsx scripts/move-partial.ts",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:api": "tsx scripts/check-api.ts",
+    "smoke:agent": "tsx scripts/smoke-agent.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
@@ -19,6 +21,8 @@
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/svelte": "^8.0.5",
+    "@dev.icons/agent": "workspace:*",
+    "@modelcontextprotocol/server": "2.3.1",
     "@nanostores/react": "^1.0.0",
     "@radix-ui/react-accessible-icon": "^1.1.2",
     "@resvg/resvg-wasm": "^2.6.2",
@@ -41,9 +45,11 @@
     "tailwind-merge": "^3.0.1",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.8.3",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "zod": "^4.2.0"
   },
   "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "fast-glob": "3.3.3",

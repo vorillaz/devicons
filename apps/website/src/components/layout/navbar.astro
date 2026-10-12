@@ -5,8 +5,8 @@ const pathname = raw.length > 1 && raw.endsWith('/') ? raw.slice(0, -1) : raw;
 const isDocs = pathname === '/docs' || pathname.startsWith('/docs/');
 const isSearch = pathname === '/search' || pathname.startsWith('/search/');
 const navLinks = [
-  { href: '/icons', label: 'All Icons', active: pathname === '/icons' },
   { href: '/search', label: 'Search', active: isSearch },
+  { href: '/icons', label: 'All Icons', active: pathname === '/icons' },
   { href: '/docs', label: 'Docs', active: isDocs },
 ];
 ---
@@ -15,12 +15,8 @@ const navLinks = [
   class="navbar-brutalist fixed top-0 left-0 right-0 z-50 bg-bg border-b-2 border-border"
   transition:persist="navbar"
   transition:animate="none">
-  <div
-    class="max-w-[1400px] mx-auto h-14 flex items-stretch justify-between">
-    <a
-      href="/"
-      class="navbar-brand group"
-      aria-label="DEVICONS home">
+  <div class="max-w-[1400px] mx-auto h-14 flex items-stretch justify-between">
+    <a href="/" class="navbar-brand group" aria-label="DEVICONS home">
       <span class="navbar-brand__plate" aria-hidden="true">
         <svg
           class="navbar-logo-mark"
@@ -426,7 +422,8 @@ const navLinks = [
   // during the view-transition swap so the bracket fade lines up with
   // the page fade instead of flashing after the transition finishes.
   // Strip trailing slash so `/icons/` matches the href `/icons`.
-  const norm = (p: string) => p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p;
+  const norm = (p: string) =>
+    p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p;
 
   const matchesPath = (target: string, pathname: string) => {
     const p = norm(pathname);
@@ -445,7 +442,7 @@ const navLinks = [
       .querySelectorAll<HTMLAnchorElement>(
         '[data-nav-link], [data-nav-link-mobile]',
       )
-      .forEach((a) => {
+      .forEach(a => {
         const target = a.dataset.match ?? a.getAttribute('href') ?? '';
         a.classList.toggle('is-active', matchesPath(target, pathname));
       });
