@@ -1,7 +1,7 @@
 {
   "name": "devicons",
   "version": "2.1.0",
-  "description": "Devicons - Icon font for developers",
+  "description": "Devicons - Icon font, SVG sprite, and CLI for developer icons",
   "type": "module",
   "sideEffects": false,
   "keywords": [
@@ -9,8 +9,15 @@
     "font",
     "webfont",
     "devicons",
-    "sprite"
+    "sprite",
+    "cli",
+    "mcp",
+    "svg",
+    "logos"
   ],
+  "bin": {
+    "devicons": "dist/cli.mjs"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -36,6 +43,7 @@
     "dist/index.mjs",
     "dist/index.d.ts",
     "dist/index.d.cts",
+    "dist/cli.mjs",
     "dist/devicons.css",
     "dist/devicons.woff2",
     "dist/devicons.ttf",
@@ -63,6 +71,8 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@dev.icons/agent": "workspace:*",
+    "@modelcontextprotocol/server": "2.3.1",
     "@dev.icons/core": "workspace:*",
     "@types/node": "22.9.0",
     "fast-glob": "3.3.3",

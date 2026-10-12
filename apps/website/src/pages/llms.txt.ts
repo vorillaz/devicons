@@ -3,10 +3,16 @@ import { getCollection } from 'astro:content';
 import { SITE_URL } from '../consts';
 import { USE_CASES } from '../data/use-cases';
 import { getSortedDocPages } from '../lib/agent-md/docs-md';
+import { TOOL_NAMES } from '@dev.icons/agent/server';
 import {
+  API_BASE_URL,
   CORE_PKG,
   FONT_PKG,
+  MCP_ADD_CLAUDE,
+  MCP_LOCAL_COMMAND,
+  MCP_URL,
   MONO_SVG_URL_PATTERN,
+  OPENAPI_URL,
   REACT_PKG,
   SVELTE_PKG,
   SVG_URL_PATTERN,
@@ -41,6 +47,17 @@ export const GET: APIRoute = async () => {
     `- [Full documentation in one file](${SITE_URL}/llms-full.txt)`,
     `- [Sitemap](${SITE_URL}/sitemap-index.xml)`,
     '',
+    '## Agent integrations',
+    '',
+    `- [MCP server](${SITE_URL}/docs/mcp/): \`${MCP_URL}\` (Streamable HTTP, read-only, no auth). Tools: \`${TOOL_NAMES.join('`, `')}\`. Claude Code: \`${MCP_ADD_CLAUDE}\`. Local stdio: \`${MCP_LOCAL_COMMAND}\`.`,
+    `- [HTTP API](${SITE_URL}/docs/api/): \`${API_BASE_URL}/\` — \`icons.json\`, \`icons/{slug}.json\`, \`categories.json\`, \`categories/{slug}.json\`, \`search?q=\`. No key, CORS-enabled.`,
+    `- [OpenAPI 3.1 spec](${OPENAPI_URL})`,
+    `- [CLI](${SITE_URL}/docs/cli/): \`npx devicons search <query>\`, \`npx devicons add <slug...>\`, \`--json\` output.`,
+    `- [Agent Skills discovery index](${SITE_URL}/.well-known/agent-skills/index.json); [SKILL.md](${SITE_URL}/.well-known/agent-skills/devicons/SKILL.md) (also at [/skill.md](${SITE_URL}/skill.md)): full agent-usage guide`,
+    `- [Skill icons reference](${SITE_URL}/skill/reference/icons.md): recommended icons with file and component names`,
+    `- [Skill packages reference](${SITE_URL}/skill/reference/packages.md): package APIs, props, and URLs`,
+    `- [agents.md](${SITE_URL}/agents.md): agent readiness manifest`,
+    '',
     '## Documentation',
     '',
     `- [Documentation index (Markdown)](${SITE_URL}/docs.md)`,
@@ -60,13 +77,6 @@ export const GET: APIRoute = async () => {
     ...USE_CASES.map(
       u => `- [${u.title}](${SITE_URL}/use-cases/${u.slug}/): ${u.intro}`,
     ),
-    '',
-    '## Agent integration',
-    '',
-    `- [Agent Skills discovery index](${SITE_URL}/.well-known/agent-skills/index.json)`,
-    `- [SKILL.md](${SITE_URL}/.well-known/agent-skills/devicons/SKILL.md) (also at [/skill.md](${SITE_URL}/skill.md)): full agent-usage guide`,
-    `- [Skill icons reference](${SITE_URL}/skill/reference/icons.md): recommended icons with file and component names`,
-    `- [Skill packages reference](${SITE_URL}/skill/reference/packages.md): package APIs, props, and URLs`,
     '',
     '## Per-icon Markdown',
     '',

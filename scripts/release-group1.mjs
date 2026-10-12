@@ -20,16 +20,16 @@
 //   is required for strict semver ordering.
 //
 // Lifecycle:
-//   1. commit-analyzer          → compute version bump
-//   2. release-notes-generator  → render release notes
+//   1. scoped-commits-plugin    → keep commits touching SCOPED_PATHS, then
+//                                 compute the bump (commit-analyzer) and
+//   2.                            render release notes (release-notes-generator)
 //   3. changelog (main only)    → write CHANGELOG.md
 //   4. npm-publish-plugin       → stamp package.json, npm publish all 4
 //   5. git (main only)          → commit CHANGELOG + 4 package.json files
 //   6. github                   → create GitHub release
 //
 //   The npm-publish-plugin lives at scripts/npm-publish-plugin.cjs and is
-//   loaded by path (a plain object plugin breaks semantic-release-monorepo;
-//   the font release uses the same plugin via the monorepo wrapper).
+//   loaded by path; the font release uses the same plugin.
 //
 //   semantic-release creates the git tag BEFORE publish plugins run. If the
 //   npm publish step fails partway through, the logged error lists which
@@ -50,13 +50,24 @@ import semanticRelease from 'semantic-release';
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const PACKAGES = ['core', 'react', 'vue', 'svelte'];
-// Absolute path — matches the font config. semantic-release-plugin-decorators
-// (used by semantic-release-monorepo) resolves relative plugin paths from its
-// own node_modules location, not cwd, so anything ./-rooted is fragile.
+// Absolute paths — matches the font config, so plugins resolve the same way
+// regardless of cwd.
 const PUBLISH_PLUGIN = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   './npm-publish-plugin.cjs',
 );
+// Only commits touching the four packages (or the codegen/utils that
+// generate react/vue/svelte) count toward this release. Website, CLI, and
+// agent commits are released elsewhere or not at all.
+const SCOPED_COMMITS_PLUGIN = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  './scoped-commits-plugin.mjs',
+);
+const SCOPED_PATHS = [
+  ...PACKAGES.map((p) => `packages/${p}/`),
+  'packages/codegen/',
+  'packages/utils/',
+];
 
 const detectBranch = () => {
   if (process.env.GITHUB_REF_NAME) return process.env.GITHUB_REF_NAME;
@@ -71,11 +82,7 @@ const branch = detectBranch();
 const isCanary = branch === 'canary';
 
 const plugins = [
-  ['@semantic-release/commit-analyzer', { preset: 'conventionalcommits' }],
-  [
-    '@semantic-release/release-notes-generator',
-    { preset: 'conventionalcommits' },
-  ],
+  [SCOPED_COMMITS_PLUGIN, { paths: SCOPED_PATHS, preset: 'conventionalcommits' }],
   ...(isCanary
     ? []
     : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),

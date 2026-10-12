@@ -1,0 +1,140 @@
+---
+import PageLayout from '../../../components/layout/page-layout.astro';
+import Breadcrumbs from '../../../components/seo/breadcrumbs.astro';
+import { getIndexableTags } from '../../../lib/tag-pages';
+import { fitTitle } from '../../../lib/meta';
+import { SITE_TITLE } from '../../../consts';
+import { breadcrumbSchema, collectionPageSchema } from '../../../lib/seo';
+
+// Only indexable categories are listed; thin tags (under the minimum icon
+// count) stay reachable from their icons but aren't promoted here.
+const tags = await getIndexableTags();
+const popular = tags.slice(0, 24);
+
+const byLetter = new Map<string, typeof tags>();
+for (const t of [...tags].sort((a, b) => a.label.localeCompare(b.label))) {
+  const first = t.label.charAt(0).toUpperCase();
+  const letter = /[A-Z]/.test(first) ? first : '#';
+  if (!byLetter.has(letter)) byLetter.set(letter, []);
+  byLetter.get(letter)!.push(t);
+}
+const letters = [...byLetter.keys()].sort((a, b) =>
+  a === '#' ? -1 : b === '#' ? 1 : a.localeCompare(b),
+);
+
+const title = fitTitle(
+  `Icon Categories — ${tags.length} Developer Logo Collections | ${SITE_TITLE}`,
+  `Icon Categories — ${tags.length} Logo Collections | ${SITE_TITLE}`,
+  `Icon Categories | ${SITE_TITLE}`,
+);
+const description = `Browse developer logos by category: ${popular
+  .slice(0, 5)
+  .map(t => t.label)
+  .join(', ')}, and ${tags.length - 5} more. Free SVGs and React, Vue, and Svelte components.`;
+
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Icons', url: '/icons/' },
+    { name: 'Categories', url: '/icons/tag/' },
+  ]),
+  collectionPageSchema({
+    name: 'Icon categories',
+    description,
+    url: '/icons/tag/',
+    items: tags.map(t => ({
+      name: `${t.label} logos & icons`,
+      url: `/icons/tag/${t.slug}/`,
+    })),
+  }),
+];
+
+const chip =
+  'inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors';
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  image="/og/home.png"
+  keywords={['icon categories', 'developer logos', 'tech logos by category']}
+  jsonLd={jsonLd}>
+  <div class="max-w-[1400px] mx-auto px-6 pt-10">
+    <Breadcrumbs
+      items={[
+        { name: 'Home', url: '/' },
+        { name: 'Icons', url: '/icons' },
+        { name: 'Categories' },
+      ]}
+    />
+
+    <header class="mt-6 mb-10 pb-8 border-b border-border">
+      <p class="type-label mb-4 flex items-center gap-3">
+        <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
+        ></span>
+        {tags.length} categories
+      </p>
+      <h1 class="type-h1">Icon categories</h1>
+      <p class="type-body-lg mt-3 max-w-[64ch]">
+        Developer logos grouped by what they are and where they're used: languages,
+        frameworks, databases, cloud services, AI models, and more. Pick a category
+        to see every matching logo as an SVG or a React, Vue, or Svelte component.
+      </p>
+    </header>
+
+    <section class="mb-16">
+      <h2 class="type-label mb-4 flex items-center gap-3">
+        <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
+        ></span>
+        Largest categories
+      </h2>
+      <ul class="flex flex-wrap gap-2">
+        {
+          popular.map(t => (
+            <li>
+              <a href={`/icons/tag/${t.slug}/`} class={chip}>
+                {t.label} <span class="text-text-muted">{t.count}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <nav aria-label="Jump to letter" class="mb-10 flex flex-wrap gap-1">
+      {
+        letters.map(l => (
+          <a
+            href={`#letter-${l === '#' ? 'num' : l.toLowerCase()}`}
+            class="font-mono text-xs w-8 h-8 inline-flex items-center justify-center border border-border hover:border-accent hover:text-accent transition-colors">
+            {l}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-10 pb-16">
+      {
+        letters.map(l => (
+          <section
+            id={`letter-${l === '#' ? 'num' : l.toLowerCase()}`}
+            class="break-inside-avoid mb-10">
+            <h2 class="type-h3 mb-3 pb-2 border-b border-border">{l}</h2>
+            <ul class="flex flex-col gap-1.5">
+              {byLetter.get(l)!.map(t => (
+                <li>
+                  <a
+                    href={`/icons/tag/${t.slug}/`}
+                    class="type-body hover:text-accent transition-colors">
+                    {t.label} icons
+                  </a>{' '}
+                  <span class="font-mono text-xs text-text-muted">{t.count}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</PageLayout>

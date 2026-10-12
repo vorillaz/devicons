@@ -43,26 +43,49 @@ const packs = (await getCollection('packs')).sort(
 
 const faqs = [
   {
-    question: 'Are Devicons free to use?',
+    id: 'license',
+    question: 'Are Devicons free for commercial use?',
     answer:
-      'Yes. The library is open source under the MIT license, so you can use it in personal and commercial projects. Each logo remains the trademark of its owner.',
+      'Yes. Devicons is open source under the MIT license, so you can use the icons in personal and commercial projects. Each logo remains the trademark of its owner.',
   },
   {
-    question: 'What formats do Devicons come in?',
+    id: 'formats',
+    question:
+      'Which formats do the icons come in: SVG, React, Vue, Svelte or icon font?',
     answer:
       'Every icon is an optimized SVG you can download or hotlink from devicons.io, a React, Vue or Svelte component from npm, and a glyph in the devicons icon font.',
   },
   {
-    question: 'How do I install Devicons?',
+    id: 'install',
+    question: 'How do I install Devicons in React, Vue or Svelte?',
     answer:
       'Run npm install @dev.icons/react (or @dev.icons/vue, @dev.icons/svelte), then import the icon by name, for example import { Css } from "@dev.icons/react". Astro projects use the React package.',
   },
   {
-    question: 'Can I request a new icon?',
+    id: 'svg-urls',
+    question: 'Can I use the SVG logos without installing a package?',
     answer:
-      'Yes. Open an issue or pull request on the Devicons GitHub repository and the maintainers will review it.',
+      'Yes. Every icon is served as an SVG at https://devicons.io/devicons/icons/{file}.svg in color and https://devicons.io/devicons/font/{file}.svg in monochrome. You can also download it from the icon page.',
+  },
+  {
+    id: 'monochrome',
+    question: 'Do the logos come in monochrome versions?',
+    answer:
+      'Yes. Every icon ships in color and monochrome. The React, Vue and Svelte packages export the monochrome variants from their /mono subpath.',
+  },
+  {
+    id: 'request',
+    question: 'How do I request a new developer icon or logo?',
+    answer:
+      'Open an issue or pull request on the Devicons GitHub repository and the maintainers will review it.',
   },
 ];
+
+// Package names, commands, imports and URLs in answers render as inline code.
+const CODE_RE =
+  /(npm install @dev\.icons\/\w+|import \{ \w+ \} from "[^"]+"|https:\/\/devicons\.io\/\S+?\.svg|@dev\.icons\/\w+|\/mono\b)/;
+const answerParts = (text: string) =>
+  text.split(CODE_RE).map((part, i) => ({ part, code: i % 2 === 1 }));
 
 const jsonLd = [
   collectionPageSchema({
@@ -92,15 +115,18 @@ const jsonLd = [
   <section
     class="home-explore border-t border-border max-w-[1400px] mx-auto px-6 py-16 sm:py-20"
     aria-labelledby="explore-heading">
-    <h2 id="explore-heading" class="type-h2 mb-10">Explore the catalog</h2>
-    <div class="grid gap-12 lg:grid-cols-[2fr_1fr_1fr]">
-      <div>
-        <h3 class="type-label mb-4">Popular logos</h3>
-        <ul class="flex flex-wrap gap-2">
+    <h2 id="explore-heading" class="type-h2 mb-8">Explore the catalog</h2>
+    <div class="home-explore__panel">
+      <div class="home-explore__cell">
+        <h3 class="home-explore__label">[ Popular logos ]</h3>
+        <ul class="home-explore__chips">
           {
             popularIcons.map(icon => (
               <li>
-                <a href={`/icons/${icon.id}/`} data-astro-prefetch class="home-explore__chip">
+                <a
+                  href={`/icons/${icon.id}/`}
+                  data-astro-prefetch
+                  class="home-explore__chip">
                   <img
                     src={`/devicons/icons/${icon.data.icons[0]}.svg`}
                     alt=""
@@ -115,25 +141,29 @@ const jsonLd = [
             ))
           }
         </ul>
-        <a href="/icons/" class="home-explore__more">All {countLabel} icons →</a>
+        <a href="/icons/" class="home-explore__cta">
+          <span>All {countLabel} icons</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
-      <div>
-        <h3 class="type-label mb-4">Categories</h3>
-        <ul class="home-explore__list">
+      <div class="home-explore__cell">
+        <h3 class="home-explore__label">[ Categories ]</h3>
+        <ul class="home-explore__links">
           {
             categories.map(({ tag, count }) => (
               <li>
                 <a href={`/icons/tag/${slugifyTag(tag)}/`}>
-                  {formatTagLabel(tag)} icons <span>{count}</span>
+                  {formatTagLabel(tag)} icons{' '}
+                  <span class="home-explore__count">{count}</span>
                 </a>
               </li>
             ))
           }
         </ul>
       </div>
-      <div>
-        <h3 class="type-label mb-4">Collections</h3>
-        <ul class="home-explore__list">
+      <div class="home-explore__cell">
+        <h3 class="home-explore__label">[ Collections ]</h3>
+        <ul class="home-explore__links">
           {
             packs.map(pack => (
               <li>
@@ -157,35 +187,86 @@ const jsonLd = [
   <section
     class="border-t border-border max-w-[1400px] mx-auto px-6 py-16 sm:py-20"
     aria-labelledby="faq-heading">
-    <h2 id="faq-heading" class="type-h2 mb-8">Frequently asked questions</h2>
-    <div class="home-faq max-w-[72ch]">
-      {
-        faqs.map(faq => (
-          <details>
-            <summary>{faq.question}</summary>
-            <p class="type-body">{faq.answer}</p>
-          </details>
-        ))
-      }
+    <div class="home-faq">
+      <div class="home-faq__intro">
+        <h2 id="faq-heading" class="type-h2">Frequently asked questions</h2>
+        <p class="type-body">
+          Licensing, formats and installation for the Devicons SVG logos and
+          React, Vue and Svelte components.
+        </p>
+        <a href="/docs/" class="home-faq__docs">Read the docs →</a>
+      </div>
+      <div class="home-faq__list">
+        {
+          faqs.map((faq, i) => (
+            <details class="home-faq__item" id={`faq-${faq.id}`} open={i === 0}>
+              <summary class="home-faq__q">
+                <h3>{faq.question}</h3>
+              </summary>
+              <p class="home-faq__a type-body">
+                {answerParts(faq.answer).map(s =>
+                  s.code ? (
+                    <code class="home-faq__code">{s.part}</code>
+                  ) : (
+                    s.part
+                  ),
+                )}
+              </p>
+            </details>
+          ))
+        }
+      </div>
     </div>
   </section>
-  <div class="border-t border-border px-6 py-24 max-w-[1400px] mx-auto">
-    <p class="type-label mb-4 flex items-center gap-3">
-      <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
-      ></span>
-      Get Started
-    </p>
-    <h2 class="type-display-sm mb-8">Ship with better icons.</h2>
-    <a
-      href="/docs/"
-      class="btn btn--primary btn--mono"
-      data-astro-prefetch="viewport">
-      Read the docs
-    </a>
-  </div>
 </PageLayout>
 
 <style>
+  .home-explore__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border: 1px solid var(--c-border);
+    /* Same diagonal hatch as the footer, showing between the cells. */
+    background:
+      repeating-linear-gradient(
+        135deg,
+        transparent 0 11px,
+        color-mix(in oklab, var(--c-border) 35%, transparent) 11px 12px
+      ),
+      var(--c-bg);
+  }
+  @media (min-width: 1024px) {
+    .home-explore__panel {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+  .home-explore__cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+  }
+  .home-explore__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    line-height: var(--leading-flat);
+    color: var(--c-text);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px dashed var(--c-border);
+  }
+  .home-explore__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
   .home-explore__chip {
     display: inline-flex;
     align-items: center;
@@ -208,54 +289,180 @@ const jsonLd = [
     height: 20px;
     object-fit: contain;
   }
-  .home-explore__more {
-    display: inline-block;
-    margin-top: var(--space-6);
+  .home-explore__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: auto;
+    padding: var(--space-4);
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     font-weight: 600;
     letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
-    color: var(--c-accent);
+    line-height: var(--leading-flat);
+    transition: background 0.15s ease;
   }
-  .home-explore__more:hover {
-    color: var(--c-accent-hover);
+  .home-explore__cta:hover {
+    background: var(--c-accent-hover);
   }
-  .home-explore__list {
+  /* Link rows in the footer's voice. */
+  .home-explore__links li {
+    border-bottom: 1px solid
+      color-mix(in oklab, var(--c-border) 60%, transparent);
+  }
+  .home-explore__links li:last-child {
+    border-bottom: 0;
+  }
+  .home-explore__links a {
     display: flex;
-    flex-direction: column;
-  }
-  .home-explore__list a {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-4);
+    align-items: center;
+    gap: var(--space-2);
     padding: var(--space-2) 0;
-    border-bottom: 1px solid var(--c-border);
-    font-size: var(--text-sm);
-    color: var(--c-text-secondary);
-    transition: color 0.15s ease;
-  }
-  .home-explore__list a:hover {
-    color: var(--c-accent);
-  }
-  .home-explore__list span {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: var(--leading-snug);
+    color: var(--c-text-secondary);
+    text-transform: lowercase;
+    transition:
+      color 0.12s ease,
+      background 0.12s ease,
+      padding 0.12s ease;
+  }
+  .home-explore__links a::before {
+    content: '›';
     color: var(--c-text-muted);
+    font-weight: 700;
+    transition: color 0.12s ease;
   }
-  .home-faq details {
-    border-bottom: 1px solid var(--c-border);
+  .home-explore__links a:hover {
+    color: var(--c-accent);
+    background: color-mix(in oklab, var(--c-accent) 6%, transparent);
+    padding-left: var(--space-2);
   }
-  .home-faq summary {
-    cursor: pointer;
-    padding: var(--space-4) 0;
-    font-weight: 600;
-    color: var(--c-text);
-  }
-  .home-faq summary:hover {
+  .home-explore__links a:hover::before {
     color: var(--c-accent);
   }
-  .home-faq p {
-    padding-bottom: var(--space-4);
+  .home-explore__count {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    color: var(--c-text-muted);
+  }
+  .home-faq {
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 1024px) {
+    .home-faq {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: var(--space-12);
+    }
+    .home-faq__intro {
+      position: sticky;
+      top: calc(56px + var(--space-8));
+      align-self: start;
+    }
+  }
+  .home-faq__intro p {
+    margin: var(--space-4) 0 var(--space-6);
+    max-width: 40ch;
+  }
+  .home-faq__docs {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    line-height: var(--leading-flat);
+    color: var(--c-accent);
+    transition: color 0.15s ease;
+  }
+  .home-faq__docs:hover {
+    color: var(--c-accent-hover);
+  }
+  /* Same bordered accordion as the docs FAQ. */
+  .home-faq__list {
+    border: 1px solid var(--c-border);
+  }
+  .home-faq__item + .home-faq__item {
+    border-top: 1px solid var(--c-border);
+  }
+  .home-faq__q {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+  .home-faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .home-faq__q h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    letter-spacing: var(--tracking-base);
+    line-height: var(--leading-snug);
+    color: inherit;
+  }
+  .home-faq__q::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    color: var(--c-text-muted);
+  }
+  .home-faq__item[open] > .home-faq__q::after {
+    content: '−';
+    color: var(--c-accent);
+  }
+  .home-faq__q:hover {
+    color: var(--c-accent);
+    background: var(--c-surface);
+  }
+  .home-faq__item[open] > .home-faq__q {
+    color: var(--c-accent);
+  }
+  .home-faq__a {
+    padding: 0 var(--space-4) var(--space-4);
+    max-width: 68ch;
+  }
+  /* Below the split layout, drop the side frame so questions and answers
+     sit on the same 24px gutter as the heading. */
+  @media (max-width: 1023px) {
+    .home-faq__list {
+      border-left: 0;
+      border-right: 0;
+    }
+    .home-faq__q,
+    .home-faq__a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .home-faq__q:hover {
+      background: transparent;
+    }
+  }
+  .home-faq__code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--c-surface);
+    color: var(--c-accent);
+    border: 1px solid var(--c-border);
+    padding: 0.1em 0.4em;
+    overflow-wrap: anywhere;
   }
 </style>

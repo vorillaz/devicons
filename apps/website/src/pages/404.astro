@@ -64,7 +64,9 @@ const TRACE = [
           <div
             class="flex items-center justify-between pb-3 mb-4 border-b border-border">
             <span class="type-label">trace.log</span>
-            <span class="type-mono text-text-muted text-xs">devicons@1.8</span>
+            <!-- Stop Cloudflare email obfuscation from reading this as an
+                 address and emitting a dead /cdn-cgi/l/email-protection link. -->
+            <!--email_off--><span class="type-mono text-text-muted text-xs">devicons@1.8</span><!--/email_off-->
           </div>
 
           <ul class="flex flex-col gap-2 type-mono text-sm">

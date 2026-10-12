@@ -1,16 +1,13 @@
 ---
+import { Code } from 'astro:components';
 import PageLayout from '../../../components/layout/page-layout.astro';
 import Breadcrumbs from '../../../components/seo/breadcrumbs.astro';
 import IconGrid from '../../../components/icons/icon-grid.astro';
-import {
-  getActiveIcons,
-  getUniqueTags,
-  toListItem,
-  slugifyTag,
-  formatTagLabel,
-  MIN_INDEXABLE_TAG_COUNT,
-} from '../../../lib/icons-query';
-import { fitTitle } from '../../../lib/meta';
+import { getTagPages, type TagPageData } from '../../../lib/tag-pages';
+import { fitDescription, fitTitle } from '../../../lib/meta';
+import { toComponentName } from '../../../lib/component-name';
+import { deviconsDark, deviconsLight } from '../../../lib/shiki-themes';
+import { TAG_CONTENT } from '../../../data/tag-content';
 import { SITE_TITLE } from '../../../consts';
 import {
   breadcrumbSchema,
@@ -19,84 +16,130 @@ import {
 } from '../../../lib/seo';
 
 export async function getStaticPaths() {
-  const tags = await getUniqueTags();
-  const icons = await getActiveIcons();
-  return tags.map(({ tag, count }) => ({
-    params: { tag: slugifyTag(tag) },
-    props: {
-      rawTag: tag,
-      count,
-      icons: icons
-        .filter(i => i.data.tags.includes(tag))
-        .map(toListItem)
-        .sort((a, b) =>
-          a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }),
-        ),
-      relatedTags: tags
-        .filter(t => t.tag !== tag)
-        .slice(0, 12)
-        .map(t => ({ ...t, slug: slugifyTag(t.tag) })),
-    },
+  return (await getTagPages()).map(page => ({
+    params: { tag: page.slug },
+    props: { page },
   }));
 }
 
-const { rawTag, count, icons, relatedTags } = Astro.props;
-const label = formatTagLabel(rawTag);
+const { page } = Astro.props as { page: TagPageData };
+const {
+  tag,
+  slug,
+  label,
+  count,
+  indexable,
+  icons,
+  relatedTags,
+  comparisons,
+  packs,
+  useCases,
+} = page;
+const url = `/icons/tag/${slug}/`;
+const about = TAG_CONTENT[tag]?.about;
 
-const iconWord = count === 1 ? 'icon' : 'icons';
-const logoWord = count === 1 ? 'logo' : 'logos';
+// Search queries for these pages split between "<tag> logos" and "<tag>
+// icons", so titles and headings carry both.
+const svgWord = count === 1 ? 'SVG' : 'SVGs';
 const title = fitTitle(
-  `${label} Icons — ${count} free developer ${logoWord} | ${SITE_TITLE}`,
-  `${label} Icons — ${count} free SVG ${logoWord} | ${SITE_TITLE}`,
-  `${label} Icons & Logos | ${SITE_TITLE}`,
+  `${label} Logos & Icons — ${count} Free ${svgWord} | ${SITE_TITLE}`,
+  `${label} Logos & Icons — ${count} ${svgWord} | ${SITE_TITLE}`,
+  `${label} Logos & Icons | ${SITE_TITLE}`,
   `${label} Icons | ${SITE_TITLE}`,
 );
-const description = `Browse ${count} ${label.toLowerCase()} ${iconWord} and ${logoWord}. Free SVG downloads plus React, Vue, and Svelte components — MIT licensed.`;
-// Thin tag pages stay reachable (icon pages link to them) but are not indexed.
-const noindex = count < MIN_INDEXABLE_TAG_COUNT;
 
-const firstFew = icons
-  .slice(0, 6)
-  .map(i => i.name)
-  .join(', ');
+// Icons are sorted most-recognizable first, so these are the names people
+// expect to see in a snippet.
+const featured = icons.slice(0, 4).map(i => i.name);
+const listNames = (names: string[]) =>
+  names.length <= 2
+    ? names.join(' and ')
+    : `${names.slice(0, -1).join(', ')}, and ${names.at(-1)}`;
+const description = fitDescription(
+  count > featured.length
+    ? `Download ${count} ${label} logos and icons, including ${listNames(featured)}.`
+    : `Download ${listNames(featured)} ${count === 1 ? 'logo' : 'logos'} as icons.`,
+  'Free SVGs plus React, Vue, and Svelte components, MIT licensed.',
+  'Free SVGs and React, Vue, Svelte components.',
+  'Free SVG downloads.',
+);
+
+const introNames = icons.slice(0, 6).map(i => i.name);
+const intro =
+  count === 1
+    ? `1 free ${label} logo: ${introNames[0]}.`
+    : count > introNames.length
+      ? `${count} free ${label} logos, including ${introNames.join(', ')}, and more.`
+      : `${count} free ${label} logos: ${listNames(introNames)}.`;
+const darkBackdrop = icons.filter(i => i.badInDark).length;
+const lightBackdrop = icons.filter(i => i.badInLight).length;
+
+const snippetIcons = icons.slice(0, 3);
+const snippet = [
+  `import { ${snippetIcons.map(i => toComponentName(i.iconFile)).join(', ')} } from "@dev.icons/react";`,
+  '',
+  'export function TechStack() {',
+  '  return (',
+  '    <>',
+  ...snippetIcons.map(i => `      <${toComponentName(i.iconFile)} size={32} />`),
+  '    </>',
+  '  );',
+  '}',
+].join('\n');
+
+const curated = [
+  ...useCases.map(u => ({ href: `/use-cases/${u.slug}/`, title: u.title })),
+  ...packs.map(p => ({ href: `/packs/${p.id}/`, title: `${p.title} pack` })),
+];
 
 const jsonLd = [
   breadcrumbSchema([
     { name: 'Home', url: '/' },
-    { name: 'Icons', url: '/icons' },
-    { name: label, url: `/icons/tag/${slugifyTag(rawTag)}` },
+    { name: 'Icons', url: '/icons/' },
+    { name: 'Categories', url: '/icons/tag/' },
+    { name: label, url },
   ]),
   collectionPageSchema({
-    name: `${label} Icons`,
+    name: `${label} logos & icons`,
     description,
-    url: `/icons/tag/${slugifyTag(rawTag)}`,
-    items: icons.map(i => ({ name: i.name, url: `/icons/${i.slug}` })),
+    url,
+    items: icons.map(i => ({
+      name: `${i.name} logo`,
+      url: `/icons/${i.slug}/`,
+      image: `/devicons/icons/${i.iconFile}.svg`,
+    })),
   }),
   definedTermSchema({
     name: label,
-    description: `Developer brands and tools tagged "${rawTag}" in the Devicons library. ${count} ${count === 1 ? 'icon' : 'icons'}.`,
-    url: `/icons/tag/${slugifyTag(rawTag)}`,
+    description: about ?? `Developer brands and tools tagged "${tag}" in the ${SITE_TITLE} library: ${count} ${count === 1 ? 'icon' : 'icons'}.`,
+    url,
   }),
 ];
+
+const sectionLabel = 'type-label mb-4 flex items-center gap-3';
+const chip =
+  'inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors';
 ---
 
 <PageLayout
   title={title}
   description={description}
-  image={`/og/icons/tag/${slugifyTag(rawTag)}.png`}
+  image={`/og/icons/tag/${slug}.png`}
   keywords={[
-    `${label} icons`,
     `${label} logos`,
+    `${label} icons`,
     `${label} svg`,
+    `${label} logo png`,
     'developer icons',
   ]}
   jsonLd={jsonLd}
-  noindex={noindex}>
+  noindex={!indexable}>
   <div class="max-w-[1400px] mx-auto px-6 pt-10">
     <Breadcrumbs
       items={[
         { name: 'Home', url: '/' },
         { name: 'Icons', url: '/icons' },
+        { name: 'Categories', url: '/icons/tag' },
         { name: label },
       ]}
     />
@@ -106,39 +149,128 @@ const jsonLd = [
         <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
         ></span>
         {count}
-        {iconWord}
+        {count === 1 ? 'icon' : 'icons'}
       </p>
-      <h1 class="type-h1">{label} icons</h1>
+      <h1 class="type-h1">{label} logos &amp; icons</h1>
       <p class="type-body-lg mt-3 max-w-[64ch]">
-        {count} free {label.toLowerCase()} {logoWord}, including {firstFew}
-        {icons.length > 6 ? ', and more' : ''}. Download optimized SVGs or drop
-        them into your React, Vue, or Svelte app.
+        {intro} Each comes as an optimized SVG in color and monochrome, and as
+        a React, Vue, or Svelte component.
       </p>
     </header>
 
     <IconGrid items={icons} />
 
+    <div class="max-w-[70ch]">
+      {
+        about && (
+          <section class="mt-16 pt-8 border-t border-border">
+            <h2 class={sectionLabel}>
+              <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+              About {label} logos
+            </h2>
+            <p class="type-body">{about}</p>
+          </section>
+        )
+      }
+
+      <section class="mt-16 pt-8 border-t border-border">
+        <h2 class={sectionLabel}>
+          <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
+          ></span>
+          Use {label} icons in your app
+        </h2>
+        <p class="type-body mb-5">
+          Install <code>@dev.icons/react</code> (or <code>/vue</code>,
+          <code>/svelte</code>) and import icons by name. Each icon is its own
+          export, so your bundle only includes the ones you use. Prefer plain
+          files? Every icon page has a one-click SVG download. See the <a
+            href="/docs/quick-start/"
+            class="underline underline-offset-4 hover:text-accent">quick start</a
+          > for the icon font and CDN options.
+        </p>
+        <div class="prose">
+          <Code
+            code={snippet}
+            lang="tsx"
+            themes={{ dark: deviconsDark, light: deviconsLight }}
+            defaultColor="dark"
+          />
+        </div>
+        {
+          (darkBackdrop > 0 || lightBackdrop > 0) && (
+            <p class="type-body mt-5 text-text-muted">
+              {darkBackdrop > 0 &&
+                `${darkBackdrop} of these ${darkBackdrop === 1 ? 'mark needs' : 'marks need'} a light backdrop on dark backgrounds. `}
+              {lightBackdrop > 0 &&
+                `${lightBackdrop} ${lightBackdrop === 1 ? 'needs' : 'need'} a dark backdrop on light backgrounds. `}
+              The grid above already applies one, and each icon page previews
+              both themes.
+            </p>
+          )
+        }
+      </section>
+    </div>
+
+    {
+      comparisons.length > 0 && (
+        <section class="mt-16 pt-8 border-t border-border">
+          <h2 class={sectionLabel}>
+            <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+            Compare {label} logos
+          </h2>
+          <ul class="flex flex-wrap gap-2">
+            {comparisons.map(c => (
+              <li>
+                <a href={`/compare/${c.slug}/`} data-astro-prefetch class={chip}>
+                  {c.a} <span class="text-text-muted">vs</span> {c.b}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      curated.length > 0 && (
+        <section class="mt-16 pt-8 border-t border-border">
+          <h2 class={sectionLabel}>
+            <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent" />
+            Curated sets
+          </h2>
+          <ul class="flex flex-wrap gap-2">
+            {curated.map(c => (
+              <li>
+                <a href={c.href} data-astro-prefetch class={chip}>
+                  {c.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
     <aside class="my-16 pt-8 border-t border-border">
-      <h2 class="type-label mb-4 flex items-center gap-3">
+      <h2 class={sectionLabel}>
         <span aria-hidden="true" class="inline-block w-3 h-[2px] bg-accent"
         ></span>
-        Other categories
+        Related categories
       </h2>
       <ul class="flex flex-wrap gap-2">
         {
           relatedTags.map(t => (
             <li>
-              <a
-                href={`/icons/tag/${t.slug}/`}
-                class="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider border border-border hover:border-accent hover:text-accent transition-colors">
-                {formatTagLabel(t.tag)}{' '}
-                <span class="text-text-muted">{t.count}</span>
+              <a href={`/icons/tag/${t.slug}/`} class={chip}>
+                {t.label} icons <span class="text-text-muted">{t.count}</span>
               </a>
             </li>
           ))
         }
+        <li>
+          <a href="/icons/tag/" class={chip}>All categories →</a>
+        </li>
       </ul>
     </aside>
-    <div class="mt-12"></div>
   </div>
 </PageLayout>

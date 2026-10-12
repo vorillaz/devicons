@@ -1,9 +1,8 @@
 // scripts/npm-publish-plugin.cjs
 //
 // semantic-release plugin that publishes one or more packages to npm using
-// Trusted Publisher (OIDC). Must be loaded by path (string) so that
-// semantic-release-monorepo can wrap it — inline plugin objects break the
-// monorepo decorator's plugin-name lookup.
+// Trusted Publisher (OIDC). Loaded by absolute path from both release
+// configs.
 //
 // Config:
 //   pkgRoot:  'packages/font'                             (single package)
