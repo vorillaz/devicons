@@ -1,6 +1,6 @@
 {
   "name": "devicons",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Devicons - Icon font, SVG sprite, and CLI for developer icons",
   "type": "module",
   "sideEffects": false,
