@@ -26,6 +26,7 @@
 //
 // Lifecycle:
 //   1. scoped-commits           → compute version bump + render release notes
+//      release-plan             → record the version for the workflow's plan step
 //   2. changelog (main only)    → write CHANGELOG.md
 //   3. npm-publish-plugin       → stamp package.json, verify entry points,
 //                                 npm publish all 4 (in parallel)
@@ -60,6 +61,7 @@ const SCRIPTS = path.dirname(fileURLToPath(import.meta.url));
 const PUBLISH_PLUGIN = path.join(SCRIPTS, 'npm-publish-plugin.cjs');
 const SCOPED_COMMITS = path.join(SCRIPTS, 'scoped-commits.mjs');
 const SCOPED_GITHUB = path.join(SCRIPTS, 'scoped-github.mjs');
+const RELEASE_PLAN = path.join(SCRIPTS, 'release-plan-plugin.cjs');
 const paths = scopes.GROUP1_PATHS;
 
 const detectBranch = () => {
@@ -76,6 +78,7 @@ const isCanary = branch === 'canary';
 
 const plugins = [
   [SCOPED_COMMITS, { paths, preset: 'conventionalcommits' }],
+  [RELEASE_PLAN, { key: 'group1' }],
   ...(isCanary
     ? []
     : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),

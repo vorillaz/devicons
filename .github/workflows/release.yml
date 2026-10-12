@@ -57,32 +57,62 @@ jobs:
           # NODE_AUTH_TOKEN that expands to an empty token, which npm
           # treats as explicit auth and short-circuits the Trusted
           # Publisher OIDC handshake — producing a 404 on publish.
+      - run: pnpm install --frozen-lockfile
+
+      # Dry-run both groups first: semantic-release needs no build for that.
+      # scripts/release-plan-plugin.cjs writes `group1=<version>` and
+      # `font=<version>` (empty = nothing to release), so a push that
+      # releases nothing skips the build, and a devicons-only release skips
+      # the react/vue/svelte bundles.
+      - name: Plan releases
+        id: plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: 'true'
+        run: |
+          RELEASE_PLAN_FILE="$GITHUB_OUTPUT" node scripts/release-group1.mjs
+          cd packages/font && RELEASE_PLAN_FILE="$GITHUB_OUTPUT" pnpm exec semantic-release --dry-run
+
       - name: Install npm for Trusted Publisher
         # OIDC publishing needs npm ≥ 11.5.1; Node 22 bundles 10.x. Installed
         # once here so the publish plugin can run all packages in parallel.
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
         run: |
           npm install -g 'npm@^11.5.1'
           echo "node $(node --version), npm $(npm --version)"
           [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] || { echo "::error::OIDC token env missing — is id-token: write granted?"; exit 1; }
-      - run: pnpm install --frozen-lockfile
 
       # One build feeds both release groups: build-all emits the sprite, font
       # assets, framework sources, the devicons font package and core's lib.
+      # A devicons-only release skips the framework sources and bundles.
       - name: Build core + devicons font package
-        run: pnpm -F @dev.icons/core build
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        run: pnpm -F @dev.icons/core build ${{ !steps.plan.outputs.group1 && '-- --no-frameworks' || '' }}
       - name: Bundle react/vue/svelte
+        if: steps.plan.outputs.group1
         run: pnpm --parallel -F @dev.icons/react -F @dev.icons/vue -F @dev.icons/svelte bundle
       - name: Check codepoints lock is committed
         # The font build pins codepoints for new glyphs. If that changed the
         # lock here, the release would ship glyph codepoints that aren't in git.
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
         run: |
           git diff --exit-code packages/font/codepoints.lock.json || {
             echo "::error file=packages/font/codepoints.lock.json::codepoints.lock.json is out of date — run 'pnpm build:font' and commit the lock."
             exit 1
           }
-      - run: pnpm test
+      - name: Test
+        if: steps.plan.outputs.group1 || steps.plan.outputs.font
+        env:
+          GROUP1: ${{ steps.plan.outputs.group1 }}
+        run: |
+          if [ -n "$GROUP1" ]; then
+            pnpm test
+          else
+            pnpm -F @dev.icons/core -F devicons -F @dev.icons/agent test
+          fi
 
       - name: Release @dev.icons/{core,react,vue,svelte}
+        if: steps.plan.outputs.group1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
@@ -91,6 +121,7 @@ jobs:
         # Runs after group1 in the same job, so it already sits on group1's
         # release commit — no race on pushing to main.
         # cwd = packages/font so semantic-release picks up its release.config.cjs.
+        if: steps.plan.outputs.font
         working-directory: packages/font
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

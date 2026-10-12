@@ -43,6 +43,7 @@ const SCRIPTS = path.resolve(__dirname, '../../scripts');
 const PUBLISH_PLUGIN = path.join(SCRIPTS, 'npm-publish-plugin.cjs');
 const SCOPED_COMMITS = path.join(SCRIPTS, 'scoped-commits.mjs');
 const SCOPED_GITHUB = path.join(SCRIPTS, 'scoped-github.mjs');
+const RELEASE_PLAN = path.join(SCRIPTS, 'release-plan-plugin.cjs');
 
 module.exports = {
   tagFormat: 'devicons-v${version}',
@@ -57,6 +58,7 @@ module.exports = {
         tagVersionInNotes: true,
       },
     ],
+    [RELEASE_PLAN, { key: 'font' }],
     ...(isCanary
       ? []
       : [['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }]]),
