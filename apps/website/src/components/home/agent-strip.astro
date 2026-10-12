@@ -1,48 +1,38 @@
 ---
 // Hero agent setup: mono tab labels in the eyebrow's " / " rhythm, a
-// hairline, and one command line that copies on click. Every command and
-// docs link is in the HTML (inactive ones are visibility: hidden); the
-// script below only switches tabs and copies.
+// hairline, and one command line that copies on click. Every command is in
+// the HTML (inactive ones are visibility: hidden); the script below only
+// switches tabs and copies.
 const TABS = [
   {
     id: 'prompt',
     label: 'Prompt',
     prefix: '>',
     command: 'Use devicons.io/skill.md to add the React logo',
-    href: '/docs/skill/',
-    docs: 'Skill',
   },
   {
     id: 'mcp',
     label: 'MCP',
     prefix: '$',
     command: 'npx add-mcp https://devicons.io/api/mcp -g',
-    href: '/docs/mcp/',
-    docs: 'MCP',
   },
   {
     id: 'skill',
     label: 'Skill',
     prefix: '$',
     command: 'npx skills add https://devicons.io',
-    href: '/docs/skill/',
-    docs: 'Skill',
   },
   {
     id: 'cli',
     label: 'CLI',
     prefix: '$',
     command: 'npx devicons add react vue',
-    href: '/docs/cli/',
-    docs: 'CLI',
   },
   {
     id: 'api',
     label: 'API',
     prefix: '$',
     command: 'curl "https://devicons.io/api/v1/search?q=react"',
-    href: '/docs/api/',
-    docs: 'API',
   },
 ] as const;
 
@@ -129,8 +119,7 @@ const state = (i: number) => (i === 0 ? 'true' : 'false');
     align-items: center;
   }
 
-  .agent-tabs__tab,
-  .agent-tabs__docs {
+  .agent-tabs__tab {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     font-weight: 600;
@@ -139,9 +128,6 @@ const state = (i: number) => (i === 0 ? 'true' : 'false');
     line-height: var(--leading-flat);
     color: var(--c-text-muted);
     transition: color 0.15s ease;
-  }
-
-  .agent-tabs__tab {
     padding: var(--space-1) 0;
     background: transparent;
     border: 0;
@@ -162,19 +148,8 @@ const state = (i: number) => (i === 0 ? 'true' : 'false');
     opacity: 0.5;
   }
 
-  /* Keeps the tabs and the docs link on one line on phones. */
-  @media (max-width: 479px) {
-    .agent-tabs__sep {
-      padding: 0 var(--space-1);
-    }
-  }
-
-  .agent-tabs__docs:hover {
-    color: var(--c-accent);
-  }
-
-  /* Docs links and panels each share one grid cell: the box keeps its
-     largest size, so nothing shifts between tabs. Inactive items are
+  /* Panels share one grid cell: the box keeps the tallest panel's
+     height, so nothing shifts between tabs. Inactive panels are
      visibility: hidden (the `hidden` attribute is display: none under
      Tailwind), which also drops them from the tab order and the
      accessibility tree. */
@@ -187,10 +162,6 @@ const state = (i: number) => (i === 0 ? 'true' : 'false');
   .agent-tabs__stack > [data-active='false'] {
     visibility: hidden;
   }
-  .agent-tabs__stack > .agent-tabs__docs {
-    justify-self: end;
-  }
-
   .agent-tabs__copy {
     display: flex;
     align-items: baseline;
