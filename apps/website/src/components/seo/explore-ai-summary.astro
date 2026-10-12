@@ -168,7 +168,7 @@ const PROVIDERS: {
 
   .ai-summary__row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
@@ -242,7 +242,7 @@ const PROVIDERS: {
 
   @media (max-width: 640px) {
     .ai-summary__row {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .ai-summary__tile:nth-child(2n) {
       border-right: 0;

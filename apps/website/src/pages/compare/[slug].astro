@@ -104,9 +104,9 @@ const cards = [
             )}
             <dl class="grid grid-cols-2 gap-3 text-sm mt-auto">
               {card.data.license && (
-                <div>
+                <div class="min-w-0">
                   <dt class="type-label mb-1">License</dt>
-                  <dd>{card.data.license}</dd>
+                  <dd class="[overflow-wrap:anywhere]">{card.data.license}</dd>
                 </div>
               )}
               {card.data.website && (
