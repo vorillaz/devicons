@@ -2,7 +2,8 @@
 //
 // Independent semantic-release run for `devicons` (the font package).
 // Scoped to FONT_PATHS (scripts/release-scopes.cjs) — the font package plus
-// the upstream export-files and the core scripts that build glyphs/sprite.
+// the upstream export-files, the core scripts that build glyphs/sprite, and
+// packages/agent (bundled into the CLI).
 //
 // Authentication model:
 //   Publishes to npm via Trusted Publisher (OIDC) — no NPM_TOKEN. The
