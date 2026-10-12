@@ -47,3 +47,5 @@ jobs:
             exit 1
           }
       - run: pnpm test
+      - name: Test release scoping
+        run: pnpm test:release
