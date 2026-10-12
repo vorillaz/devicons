@@ -168,7 +168,7 @@ interface CollectionPageInput {
   name: string;
   description: string;
   url: string;
-  items: Array<{ name: string; url: string }>;
+  items: Array<{ name: string; url: string; image?: string }>;
   site?: string;
 }
 
@@ -194,6 +194,7 @@ export const collectionPageSchema = ({
       position: index + 1,
       name: item.name,
       url: abs(item.url, site),
+      ...(item.image ? { image: abs(item.image, site) } : {}),
     })),
   },
 });
@@ -348,7 +349,7 @@ export const definedTermSchema = ({
   url: abs(url, site),
   inDefinedTermSet: {
     '@type': 'DefinedTermSet',
-    name: `${SITE_TITLE} tag taxonomy`,
-    url: abs('/icons', site),
+    name: `${SITE_TITLE} icon categories`,
+    url: abs('/icons/tag/', site),
   },
 });

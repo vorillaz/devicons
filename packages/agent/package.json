@@ -1,0 +1,30 @@
+{
+  "name": "@dev.icons/agent",
+  "description": "Shared API schemas, search, MCP tools, and CLI for Devicons agent integrations",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./schema": "./src/schema.ts",
+    "./search": "./src/search.ts",
+    "./source": "./src/source.ts",
+    "./snippets": "./src/snippets.ts",
+    "./tools": "./src/tools.ts",
+    "./server": "./src/server.ts",
+    "./cli": "./src/cli.ts"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "minisearch": "^7.2.0",
+    "zod": "^4.2.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "@types/node": "22.9.0",
+    "typescript": "^5.7.3",
+    "vitest": "3.1.3"
+  }
+}

@@ -1,3 +1,36 @@
 # The introduction doc is served at /docs/.
 /docs/introduction   /docs/   301
 /docs/introduction/  /docs/   301
+
+# Removed docs page.
+/docs/astro   /docs/   301
+/docs/astro/  /docs/   301
+
+# Comparison slugs renamed to match icon ids.
+/compare/aws-vs-azure                /compare/aws-vs-microsoft-azure/  301
+/compare/aws-vs-azure/               /compare/aws-vs-microsoft-azure/  301
+/compare/aws-vs-gcp                  /compare/aws-vs-google-cloud/     301
+/compare/aws-vs-gcp/                 /compare/aws-vs-google-cloud/     301
+/compare/prisma-vs-drizzle           /compare/prisma-vs-drizzle-orm/   301
+/compare/prisma-vs-drizzle/          /compare/prisma-vs-drizzle-orm/   301
+/compare/tailwindcss-vs-bootstrap    /compare/tailwind-vs-bootstrap/   301
+/compare/tailwindcss-vs-bootstrap/   /compare/tailwind-vs-bootstrap/   301
+
+# Removed tags folded into their closest surviving tag. Tags named after an
+# icon (express, ember, ...) are redirected to that icon by _middleware.ts.
+/icons/tag/employee-engagement           /icons/tag/business/             301
+/icons/tag/employee-engagement/          /icons/tag/business/             301
+/icons/tag/executable                    /icons/tag/developer-tools/      301
+/icons/tag/executable/                   /icons/tag/developer-tools/      301
+/icons/tag/organizational-development    /icons/tag/business/             301
+/icons/tag/organizational-development/   /icons/tag/business/             301
+/icons/tag/packaging                     /icons/tag/package-manager/      301
+/icons/tag/packaging/                    /icons/tag/package-manager/      301
+/icons/tag/product                       /icons/tag/product-management/   301
+/icons/tag/product/                      /icons/tag/product-management/   301
+/icons/tag/scaffolding                   /icons/tag/generator/            301
+/icons/tag/scaffolding/                  /icons/tag/generator/            301
+/icons/tag/task-runner                   /icons/tag/build-tool/           301
+/icons/tag/task-runner/                  /icons/tag/build-tool/           301
+/icons/tag/video-call                    /icons/tag/communication/        301
+/icons/tag/video-call/                   /icons/tag/communication/        301

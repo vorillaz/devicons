@@ -26,6 +26,14 @@ export const monoSvgUrl = (file: string): string =>
 export const SVG_URL_PATTERN = `${SITE_URL}/devicons/icons/{file}.svg`;
 export const MONO_SVG_URL_PATTERN = `${SITE_URL}/devicons/font/{file}.svg`;
 
+/** Agent-facing endpoints (see /docs/agents/). */
+export const API_BASE_URL = `${SITE_URL}/api/v1`;
+export const OPENAPI_URL = `${API_BASE_URL}/openapi.json`;
+export const MCP_URL = `${SITE_URL}/api/mcp`;
+export const MCP_ADD_CLAUDE = `claude mcp add --transport http devicons ${MCP_URL}`;
+export const MCP_LOCAL_COMMAND = 'npx -y devicons mcp';
+
+
 const normalizeVersion = (v: string) => (v === '0.0.0' ? 'latest' : v);
 
 export interface PackageFact {

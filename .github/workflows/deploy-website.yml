@@ -7,6 +7,8 @@ on:
       - canary
     paths:
       - 'apps/website/**'
+      - 'packages/agent/**'
+      - 'packages/font/src/**'
   workflow_dispatch:
     inputs:
       environment:
@@ -98,6 +100,11 @@ jobs:
           NODE_ENV: production
           DEPLOY_ENV: ${{ steps.target.outputs.environment }}
 
+      # Validate every /api/v1 file, discovery file, and agent docs page
+      # against the shared schemas before anything is deployed.
+      - name: Check agent surfaces
+        run: pnpm -F @dev.icons/website check:api
+
       - name: Deploy to Cloudflare Pages
         id: deploy
         uses: cloudflare/wrangler-action@v3
@@ -115,6 +122,20 @@ jobs:
           packageManager: pnpm
           wranglerVersion: '4.83.0'
           command: pages deploy dist --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=${{ steps.target.outputs.branch }}
+
+      # End-to-end check of the deployed API, search, MCP server, and CLI.
+      # Production only, against the public domain: every
+      # *.devicons-website.pages.dev deployment URL (staging and the
+      # per-deployment URL of production) sits behind Cloudflare Access and
+      # answers with a login redirect. Built after deploy so a CLI build
+      # problem can't block the website.
+      - name: Build devicons CLI
+        if: steps.target.outputs.environment == 'production'
+        run: pnpm -F devicons build:lib
+
+      - name: Smoke test agent surfaces
+        if: steps.target.outputs.environment == 'production'
+        run: pnpm -F @dev.icons/website smoke:agent https://devicons.io
 
       - name: Summary
         run: |

@@ -1,5 +1,5 @@
 /
-  Link: </docs/>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="alternate"; type="text/plain"
+  Link: </docs/>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="alternate"; type="text/plain", </api/v1/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"
 
 # Hashed build assets never change.
 /_astro/*
@@ -39,3 +39,17 @@
 
 /.well-known/agent-skills/*
   Access-Control-Allow-Origin: *
+
+/.well-known/mcp.json
+  Access-Control-Allow-Origin: *
+
+# Public JSON API and MCP endpoint: open CORS, kept out of search results.
+/api/*
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: noindex
+
+# Static API files change only on deploy. A short max-age (revalidated
+# cheaply with ETags) also keeps a 404 for a just-added slug from sticking.
+/api/v1/*
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600

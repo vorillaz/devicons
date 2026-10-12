@@ -1,15 +1,17 @@
 ---
 title: "skill.md"
 description: "Drop Devicons into Claude, Cursor, and any agent-aware tool as a self-contained skill."
-order: 3
-category: "Getting Started"
-categoryOrder: 0
+order: 4
+category: "AI & Agents"
+categoryOrder: 2
 badge: "new"
 ---
 
 import Note from "../../components/docs/note.astro";
 
 Devicons has a ready-to-install agent skill. Point Claude, Cursor, or any tool that reads a [Claude-style skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) at a single URL. The agent then gets the package list, component naming rules, SVG URLs, and catalog metadata.
+
+If your tool supports MCP, the [MCP server](/docs/mcp/) is usually a better fit: the agent calls it for search results, SVG markup, and code instead of reading instructions. For your own integrations, use the [Icons API](/docs/api/).
 
 ## One-line prompt
 
@@ -43,9 +45,19 @@ The index lists each skill with its type, description, artifact URL, and SHA-256
 
 `/skill.md` returns the same bytes as the canonical path. For a site-wide overview, see [`/llms.txt`](/llms.txt) and [`/llms-full.txt`](/llms-full.txt).
 
+## Install with the skills CLI
+
+The [skills](https://github.com/vercel-labs/skills) CLI finds the skill through the discovery endpoint and installs it for the agents you pick:
+
+```bash
+npx skills add https://devicons.io
+```
+
+Add `-g` to install it for every project.
+
 ## Install locally
 
-If your agent loads skills from a local directory:
+To copy the files by hand, for an agent that loads skills from a local directory:
 
 ```bash
 SKILL_DIR=~/.claude/skills/devicons
