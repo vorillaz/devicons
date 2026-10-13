@@ -121,6 +121,8 @@ function checkDiscovery() {
 
   if (!readText('agents.md').includes(MCP_URL)) fail('agents.md does not mention the MCP URL');
 
+  if (!/^# .*auth\.md/m.test(readText('auth.md'))) fail('auth.md: no H1 containing "auth.md"');
+
   const llms = readText('llms.txt');
   if (!llms.includes('## Agent integrations')) fail('llms.txt: no "## Agent integrations" section');
   if (!llms.includes(MCP_URL)) fail('llms.txt: no MCP URL');
@@ -170,6 +172,13 @@ function checkHomepage() {
     '/api/v1/search?q=',
   ]) {
     if (!html.includes(needle)) fail(`index.html: missing ${needle}`);
+  }
+
+  // WebMCP: the tool specs agents see on page load.
+  const specs = html.match(/<script type="application\/json" id="webmcp-tools">([^<]*)<\/script>/)?.[1];
+  const names = specs ? (JSON.parse(specs) as Array<{ name: string }>).map(s => s.name) : [];
+  if (JSON.stringify(names) !== JSON.stringify([...TOOL_NAMES])) {
+    fail(`index.html: WebMCP tools ${JSON.stringify(names)}`);
   }
 }
 

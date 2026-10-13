@@ -2,12 +2,7 @@ import { McpServer } from '@modelcontextprotocol/server';
 import type { DataSource } from './source.ts';
 import { registerDeviconsTools } from './tools.ts';
 
-export const TOOL_NAMES = [
-  'search_icons',
-  'get_icon',
-  'list_categories',
-  'get_category',
-] as const;
+export { TOOL_NAMES } from './tools.ts';
 
 export const SERVER_INSTRUCTIONS = [
   'Devicons is a free library of developer, brand, framework, and tooling logos as SVGs and React, Vue, and Svelte components.',

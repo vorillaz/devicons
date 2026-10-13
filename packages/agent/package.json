@@ -11,6 +11,7 @@
     "./snippets": "./src/snippets.ts",
     "./tools": "./src/tools.ts",
     "./server": "./src/server.ts",
+    "./webmcp": "./src/webmcp.ts",
     "./cli": "./src/cli.ts"
   },
   "scripts": {

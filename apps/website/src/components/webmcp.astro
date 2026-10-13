@@ -1,0 +1,15 @@
+---
+// WebMCP tool definitions, computed from the shared agent tools at build time.
+import { webmcpToolSpecs } from '@dev.icons/agent/webmcp';
+
+const specs = JSON.stringify(webmcpToolSpecs()).replace(/</g, '\\u003c');
+---
+
+<script is:inline type="application/json" id="webmcp-tools" set:html={specs} />
+
+<script>
+  import { registerWebmcpTools } from '../lib/webmcp';
+
+  const el = document.getElementById('webmcp-tools');
+  if (el?.textContent) registerWebmcpTools(JSON.parse(el.textContent));
+</script>
