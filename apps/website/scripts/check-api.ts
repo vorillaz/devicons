@@ -121,6 +121,8 @@ function checkDiscovery() {
 
   if (!readText('agents.md').includes(MCP_URL)) fail('agents.md does not mention the MCP URL');
 
+  if (!/^# .*auth\.md/m.test(readText('auth.md'))) fail('auth.md: no H1 containing "auth.md"');
+
   const llms = readText('llms.txt');
   if (!llms.includes('## Agent integrations')) fail('llms.txt: no "## Agent integrations" section');
   if (!llms.includes(MCP_URL)) fail('llms.txt: no MCP URL');

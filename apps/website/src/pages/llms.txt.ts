@@ -57,6 +57,7 @@ export const GET: APIRoute = async () => {
     `- [Skill icons reference](${SITE_URL}/skill/reference/icons.md): recommended icons with file and component names`,
     `- [Skill packages reference](${SITE_URL}/skill/reference/packages.md): package APIs, props, and URLs`,
     `- [agents.md](${SITE_URL}/agents.md): agent readiness manifest`,
+    `- [auth.md](${SITE_URL}/auth.md): authentication for agents (none needed)`,
     '',
     '## Documentation',
     '',

@@ -47,6 +47,7 @@ ${MCP_ADD_CLAUDE}
 - MCP server card: ${SITE_URL}/.well-known/mcp.json
 - API catalog (RFC 9727): ${SITE_URL}/.well-known/api-catalog
 - Agent Skills index: ${SITE_URL}/.well-known/agent-skills/index.json
+- Authentication: ${SITE_URL}/auth.md (none needed)
 - Every HTML page has a Markdown twin (\`/icons/react.md\`) and answers \`Accept: text/markdown\`.
 
 ## Limits and terms
