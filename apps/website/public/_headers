@@ -1,5 +1,5 @@
 /
-  Link: </docs/>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="alternate"; type="text/plain", </api/v1/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"
+  Link: </docs/>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="alternate"; type="text/plain", </auth.md>; rel="describedby"; type="text/markdown", </api/v1/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"
 
 # Hashed build assets never change.
 /_astro/*

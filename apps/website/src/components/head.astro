@@ -11,6 +11,7 @@ import {
   THEME_COLOR_DARK,
 } from "../consts";
 import { organizationSchema, webPageSchema, websiteSchema } from "../lib/seo";
+import WebMcp from "./webmcp.astro";
 
 interface Props {
   title: string;
@@ -235,3 +236,6 @@ const verificationGoogle = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 <!-- Structured data -->
 <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />
+
+<!-- WebMCP tools for in-browser agents -->
+<WebMcp />
