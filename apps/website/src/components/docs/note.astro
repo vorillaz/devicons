@@ -134,7 +134,7 @@ const kindLabel = kinds[variant];
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     line-height: var(--leading-snug);
-    overflow-x: scroll;
+    overflow-x: auto;
   }
   .docs-note__body :global(pre code) {
     background: transparent;
@@ -142,6 +142,16 @@ const kindLabel = kinds[variant];
     padding: 0;
     color: inherit;
     white-space: pre;
+  }
+  /* Phones: wrap code so notes never push the page sideways. */
+  @media (max-width: 639px) {
+    .docs-note__body :global(code) {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    .docs-note__body :global(pre code) {
+      white-space: pre-wrap;
+    }
   }
   .docs-note__body :global(ul),
   .docs-note__body :global(ol) {
