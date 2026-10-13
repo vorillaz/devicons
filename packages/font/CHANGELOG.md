@@ -1,3 +1,9 @@
+## [devicons-v2.4.0](https://github.com/vorillaz/devicons/compare/devicons-v2.3.0...devicons-v2.4.0) (2026-10-13)
+
+### Features
+
+* **agent:** add WebMCP tool specs and runner ([feafaf1](https://github.com/vorillaz/devicons/commit/feafaf1a5377615036456c4bb39942800c3924ce))
+
 ## [devicons-v2.3.0](https://github.com/vorillaz/devicons/compare/devicons-v2.2.0...devicons-v2.3.0) (2026-10-12)
 
 ### Features
