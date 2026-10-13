@@ -173,6 +173,13 @@ function checkHomepage() {
   ]) {
     if (!html.includes(needle)) fail(`index.html: missing ${needle}`);
   }
+
+  // WebMCP: the tool specs agents see on page load.
+  const specs = html.match(/<script type="application\/json" id="webmcp-tools">([^<]*)<\/script>/)?.[1];
+  const names = specs ? (JSON.parse(specs) as Array<{ name: string }>).map(s => s.name) : [];
+  if (JSON.stringify(names) !== JSON.stringify([...TOOL_NAMES])) {
+    fail(`index.html: WebMCP tools ${JSON.stringify(names)}`);
+  }
 }
 
 const checks: Array<[string, () => void]> = [
